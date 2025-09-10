@@ -2,7 +2,8 @@ css
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #fff8f8;
+  background: url('https://i.imgur.com/4DpqFyz.png') no-repeat center center fixed;
+  background-size: cover;
   color: #333;
 }
 
@@ -40,8 +41,8 @@ section {
   margin-top: 10px;
 }
 
-footer {
-  background: #eee;
-  text-align: center;
-  padding: 15px;
-  font
+/* Carousel Alanı */
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  margin: 40px auto;
