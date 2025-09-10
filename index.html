@@ -5,70 +5,7 @@ html
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yusuf Güzellik</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://i.imgur.com/4DpqFyz.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-    }
-    header {
-      background: rgba(216, 125, 160, 0.85);
-      color: white;
-      padding: 30px 0;
-      text-align: center;
-    }
-    section {
-      background: rgba(255, 255, 255, 0.8);
-      margin: 30px auto;
-      max-width: 500px;
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-    }
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      padding: 20px;
-      gap: 20px;
-      scroll-snap-type: x mandatory;
-    }
-    .carousel::-webkit-scrollbar {
-      display: none;
-    }
-    .item {
-      flex: 0 0 auto;
-      width: 200px;
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      scroll-snap-align: start;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .item img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .btn {
-      background: #d87da0;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    footer {
-      background: #eee;
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-      color: #555;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -78,31 +15,39 @@ html
 </header>
 
 <section>
-  <a href="https://www.instagram.com/01_joseph_10/" target="_blank">
-    <img src="https://i.imgur.com/I5s8wq7.png" alt="Yusuf Güzellik" />
+  <a href="https://www.instagram.com/01_joseph_10/" target="_blank" rel="noopener noreferrer">
+    <img class="main-img" src="https://i.imgur.com/I5s8wq7.png" alt="yusuf güzellik" />
   </a>
   <p>Profesyonel cilt bakımı, lazer epilasyon, kalıcı makyaj ve daha fazlası için uzman ekibimizle hizmetinizdeyiz.</p>
   <button class="btn" onclick="window.location.href='https://www.instagram.com/01_joseph_10/'">Randevu Al</button>
 </section>
 
-<section class="carousel">
-  <div class="item">
-    <img src="https://via.placeholder.com/200x150?text=Ürün+1" alt="Ürün 1">
-    <p>Cilt Bakım Serumu</p>
+<!-- Ürün Slider Alanı -->
+<div class="carousel">
+  <div class="carousel-track">
+    <div class="carousel-item">Ürün 1</div>
+    <div class="carousel-item">Ürün 2</div>
+    <div class="carousel-item">Ürün 3</div>
+    <div class="carousel-item">Ürün 4</div>
+<div class="carousel-item">Ürün 5</div>
+    <div class="carousel-item">Ürün 6</div>
   </div>
-  <div class="item">
-    <img src="https://via.placeholder.com/200x150?text=Ürün+2" alt="Ürün 2">
-    <p>Lazer Epilasyon Paketi</p>
-  </div>
-  <div class="item">
-    <img src="https://via.placeholder.com/200x150?text=Ürün+3" alt="Ürün 3">
-    <p>Kalıcı Makyaj Seti</p>
-  </div>
-</section>
+</div>
 
 <footer>
   © 2025 Yusuf Güzellik – Tüm hakları saklıdır.
 </footer>
+
+<script>
+  const track = document.querySelector('.carousel-track');
+  let index = 0;
+
+  setInterval(() => {
+    index++;
+    if (index > 5) index = 0;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }, 3000);
+</script>
 
 </body>
 </html>
