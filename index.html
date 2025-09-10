@@ -22,8 +22,8 @@ html
   <button class="btn" onclick="window.location.href='https://www.instagram.com/01_joseph_10/'">Randevu Al</button>
 </section>
 
-<!-- Ürün Slider Alanı -->
-<div class="carousel">
+<!-- Ürünler Carousel -->
+<div class="carousel-container">
   <div class="carousel-track">
     <div class="carousel-item">Ürün 1</div>
     <div class="carousel-item">Ürün 2</div>
@@ -41,10 +41,8 @@ html
 <script>
   const track = document.querySelector('.carousel-track');
   let index = 0;
-
   setInterval(() => {
-    index++;
-    if (index > 5) index = 0;
+    index = (index + 1) % 6;
     track.style.transform = `translateX(-${index * 100}%)`;
   }, 3000);
 </script>
