@@ -5,7 +5,6 @@ html
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yusuf Güzellik</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     body {
       margin: 0;
@@ -28,12 +27,29 @@ html
       padding: 20px;
       text-align: center;
     }
-    img {
-      width: 90%;
-      max-width: 400px;
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px;
+      gap: 20px;
+      scroll-snap-type: x mandatory;
+    }
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .item {
+      flex: 0 0 auto;
+      width: 200px;
+      background: white;
       border-radius: 10px;
-      margin: 20px 0;
-      cursor: pointer;
+      padding: 15px;
+      text-align: center;
+      scroll-snap-align: start;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .item img {
+      width: 100%;
+      border-radius: 10px;
     }
     .btn {
       background: #d87da0;
@@ -62,11 +78,26 @@ html
 </header>
 
 <section>
-  <a href="https://www.instagram.com/01_joseph_10/" target="_blank" rel="noopener noreferrer">
-    <img src="https://i.imgur.com/I5s8wq7.png" alt="yusuf güzellik" />
+  <a href="https://www.instagram.com/01_joseph_10/" target="_blank">
+    <img src="https://i.imgur.com/I5s8wq7.png" alt="Yusuf Güzellik" />
   </a>
   <p>Profesyonel cilt bakımı, lazer epilasyon, kalıcı makyaj ve daha fazlası için uzman ekibimizle hizmetinizdeyiz.</p>
   <button class="btn" onclick="window.location.href='https://www.instagram.com/01_joseph_10/'">Randevu Al</button>
+</section>
+
+<section class="carousel">
+  <div class="item">
+    <img src="https://via.placeholder.com/200x150?text=Ürün+1" alt="Ürün 1">
+    <p>Cilt Bakım Serumu</p>
+  </div>
+  <div class="item">
+    <img src="https://via.placeholder.com/200x150?text=Ürün+2" alt="Ürün 2">
+    <p>Lazer Epilasyon Paketi</p>
+  </div>
+  <div class="item">
+    <img src="https://via.placeholder.com/200x150?text=Ürün+3" alt="Ürün 3">
+    <p>Kalıcı Makyaj Seti</p>
+  </div>
 </section>
 
 <footer>
