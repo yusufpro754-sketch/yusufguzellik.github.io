@@ -1,47 +1,41 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yusuf Güzellik Merkezi</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yusuf Güzellik</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #fff0f5;
+      background-color: #fffdfd;
       color: #333;
     }
 
     header {
-      background: #d87da0;
-      color: white;
-      padding: 40px 0;
-      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px;
+      background: linear-gradient(to right, #ffe4ec, #fff);
+    }
+
+    header .text {
+      flex: 1;
     }
 
     header h1 {
-      margin: 0;
       font-size: 36px;
+      margin-bottom: 10px;
     }
 
     header p {
-      margin-top: 10px;
       font-size: 18px;
-    }
-
-    section {
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .main-img {
-      width: 90%;
-      max-width: 500px;
-      border-radius: 12px;
       margin-bottom: 20px;
     }
 
-    .btn {
+    header button {
       background: #d87da0;
       color: white;
       padding: 12px 24px;
@@ -49,95 +43,88 @@
       border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
-      text-decoration: none;
     }
 
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      gap: 20px;
-      padding: 20px;
-    }
-    .carousel::-webkit-scrollbar {
-      display: none;
-    }
-
-    .product-card {
-      flex: 0 0 auto;
-      width: 200px;
-      background: white;
+    header img {
+      max-width: 300px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 10px;
+    }
+
+    section {
+      padding: 60px 20px;
       text-align: center;
     }
 
-    .product-card img {
+    .services {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .service {
+      width: 250px;
+    }
+
+    .service img {
       width: 100%;
-      border-radius: 8px;
-      height: 150px;
-      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .about {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      background-color: #fff0f4;
+      padding: 50px 20px;
+      flex-wrap: wrap;
+    }
+
+    .about img {
+      max-width: 300px;
+      border-radius: 10px;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      background: #f5f5f5;
+      padding: 50px 20px;
+    }
+
+    .contact div {
+      margin: 10px;
     }
 
     footer {
-      background: #eee;
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       font-size: 14px;
-      color: #555;
-      margin-top: 40px;
-    }
-
-    @keyframes slide {
-      0% {transform: translateX(0);}
-      100% {transform: translateX(-50%);}
+      background: #eee;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Yusuf Güzellik Merkezi</h1>
-  <p>Güzelliğiniz için buradayız</p>
+  <div class="text">
+    <h1>Kendinizi ödüllendirin</h1>
+    <p>Profesyonel cilt bakımı, lazer epilasyon ve daha fazlası</p>
+    <button onclick="window.location.href='https://www.instagram.com/01_joseph_10/'">Randevu Al</button>
+  </div>
+  <img src="https://cdn.pixabay.com/photo/2019/10/08/15/00/woman-4530144_960_720.jpg" alt="model">
 </header>
 
 <section>
-  <a href="https://www.instagram.com/01_joseph_10/" target="_blank">
-    <img src="https://cdn.pixabay.com/photo/2023/09/04/16/02/beautiful-woman-8233822_1280.jpg" alt="Güzellik Merkezi" class="main-img">
-  </a>
-  <p>Profesyonel cilt bakımı, lazer epilasyon, kalıcı makyaj ve daha fazlası için uzman ekibimizle hizmetinizdeyiz.</p>
-  <br>
-  <a class="btn" href="https://www.instagram.com/01_joseph_10/" target="_blank">Randevu Al</a>
-</section>
-
-<section>
-  <h2>Popüler Hizmetler</h2>
-  <div class="carousel">
-   <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2016/11/29/05/45/woman-1867093_1280.jpg" alt="Cilt Bakımı">
-      <p>Cilt Bakımı</p>
-    </div>
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2020/09/12/07/54/beauty-5564546_1280.jpg" alt="Lazer Epilasyon">
-      <p>Lazer Epilasyon</p>
-    </div>
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2018/05/11/23/04/beauty-3398297_1280.jpg" alt="Kaş Tasarımı">
-      <p>Kaş Tasarımı</p>
-    </div>
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2020/10/14/18/45/makeup-5653775_1280.jpg" alt="Kalıcı Makyaj">
-      <p>Kalıcı Makyaj</p>
-    </div>
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2021/03/22/16/41/hair-6114337_1280.jpg" alt="Saç Bakımı">
-      <p>Saç Bakımı</p>
-    </div>
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2017/06/15/00/28/nails-2409424_1280.jpg" alt="Manikür">
-      <p>Manikür</p>
-    </div>
+  <h2>Hizmetlerimiz</h2>
+  <div class="services">
+    <div class="service">
+      <p><strong>Instagram:</strong> <a href="https://www.instagram.com/01_joseph_10/">@01_joseph_10</a></p>
+  </div>
+  <div>
+    <iframe src="https://maps.google.com/maps?q=Harran%20University&t=&z=13&ie=UTF8&iwloc=&output=embed" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
   </div>
 </section>
 
@@ -147,4 +134,36 @@
 
 </body>
 </html>
- 
+<img src="https://cdn.pixabay.com/photo/2020/02/21/17/57/woman-4871166_1280.jpg" alt="Cilt Bakımı">
+      <h3>Cilt Bakımı</h3>
+      <p>Derinlemesine temizlik ve nemlendirme</p>
+    </div>
+    <div class="service">
+      <img src="https://cdn.pixabay.com/photo/2020/10/03/17/32/laser-5623936_1280.jpg" alt="Lazer Epilasyon">
+      <h3>Lazer Epilasyon</h3>
+      <p>Pürüzsüz ve kalıcı çözümler</p>
+    </div>
+    <div class="service">
+      <img src="https://cdn.pixabay.com/photo/2017/08/06/06/53/makeup-2585774_1280.jpg" alt="Kalıcı Makyaj">
+      <h3>Kalıcı Makyaj</h3>
+      <p>Doğal ve estetik görünüm</p>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <img src="https://cdn.pixabay.com/photo/2016/10/13/09/06/interior-1734452_1280.jpg" alt="Salon">
+  <div>
+    <h2>Hakkımızda</h2>
+    <p>
+      Yusuf Güzellik Merkezi olarak uzman kadromuzla sağlıklı ve estetik çözümler sunuyoruz.
+      Müşteri memnuniyetini ön planda tutan yaklaşımımızla kaliteli hizmet vermekteyiz.
+    </p>
+  </div>
+</section>
+
+<section class="contact">
+  <div>
+    <h2>İletişim</h2>
+    <p><strong>Adres:</strong> Harran Ünv. Teknokent, Şanlıurfa</p>
+    <p><strong>Telefon:</strong> ‪+90 555 555 55 55‬</p>
