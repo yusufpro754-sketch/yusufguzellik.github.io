@@ -2,167 +2,104 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yusuf Güzellik</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yusuf Güzellik Salonu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fffdfd;
-      color: #333;
-    }
-
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 40px;
-      background: linear-gradient(to right, #ffe4ec, #fff);
-    }
-
-    header .text {
-      flex: 1;
-    }
-
-    header h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    header button {
-      background: #d87da0;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    header img {
-      max-width: 300px;
-      border-radius: 10px;
-    }
-
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .services {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .service {
-      width: 250px;
-    }
-
-    .service img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .about {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-      background-color: #fff0f4;
-      padding: 50px 20px;
-      flex-wrap: wrap;
-    }
-
-    .about img {
-      max-width: 300px;
-      border-radius: 10px;
-    }
-
-    .contact {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      background: #f5f5f5;
-      padding: 50px 20px;
-    }
-
-    .contact div {
-      margin: 10px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      background: #eee;
-    }
+    body { background: #fff8fb; }
+    .hero { background: #f7e6ef; padding: 80px 0; text-align: center; }
+    .service-card { border: none; border-radius: 16px; box-shadow: 0 2px 16px #f1e3ef; }
+    .btn-main { background: #e27da0; color: white; border-radius: 24px; }
+    .btn-main:hover { background: #c95c88; }
+    footer { background: #f5e4ef; padding: 24px 0; }
   </style>
 </head>
 <body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="display-4">Yusuf Güzellik Salonu'na Hoş Geldiniz</h1>
+    <p class="lead">Güzelliğinizi keşfedin ve yenileyin.</p>
+    <a href="#randevu" class="btn btn-main btn-lg">Hemen Randevu Al</a>
+  </section>
 
-<header>
-  <div class="text">
-    <h1>Kendinizi ödüllendirin</h1>
-    <p>Profesyonel cilt bakımı, lazer epilasyon ve daha fazlası</p>
-    <button onclick="window.location.href='https://www.instagram.com/01_joseph_10/'">Randevu Al</button>
-  </div>
-  <img src="https://cdn.pixabay.com/photo/2019/10/08/15/00/woman-4530144_960_720.jpg" alt="model">
-</header>
+  <!-- Hizmetler -->
+  <section id="hizmetler" class="container py-5">
+    <h2 class="text-center mb-4">Hizmetlerimiz</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card service-card p-4">
+          <h5>Saç Bakımı</h5>
+          <p>Profesyonel saç kesimi, şekillendirme ve bakım hizmetleri.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card service-card p-4">
+          <h5>Cilt Bakımı</h5>
+          <p>Cildinize özel bakım ve canlandırıcı uygulamalar.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card service-card p-4">
+          <h5>Makyaj</h5>
+          <p>Özel günleriniz için profesyonel makyaj uygulamaları.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section>
-  <h2>Hizmetlerimiz</h2>
-  <div class="services">
-    <div class="service">
-      <p><strong>Instagram:</strong> <a href="https://www.instagram.com/01_joseph_10/">@01_joseph_10</a></p>
-  </div>
-  <div>
-    <iframe src="https://maps.google.com/maps?q=Harran%20University&t=&z=13&ie=UTF8&iwloc=&output=embed" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </div>
-</section>
+  <!-- Hakkımızda -->
+  <section id="hakkimizda" class="container py-5">
+    <h2 class="text-center mb-4">Hakkımızda</h2>
+    <p class="text-center">Yusuf Güzellik Salonu, yılların deneyimiyle güzelliğinize değer katıyor. Uzman ekibimizle hijyenik ve konforlu bir ortamda hizmet veriyoruz.</p>
+  </section>
 
-<footer>
-  © 2025 Yusuf Güzellik – Tüm hakları saklıdır.
-</footer>
+  <!-- Galeri -->
+  <section id="galeri" class="container py-5">
+    <h2 class="text-center mb-4">Galeri</h2>
+    <div class="row g-3">
+      <div class="col-4"><img src="https://via.placeholder.com/300x200" class="img-fluid rounded"></div>
+      <div class="col-4"><img src="https://via.placeholder.com/300x200" class="img-fluid rounded"></div>
+      <div class="col-4"><img src="https://via.placeholder.com/300x200" class="img-fluid rounded"></div>
+    </div>
+  </section>
 
+  <!-- Randevu -->
+  <section id="randevu" class="container py-5">
+    <h2 class="text-center mb-4">Randevu Al</h2>
+    <form class="row g-3">
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Adınız Soyadınız" required>
+      </div>
+      <div class="col-md-6">
+        <input type="tel" class="form-control" placeholder="Telefon Numaranız" required>
+      </div>
+      <div class="col-12">
+        <select class="form-select" required>
+          <option selected disabled>Hizmet Seçiniz</option>
+          <option>Saç Bakımı</option>
+          <option>Cilt Bakımı</option>
+          <option>Makyaj</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <input type="date" class="form-control" required>
+      </div>
+      <div class="col-12 text-center">
+        <button class="btn btn-main px-5" type="submit">Randevu Al</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- İletişim -->
+  <footer>
+    <div class="container text-center">
+      <p>Adres: Atatürk Cad. No: 123, İstanbul</p>
+      <p>Telefon: <a href="tel:+905551234567">+90 555 123 45 67</a></p>
+      <p>
+        <a href="#">Instagram</a> | <a href="#">WhatsApp</a>
+      </p>
+      <small>© 2025 Yusuf Güzellik Salonu</small>
+    </div>
+  </footer>
 </body>
 </html>
-<img src="https://cdn.pixabay.com/photo/2020/02/21/17/57/woman-4871166_1280.jpg" alt="Cilt Bakımı">
-      <h3>Cilt Bakımı</h3>
-      <p>Derinlemesine temizlik ve nemlendirme</p>
-    </div>
-    <div class="service">
-      <img src="https://cdn.pixabay.com/photo/2020/10/03/17/32/laser-5623936_1280.jpg" alt="Lazer Epilasyon">
-      <h3>Lazer Epilasyon</h3>
-      <p>Pürüzsüz ve kalıcı çözümler</p>
-    </div>
-    <div class="service">
-      <img src="https://cdn.pixabay.com/photo/2017/08/06/06/53/makeup-2585774_1280.jpg" alt="Kalıcı Makyaj">
-      <h3>Kalıcı Makyaj</h3>
-      <p>Doğal ve estetik görünüm</p>
-    </div>
-  </div>
-</section>
-
-<section class="about">
-  <img src="https://cdn.pixabay.com/photo/2016/10/13/09/06/interior-1734452_1280.jpg" alt="Salon">
-  <div>
-    <h2>Hakkımızda</h2>
-    <p>
-      Yusuf Güzellik Merkezi olarak uzman kadromuzla sağlıklı ve estetik çözümler sunuyoruz.
-      Müşteri memnuniyetini ön planda tutan yaklaşımımızla kaliteli hizmet vermekteyiz.
-    </p>
-  </div>
-</section>
-
-<section class="contact">
-  <div>
-    <h2>İletişim</h2>
-    <p><strong>Adres:</strong> Harran Ünv. Teknokent, Şanlıurfa</p>
