@@ -3,185 +3,274 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Güzellik Salonu | Yusuf Beauty</title>
+  <title>Yusuf Beauty | Güzellik Salonu</title>
   <meta name="description" content="Güzellik Salonu - Profesyonel güzellik ve bakım hizmetleri.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #c59fc9;
-      --secondary: #fff0f6;
-      --dark: #353535;
-      --accent: #f8b5d0;
+      --primary: #d18fb0;
+      --secondary: #f4e8f5;
+      --accent: #fbc2eb;
+      --dark: #202023;
+      --white: #fff;
+      --shadow: 0 4px 24px 0 #0001;
     }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{
-      font-family:'Segoe UI',Arial,sans-serif;
-      color:var(--dark);
-      background:var(--secondary);
-      line-height:1.6;
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(115deg, #fbc2eb 0%, #a6c1ee 100%);
+      min-height: 100vh;
+      position: relative;
+      z-index: 0;
     }
-    header{
-      background:var(--primary);
-      color:white;
-      padding:16px 0;
-      position:sticky;
-      top:0;
-      z-index:1000;
+
+    /* Arka plan görseli */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      opacity: 0.25;
+      z-index: -2;
+      filter: blur(2px) brightness(0.85);
     }
-    .container{max-width:1100px;margin:0 auto;padding:0 16px;}
-    nav{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+
+    header {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: var(--white);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: var(--shadow);
     }
-    .logo{
-      font-size:2em;
-      font-weight:700;
-      letter-spacing:1px;
-      color:white;
-      text-decoration:none;
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 18px;
     }
-    .nav-links{
-      display:flex;
-      gap:24px;
-      list-style:none;
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .nav-links a{
-      color:white;
-      text-decoration:none;
-      font-weight:500;
-      transition:.2s;
+    .logo {
+      font-size: 2.1em;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      text-shadow: 1px 1px 8px #d18fb088;
+      text-decoration: none;
     }
-    .nav-links a:hover{color:var(--accent);}
-    .menu-toggle{
-      display:none;
-      font-size:2em;
-      cursor:pointer;
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
     }
-    @media (max-width: 768px){
-      .nav-links{
-        position:absolute;
-        top:64px;right:0;left:0;
-        background:var(--primary);
-        flex-direction:column;
-        gap:0;
-        display:none;
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08em;
+      transition: .21s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
+    .nav-links a:hover {
+      color: #ed51a3;
+      border-bottom: 2px solid #ed51a3;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 2em;
+      cursor: pointer;
+    }
+    @media (max-width: 800px) {
+      .nav-links {
+        position: absolute;
+        right: 0; left: 0; top: 63px;
+        background: linear-gradient(90deg, var(--primary), var(--accent) 90%);
+        flex-direction: column;
+        gap: 0;
+        display: none;
+        box-shadow: 0 16px 32px #0002;
       }
-      .nav-links.active{display:flex;}
-      .nav-links li{border-bottom:1px solid #fff4;}
-      .menu-toggle{display:block;}
+      .nav-links.active { display: flex; }
+      .nav-links li { border-bottom: 1px solid #fff3; }
+      .menu-toggle { display: block; }
     }
-    section{padding:40px 0;}
-    .hero{
-      background:linear-gradient(135deg,var(--primary) 70%,var(--accent) 100%);
-      color:white;
-      text-align:center;
-      padding:80px 16px 60px 16px;
-      border-radius:0 0 40px 40px;
-      box-shadow:0 4px 16px #afa3ad22;
+
+    section { padding: 48px 0; }
+
+    .hero {
+      background: linear-gradient(105deg, #fbc2ebcc 65%, #a6c1eecc 100%);
+      color: var(--dark);
+      text-align: center;
+      padding: 90px 12px 60px 12px;
+      border-radius: 0 0 48px 48px;
+      box-shadow: 0 4px 24px #d18fb044;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
     }
-    .hero h1{font-size:2.5em;margin-bottom:10px;}
-    .hero p{font-size:1.2em;}
-    .btn{
-      display:inline-block;
-      background:var(--dark);
-      color:white;
-      padding:12px 32px;
-      border-radius:24px;
-      text-decoration:none;
-      font-size:1.1em;
-      margin-top:20px;
-      transition:.2s;
+    .hero h1 {
+      font-size: 2.7em;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 16px #fff7, 0 2px 8px #d18fb055;
+      background: linear-gradient(90deg, #ed51a3 30%, #8f5fc4 70%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .btn:hover{background:var(--accent);color:var(--dark);}
-    .section-title{
-      font-size:2em;
-      margin-bottom:28px;
-      text-align:center;
-      color:var(--primary);
-      letter-spacing:1px;
+    .hero p {
+      font-size: 1.22em;
+      text-shadow: 1px 1px 8px #fff9;
     }
-    .about, .services, .gallery, .contact{
-      background:white;
-      border-radius:18px;
-      box-shadow:0 2px 8px #0001;
-      margin-bottom:28px;
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      background: linear-gradient(90deg, #ed51a3, #a6c1ee);
+      color: var(--white);
+      padding: 13px 34px;
+      border-radius: 27px;
+      text-decoration: none;
+      font-size: 1.13em;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      box-shadow: 0 2px 12px #d18fb044;
+      transition: .21s;
+      border: none;
+      cursor: pointer;
     }
-    .about p{text-align:center;font-size:1.15em;}
-    .services-list{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:20px;
-      margin-top:24px;
+    .btn:hover { background: linear-gradient(90deg, #a6c1ee, #ed51a3); color: var(--dark); }
+
+    .section-title {
+      font-size: 2.1em;
+      margin-bottom: 28px;
+      text-align: center;
+      color: var(--primary);
+      letter-spacing: 1.2px;
+      background: linear-gradient(90deg, #ed51a3, #8f5fc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 1px 2px 10px #d18fb055;
     }
-    .service{
-      background:var(--secondary);
-      padding:20px;
-      border-radius:14px;
-      text-align:center;
-      box-shadow:0 1px 6px #c59fc931;
-      transition:.2s;
+
+    .about, .services, .gallery, .contact {
+      background: rgba(255,255,255,0.83);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+      backdrop-filter: blur(2px);
+      transition: box-shadow .21s;
     }
-    .service:hover{box-shadow:0 3px 16px #c59fc944;}
-    .service i{font-size:2.5em;color:var(--accent);}
-    .service h3{margin:12px 0 8px;}
-    .gallery-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:16px;
-      margin-top:18px;
+    .about:hover, .services:hover, .gallery:hover, .contact:hover {
+      box-shadow: 0 8px 32px #c59fc944;
     }
-    .gallery-grid img{
-      width:100%;
-      border-radius:12px;
-      box-shadow:0 1px 8px #ccc6;
-      transition:.2s;
+    .about p { text-align: center; font-size: 1.17em; }
+
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px,1fr));
+      gap: 22px;
+      margin-top: 28px;
     }
-    .gallery-grid img:hover{
-      transform:scale(1.04);
-      box-shadow:0 4px 16px #c59fc980;
+    .service {
+      background: linear-gradient(120deg, #fbc2eb55 60%, #a6c1ee22 100%);
+      padding: 21px 8px 18px 8px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 3px 14px #d18fb022;
+      transition: .18s;
+      border: 1px solid #fbc2eb55;
     }
-    form{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      max-width:400px;
-      margin:0 auto;
+    .service:hover {
+      box-shadow: 0 8px 36px #d18fb066;
+      transform: translateY(-6px) scale(1.03);
+      border: 1px solid #ed51a366;
     }
-    input, textarea{
-      padding:10px;
-      border:1px solid #ccc;
-      border-radius:7px;
-      font-size:1em;
-      background:var(--secondary);
-      resize:vertical;
+    .service i { font-size: 2.6em; color: #ed51a3; }
+    .service h3 { margin: 13px 0 9px; font-weight: 600; color: #a464c2; }
+    .service p { color: #333; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+      gap: 16px;
+      margin-top: 18px;
+      padding-bottom: 8px;
     }
-    label{font-weight:500;}
-    .contact-info{
-      text-align:center;
-      margin-top:20px;
-      font-size:1.1em;
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 13px;
+      box-shadow: 0 2px 10px #b38ecb55;
+      transition: .18s;
+      border: 3px solid #fff7;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      background: #fff;
     }
-    .social-links{
-      display:flex;
-      justify-content:center;
-      gap:18px;
-      margin-top:18px;
+    .gallery-grid img:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 32px #ed51a388;
+      border: 3px solid #ed51a3cc;
     }
-    .social-links a{
-      color:var(--primary);
-      font-size:1.7em;
-      transition:.2s;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      max-width: 410px;
+      margin: 0 auto;
+      padding: 0 8px;
     }
-    .social-links a:hover{color:var(--accent);}
-    footer{
-      background:var(--primary);
-      color:white;
-      text-align:center;
-      padding:18px 0;
-      border-radius:16px 16px 0 0;
-      margin-top:20px;
-      font-size:1em;
+    input, textarea {
+      padding: 12px;
+      border: 1.5px solid #d18fb088;
+      border-radius: 8px;
+      font-size: 1.07em;
+      background: #f9f7fb;
+      resize: vertical;
+      outline: none;
+      transition: border .17s;
+    }
+    input:focus, textarea:focus { border: 1.5px solid #ed51a3cc; }
+    label { font-weight: 530; color: #a464c2; }
+    .contact-info {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 1.13em;
+    }
+    .contact-info a { color: #ed51a3; text-decoration: none; }
+    .contact-info a:hover { text-decoration: underline; }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 26px;
+      margin-top: 18px;
+    }
+    .social-links a {
+      color: #a464c2;
+      font-size: 1.95em;
+      transition: .19s;
+      filter: drop-shadow(0 2px 8px #fbc2eb77);
+    }
+    .social-links a:hover { color: #ed51a3; }
+
+    footer {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: var(--white);
+      text-align: center;
+      padding: 20px 0 18px 0;
+      border-radius: 20px 20px 0 0;
+      margin-top: 23px;
+      font-size: 1.03em;
+      box-shadow: var(--shadow);
+      letter-spacing: 0.2px;
     }
   </style>
 </head>
@@ -204,7 +293,7 @@
 
   <section class="hero" id="hero">
     <h1>Güzellik ve Bakımda <br>Profesyonel Dokunuş</h1>
-    <p>Yusuf Beauty ile güzelliğinize güzellik katın. Uzman kadro, kaliteli ürünler ve müşteri memnuniyetiyle hizmetinizdeyiz.</p>
+    <p>Yusuf Beauty ile güzelliğinize güzellik katın.<br>Uzman kadro, kaliteli ürünler ve müşteri memnuniyetiyle hizmetinizdeyiz.</p>
     <a href="#contact" class="btn">Randevu Al</a>
   </section>
 
