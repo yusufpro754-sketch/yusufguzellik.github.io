@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <title>Yusuf Beauty | Güzellik ve Medikal Bakım</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google Fonts (Montserrat & Open Sans) -->
+  <!-- Google Fonts ve FontAwesome -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     :root {
@@ -23,8 +22,9 @@
       font-family: 'Open Sans', Arial, sans-serif;
       background: var(--light);
       color: var(--dark);
-      min-height: 100vh;
     }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 18px; }
+    /* HEADER */
     header {
       background: var(--main);
       box-shadow: 0 3px 16px #0002;
@@ -32,12 +32,12 @@
       top: 0;
       z-index: 10;
     }
-    .container { max-width: 1180px; margin: 0 auto; padding: 0 18px; }
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 0;
+      position: relative;
     }
     .logo-flex {
       display: flex;
@@ -94,41 +94,63 @@
       nav ul.show { display: flex; }
       .menu-toggle { display: block; position: absolute; right: 20px; top: 23px;}
     }
-
-    /* Slider */
+    /* SLIDER / BANNER */
     .slider {
-      background: var(--gradient);
-      padding: 38px 0 48px 0;
-      text-align: center;
-      color: #fff;
       position: relative;
+      width: 100%;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
       overflow: hidden;
     }
+    .slider-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+    .slider-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.68);
+    }
+    .slider-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #1a2a65dd 60%, #00c3c0aa 110%);
+      opacity: 0.82;
+    }
     .slider-content {
-      max-width: 700px;
-      margin: 0 auto;
-      z-index: 2;
       position: relative;
+      z-index: 2;
+      color: #fff;
+      max-width: 650px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 12px;
     }
-    .slider h1 {
-      font-family: 'Montserrat', Arial, sans-serif;
+    .slider-content h1 {
       font-size: 2.4em;
-      margin-bottom: 16px;
+      font-family: 'Montserrat', Arial, sans-serif;
       letter-spacing: 1px;
-      text-shadow: 0 4px 20px #00c3c045;
+      margin-bottom: 16px;
+      text-shadow: 0 4px 16px #0005;
     }
-    .slider p {
-      font-size: 1.18em;
+    .slider-content p {
+      font-size: 1.16em;
       margin-bottom: 24px;
       color: #eaffff;
-      text-shadow: 0 2px 12px #1a2a6588;
+      text-shadow: 0 2px 10px #1a2a6588;
     }
-    .slider .slider-btn {
+    .slider-btn {
       background: #fff;
       color: var(--main);
-      padding: 14px 38px;
+      padding: 13px 35px;
       font-size: 1.1em;
-      border-radius: 24px;
+      border-radius: 22px;
       font-weight: 700;
       text-decoration: none;
       letter-spacing: .5px;
@@ -136,110 +158,18 @@
       transition: background .16s, color .16s, transform .14s;
       border: none;
       cursor: pointer;
+      display: inline-block;
     }
-    .slider .slider-btn:hover {
+    .slider-btn:hover {
       background: var(--accent);
       color: #fff;
       transform: translateY(-3px) scale(1.04);
     }
-    .slider-shape {
-      position: absolute;
-      bottom: 0; left: 0; width: 100%; height: 80px;
-      background: url('data:image/svg+xml;utf8,<svg width="100%" height="80" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,32L120,26.7C240,21,480,11,720,21.3C960,32,1200,64,1320,80L1440,96V0H1320C1200,0,960,0,720,0C480,0,240,0,120,0H0Z" fill="%23f5f8fa"/></svg>');
-      background-size: cover;
-      background-repeat: no-repeat;
-      z-index: 1;
+    @media (max-width: 700px) {
+      .slider { height: 320px; }
+      .slider-content h1 { font-size: 1.3em;}
     }
-
-    /* Hizmetler */
-    .services {
-      padding: 60px 0 30px 0;
-      background: var(--light);
-    }
-    .section-title {
-      text-align: center;
-      font-family: 'Montserrat', Arial, sans-serif;
-      color: var(--main);
-      font-size: 2em;
-      margin-bottom: 28px;
-      letter-spacing: 1px;
-    }
-    .services-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
-      gap: 28px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .service-card {
-      background: #fff;
-      border-radius: var(--radius);
-      box-shadow: 0 2px 18px #1a2a6533;
-      padding: 32px 18px 22px 18px;
-      text-align: center;
-      transition: box-shadow .18s, transform .13s;
-      border: 2px solid #eaeff7;
-      min-height: 290px;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .service-card:hover {
-      box-shadow: 0 8px 32px #00c3c077;
-      transform: scale(1.045) translateY(-2px) rotate(-1deg);
-      border: 2px solid var(--accent);
-    }
-    .service-card i {
-      font-size: 2.6em;
-      color: var(--accent);
-      margin-bottom: 12px;
-      transition: color .17s;
-    }
-    .service-card:hover i {
-      color: var(--main);
-    }
-    .service-card h3 {
-      margin-bottom: 10px;
-      font-size: 1.19em;
-      color: var(--main);
-      font-weight: 700;
-      font-family: 'Montserrat', Arial, sans-serif;
-    }
-    .service-card p {
-      color: #333;
-      font-size: 1em;
-      margin-bottom: 0;
-    }
-
-    /* Galeri */
-    .gallery {
-      background: var(--light);
-      padding: 48px 0 20px 0;
-    }
-    .gallery-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px,1fr));
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto;
-      margin-bottom: 15px;
-    }
-    .gallery-list img {
-      width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 2px 12px #1a2a6544;
-      transition: transform .18s, box-shadow .17s;
-      cursor: pointer;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-    }
-    .gallery-list img:hover {
-      transform: scale(1.07) rotate(-2deg);
-      box-shadow: 0 6px 24px #00c3c099;
-      border: 2px solid var(--accent);
-    }
-
-    /* Hakkımızda */
+    /* HAKKIMIZDA */
     .about {
       background: #fff;
       padding: 54px 0 28px 0;
@@ -283,8 +213,93 @@
       .about-flex { flex-direction: column; gap: 22px;}
       .about-img, .about-text { max-width: 100%; }
     }
-
-    /* İletişim */
+    /* HİZMETLER */
+    .services {
+      padding: 60px 0 30px 0;
+      background: var(--light);
+    }
+    .section-title {
+      text-align: center;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--main);
+      font-size: 2em;
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+      gap: 28px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .service-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 18px #1a2a6533;
+      padding: 32px 18px 22px 18px;
+      text-align: center;
+      transition: box-shadow .18s, transform .13s;
+      border: 2px solid #eaeff7;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .service-card:hover {
+      box-shadow: 0 8px 32px #00c3c077;
+      transform: scale(1.045) translateY(-2px) rotate(-1deg);
+      border: 2px solid var(--accent);
+    }
+    .service-card i {
+      font-size: 2.6em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      transition: color .17s;
+    }
+    .service-card:hover i {
+      color: var(--main);
+    }
+    .service-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.19em;
+      color: var(--main);
+      font-weight: 700;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .service-card p {
+      color: #333;
+      font-size: 1em;
+      margin-bottom: 0;
+    }
+    /* GALERİ */
+    .gallery {
+      background: var(--light);
+      padding: 48px 0 20px 0;
+    }
+    .gallery-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px,1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      margin-bottom: 15px;
+    }
+    .gallery-list img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #1a2a6544;
+      transition: transform .18s, box-shadow .17s;
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    .gallery-list img:hover {
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 6px 24px #00c3c099;
+      border: 2px solid var(--accent);
+    }
+    /* İLETİŞİM */
     .contact {
       background: var(--gradient);
       color: #fff;
@@ -380,8 +395,7 @@
       .contact-form, .contact-info { max-width: 100%;}
       .contact-map { max-width: 100%; }
     }
-
-    /* Footer */
+    /* FOOTER */
     footer {
       background: var(--main);
       color: #fff;
@@ -396,11 +410,11 @@
   </style>
 </head>
 <body>
+  <!-- HEADER -->
   <header>
     <div class="container navbar">
       <a class="logo-flex" href="#">
         <span class="logo-img">
-          <!-- Yusuf Beauty Logo SVG -->
           <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#00c3c0"/><path d="M32 16 Q38 24 32 48 Q26 24 32 16 Z" fill="#fff"/><ellipse cx="32" cy="25" rx="8" ry="3" fill="#fff" opacity="0.7"/><text x="32" y="41" text-anchor="middle" font-family="Montserrat" font-weight="bold" font-size="11" fill="#1a2a65">YB</text></svg>
         </span>
         <span class="logo-title">Yusuf Beauty</span>
@@ -417,87 +431,91 @@
       </nav>
     </div>
   </header>
-
-  <!-- SLIDER / HERO -->
-  <div class="slider" id="slider">
+  <!-- SLIDER / BANNER -->
+  <section class="slider" id="slider">
+    <div class="slider-bg">
+      <img src="https://focusmedikal.com/assets/img/slider/slider-1.jpg" alt="Slider Görseli" class="slider-img">
+      <div class="slider-overlay"></div>
+    </div>
     <div class="slider-content">
-      <h1>Güzellikte <span style="color:var(--accent);text-shadow:0 2px 10px #fff8;">Sağlık & Estetik</span> Buluşuyor!</h1>
+      <h1>Güzellikte Sağlık & Estetik Buluşuyor!</h1>
       <p>
-        En modern teknolojilerle, uzman ekibimizle ve hijyenik ortamımızda güzelliğinize güzellik katıyoruz.<br>
-        Yusuf Beauty ile medikal ve estetik bakımda yeni bir deneyim sizi bekliyor!
+        En modern teknolojiler ve uzman ekibimizle, Yusuf Beauty’de güzellik ve sağlık bir arada.<br>
+        Medikal ve estetikte yeni bir deneyim sizi bekliyor!
       </p>
       <a class="slider-btn" href="#contact">Randevu Al</a>
     </div>
-    <div class="slider-shape"></div>
-  </div>
-
+  </section>
   <!-- HAKKIMIZDA -->
   <section class="about" id="about">
     <div class="container about-flex">
       <div class="about-img">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80" alt="Salon">
+        <img src="https://focusmedikal.com/assets/img/about/about-1.jpg" alt="Salon">
       </div>
       <div class="about-text">
         <h2>Hakkımızda</h2>
         <p>
-          Yusuf Beauty, uzman ekibiyle güzellik ve medikal bakımda yüksek kalite standartları sunar. Yenilikçi uygulamalarımız, müşteri memnuniyeti ve sağlık odaklı yaklaşımımız ile sektörün öncüsüyüz.
+          Yusuf Beauty, uzman kadrosu ve modern ekipmanlarıyla güzellikte ve medikal bakımda en iyi hizmeti sunmayı amaçlar. 
+          Sağlığınız ve memnuniyetiniz önceliğimizdir. Yenilikçi uygulamalarımız ve hijyenik ortamımızla güzellik yolculuğunuzda yanınızdayız.
         </p>
         <p>
-          Misyonumuz; güvenli, hijyenik ve konforlu ortamımızda, en gelişmiş yöntemlerle güzellik yolculuğunuza eşlik etmek.
+          Misyonumuz; güvenli, konforlu ve kaliteli hizmet ile güzellik ve sağlık alanında fark yaratmak.
         </p>
       </div>
     </div>
   </section>
-
   <!-- HİZMETLER -->
   <section class="services" id="services">
-    <h2 class="section-title">Hizmetlerimiz</h2>
-    <div class="services-list">
-      <div class="service-card">
-        <i class="fas fa-spa"></i>
-        <h3>Cilt Bakımı</h3>
-        <p>Profesyonel cilt analizleri, nemlendirme, akne ve leke tedavileri ile sağlıklı ve parlak bir cilt.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-cut"></i>
-        <h3>Saç Tasarımı</h3>
-        <p>Modern saç kesimi, renklendirme, keratin bakım ve saç sağlığı için özel uygulamalar.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-paint-brush"></i>
-        <h3>Makyaj</h3>
-        <p>Günlük, gece ve özel gün makyajı; doğal ve uzun süre kalıcı görünümler.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-hand-sparkles"></i>
-        <h3>Manikür & Pedikür</h3>
-        <p>Hijyenik ortamda el ve ayak bakımı, nail art ve spa uygulamaları.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-user-nurse"></i>
-        <h3>Medikal Estetik</h3>
-        <p>Dermapen, PRP, mezoterapi ve gençleştirici uygulamalar, uzman ellerde güvenli hizmet.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-laser"></i>
-        <h3>Lazer Epilasyon</h3>
-        <p>Acısız, kalıcı ve hızlı lazer epilasyon çözümleri ile pürüzsüz bir cilt.</p>
+    <div class="container">
+      <h2 class="section-title">Hizmetlerimiz</h2>
+      <div class="services-list">
+        <div class="service-card">
+          <i class="fas fa-spa"></i>
+          <h3>Cilt Bakımı</h3>
+          <p>Profesyonel cilt bakımı ve yenileyici uygulamalar.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-cut"></i>
+          <h3>Saç Tasarımı</h3>
+          <p>Modern ve trend saç kesim, renklendirme, bakım.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-paint-brush"></i>
+          <h3>Makyaj</h3>
+          <p>Günlük, gece ve özel gün makyajı uygulamaları.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-hand-sparkles"></i>
+          <h3>Manikür & Pedikür</h3>
+          <p>Hijyenik ortamda el ve ayak bakımı, nail art.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-user-nurse"></i>
+          <h3>Medikal Estetik</h3>
+          <p>Dermapen, PRP, mezoterapi ve gençleştirici işlemler.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-laser"></i>
+          <h3>Lazer Epilasyon</h3>
+          <p>Acısız, kalıcı ve hızlı lazer epilasyon çözümleri.</p>
+        </div>
       </div>
     </div>
   </section>
-
   <!-- GALERİ -->
   <section class="gallery" id="gallery">
-    <h2 class="section-title">Salonumuzdan Kareler</h2>
-    <div class="gallery-list">
-      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Galeri 1">
-      <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Galeri 2">
-      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Galeri 3">
-      <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Galeri 4">
-      <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Galeri 5">
+    <div class="container">
+      <h2 class="section-title">Salonumuzdan Kareler</h2>
+      <div class="gallery-list">
+        <img src="https://focusmedikal.com/assets/img/gallery/gallery-1.jpg" alt="Galeri 1">
+        <img src="https://focusmedikal.com/assets/img/gallery/gallery-2.jpg" alt="Galeri 2">
+        <img src="https://focusmedikal.com/assets/img/gallery/gallery-3.jpg" alt="Galeri 3">
+        <img src="https://focusmedikal.com/assets/img/gallery/gallery-4.jpg" alt="Galeri 4">
+        <img src="https://focusmedikal.com/assets/img/gallery/gallery-5.jpg" alt="Galeri 5">
+        <img src="https://focusmedikal.com/assets/img/gallery/gallery-6.jpg" alt="Galeri 6">
+      </div>
     </div>
   </section>
-
   <!-- İLETİŞİM -->
   <section class="contact" id="contact">
     <div class="container contact-flex">
@@ -526,35 +544,17 @@
       </form>
     </div>
   </section>
-
+  <!-- FOOTER -->
   <footer>
     © 2025 Yusuf Beauty | Tüm Hakları Saklıdır. | <i class="fas fa-heart"></i> ile hazırlandı
   </footer>
-
+  <!-- JS: Menü ve Form -->
   <script>
     // Mobil menü aç/kapa
     const menuToggle = document.getElementById('menuToggle');
     const mainMenu = document.getElementById('mainMenu');
     menuToggle.addEventListener('click', ()=>mainMenu.classList.toggle('show'));
-
-    // Aktif menü linki (scroll ile)
-    const sections = document.querySelectorAll('section, .slider');
-    const navLinks = document.querySelectorAll('nav ul li a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop-120;
-        if (pageYOffset >= sectionTop) current = section.getAttribute('id');
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if(current && link.getAttribute('href').includes(current)) link.classList.add('active');
-        // Slider (anasayfa) için
-        if(!current && link.getAttribute('href')==="#slider") link.classList.add('active');
-      });
-    });
-
-    // İletişim formu uyarı
+    // İletişim formu
     function sendForm(e){
       e.preventDefault();
       alert("Mesajınız başarıyla gönderildi! Teşekkürler.");
