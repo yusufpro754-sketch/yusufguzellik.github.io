@@ -2,868 +2,559 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
+  <title>Yusuf Beauty | Güzellik ve Medikal Bakım</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yusuf Beauty | Güzellik Salonu</title>
-  <meta name="description" content="Güzellik Salonu - Profesyonel güzellik ve bakım hizmetleri.">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Swiper (Slider/Karusel için) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <!-- AOS (Animasyon için) -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
-  <!-- Lightbox2 (Galeri için) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"/>
+  <!-- Google Fonts (Montserrat & Open Sans) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     :root {
-      --p1: #f7971e;
-      --p2: #ffd200;
-      --p3: #f857a6;
-      --p4: #ff5858;
-      --p5: #8fd3f4;
-      --b1: #fff7fa;
-      --b2: #fff0f6;
-      --dark: #252525;
-      --white: #fff;
-      --shadow: 0 4px 24px 0 #0001;
-      --radius: 21px;
+      --main: #1a2a65;
+      --accent: #00c3c0;
+      --light: #f5f8fa;
+      --dark: #222741;
+      --hover: #eaeff7;
+      --gradient: linear-gradient(90deg, #00c3c0 0%, #1a2a65 100%);
+      --radius: 16px;
     }
-    html { scroll-behavior: smooth; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--b2);
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: var(--light);
       color: var(--dark);
       min-height: 100vh;
-      position: relative;
-      transition: background .3s, color .3s;
     }
-    body.dark {
-      background: #1e1e25;
-      color: #eee;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      width: 100vw; height: 100vh; left: 0; top: 0;
-      background: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      opacity: 0.13;
-      z-index: -2;
-      filter: blur(4px) brightness(0.9);
-      pointer-events: none;
-      transition: filter .3s;
-    }
-    body.dark::before {
-      filter: blur(4px) brightness(0.4);
-    }
-
-    /* SVG Dalga */
-    .svg-wave {
-      display: block;
-      width: 100vw;
-      height: 80px;
-      margin-bottom: -3px;
-    }
-
     header {
-      background: linear-gradient(90deg, var(--p3), var(--p1), var(--p2));
-      color: var(--white);
-      padding: 13px 0;
+      background: var(--main);
+      box-shadow: 0 3px 16px #0002;
       position: sticky;
       top: 0;
       z-index: 10;
-      box-shadow: var(--shadow);
-      transition: background .25s;
     }
-    .container { max-width: 1150px; margin: 0 auto; padding: 0 18px; }
-    nav { display: flex; justify-content: space-between; align-items: center; }
-    .logo {
-      font-size: 2.2em;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--white);
-      text-shadow: 1px 1px 12px var(--p3);
-      text-decoration: none;
-      filter: drop-shadow(0 3px 12px var(--p4));
-      transition: transform .19s;
-    }
-    .logo:hover { transform: scale(1.08) rotate(-2deg); }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a {
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.1em;
-      transition: .21s;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 2px;
-      border-radius: 8px;
-      padding: 4px 8px;
-      position: relative;
-    }
-    .nav-links a.active, .nav-links a:hover {
-      color: var(--p1);
-      background: var(--white);
-      box-shadow: 0 1px 6px #f857a677;
-    }
-    .menu-toggle { display: none; font-size: 2em; cursor: pointer; }
-    /* Tema butonu */
-    .theme-toggle {
-      background: rgba(255,255,255,0.23);
-      border:none;
-      color: var(--white);
-      font-size: 1.7em;
-      border-radius: 50%;
-      margin-left: 8px;
-      cursor: pointer;
-      transition: background .2s, color .2s;
-      padding: 4px 8px 3px 8px;
-    }
-    .theme-toggle:hover { background: var(--p3); color: var(--white);}
-    @media (max-width: 900px) {
-      .container { padding: 0 8px; }
-    }
-    @media (max-width: 800px) {
-      .nav-links {
-        position: absolute; right: 0; left: 0; top: 62px;
-        background: linear-gradient(90deg, var(--p3), var(--p1), var(--p2));
-        flex-direction: column; gap: 0; display: none;
-        box-shadow: 0 16px 32px #0002;
-      }
-      .nav-links.active { display: flex; }
-      .nav-links li { border-bottom: 1px solid #fff3; }
-      .menu-toggle { display: block; }
-    }
-
-    /* Whatsapp/Instagram Sabit Butonlar */
-    .quick-contact {
-      position: fixed;
-      right: 18px;
-      bottom: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      z-index: 999;
-    }
-    .quick-contact a {
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 18px; }
+    .navbar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--p3), var(--p1));
-      color: var(--white);
-      font-size: 2.2em;
-      box-shadow: 0 2px 12px #f857a677;
-      transition: box-shadow .2s, transform .15s;
-      animation: popUp .7s;
+      justify-content: space-between;
+      padding: 14px 0;
     }
-    .quick-contact a:hover {
-      background: linear-gradient(135deg, var(--p1), var(--p3));
-      transform: scale(1.12) rotate(-5deg);
-      box-shadow: 0 8px 32px #ffd20077;
+    .logo-flex {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      text-decoration: none;
     }
-    @keyframes popUp {
-      from { opacity:0; transform: translateY(30px);}
-      to { opacity:1; transform: none;}
+    .logo-img svg {
+      width: 52px; height: 52px;
+      display: block;
+    }
+    .logo-title {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.7em;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px #00c3c088;
+    }
+    nav ul {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    nav ul li a {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.08em;
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: 7px;
+      transition: background .19s, color .18s;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      background: var(--accent);
+      color: var(--main);
+    }
+    .menu-toggle { display: none; color: #fff; font-size: 2em; cursor: pointer;}
+    @media (max-width: 900px) {
+      nav ul { gap: 14px;}
+    }
+    @media (max-width: 720px) {
+      .navbar { flex-direction: column; align-items: flex-start; }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--main);
+        position: absolute;
+        left: 0; top: 70px;
+        z-index: 20;
+      }
+      nav ul.show { display: flex; }
+      .menu-toggle { display: block; position: absolute; right: 20px; top: 23px;}
     }
 
-    /* Banner / Duyuru */
-    .banner {
-      background: linear-gradient(90deg, var(--p4), var(--p3));
-      color: var(--white);
+    /* Slider */
+    .slider {
+      background: var(--gradient);
+      padding: 38px 0 48px 0;
       text-align: center;
-      padding: 8px 0 6px 0;
-      letter-spacing: 1.2px;
-      font-size: 1.13em;
-      font-weight: 500;
-      text-shadow: 0 1px 8px #fff6;
-      box-shadow:0 2px 16px #f857a644;
-      animation: bannerfade 1.5s;
-      margin-bottom: -10px;
-    }
-    @keyframes bannerfade {
-      from { opacity: 0; transform: translateY(-20px);}
-      to { opacity: 1; transform: none;}
-    }
-
-    section { padding: 48px 0; }
-    .hero {
-      background: linear-gradient(110deg, #fbc2ebcc 65%, #a6c1eecc 120%);
-      color: var(--dark);
-      text-align: center;
-      padding: 90px 12px 60px 12px;
-      border-radius: 0 0 48px 48px;
-      box-shadow: 0 4px 24px #d18fb044;
-      margin-bottom: 0;
+      color: #fff;
       position: relative;
       overflow: hidden;
     }
-    .hero-video-bg {
-      position: absolute;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 0; opacity: 0.21;
-      pointer-events:none;
+    .slider-content {
+      max-width: 700px;
+      margin: 0 auto;
+      z-index: 2;
+      position: relative;
     }
-    .hero-content { position: relative; z-index: 1; }
-    .hero h1 {
-      font-size: 2.7em;
-      margin-bottom: 15px;
+    .slider h1 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 2.4em;
+      margin-bottom: 16px;
       letter-spacing: 1px;
-      text-shadow: 2px 2px 16px #fff7, 0 2px 8px #f857a655;
-      background: linear-gradient(90deg, #f857a6 30%, #ff5858 70%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 20px #00c3c045;
     }
-    .hero p {
-      font-size: 1.25em;
-      text-shadow: 1px 1px 8px #fff9;
-      margin-bottom: 12px;
+    .slider p {
+      font-size: 1.18em;
+      margin-bottom: 24px;
+      color: #eaffff;
+      text-shadow: 0 2px 12px #1a2a6588;
     }
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      background: linear-gradient(90deg, #f857a6, #ffd200);
-      color: var(--white);
-      padding: 13px 34px;
-      border-radius: 27px;
+    .slider .slider-btn {
+      background: #fff;
+      color: var(--main);
+      padding: 14px 38px;
+      font-size: 1.1em;
+      border-radius: 24px;
+      font-weight: 700;
       text-decoration: none;
-      font-size: 1.13em;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      box-shadow: 0 2px 12px #f857a644;
-      transition: .21s, transform .12s;
+      letter-spacing: .5px;
+      box-shadow: 0 4px 20px #1a2a6540;
+      transition: background .16s, color .16s, transform .14s;
       border: none;
       cursor: pointer;
-      outline: none;
-      position: relative;
-      overflow: hidden;
     }
-    .btn:after {
-      content: '';
+    .slider .slider-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-3px) scale(1.04);
+    }
+    .slider-shape {
       position: absolute;
-      left: -50%; top: 0;
-      width: 40%; height: 100%;
-      background: linear-gradient(90deg, #fff7 30%, transparent 100%);
-      transform: skewX(-20deg);
-      transition: left .3s;
-      z-index: 2;
-      pointer-events:none;
+      bottom: 0; left: 0; width: 100%; height: 80px;
+      background: url('data:image/svg+xml;utf8,<svg width="100%" height="80" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,32L120,26.7C240,21,480,11,720,21.3C960,32,1200,64,1320,80L1440,96V0H1320C1200,0,960,0,720,0C480,0,240,0,120,0H0Z" fill="%23f5f8fa"/></svg>');
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: 1;
     }
-    .btn:hover:after { left: 120%; }
-    .btn:hover {
-      background: linear-gradient(90deg, #ffd200, #f857a6);
-      color: var(--dark);
-      transform: scale(1.04) translateY(-2px);
-      box-shadow: 0 6px 24px #ffd20055;
+
+    /* Hizmetler */
+    .services {
+      padding: 60px 0 30px 0;
+      background: var(--light);
     }
     .section-title {
-      font-size: 2.1em;
+      text-align: center;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--main);
+      font-size: 2em;
       margin-bottom: 28px;
-      text-align: center;
-      color: var(--p3);
-      letter-spacing: 1.2px;
-      background: linear-gradient(90deg, #f7971e, #f857a6, #8fd3f4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 1px 2px 10px #f857a655;
+      letter-spacing: 1px;
     }
-
-    /* Bölüm kutuları */
-    .about, .services, .gallery, .contact, .reviews, .info-cards, .blog {
-      background: rgba(255,255,255,0.92);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      margin-bottom: 34px;
-      backdrop-filter: blur(2px);
-      transition: box-shadow .21s;
-      animation: fadeinup 1.2s;
-    }
-    .about:hover, .services:hover, .gallery:hover, .contact:hover, .reviews:hover, .info-cards:hover, .blog:hover {
-      box-shadow: 0 12px 36px #f857a655;
-    }
-    .about p { text-align: center; font-size: 1.17em; }
-
-    /* Bilgilendirici kutular */
-    .info-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap: 18px;
-      margin: 35px 0 14px 0;
-      padding: 16px 7px;
-    }
-    .info-card {
-      background: linear-gradient(110deg, #ffd20077 0%, #f857a655 100%);
-      border-radius: 14px;
-      box-shadow: 0 2px 12px #ffd20033;
-      text-align: center;
-      padding: 19px 12px 16px 12px;
-      font-size: 1.11em;
-      transition: box-shadow .18s, transform .13s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-    .info-card i {
-      font-size: 2.2em;
-      color: #f857a6;
-      margin-bottom: 6px;
-      transition: color .18s;
-    }
-    .info-card:hover {
-      box-shadow: 0 6px 32px #f857a677;
-      transform: scale(1.04) rotate(-2deg);
-      background: linear-gradient(110deg, #f857a677 0%, #ffd20055 100%);
-    }
-    .info-card:hover i { color: #ffd200; }
-
-    /* Hizmet kartları */
     .services-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px,1fr));
-      gap: 22px;
-      margin-top: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+      gap: 28px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
-    .service {
-      background: linear-gradient(120deg, #fff0f6 60%, #ffd20022 100%);
-      padding: 21px 8px 18px 8px;
-      border-radius: 15px;
+    .service-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 18px #1a2a6533;
+      padding: 32px 18px 22px 18px;
       text-align: center;
-      box-shadow: 0 3px 14px #f857a622;
-      transition: .18s, transform .13s;
-      border: 1.5px solid #ffd20055;
-      cursor: pointer;
+      transition: box-shadow .18s, transform .13s;
+      border: 2px solid #eaeff7;
+      min-height: 290px;
       position: relative;
-      perspective: 600px;
-      min-height: 180px;
-      transform-style: preserve-3d;
-      will-change: transform;
+      overflow: hidden;
+      cursor: pointer;
     }
-    .service .front, .service .back {
-      position: absolute;
-      width: 100%; height: 100%;
-      left: 0; top: 0;
-      backface-visibility: hidden;
-      transition: .62s cubic-bezier(.6,.2,.2,1.2);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    .service-card:hover {
+      box-shadow: 0 8px 32px #00c3c077;
+      transform: scale(1.045) translateY(-2px) rotate(-1deg);
+      border: 2px solid var(--accent);
     }
-    .service .back {
-      background: linear-gradient(120deg, #ffd20055 60%, #f857a655 100%);
-      color: #222;
-      border-radius: 15px;
-      transform: rotateY(180deg);
-      padding: 16px 7px;
+    .service-card i {
+      font-size: 2.6em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      transition: color .17s;
+    }
+    .service-card:hover i {
+      color: var(--main);
+    }
+    .service-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.19em;
+      color: var(--main);
+      font-weight: 700;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .service-card p {
+      color: #333;
       font-size: 1em;
-      box-shadow: 0 1px 8px #ffd20033;
-    }
-    .service:hover .front { transform: rotateY(180deg);}
-    .service:hover .back { transform: rotateY(0deg);}
-    .service .front { z-index: 2;}
-    .service .back { z-index: 3;}
-
-    .service i { font-size: 2.6em; color: #f857a6; }
-    .service h3 { margin: 13px 0 9px; font-weight: 600; color: #f7971e; }
-    .service p { color: #333; margin-top: 0; margin-bottom: 0; }
-    @media (max-width: 600px) {
-      .services-list { grid-template-columns: 1fr; }
+      margin-bottom: 0;
     }
 
     /* Galeri */
-    .gallery-grid {
+    .gallery {
+      background: var(--light);
+      padding: 48px 0 20px 0;
+    }
+    .gallery-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-      gap: 16px;
-      margin-top: 18px;
-      padding-bottom: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(190px,1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      margin-bottom: 15px;
     }
-    .gallery-grid a {
-      display: block;
-      background: #fff;
-      border-radius: 13px;
-      box-shadow: 0 2px 10px #b38ecb55;
-      transition: .18s, transform .13s;
-      border: 3px solid #fff7;
-      aspect-ratio: 1/1;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-    }
-    .gallery-grid img {
+    .gallery-list img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: .18s, transform .13s;
-      border-radius: 13px;
-    }
-    .gallery-grid a:hover {
-      transform: scale(1.10) rotate(-2deg);
-      box-shadow: 0 8px 32px #f857a688;
-      border: 3px solid #ffd200cc;
-      z-index: 2;
-    }
-    .gallery-grid a::after {
-      content: '\f065';
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      color: #fff;
-      font-size: 2em;
-      background: #f857a6cc;
-      border-radius: 50%;
-      padding: 7px 10px 7px 11px;
-      position: absolute;
-      right: 10px; top: 10px;
-      opacity: 0.0;
-      transition: opacity .22s;
-      pointer-events: none;
-    }
-    .gallery-grid a:hover::after { opacity: 0.95; }
-
-    /* Swiper Slider (Yorumlar) */
-    .swiper { width: 100%; padding: 15px 0 28px 0; }
-    .swiper-slide {
-      background: #fff;
       border-radius: 14px;
-      box-shadow: 0 2px 12px #f857a644;
-      padding: 22px 18px;
-      min-width: 220px;
-      max-width: 320px;
-      font-size: 1em;
-      margin-bottom: 8px;
-      border-left: 6px solid #ffd200;
-      transition: box-shadow .18s, transform .11s;
-      position: relative;
-      margin-right: 20px;
+      box-shadow: 0 2px 12px #1a2a6544;
+      transition: transform .18s, box-shadow .17s;
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      object-fit: cover;
     }
-    .swiper-slide:hover {
-      box-shadow: 0 8px 32px #ffd20077;
-      transform: scale(1.04) rotate(-1deg);
-      border-left: 6px solid #f857a6;
+    .gallery-list img:hover {
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 6px 24px #00c3c099;
+      border: 2px solid var(--accent);
     }
-    .rev-name {
-      margin-top: 9px;
-      font-weight: bold;
-      color: #f857a6;
-    }
-    .rev-stars {
-      color: #ffd200;
-      font-size: 1.11em;
-    }
-    .swiper-pagination-bullet { background: #f857a6; opacity: 0.7;}
-    .swiper-pagination-bullet-active { background: #ffd200; }
 
-    /* Blog / İpuçları */
-    .blog-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-      gap: 18px;
-      padding: 12px 0 5px 0;
-      margin-bottom: 12px;
+    /* Hakkımızda */
+    .about {
+      background: #fff;
+      padding: 54px 0 28px 0;
     }
-    .blog-card {
-      background: linear-gradient(120deg, #fbc2eb44 60%, #ffd20022 100%);
-      border-radius: 13px;
-      box-shadow: 0 2px 12px #ffd20033;
-      padding: 16px 12px 20px 12px;
-      transition: box-shadow .15s, transform .11s;
+    .about-flex {
       display: flex;
-      flex-direction: column;
-      gap: 7px;
-      border: 1.5px solid #ffd20033;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 38px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
-    .blog-card:hover {
-      box-shadow: 0 8px 32px #f857a677;
-      transform: scale(1.03) rotate(-1deg);
-      border: 1.5px solid #f857a6;
+    .about-img {
+      flex: 1 1 280px;
+      min-width: 220px;
+      max-width: 350px;
+      border-radius: 17px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px #00c3c044;
     }
-    .blog-card h4 {
-      color: #f857a6;
-      font-size: 1.13em;
-      margin-bottom: 2px;
+    .about-img img {
+      width: 100%; display: block;
     }
-    .blog-card p {
-      font-size: 1em;
+    .about-text {
+      flex: 2 1 350px;
+      min-width: 220px;
+    }
+    .about-text h2 {
+      font-size: 1.6em;
+      color: var(--main);
+      margin-bottom: 15px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .about-text p {
+      font-size: 1.16em;
+      color: #232323;
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) {
+      .about-flex { flex-direction: column; gap: 22px;}
+      .about-img, .about-text { max-width: 100%; }
     }
 
     /* İletişim */
-    form {
+    .contact {
+      background: var(--gradient);
+      color: #fff;
+      padding: 50px 0 35px 0;
+    }
+    .contact-flex {
       display: flex;
-      flex-direction: column;
-      gap: 13px;
-      max-width: 410px;
+      flex-wrap: wrap;
+      gap: 36px;
+      max-width: 950px;
       margin: 0 auto;
-      padding: 0 8px;
     }
-    input, textarea {
-      padding: 12px;
-      border: 1.5px solid #ffd20088;
-      border-radius: 8px;
-      font-size: 1.07em;
-      background: #f9f7fb;
-      resize: vertical;
-      outline: none;
-      transition: border .17s;
-    }
-    input:focus, textarea:focus { border: 1.5px solid #f857a6cc; }
-    label { font-weight: 530; color: #f857a6; }
     .contact-info {
-      text-align: center;
-      margin-top: 24px;
-      font-size: 1.13em;
+      flex: 1 1 270px;
+      min-width: 230px;
     }
-    .contact-info a { color: #f857a6; text-decoration: none; }
-    .contact-info a:hover { text-decoration: underline; }
-    .social-links {
+    .contact-info h3 {
+      font-size: 1.23em;
+      margin-bottom: 12px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .contact-info p, .contact-info a {
+      color: #fff;
+      font-size: 1.08em;
+      margin-bottom: 9px;
+      text-decoration: none;
+      display: block;
+    }
+    .contact-info .social-links {
       display: flex;
-      justify-content: center;
-      gap: 26px;
-      margin-top: 18px;
+      gap: 18px;
+      margin-top: 12px;
     }
-    .social-links a {
-      color: #f857a6;
-      font-size: 2em;
-      transition: .19s, transform .12s;
-      filter: drop-shadow(0 2px 8px #ffd20077);
+    .contact-info .social-links a {
+      color: #fff;
+      font-size: 1.5em;
+      transition: color .18s;
     }
-    .social-links a:hover {
-      color: #ffd200;
-      transform: scale(1.14) rotate(-6deg);
+    .contact-info .social-links a:hover { color: var(--accent);}
+    .contact-form {
+      flex: 2 1 340px;
+      min-width: 220px;
+      background: #fff;
+      padding: 26px 18px 20px 18px;
+      border-radius: 15px;
+      color: var(--dark);
+      box-shadow: 0 2px 14px #00c3c044;
     }
-    /* Google Maps */
-    .map-embed {
-      margin: 20px auto 0 auto;
-      max-width: 400px;
-      border-radius: 14px;
+    .contact-form label {
+      font-weight: 600;
+      color: var(--main);
+      font-size: 1em;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 11px;
+      border: 1.5px solid #eaeff7;
+      background: #f7fafd;
+      border-radius: 7px;
+      font-size: 1em;
+      transition: border .17s;
+      outline: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border: 1.5px solid var(--accent);
+    }
+    .contact-form button {
+      background: var(--gradient);
+      color: #fff;
+      padding: 12px 32px;
+      border-radius: 23px;
+      font-weight: 700;
+      font-size: 1.1em;
+      border: none;
+      cursor: pointer;
+      transition: background .18s, color .16s;
+      margin-top: 3px;
+    }
+    .contact-form button:hover { background: var(--main); color: var(--accent);}
+    .contact-map {
+      margin-top: 20px;
+      border-radius: 13px;
       overflow: hidden;
-      box-shadow: 0 2px 16px #ffd20033;
-      border: 2px solid #ffd20033;
+      box-shadow: 0 2px 12px #1a2a6555;
+      border: 2px solid #eaeff7;
+      max-width: 370px;
     }
-
-    /* Dark Theme */
-    body.dark, body.dark .about, body.dark .services, body.dark .gallery, body.dark .contact, body.dark .reviews, body.dark .info-cards, body.dark .blog {
-      background: #2b2530 !important;
-      color: #eee !important;
-      box-shadow: 0 4px 32px #000c;
+    @media (max-width: 900px) {
+      .contact-flex { flex-direction: column; gap: 18px;}
+      .contact-form, .contact-info { max-width: 100%;}
+      .contact-map { max-width: 100%; }
     }
-    body.dark .service, body.dark .info-card, body.dark .blog-card, body.dark .swiper-slide {
-      background: #31283b !important;
-      color: #fff !important;
-    }
-    body.dark .service .back { color: #fff; }
-    body.dark .gallery-grid a { background: #31283b; }
-    body.dark .map-embed { border-color: #f857a655; }
-    body.dark .btn { color: #202020 !important; }
-    body.dark .contact-info a { color: #ffd200 !important; }
 
     /* Footer */
     footer {
-      background: linear-gradient(90deg, var(--p3), var(--p1), var(--p2));
-      color: var(--white);
+      background: var(--main);
+      color: #fff;
       text-align: center;
-      padding: 20px 0 18px 0;
-      border-radius: 20px 20px 0 0;
-      margin-top: 23px;
-      font-size: 1.03em;
-      box-shadow: var(--shadow);
-      letter-spacing: 0.2px;
-      text-shadow: 0 1px 8px #fff7, 0 1px 12px #f857a6;
+      padding: 28px 0 18px 0;
+      border-radius: 18px 18px 0 0;
+      font-size: 1.07em;
+      margin-top: 22px;
+      box-shadow: 0 -3px 16px #0001;
+      letter-spacing: 0.4px;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="container">
+    <div class="container navbar">
+      <a class="logo-flex" href="#">
+        <span class="logo-img">
+          <!-- Yusuf Beauty Logo SVG -->
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#00c3c0"/><path d="M32 16 Q38 24 32 48 Q26 24 32 16 Z" fill="#fff"/><ellipse cx="32" cy="25" rx="8" ry="3" fill="#fff" opacity="0.7"/><text x="32" y="41" text-anchor="middle" font-family="Montserrat" font-weight="bold" font-size="11" fill="#1a2a65">YB</text></svg>
+        </span>
+        <span class="logo-title">Yusuf Beauty</span>
+      </a>
       <nav>
-        <a href="#" class="logo">Yusuf Beauty</a>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#hero" class="active">Ana Sayfa</a></li>
+        <span class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></span>
+        <ul id="mainMenu">
+          <li><a href="#slider" class="active">Ana Sayfa</a></li>
           <li><a href="#about">Hakkımızda</a></li>
           <li><a href="#services">Hizmetler</a></li>
           <li><a href="#gallery">Galeri</a></li>
-          <li><a href="#blog">İpuçları</a></li>
-          <li><a href="#reviews">Yorumlar</a></li>
           <li><a href="#contact">İletişim</a></li>
         </ul>
-        <button class="theme-toggle" id="themeToggle" title="Tema Değiştir"><i class="fas fa-moon"></i></button>
-        <span class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></span>
       </nav>
     </div>
   </header>
 
-  <!-- Sabit Hızlı iletişim -->
-  <div class="quick-contact">
-    <a href="https://wa.me/905551234567" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+  <!-- SLIDER / HERO -->
+  <div class="slider" id="slider">
+    <div class="slider-content">
+      <h1>Güzellikte <span style="color:var(--accent);text-shadow:0 2px 10px #fff8;">Sağlık & Estetik</span> Buluşuyor!</h1>
+      <p>
+        En modern teknolojilerle, uzman ekibimizle ve hijyenik ortamımızda güzelliğinize güzellik katıyoruz.<br>
+        Yusuf Beauty ile medikal ve estetik bakımda yeni bir deneyim sizi bekliyor!
+      </p>
+      <a class="slider-btn" href="#contact">Randevu Al</a>
+    </div>
+    <div class="slider-shape"></div>
   </div>
 
-  <div class="banner" data-aos="fade-down">
-    <i class="fa fa-star"></i> Sonbahar Kampanyası! Tüm cilt bakımlarında %20 indirim. <b>Hemen randevu alın!</b>
-  </div>
-
-  <!-- SVG Dalga -->
-  <svg class="svg-wave" viewBox="0 0 1440 80"><path fill="#fbc2eb" d="M0,32L120,26.7C240,21,480,11,720,21.3C960,32,1200,64,1320,80L1440,96V0H1320C1200,0,960,0,720,0C480,0,240,0,120,0H0Z"></path></svg>
-  
-  <section class="hero" id="hero">
-    <video class="hero-video-bg" src="https://www.w3schools.com/howto/rain.mp4" autoplay loop muted playsinline></video>
-    <div class="hero-content" data-aos="zoom-in">
-      <h1>Güzellik ve Bakımda <br>Profesyonel Dokunuş</h1>
-      <p>Yusuf Beauty ile güzelliğinize güzellik katın.<br>Uzman kadro, kaliteli ürünler ve müşteri memnuniyetiyle hizmetinizdeyiz.</p>
-      <a href="#contact" class="btn">Randevu Al</a>
+  <!-- HAKKIMIZDA -->
+  <section class="about" id="about">
+    <div class="container about-flex">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80" alt="Salon">
+      </div>
+      <div class="about-text">
+        <h2>Hakkımızda</h2>
+        <p>
+          Yusuf Beauty, uzman ekibiyle güzellik ve medikal bakımda yüksek kalite standartları sunar. Yenilikçi uygulamalarımız, müşteri memnuniyeti ve sağlık odaklı yaklaşımımız ile sektörün öncüsüyüz.
+        </p>
+        <p>
+          Misyonumuz; güvenli, hijyenik ve konforlu ortamımızda, en gelişmiş yöntemlerle güzellik yolculuğunuza eşlik etmek.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- Bilgilendirici kartlar -->
-  <div class="info-cards container" data-aos="fade-up">
-    <div class="info-card">
-      <i class="fa fa-star"></i>
-      %100 Müşteri Memnuniyeti
-    </div>
-    <div class="info-card">
-      <i class="fa fa-sparkles"></i>
-      Hijyenik & Modern Salon
-    </div>
-    <div class="info-card">
-      <i class="fa fa-user-tie"></i>
-      Uzman Kadro
-    </div>
-    <div class="info-card">
-      <i class="fa fa-calendar-check"></i>
-      Kolay Randevu Sistemi
-    </div>
-  </div>
-
-  <section class="about container" id="about" data-aos="fade-up">
-    <h2 class="section-title">Hakkımızda</h2>
-    <p>
-      Yusuf Beauty, sektörde yılların verdiği tecrübe ve profesyonel ekibiyle güzellik ve bakım alanında hizmet vermektedir. Temiz, hijyenik ve ferah ortamımızda, müşteri memnuniyetini her zaman ön planda tutuyoruz. Güzelliğinize değer katmak için buradayız!
-    </p>
-    <div class="hours">
-      <b>Çalışma Saatleri:</b><br>
-      Pazartesi - Cumartesi: 09:00 - 20:00<br>
-      Pazar: Kapalı
-    </div>
-  </section>
-
-  <section class="services container" id="services" data-aos="fade-up">
+  <!-- HİZMETLER -->
+  <section class="services" id="services">
     <h2 class="section-title">Hizmetlerimiz</h2>
     <div class="services-list">
-      <div class="service">
-        <div class="front">
-          <i class="fas fa-spa"></i>
-          <h3>Cilt Bakımı</h3>
-          <p>Cildinizin ihtiyacına uygun profesyonel bakım uygulamaları.</p>
-        </div>
-        <div class="back">
-          <h3>Cilt Bakımı</h3>
-          <p>Detaylı analiz, cilt tipinize özel maske, nemlendirme, temizleme ve gençleştirici uygulamalar.</p>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-spa"></i>
+        <h3>Cilt Bakımı</h3>
+        <p>Profesyonel cilt analizleri, nemlendirme, akne ve leke tedavileri ile sağlıklı ve parlak bir cilt.</p>
       </div>
-      <div class="service">
-        <div class="front">
-          <i class="fas fa-cut"></i>
-          <h3>Saç Tasarımı</h3>
-          <p>Modern ve trend saç kesim ve renklendirme hizmetleri.</p>
-        </div>
-        <div class="back">
-          <h3>Saç Tasarımı</h3>
-          <p>Kişiye özel danışmanlıkla kesim, boya, ombre & balyaj, bakım uygulamaları.</p>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-cut"></i>
+        <h3>Saç Tasarımı</h3>
+        <p>Modern saç kesimi, renklendirme, keratin bakım ve saç sağlığı için özel uygulamalar.</p>
       </div>
-      <div class="service">
-        <div class="front">
-          <i class="fas fa-paint-brush"></i>
-          <h3>Makyaj</h3>
-          <p>Özel günleriniz ve günlük kullanım için profesyonel makyaj.</p>
-        </div>
-        <div class="back">
-          <h3>Makyaj</h3>
-          <p>Günlük, gece ve gelin makyajı. Uzun süre kalıcı, doğal ve ışıl ışıl görünümler.</p>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-paint-brush"></i>
+        <h3>Makyaj</h3>
+        <p>Günlük, gece ve özel gün makyajı; doğal ve uzun süre kalıcı görünümler.</p>
       </div>
-      <div class="service">
-        <div class="front">
-          <i class="fas fa-hand-sparkles"></i>
-          <h3>Manikür & Pedikür</h3>
-          <p>Hijyenik ortamda el ve ayak bakımı.</p>
-        </div>
-        <div class="back">
-          <h3>Manikür & Pedikür</h3>
-          <p>Shellac, nail art, klasik ve spa bakımı. Tam hijyen standartları.</p>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-hand-sparkles"></i>
+        <h3>Manikür & Pedikür</h3>
+        <p>Hijyenik ortamda el ve ayak bakımı, nail art ve spa uygulamaları.</p>
       </div>
-      <div class="service">
-        <div class="front">
-          <i class="fas fa-user-tie"></i>
-          <h3>Epilasyon</h3>
-          <p>Güvenli ve hijyenik epilasyon hizmetleri.</p>
-        </div>
-        <div class="back">
-          <h3>Epilasyon</h3>
-          <p>Lazer, ağda, iğneli ve kalıcı epilasyon teknikleri. Acısız ve konforlu uygulama.</p>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-user-nurse"></i>
+        <h3>Medikal Estetik</h3>
+        <p>Dermapen, PRP, mezoterapi ve gençleştirici uygulamalar, uzman ellerde güvenli hizmet.</p>
       </div>
-      <div class="service">
-        <div class="front">
-          <i class="fas fa-eye"></i>
-          <h3>Kaş & Kirpik</h3>
-          <p>Kaş şekillendirme ve kirpik lifting uygulamaları.</p>
-        </div>
-        <div class="back">
-          <h3>Kaş & Kirpik</h3>
-          <p>Lifting, kaş laminasyonu, microblading ve doğal görünümler.</p>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-laser"></i>
+        <h3>Lazer Epilasyon</h3>
+        <p>Acısız, kalıcı ve hızlı lazer epilasyon çözümleri ile pürüzsüz bir cilt.</p>
       </div>
     </div>
   </section>
 
-  <section class="gallery container" id="gallery" data-aos="zoom-in-up">
-    <h2 class="section-title">Galeri</h2>
-    <div class="gallery-grid">
-      <a href="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" data-lightbox="salon" data-title="Salon 1"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Salon 1"></a>
-      <a href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" data-lightbox="salon" data-title="Salon 2"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Salon 2"></a>
-      <a href="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80" data-lightbox="salon" data-title="Salon 3"><img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Salon 3"></a>
-      <a href="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" data-lightbox="salon" data-title="Salon 4"><img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Salon 4"></a>
-      <a href="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" data-lightbox="salon" data-title="Salon 5"><img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Salon 5"></a>
-      <a href="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80" data-lightbox="salon" data-title="Salon 6"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Salon 6"></a>
-    </div>
-    <!-- Galeri filtre örneği için -->
-    <!-- Filtreli galeri istersen JS ile ekleyebilirim. -->
-  </section>
-
-  <section class="blog container" id="blog" data-aos="fade-up">
-    <h2 class="section-title">Güzellik İpuçları</h2>
-    <div class="blog-list">
-      <div class="blog-card">
-        <h4>Cilt Bakımında 5 Altın Kural</h4>
-        <p>Düzenli temizlik, uygun nemlendirici, bol su tüketimi, güneş koruyucu kullanımı ve düzenli peeling cildinizi ışıldatır.</p>
-      </div>
-      <div class="blog-card">
-        <h4>Saçlarınız İçin Evde Bakım Tüyoları</h4>
-        <p>Doğal yağlar ve haftalık maske ile saçlarınızın canlılığını koruyun. Fön ve düzleştiriciden uzak durun!</p>
-      </div>
-      <div class="blog-card">
-        <h4>Mükemmel Makyajın Sırrı</h4>
-        <p>Cilt tipinize uygun baz, doğru fondöten ve doğal tonlarda makyaj ile kusursuz bir görünüm elde edin.</p>
-      </div>
+  <!-- GALERİ -->
+  <section class="gallery" id="gallery">
+    <h2 class="section-title">Salonumuzdan Kareler</h2>
+    <div class="gallery-list">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Galeri 1">
+      <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Galeri 2">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Galeri 3">
+      <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Galeri 4">
+      <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Galeri 5">
     </div>
   </section>
 
-  <section class="reviews container" id="reviews" data-aos="fade-up">
-    <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <span class="rev-stars">★★★★★</span>
-          <br>
-          Hizmet kalitesi ve hijyen mükemmel. Herkese tavsiye ederim!
-          <div class="rev-name">- Elif K.</div>
+  <!-- İLETİŞİM -->
+  <section class="contact" id="contact">
+    <div class="container contact-flex">
+      <div class="contact-info">
+        <h3>Bize Ulaşın</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Örnek Mah. Güzellik Cad. No:10, İstanbul</p>
+        <a href="tel:05551234567"><i class="fas fa-phone"></i> 0555 123 45 67</a>
+        <a href="mailto:info@yusufbeauty.com"><i class="fas fa-envelope"></i> info@yusufbeauty.com</a>
+        <div class="social-links">
+          <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://wa.me/905551234567" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <div class="swiper-slide">
-          <span class="rev-stars">★★★★★</span>
-          <br>
-          Personel çok ilgili ve güler yüzlü, kendimi çok rahat hissettim.
-          <div class="rev-name">- Zeynep T.</div>
-        </div>
-        <div class="swiper-slide">
-          <span class="rev-stars">★★★★★</span>
-          <br>
-          Randevu sistemi çok pratik, ortam ferah ve temizdi.
-          <div class="rev-name">- Merve S.</div>
-        </div>
-        <div class="swiper-slide">
-          <span class="rev-stars">★★★★★</span>
-          <br>
-          Saçımda harika bir değişim yaşadım, tekrar geleceğim!
-          <div class="rev-name">- Aylin A.</div>
+        <div class="contact-map">
+          <iframe src="https://www.google.com/maps?q=41.0082,28.9784&z=16&output=embed" width="100%" height="200" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
       </div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </section>
-
-  <section class="contact container" id="contact" data-aos="fade-up">
-    <h2 class="section-title">İletişim</h2>
-    <form autocomplete="off" onsubmit="return sendForm(event)">
-      <label for="name">Ad Soyad</label>
-      <input type="text" id="name" name="name" required>
-      <label for="email">E-posta</label>
-      <input type="email" id="email" name="email" required>
-      <label for="message">Mesajınız</label>
-      <textarea id="message" name="message" required rows="4"></textarea>
-      <button class="btn" type="submit">Gönder</button>
-    </form>
-    <div class="contact-info">
-      <p><i class="fas fa-map-marker-alt"></i> Adres: Örnek Mah. Güzellik Cad. No:10, İstanbul</p>
-      <p><i class="fas fa-phone"></i> Telefon: <a href="tel:05551234567">0555 123 45 67</a></p>
-      <p><i class="fas fa-envelope"></i> E-posta: <a href="mailto:info@yusufbeauty.com">info@yusufbeauty.com</a></p>
-      <div class="social-links">
-        <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="https://wa.me/905551234567" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-      </div>
-      <div class="map-embed">
-        <iframe src="https://www.google.com/maps?q=41.0082,28.9784&z=16&output=embed" width="100%" height="220" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-      </div>
+      <form class="contact-form" autocomplete="off" onsubmit="return sendForm(event)">
+        <label for="name">Ad Soyad</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">E-posta</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Mesajınız</label>
+        <textarea id="message" name="message" required rows="4"></textarea>
+        <button type="submit">Gönder</button>
+      </form>
     </div>
   </section>
 
   <footer>
-    © 2025 Yusuf Beauty | Tüm Hakları Saklıdır.
+    © 2025 Yusuf Beauty | Tüm Hakları Saklıdır. | <i class="fas fa-heart"></i> ile hazırlandı
   </footer>
 
-  <!-- Swiper.js -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <!-- Lightbox2 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-  <!-- AOS (Animasyon) -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    // Menü aç-kapa (mobil)
+    // Mobil menü aç/kapa
     const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click',()=>navLinks.classList.toggle('active'));
+    const mainMenu = document.getElementById('mainMenu');
+    menuToggle.addEventListener('click', ()=>mainMenu.classList.toggle('show'));
 
     // Aktif menü linki (scroll ile)
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section, .slider');
+    const navLinks = document.querySelectorAll('nav ul li a');
     window.addEventListener('scroll', () => {
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop-120;
         if (pageYOffset >= sectionTop) current = section.getAttribute('id');
       });
-      navItems.forEach(li => {
-        li.classList.remove('active');
-        if (li.getAttribute('href').slice(1) === current) li.classList.add('active');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(current && link.getAttribute('href').includes(current)) link.classList.add('active');
+        // Slider (anasayfa) için
+        if(!current && link.getAttribute('href')==="#slider") link.classList.add('active');
       });
     });
 
-    // Swiper (yorumlar için)
-    new Swiper('.mySwiper', {
-      slidesPerView: 1,
-      spaceBetween: 18,
-      loop: true,
-      autoplay: { delay: 3500, disableOnInteraction: false },
-      pagination: { el: '.swiper-pagination', clickable: true },
-      breakpoints: {
-        600: { slidesPerView: 2 },
-        900: { slidesPerView: 3 }
-      }
-    });
-
-    // AOS Animasyon başlat
-    AOS.init({ duration: 850, once: true });
-
-    // Dark/Light tema değiştirici
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      themeToggle.innerHTML = document.body.classList.contains('dark')
-        ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    });
-
-    // Basit form doğrulama ve mesaj (backend yok)
+    // İletişim formu uyarı
     function sendForm(e){
       e.preventDefault();
       alert("Mesajınız başarıyla gönderildi! Teşekkürler.");
