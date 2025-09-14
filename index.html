@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Swiper.js (Yorumlar için) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <!-- Lightbox2 (Galeri için) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"/>
   <style>
     :root {
       --bg-main: #10101a;
@@ -36,6 +38,43 @@
       position: relative;
       overflow-x: hidden;
     }
+    /* Hareketli arka plan canvas */
+    #bgStars {
+      position: fixed;
+      z-index: -2;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+    }
+    /* Neon Duyuru Bannerı */
+    .vip-banner {
+      background: linear-gradient(90deg,#ffd700,#00eaff,#ff4ebf,#ffd700 130%);
+      color:#191927;font-weight:bold;letter-spacing:1.2px;
+      padding:11px 0 10px 0;text-align:center;font-size:1.13em;
+      text-shadow:0 2px 12px #fff9,0 1px 16px #ffd700;
+      border-bottom: 2.5px solid #ffd70077;
+      animation: bannerMove 15s linear infinite;
+      background-size: 400% 100%;
+      position:relative;
+      z-index:12;
+    }
+    @keyframes bannerMove {
+      0%{background-position:0 0;}
+      100%{background-position:400px 0;}
+    }
+    .vip-banner a {color:#191927;text-decoration:underline;}
+    /* Sabit Neon Hızlı İletişim Butonları */
+    .vip-contact-float {
+      position: fixed; right: 16px; bottom: 32px; display: flex; flex-direction: column; gap: 17px; z-index: 1000;
+    }
+    .vip-contact-float a {
+      width:54px;height:54px;display:flex;align-items:center;justify-content:center;
+      border-radius:50%;font-size:2.1em;color:#fff;background:linear-gradient(135deg,#ffd700,#00eaff);
+      box-shadow:0 3px 18px #ffd70088,0 0 24px #00eaff55;transition:.2s;
+      animation: popUp .7s;
+    }
+    .vip-contact-float a:hover {background:linear-gradient(135deg,#00eaff,#ffd700);transform:scale(1.1) rotate(-8deg);}
+    @keyframes popUp {from {opacity:0;transform:translateY(40px);} to{opacity:1;transform:none;}}
     /* Header */
     header {
       background: linear-gradient(90deg, #191927 55%, #362f58 100%);
@@ -76,35 +115,12 @@
       text-transform: uppercase;
       filter: drop-shadow(0 0 18px #ffd70080);
       transition: .18s;
+      position:relative;
     }
-    .nav-links {
-      display: flex; gap: 32px; list-style: none;
-      font-family: 'Orbitron', Arial, sans-serif;
-    }
-    .nav-links a {
-      color: #ffd700;
-      font-size: 1.12em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      padding: 9px 16px;
-      border-radius: 12px;
-      background: transparent;
-      text-decoration: none;
-      transition: color .19s, background .17s, box-shadow .13s;
-      box-shadow: none;
-      border: none;
-      position: relative;
-    }
-    .nav-links a.active, .nav-links a:hover {
-      color: #10101a;
-      background: linear-gradient(90deg, #ffd700 40%, #00eaff 90%);
-      box-shadow: 0 0 14px #ffd700bb, 0 0 40px #00eaff55;
-      text-shadow: 0 0 8px #ffd700cc;
-    }
-    .menu-toggle { display: none; font-size: 2em; color: #ffd700; background: none; border: none; }
-    @media (max-width: 900px) {
-      .container { padding: 0 8px;}
+    .logo-title .vip-badge {
+      background: linear-gradient(90deg,#ffd700 40%,#ff4ebf 100%);
+      color:#191927;
+      font-size: 0.5em; font-family:'Orbitron',Arial,sans padding: 0 8px;}
       .nav-links { gap: 15px;}
     }
     @media (max-width: 700px) {
@@ -121,8 +137,7 @@
     .hero {
       background: linear-gradient(120deg, #1e1e34 45%, #2b223c 100%);
       color: #fffbe7;
-      text-align: center;
-      padding: 110px 16px 85px 16px;
+      text16px 85px 16px;
       border-radius: 0 0 64px 64px;
       box-shadow: 0 6px 38px #ffd70044;
       margin-bottom: 0;
@@ -179,6 +194,11 @@
       outline: none;
       position: relative;
       overflow: hidden;
+      animation: btnPulse 2.2s infinite alternate;
+    }
+    @keyframes btnPulse {
+      from {box-shadow: 0 3px 20px #ffd700cc;}
+      to {box-shadow: 0 8px 38px #00eaffcc;}
     }
     .btn:hover {
       background: linear-gradient(90deg, #00eaff 10%, #ffd700 90%);
@@ -229,6 +249,11 @@
       transition: box-shadow .18s, transform .13s, border .13s;
       display: flex; flex-direction: column; align-items: center; gap: 10px;
       position: relative;
+      animation: cardPulse 2.5s infinite alternate;
+    }
+    @keyframes cardPulse {
+      from {box-shadow: 0 2px 18px #ffd70044;}
+      to {box-shadow: 0 8px 38px #00eaff66;}
     }
     .vip-card i {
       font-size: 2.5em;
@@ -251,6 +276,10 @@
       grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
       gap: 18px;
       margin-top: 17px;
+    }
+    .vip-gallery a {
+      display: block;
+      border-radius: 15px;
     }
     .vip-gallery img {
       width: 100%; border-radius: 15px;
@@ -324,11 +353,77 @@
     .social-links a {
       color: #ffd700; font-size: 2.1em;
       transition: .2s, transform .13s;
-      filter(0 2px 8px #00eaff77);
+      filter: drop-shadow(0 2px 8px #00eaff77);
     }
     .social-links a:hover {
       color: #00eaff;
-      transform: scale(1.12) rotate(-6deg </div>
+      transform: scale(1.12) rotate(-6deg);
+    }
+    .map-embed {
+      margin: 20px auto 0 auto;
+      max-width: 400px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px #ffd70033;
+      border: 2.5px solid #ffd70033;
+    }
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, #ffd700, #00eaff, #ff4ebf 100%);
+      color: #191927;
+      text-align: center;
+      padding: 24px 0 18px 0;
+      border-radius: 24px 24px 0 0;
+      margin-top: 40px;
+      font-size: 1.1em;
+      font-family: 'Orbitron', Arial, sans-serif;
+      letter-spacing: 1.5px;
+      box-shadow: 0 -4px 32px #ffd70055;
+      text-shadow: 0 1px 8px #fff7, 0 1px 16px #ffd700;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hareketli neon yıldız arka planı -->
+  <canvas id="bgStars"></canvas>
+
+  <!-- Neon banner/duyuru -->
+  <div class="vip-banner">🎉 VIP üyelikte ilk bakım %30 indirimli! <a href="#contact">Detaylar</a></div>
+
+  <!-- Sabit iletişim -->
+  <div class="vip-contact-float">
+    <a href="https://wa.me/905551234567" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <nav>
+        <a class="logo-flex" href="#">
+          <span class="logo-vip">
+            <!-- VIP SCI-FI SVG LOGO -->
+            <svg viewBox="0 0 58 58" fill="none">
+              <circle cx="29" cy="29" r="24" fill="#191927" stroke="#ffd700" stroke-width="3.5" />
+              <ellipse cx="29" cy="22" rx="13" ry="8" fill="#ffd70088"/>
+              <ellipse cx="29" cy="32" rx="17" ry="10" fill="none" stroke="#00eaff" stroke-width="2.3"/>
+              <path d="M17 33 Q29 49 41 33" stroke="#7f52ff" stroke-width="2.1" fill="none"/>
+              <text x="50%" y="56%" text-anchor="middle" fill="#ffd700" font-family="Orbitron" font-size="17" font-weight="900" letter-spacing="2" dy=".3em">YB</text>
+            </svg>
+          </span>
+          <span class="logo-title">Yusuf Beauty <span class="vip-badge">VIP</span></span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero" class="active">Ana Sayfa</a></li>
+          <li><a href="#about">Hakkımızda</a></li>
+          <li><a href="#services">Hizmetler</a></li>
+          <li><a href="#gallery">Galeri</a></li>
+          <li><a href="#reviews">Yorumlar</a></li>
+          <li><a href="#contact">İletişim</a></li>
+        </ul>
+        <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      </nav>
+    </div>
   </header>
 
   <!-- HERO -->
@@ -344,7 +439,29 @@
     </div>
   </section>
 
-  <!-- VIP KART ve steril ortam.</span>
+  <!-- VIP KARTLAR (Hakkımızda ve avantajlar) -->
+  <section id="about">
+    <h2 class="section-title">Neden Yusuf Beauty?</h2>
+    <div class="vip-cards">
+      <div class="vip-card">
+        <i class="fa fa-crown"></i>
+        <strong>VIP Karşılama & Konfor</strong>
+        <span>Salonumuzda her misafirimiz bir VIP. Özel lounge alanı ve ikramlarla kendinizi ayrıcalıklı hissedin.</span>
+      </div>
+      <div class="vip-card">
+        <i class="fa fa-user-astronaut"></i>
+        <strong>Bilim Kurgu Esintili Atmosfer</strong>
+        <span>Futuristik dekor, neon ışıklar ve dijital dokunuşlarla farklı bir güzellik deneyimi.</span>
+      </div>
+      <div class="vip-card">
+        <i class="fa fa-gem"></i>
+        <strong>Uzman ve Güvenilir Kadro</strong>
+        <span>En iyi eğitimi almış, deneyimli ve güler yüzlü profesyoneller.</span>
+      </div>
+      <div class="vip-card">
+        <i class="fa fa-shield-alt"></i>
+        <strong>Hijyen & Teknoloji</strong>
+        <span>Avrupa standartlarında hijyen, son teknoloji cihazlar ve steril ortam.</span>
       </div>
     </div>
   </section>
@@ -383,8 +500,23 @@
   <section id="gallery">
     <h2 class="section-title">VIP Galeri</h2>
     <div class="vip-gallery">
-      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Salon 1">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3>
+      <a href="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" data-lightbox="salon"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Salon 1"></a>
+      <a href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" data-lightbox="salon"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Salon 2"></a>
+      <a href="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80" data-lightbox="salon"><img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Salon 3"></a>
+      <a href="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" data-lightbox="salon"><img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Salon 4"></a>
+      <a href="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" data-lightbox="salon"><img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Salon 5"></a>
+      <a href="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80" data-lightbox="salon"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Salon 6"></a>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <h2 class="section-title">VIP Yorumlar</h2>
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <span class="rev-stars">★★★★★</span>
+          <br>
+          VIP ilgisi ve salonun atmosferi gerçekten farklı! <br>
           <span class="rev-name">- Elif K.</span>
         </div>
         <div class="swiper-slide">
@@ -442,7 +574,26 @@
 
   <!-- Swiper.js -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Lightbox2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
   <script>
+    // Hareketli neon starfield
+    const c = document.getElementById('bgStars');
+    const ctx = c.getContext('2d');
+    function resize() { c.width = window.innerWidth; c.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    let stars = Array.from({length:90},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.2+0.5,dx:(Math.random()-0.5)*0.15}));
+    function drawStars() {
+      ctx.clearRect(0,0,c.width,c.height);
+      for(let s of stars) {
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,2*Math.PI);
+        ctx.fillStyle = 'rgba(0,234,255,0.85)'; ctx.shadowColor="#ffd700"; ctx.shadowBlur=10; ctx.fill();
+        s.x+=s.dx; if(s.x<0) s.x=c.width; if(s.x>c.width) s.x=0;
+      }
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
     // Mobil menü aç/kapa
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
