@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Güzellik Salonu</title>
-  <!-- Bootstrap CSS -->
+  <title>Yusuf Güzellik</title>
+
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Custom CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
@@ -16,174 +18,237 @@
       margin: 0;
       padding: 0;
     }
+    .navbar {
+      transition: background .3s, box-shadow .3s;
+    }
+    .navbar.scrolled {
+      background: rgba(255,255,255,0.95) !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
     #hero {
-      background: url('images/hero.jpg') center/cover no-repeat;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
     }
-    #hero h1,
-    #hero p {
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    #hero video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      z-index: 1;
     }
-    section {
-      scroll-margin-top: 80px;
+    #hero .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 2;
     }
-    .navbar-brand {
+    #hero .content {
+      position: relative;
+      z-index: 3;
+      color: #fff;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    section { padding: 5rem 0; }
+    .section-bg { background: #f9f9f9; }
+    .service-card {
+      border: none;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .pricing .card {
+      border: 2px solid #e0e0e0;
+      transition: border-color .3s, transform .3s;
+    }
+    .pricing .card.featured {
+      border-color: #d63384;
+      transform: scale(1.05);
+    }
+    .gallery img {
+      width: 100%;
+      cursor: pointer;
+      transition: transform .3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    .blog-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    footer {
+      background: #333;
+      color: #ccc;
+      padding: 2rem 0;
+    }
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+    #chat-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #d63384;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
       font-size: 1.5rem;
-    }
-    footer p {
-      font-size: 0.9rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 999;
     }
   </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70">
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="80">
 
   <!-- Navbar -->
-  <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+  <nav id="mainNav" class="navbar navbar-expand-lg navbar-light fixed-top py-3 bg-transparent">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">SalonAdı</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="images/logo.png" alt="Yusuf Güzellik" height="40">
+        <span class="ms-2 fw-bold">Yusuf Güzellik</span>
+      </a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navmenu">
+      <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#hero">Anasayfa</a></li>
-          <li class="nav-item"><a class="nav-link" href="#hakkimizda">Hakkımızda</a></li>
-          <li class="nav-item"><a class="nav-link" href="#hizmetler">Hizmetler</a></li>
-          <li class="nav-item"><a class="nav-link" href="#galeri">Galeri</a></li>
-          <li class="nav-item"><a class="nav-link" href="#iletisim">İletişim</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Hizmetler</a></li>
+          <li class="nav-item"><a class="nav-link" href="#team">Ekip</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Fiyatlar</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Galeri</a></li>
+          <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header id="hero" class="vh-100 d-flex align-items-center text-white text-center">
-    <div class="container">
-      <h1 class="display-4 fw-bold">Güzelliğin Yeni Adresi</h1>
-      <p class="lead mb-4">Profesyonel bakım, konforlu ortam ve uzman ekip</p>
-      <a href="#iletisim" class="btn btn-outline-light btn-lg">Randevu Al</a>
-    </div>
-  </header>
-
-  <!-- Hakkımızda -->
-  <section id="hakkimizda" class="py-5">
-    <div class="container">
-      <h2 class="mb-4 text-center">Hakkımızda</h2>
-      <p class="text-center">
-        X yıllık tecrübemiz ve uzman ekibimizle en kaliteli hizmeti sunuyoruz.
-        Misafirlerimizin memnuniyeti her zaman birinci önceliğimizdir.
-      </p>
+  <!-- Hero (Video Arka Plan) -->
+  <section id="hero">
+    <video autoplay muted loop>
+      <source src="images/hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="content container" data-aos="fade-up">
+      <h1 class="display-4 fw-bold">Yusuf Güzellik Salonu</h1>
+      <p class="lead mb-4">Uzman dokunuşlarla en iyi bakım deneyimi</p>
+      <a href="#contact" class="btn btn-outline-light btn-lg">Randevu Al</a>
     </div>
   </section>
 
-  <!-- Hizmetler -->
-  <section id="hizmetler" class="py-5 bg-light">
+  <!-- About -->
+  <section id="about" class="section-bg">
     <div class="container">
-      <h2 class="mb-5 text-center">Hizmetlerimiz</h2>
-      <div class="row g-4">
-        <div class="col-md-4 text-center">
-          <img src="images/service1.jpg" class="rounded mb-3" alt="Saç Tasarımı" width="100%">
-          <h5>Saç Tasarımı</h5>
-          <p>Modern kesim ve renklendirme teknikleriyle kusursuz bir görünüm.</p>
+      <div class="row align-items-center">
+        <div class="col-md-6" data-aos="fade-right">
+          <img src="images/about.jpg" alt="Hakkımızda" class="img-fluid rounded">
         </div>
-        <div class="col-md-4 text-center">
-          <img src="images/service2.jpg" class="rounded mb-3" alt="Cilt Bakımı" width="100%">
-          <h5>Cilt Bakımı</h5>
-          <p>Profesyonel ürünler ve kişiye özel uygulamalar.</p>
-        </div>
-        <div class="col-md-4 text-center">
-          <img src="images/service3.jpg" class="rounded mb-3" alt="Manikür & Pedikür" width="100%">
-          <h5>Manikür & Pedikür</h5>
-          <p>Detaylara önem veren özenli el ve ayak bakımı.</p>
+        <div class="col-md-6" data-aos="fade-left">
+          <h2>Hakkımızda</h2>
+          <p>Yusuf Güzellik ailesi olarak 10 yılı aşkın süredir profesyonel hizmet sunuyoruz. Misafir memnuniyeti ve hijyen en büyük önceliğimizdir.</p>
+          <ul>
+            <li>Uzman estetisyen ekibi</li>
+            <li>Sertifikalı ve hijyenik ürünler</li>
+            <li>Kişiye özel bakım planları</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Galeri -->
-  <section id="galeri" class="py-5">
+  <!-- Services -->
+  <section id="services">
     <div class="container">
-      <h2 class="mb-5 text-center">Galeri</h2>
-      <div id="carouselGaleri" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="images/gallery1.jpg" class="d-block w-100" alt="Salon Görsel 1">
-          </div>
-          <div class="carousel-item">
-            <img src="images/gallery2.jpg" class="d-block w-100" alt="Salon Görsel 2">
-          </div>
-          <div class="carousel-item">
-            <img src="images/gallery3.jpg" class="d-block w-100" alt="Salon Görsel 3">
+      <h2 class="text-center" data-aos="fade-up">Hizmetlerimiz</h2>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4" data-aos="zoom-in">
+          <div class="card service-card text-center p-4">
+            <i class="fas fa-cut fa-3x mb-3 text-primary"></i>
+            <h5>Saç Tasarımı</h5>
+            <p>Kesim, renklendirme ve bakımla kusursuz saçlar.</p>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselGaleri" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselGaleri" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- İletişim -->
-  <section id="iletisim" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="mb-4 text-center">Bize Ulaşın</h2>
-      <div class="row g-4">
-        <div class="col-md-6">
-          <form id="contactForm" novalidate>
-            <div class="mb-3">
-              <label for="name" class="form-label">Ad Soyad</label>
-              <input type="text" class="form-control" id="name" required>
-              <div class="invalid-feedback">Lütfen adınızı girin.</div>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">E-posta</label>
-              <input type="email" class="form-control" id="email" required>
-              <div class="invalid-feedback">Geçerli bir e-posta girin.</div>
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Mesaj</label>
-              <textarea class="form-control" id="message" rows="4" required></textarea>
-              <div class="invalid-feedback">Mesajınızı yazın.</div>
-            </div>
-            <button type="submit" class="btn btn-primary">Gönder</button>
-          </form>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card service-card text-center p-4">
+            <i class="fas fa-spa fa-3x mb-3 text-primary"></i>
+            <h5>Cilt Bakımı</h5>
+            <p>Profesyonel ürünlerle her cilt tipine özel bakım.</p>
+          </div>
         </div>
-        <div class="col-md-6">
-          <div class="ratio ratio-4x3">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!..."
-              style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card service-card text-center p-4">
+            <i class="fas fa-hand-sparkles fa-3x mb-3 text-primary"></i>
+            <h5>Manikür & Pedikür</h5>
+            <p>Detaylı ve hijyenik el-ayak bakımı.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="py-3 bg-dark text-white text-center">
+  <!-- Team -->
+  <section id="team" class="section-bg">
     <div class="container">
-      <p class="mb-0">&copy; 2025 SalonAdı. Tüm hakları saklıdır.</p>
+      <h2 class="text-center" data-aos="fade-up">Ekibimiz</h2>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4" data-aos="flip-left">
+          <div class="card text-center">
+            <img src="images/team1.jpg" class="card-img-top" alt="Uzman 1">
+            <div class="card-body">
+              <h5 class="card-title">Ayşe Yılmaz</h5>
+              <p class="card-text">Baş Estetisyen</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+          <div class="card text-center">
+            <img src="images/team2.jpg" class="card-img-top" alt="Uzman 2">
+            <div class="card-body">
+              <h5 class="card-title">Mehmet Demir</h5>
+              <p class="card-text">Saç Tasarım Uzmanı</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+          <div class="card text-center">
+            <img src="images/team3.jpg" class="card-img-top" alt="Uzman 3">
+            <div class="card-body">
+              <h5 class="card-title">Elif Kaya</h5>
+              <p class="card-text">Cilt Bakım Uzmanı</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Form Validation Script -->
-  <script>
-    (function () {
-      'use strict'
-      const form = document.getElementById('contactForm')
-      form.addEventListener('submit', function (e) {
-        if (!form.checkValidity()) {
-          e.preventDefault()
-          e.stopPropagation()
-        }
-        form.classList.add('was-validated')
-      }, false)
-    })()
-  </script>
-</body>
-</html>
-```[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/icinvestmentsoc/ICIS-React-Site/tree/21c1b6049ed529f5157bff367383003782636f89/src%2Fcomponents%2Fnav.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/usmanraza5245/Mobile-Tech/tree/b66eaa1ee605ac3cf2cbb97f33e2a46b9d1bc377/resources%2Fviews%2FMobileReviews%2Fcontact.blade.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "2")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/AymanLyesri/Projects_1er_Year/tree/ea49388b9073a7a695c52dfc38964e39200e0976/Project_PHP%2Fsite2.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "3")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/trentnsmith/koubaphoto/tree/d0aafbd1e26076c8fec7d9056f2646c455eafdda/src%2Fcomponents%2FHeader.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "4")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/Okanzekikayan/EYP-Tur/tree/521736d8391d48e40e1ad7e7020a94b7690622d7/index.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "5")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/muhammadgenta29/mmatasik/tree/c9173087a6f8259ddaa9846e94317303db307889/index.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "6")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/nooravipp-ux/ppdb-v-2/tree/2508f06f5831fbc1e5c45805962acb26d1c6b5cc/.history%2Fresources%2Fviews%2Fwelcome.blade_20210831231941.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "7")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/Chotika-SE62/final_chotika/tree/86cde5a84e01feb27d3858d5baf6df53a2c69343/app%2FViews%2Fwelcome_message.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "8")
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <h2 class="text-center" data-aos="fade-up">Fiyat Listesi</h2>
+      <div class="row g-4 mt-4 pricing">
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="card text-center p-4">
+            <h5 class="card-title">Standart Bakım</h5>
+            <p class="h3">₺250</p>
+            <ul class="list-unstyled">
