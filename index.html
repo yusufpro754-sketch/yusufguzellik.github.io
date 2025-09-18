@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf Güzellik Salonu | Lüks Bakım Deneyimi</title>
+    <title>Yusuf Güzellik Salonu | Premium Bakım Deneyimi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -32,8 +32,8 @@
         }
         
         h1, h2, h3, h4, h5 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
         
         .container {
@@ -137,21 +137,7 @@
             position: relative;
             overflow: hidden;
             padding-top: 100px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(249, 249, 249, 0.9) 100%);
-        }
-        
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            opacity: 0.1;
-            background: 
-                radial-gradient(circle at 20% 30%, var(--primary) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, var(--accent) 0%, transparent 20%),
-                radial-gradient(circle at 40% 80%, var(--secondary) 0%, transparent 20%);
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
         }
         
         .hero-content {
@@ -159,14 +145,13 @@
             text-align: center;
             margin: 0 auto;
             padding: 60px 40px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 30px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
+            animation: fadeIn 1s ease;
         }
         
         .hero-content:before {
@@ -176,7 +161,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transform: rotate(45deg);
             animation: shine 6s infinite linear;
         }
@@ -184,16 +169,14 @@
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 20px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 30px;
-            color: var(--dark);
+            color: white;
             position: relative;
         }
         
@@ -206,7 +189,7 @@
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(138, 93, 124, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -226,7 +209,7 @@
         
         .btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(138, 93, 124, 0.4);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
         }
         
         .btn:hover:before {
@@ -335,12 +318,17 @@
             height: 200px;
             overflow: hidden;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--gradient);
-            color: white;
-            font-size: 4rem;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
         }
         
         .service-content {
@@ -361,111 +349,49 @@
             line-height: 1.7;
         }
         
-        /* Team Section */
-        .team {
-            background: linear-gradient(to bottom, var(--light) 0%, #f1f1f1 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .team .shape {
-            position: absolute;
-            z-index: -1;
-            opacity: 0.05;
-        }
-        
-        .team .shape:nth-child(1) {
-            top: 20%;
-            left: 5%;
-            width: 200px;
-            height: 200px;
-            background: var(--gradient);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation: morph 10s linear infinite alternate;
-        }
-        
-        .team .shape:nth-child(2) {
-            bottom: 10%;
-            right: 5%;
-            width: 250px;
-            height: 250px;
-            background: var(--gradient-gold);
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation: morph 8s linear infinite alternate-reverse;
-        }
-        
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .team-member {
-            text-align: center;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-        }
-        
-        .team-member:hover {
-            transform: translateY(-10px) rotate(-1deg);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-        
-        .member-img {
-            height: 280px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--gradient);
+        /* Premium Section */
+        .premium {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
             color: white;
-            font-size: 5rem;
+            text-align: center;
+            position: relative;
         }
         
-        .member-img:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 1;
+        .premium-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .team-member:hover .member-img:before {
-            opacity: 0.1;
+        .premium-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
         }
         
-        .member-info {
-            padding: 25px;
+        .premium-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
         
-        .member-info h3 {
+        .premium-feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .premium-feature i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .premium-feature h3 {
             font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-        
-        .member-info p {
-            color: var(--accent);
-            font-style: italic;
             margin-bottom: 15px;
-            font-weight: 500;
-        }
-        
-        .member-desc {
-            color: var(--dark);
-            font-size: 0.95rem;
-            line-height: 1.7;
         }
         
         /* Gallery Section */
@@ -479,7 +405,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50);
+            transform: translate(-50%, -50%);
             width: 400px;
             height: 400px;
             background: var(--gradient);
@@ -505,18 +431,22 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--gradient);
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
         }
         
         .gallery-item:hover {
             transform: translateY(-10px) scale(1.03);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.15);
         }
         
         .gallery-overlay {
@@ -844,7 +774,7 @@
             }
             
             .services-grid,
-            .team-grid,
+            .premium-features,
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
@@ -881,7 +811,7 @@
                 <ul>
                     <li><a href="#home">Ana Sayfa</a></li>
                     <li><a href="#services">Hizmetler</a></li>
-                    <li><a href="#team">Ekibimiz</a></li>
+                    <li><a href="#premium">Premium</a></li>
                     <li><a href="#gallery">Galeri</a></li>
                     <li><a href="#instagram">Instagram</a></li>
                 </ul>
@@ -891,7 +821,6 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-bg"></div>
         <div class="container">
             <div class="hero-content">
                 <h1>Yusuf Güzellik Salonu</h1>
@@ -913,7 +842,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-img">
-                        <i class="fas fa-cut"></i>
+                        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Saç Tasarımı">
                     </div>
                     <div class="service-content">
                         <h3>Saç Tasarımı</h3>
@@ -922,7 +851,7 @@
                 </div>
                 <div class="service-card">
                     <div class="service-img">
-                        <i class="fas fa-paint-brush"></i>
+                        <img src="https://images.unsplash.com/photo-1512496015859-c0fde078a46d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Makyaj">
                     </div>
                     <div class="service-content">
                         <h3>Profesyonel Makyaj</h3>
@@ -931,7 +860,7 @@
                 </div>
                 <div class="service-card">
                     <div class="service-img">
-                        <i class="fas fa-hand-sparkles"></i>
+                        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="El & Ayak Bakımı">
                     </div>
                     <div class="service-content">
                         <h3>El & Ayak Bakımı</h3>
@@ -942,45 +871,28 @@
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="team" id="team">
-        <div class="shape"></div>
-        <div class="shape"></div>
+    <!-- Premium Section -->
+    <section class="premium" id="premium">
         <div class="container">
             <div class="section-title">
-                <h2>Uzman Ekibimiz</h2>
-                <p>Deneyimli ve uzman ekibimizle tanışın</p>
+                <h2>Premium Hizmetler</h2>
+                <p>Özel ihtiyaçlarınıza yönelik lüks hizmetlerimiz</p>
             </div>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-img">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="member-info">
-                        <h3>Yusuf Yılmaz</h3>
-                        <p>Kuaför & Salon Sahibi</p>
-                        <p class="member-desc">15 yıllık deneyimiyle uzmanlaşmış saç tasarımcısı. Uluslararası yarışmalarda ödüllere sahiptir.</p>
-                    </div>
+            <div class="premium-features">
+                <div class="premium-feature">
+                    <i class="fas fa-spa"></i>
+                    <h3>Lüks Bakım Paketleri</h3>
+                    <p>Özel olarak hazırlanmış premium bakım paketleri ile kendinizi şımartın.</p>
                 </div>
-                <div class="team-member">
-                    <div class="member-img">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="member-info">
-                        <h3>Zeynep Kaya</h3>
-                        <p>Makyöz</p>
-                        <p class="member-desc">Özel gün makyajında uzman, yaratıcı ve deneyimli. Paris ve Milano'da eğitim almıştır.</p>
-                    </div>
+                <div class="premium-feature">
+                    <i class="fas fa-gem"></i>
+                    <h3>Özel Ürünler</h3>
+                    <p>Yüksek kaliteli, lüks markaların özel bakım ürünleri ile hizmet veriyoruz.</p>
                 </div>
-                <div class="team-member">
-                    <div class="member-img">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="member-info">
-                        <h3>Melis Demir</h3>
-                        <p>Cilt Bakım Uzmanı</p>
-                        <p class="member-desc">Cilt sağlığı ve güzelliği konusında sertifikalı uzman. Doğal ve organik ürünler kullanmaktadır.</p>
-                    </div>
+                <div class="premium-feature">
+                    <i class="fas fa-clock"></i>
+                    <h3>Özel Randevu Saatleri</h3>
+                    <p>Yoğun programınıza uygun, size özel çalışma saatleri sunuyoruz.</p>
                 </div>
             </div>
         </div>
@@ -996,19 +908,19 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    Saç Tasarımı
+                    <img src="https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Saç Tasarımı">
                     <div class="gallery-overlay">
                         <h3>Özel Saç Tasarımı</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    Makyaj
+                    <img src="https://images.unsplash.com/photo-1512496015859-c0fde078a46d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Makyaj">
                     <div class="gallery-overlay">
                         <h3>Düğün Makyajı</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    Cilt Bakımı
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cilt Bakımı">
                     <div class="gallery-overlay">
                         <h3>Cilt Bakımı</h3>
                     </div>
@@ -1076,7 +988,7 @@
                     <ul>
                         <li><a href="#home">Ana Sayfa</a></li>
                         <li><a href="#services">Hizmetler</a></li>
-                        <li><a href="#team">Ekibimiz</a></li>
+                        <li><a href="#premium">Premium</a></li>
                         <li><a href="#gallery">Galeri</a></li>
                         <li><a href="#instagram">Instagram</a></li>
                     </ul>
