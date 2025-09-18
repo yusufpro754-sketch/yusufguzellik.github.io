@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf Güzellik Salonu | Yeni Nesil Tasarım</title>
+    <title>Yusuf Güzellik Salonu | Premium Hizmet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Genel Stil */
         * {
             margin: 0;
             padding: 0;
@@ -47,39 +46,6 @@
         section {
             padding: 100px 0;
             position: relative;
-        }
-        
-        /* Özel Şekiller ve Dekorasyonlar */
-        .shape {
-            position: absolute;
-            z-index: -1;
-            opacity: 0.1;
-        }
-        
-        .circle {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: var(--gradient);
-        }
-        
-        .triangle {
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-bottom: 260px solid var(--primary);
-        }
-        
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%238a5d7c'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            opacity: 0.05;
         }
         
         /* Header Styles */
@@ -274,6 +240,12 @@
             overflow: hidden;
         }
         
+        .services .shape {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
         .services .shape:nth-child(1) {
             top: -150px;
             right: -150px;
@@ -281,7 +253,6 @@
             height: 400px;
             background: var(--gradient);
             border-radius: 50%;
-            opacity: 0.05;
         }
         
         .services .shape:nth-child(2) {
@@ -291,7 +262,6 @@
             height: 300px;
             background: var(--gradient-gold);
             border-radius: 50%;
-            opacity: 0.05;
         }
         
         .section-title {
@@ -365,17 +335,12 @@
             height: 200px;
             overflow: hidden;
             position: relative;
-        }
-        
-        .service-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s ease;
-        }
-        
-        .service-card:hover .service-img img {
-            transform: scale(1.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            color: white;
+            font-size: 4rem;
         }
         
         .service-content {
@@ -403,6 +368,12 @@
             overflow: hidden;
         }
         
+        .team .shape {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
         .team .shape:nth-child(1) {
             top: 20%;
             left: 5%;
@@ -410,7 +381,6 @@
             height: 200px;
             background: var(--gradient);
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            opacity: 0.05;
             animation: morph 10s linear infinite alternate;
         }
         
@@ -421,7 +391,6 @@
             height: 250px;
             background: var(--gradient-gold);
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            opacity: 0.05;
             animation: morph 8s linear infinite alternate-reverse;
         }
         
@@ -451,6 +420,12 @@
             height: 280px;
             overflow: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            color: white;
+            font-size: 5rem;
         }
         
         .member-img:before {
@@ -464,17 +439,6 @@
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1;
-        }
-        
-        .member-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s ease;
-        }
-        
-        .team-member:hover .member-img img {
-            transform: scale(1.1);
         }
         
         .team-member:hover .member-img:before {
@@ -512,6 +476,7 @@
         }
         
         .gallery .shape {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -521,6 +486,7 @@
             opacity: 0.03;
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             animation: morph 15s linear infinite alternate;
+            z-index: -1;
         }
         
         .gallery-grid {
@@ -539,22 +505,18 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
         
         .gallery-item:hover {
             transform: translateY(-10px) scale(1.03);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.15);
         }
         
         .gallery-overlay {
@@ -585,9 +547,16 @@
         }
         
         .testimonials .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            opacity: 0.1;
             top: 0;
             transform: rotate(180deg);
-            opacity: 0.1;
         }
         
         .testimonial-container {
@@ -654,6 +623,7 @@
         }
         
         .instagram .shape {
+            position: absolute;
             top: 20%;
             right: 10%;
             width: 200px;
@@ -661,6 +631,7 @@
             background: var(--gradient);
             border-radius: 50%;
             opacity: 0.05;
+            z-index: -1;
         }
         
         .instagram-container {
@@ -897,10 +868,6 @@
     </style>
 </head>
 <body>
-    <!-- Dekoratif Şekiller -->
-    <div class="shape circle" style="top: 10%; left: 5%;"></div>
-    <div class="shape triangle" style="top: 20%; right: 5%;"></div>
-
     <!-- Header -->
     <header>
         <div class="container header-container">
@@ -946,7 +913,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Saç Stili & Bakımı">
+                        <i class="fas fa-cut"></i>
                     </div>
                     <div class="service-content">
                         <h3>Saç Tasarımı</h3>
@@ -955,7 +922,7 @@
                 </div>
                 <div class="service-card">
                     <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1512496015859-c0fde078a46d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Makyaj">
+                        <i class="fas fa-paint-brush"></i>
                     </div>
                     <div class="service-content">
                         <h3>Profesyonel Makyaj</h3>
@@ -964,7 +931,7 @@
                 </div>
                 <div class="service-card">
                     <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="El & Ayak Bakımı">
+                        <i class="fas fa-hand-sparkles"></i>
                     </div>
                     <div class="service-content">
                         <h3>El & Ayak Bakımı</h3>
@@ -987,7 +954,7 @@
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-img">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Yusuf Yılmaz">
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="member-info">
                         <h3>Yusuf Yılmaz</h3>
@@ -997,7 +964,7 @@
                 </div>
                 <div class="team-member">
                     <div class="member-img">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Zeynep Kaya">
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="member-info">
                         <h3>Zeynep Kaya</h3>
@@ -1007,7 +974,7 @@
                 </div>
                 <div class="team-member">
                     <div class="member-img">
-                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Melis Demir">
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="member-info">
                         <h3>Melis Demir</h3>
@@ -1029,19 +996,19 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Saç Tasarımı">
+                    Saç Tasarımı
                     <div class="gallery-overlay">
                         <h3>Özel Saç Tasarımı</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1512496015859-c0fde078a46d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Makyaj">
+                    Makyaj
                     <div class="gallery-overlay">
                         <h3>Düğün Makyajı</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cilt Bakımı">
+                    Cilt Bakımı
                     <div class="gallery-overlay">
                         <h3>Cilt Bakımı</h3>
                     </div>
