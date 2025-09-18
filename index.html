@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf Güzellik Salonu | Zarif ve Şık</title>
+    <title>Yusuf Güzellik Salonu | Yeni Nesil Tasarım</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Genel Stil */
         * {
             margin: 0;
             padding: 0;
@@ -14,63 +15,48 @@
         }
         
         :root {
-            --soft-pink: #f8e2e7;
-            --light-pink: #f9dce6;
-            --rose: #e6b8c2;
-            --dark-rose: #b76e79;
-            --gold: #d4af37;
-            --light-gold: #f1e5b9;
-            --dark-gold: #8a5d34;
-            --dark-brown: #6b4c2c;
-            --light-beige: #f9f2e8;
-            --white: #ffffff;
-            --black: #333333;
+            --primary: #8A5D7C;
+            --secondary: #D4AF37;
+            --accent: #FF6B6B;
+            --dark: #2D3047;
+            --light: #F9F9F9;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
         }
         
         body {
             font-family: 'Montserrat', sans-serif;
-            color: var(--black);
-            line-height: 1.6;
-            background-color: var(--white);
+            color: var(--dark);
+            background-color: var(--light);
             overflow-x: hidden;
-            background: url('https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
-            background-size: cover;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            z-index: -1;
+            line-height: 1.6;
         }
         
         h1, h2, h3, h4, h5 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
         }
         
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
         }
         
         /* Header Styles */
         header {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
         }
         
         .header-container {
@@ -89,22 +75,20 @@
         .logo-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--gold), var(--dark-rose));
+            background: var(--gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
-            font-weight: bold;
+            color: white;
             font-size: 24px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 15px rgba(138, 93, 124, 0.3);
         }
         
         .logo-text {
-            font-family: 'Playfair Display', serif;
             font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--dark-rose), var(--dark-gold));
+            font-weight: 800;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -117,8 +101,8 @@
         
         nav a {
             text-decoration: none;
-            color: var(--dark-brown);
-            font-weight: 500;
+            color: var(--dark);
+            font-weight: 600;
             font-size: 16px;
             transition: all 0.3s ease;
             position: relative;
@@ -128,15 +112,16 @@
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
+            height: 3px;
             bottom: -5px;
             left: 0;
-            background: linear-gradient(to right, var(--gold), var(--dark-rose));
+            background: var(--gradient);
             transition: width 0.3s ease;
+            border-radius: 3px;
         }
         
         nav a:hover {
-            color: var(--dark-rose);
+            color: var(--primary);
         }
         
         nav a:hover:after {
@@ -145,59 +130,73 @@
         
         /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            text-align: center;
-            color: var(--dark-brown);
-            padding-top: 80px;
             position: relative;
             overflow: hidden;
+            padding-top: 100px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(249, 249, 249, 0.9) 100%);
         }
         
-        .hero-video {
+        .hero-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: -1;
-            opacity: 0.2;
+            opacity: 0.5;
+        }
+        
+        .hero-bg:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background-size: cover;
+            filter: blur(5px);
         }
         
         .hero-content {
             max-width: 800px;
+            text-align: center;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease;
         }
         
         .hero h1 {
-            font-size: 52px;
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--dark-brown), var(--dark-rose));
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         .hero p {
-            font-size: 20px;
+            font-size: 1.2rem;
             margin-bottom: 30px;
-            font-weight: 400;
-            color: var(--dark-brown);
+            color: var(--dark);
         }
         
         .btn {
             display: inline-block;
-            padding: 14px 35px;
-            background: linear-gradient(to right, var(--gold), var(--dark-rose));
-            color: var(--white);
-            border-radius: 30px;
+            padding: 15px 35px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(138, 93, 124, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -210,14 +209,14 @@
             left: 0;
             width: 0%;
             height: 100%;
-            background: linear-gradient(to right, var(--dark-rose), var(--gold));
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
             transition: all 0.5s ease;
             z-index: -1;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(138, 93, 124, 0.4);
         }
         
         .btn:hover:before {
@@ -226,8 +225,8 @@
         
         /* Services Section */
         .services {
-            padding: 100px 0;
             position: relative;
+            background: var(--light);
         }
         
         .section-title {
@@ -237,51 +236,68 @@
         }
         
         .section-title h2 {
-            font-size: 42px;
-            color: var(--dark-rose);
+            font-size: 2.8rem;
+            color: var(--primary);
             margin-bottom: 15px;
         }
         
         .section-title p {
-            color: var(--dark-brown);
+            color: var(--dark);
             max-width: 600px;
             margin: 0 auto;
-            font-size: 18px;
+            font-size: 1.1rem;
         }
         
         .section-title:after {
             content: '';
             display: block;
             width: 80px;
-            height: 3px;
-            background: linear-gradient(to right, var(--gold), var(--dark-rose));
+            height: 4px;
+            background: var(--gradient);
             margin: 20px auto 0;
-            border-radius: 3px;
+            border-radius: 2px;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .service-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--gradient);
+            opacity: 0.05;
+            transition: all 0.4s ease;
+            z-index: -1;
         }
         
         .service-card:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-15px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
+        .service-card:hover:before {
+            height: 100%;
+        }
+        
         .service-img {
-            height: 220px;
+            height: 200px;
             overflow: hidden;
         }
         
@@ -302,63 +318,77 @@
         }
         
         .service-content h3 {
-            font-size: 24px;
-            color: var(--dark-brown);
+            font-size: 1.5rem;
+            color: var(--primary);
             margin-bottom: 15px;
         }
         
         .service-content p {
-            color: var(--black);
+            color: var(--dark);
             margin-bottom: 15px;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 1.7;
         }
         
         /* Team Section */
         .team {
-            padding: 100px 0;
-            background: rgba(249, 220, 230, 0.3);
+            background: linear-gradient(to bottom, var(--light) 0%, #f1f1f1 100%);
             position: relative;
+            overflow: hidden;
         }
         
         .team:before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
-            background-size: cover;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--gradient);
             opacity: 0.1;
-            z-index: -1;
+            z-index: 0;
+        }
+        
+        .team:after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--gradient);
+            opacity: 0.1;
+            z-index: 0;
         }
         
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
         }
         
         .team-member {
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
         }
         
         .team-member:hover {
-            transform: translateY(-15px) rotate(2deg);
+            transform: translateY(-10px) rotate(2deg);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
         .member-img {
             height: 280px;
             overflow: hidden;
+            position: relative;
         }
         
         .member-img img {
@@ -377,60 +407,48 @@
         }
         
         .member-info h3 {
-            font-size: 24px;
-            color: var(--dark-brown);
+            font-size: 1.5rem;
+            color: var(--primary);
             margin-bottom: 8px;
         }
         
         .member-info p {
-            color: var(--dark-rose);
+            color: var(--accent);
             font-style: italic;
             margin-bottom: 15px;
             font-weight: 500;
         }
         
         .member-desc {
-            color: var(--black);
-            font-size: 15px;
+            color: var(--dark);
+            font-size: 0.95rem;
             line-height: 1.7;
         }
         
         /* Gallery Section */
         .gallery {
-            padding: 100px 0;
             position: relative;
-        }
-        
-        .gallery:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
-            background-size: cover;
-            opacity: 0.1;
-            z-index: -1;
+            background: var(--light);
         }
         
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 20px;
         }
         
         .gallery-item {
             position: relative;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
             height: 280px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
+            cursor: pointer;
         }
         
         .gallery-item:hover {
-            transform: translateY(-10px) rotate(-1deg);
+            transform: translateY(-10px) scale(1.03);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
@@ -452,7 +470,7 @@
             right: 0;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
             padding: 25px;
-            color: var(--white);
+            color: white;
             opacity: 0;
             transition: opacity 0.4s ease;
             transform: translateY(20px);
@@ -465,10 +483,11 @@
         
         /* Testimonials */
         .testimonials {
-            padding: 100px 0;
-            background: linear-gradient(135deg, rgba(248, 226, 231, 0.7) 0%, rgba(249, 220, 230, 0.7) 100%);
+            background: var(--gradient);
+            color: white;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
         
         .testimonials:before {
@@ -478,39 +497,40 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1512496015859-c0fde078a46d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
             background-size: cover;
             opacity: 0.1;
-            z-index: -1;
+            z-index: 0;
         }
         
         .testimonial-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
         
         .testimonial {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin: 30px 0;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.4s ease;
         }
         
         .testimonial:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
         .testimonial-text {
             font-style: italic;
             margin-bottom: 25px;
-            color: var(--dark-brown);
-            font-size: 18px;
+            font-size: 1.1rem;
             line-height: 1.8;
             position: relative;
         }
@@ -518,8 +538,7 @@
         .testimonial-text:before, .testimonial-text:after {
             content: '"';
             font-size: 50px;
-            color: var(--gold);
-            opacity: 0.3;
+            color: rgba(255, 255, 255, 0.3);
             position: absolute;
         }
         
@@ -535,205 +554,90 @@
         
         .testimonial-author {
             font-weight: 600;
-            color: var(--dark-rose);
-            font-size: 18px;
+            font-size: 1.1rem;
         }
         
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background: rgba(249, 242, 232, 0.5);
-            position: relative;
+        /* Instagram Section */
+        .instagram {
+            background: var(--light);
+            text-align: center;
+            padding: 80px 0;
         }
         
-        .contact:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
-            background-size: cover;
-            opacity: 0.1;
-            z-index: -1;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px;
-        }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        
-        .contact-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--gold), var(--dark-rose));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-        
-        .contact-text h4 {
-            font-size: 20px;
-            color: var(--dark-brown);
-            margin-bottom: 8px;
-        }
-        
-        .contact-text p {
-            color: var(--black);
-        }
-        
-        .contact-form {
-            background: rgba(255, 255, 255, 0.9);
+        .instagram-container {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 40px;
+            background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
         
-        .form-group {
-            margin-bottom: 25px;
+        .instagram-container h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            color: var(--dark-brown);
-            font-weight: 500;
-            font-size: 16px;
+        .instagram-container p {
+            color: var(--dark);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
         }
         
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 15px 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
+        .instagram-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 20px rgba(138, 93, 124, 0.3);
         }
         
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(to right, var(--gold), var(--dark-rose));
-            color: var(--white);
-            border: none;
-            padding: 16px 35px;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            font-size: 17px;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .submit-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(to right, var(--dark-rose), var(--gold));
-            transition: all 0.5s ease;
-            z-index: -1;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .submit-btn:hover:before {
-            width: 100%;
+        .instagram-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(138, 93, 124, 0.4);
         }
         
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--dark-brown) 0%, var(--black) 100%);
-            color: var(--white);
-            padding: 80px 0 30px;
-            position: relative;
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 50px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
         
         .footer-about {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
         }
         
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
         .footer-text {
-            font-size: 15px;
+            font-size: 0.95rem;
             opacity: 0.8;
             line-height: 1.8;
         }
         
         .footer-heading {
-            font-size: 22px;
-            margin-bottom: 25px;
-            color: var(--light-gold);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
         }
         
         .footer-links {
@@ -741,28 +645,26 @@
         }
         
         .footer-links li {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         
         .footer-links a {
-            color: var(--white);
+            color: white;
             text-decoration: none;
             opacity: 0.8;
             transition: all 0.3s ease;
-            display: block;
-            padding: 5px 0;
         }
         
         .footer-links a:hover {
             opacity: 1;
-            transform: translateX(10px);
-            color: var(--light-gold);
+            color: var(--secondary);
+            padding-left: 5px;
         }
         
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 25px;
+            margin-top: 20px;
         }
         
         .social-links a {
@@ -773,39 +675,45 @@
             height: 45px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            color: var(--white);
+            color: white;
             transition: all 0.3s ease;
-            font-size: 18px;
+            font-size: 1.2rem;
         }
         
         .social-links a:hover {
-            background: linear-gradient(135deg, var(--gold), var(--dark-rose));
+            background: var(--gradient);
             transform: translateY(-5px);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 40px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 15px;
+            font-size: 0.9rem;
             opacity: 0.7;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Responsive */
         @media (max-width: 992px) {
             .hero h1 {
-                font-size: 42px;
+                font-size: 2.8rem;
             }
             
             .section-title h2 {
-                font-size: 36px;
+                font-size: 2.2rem;
             }
         }
         
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
             }
             
             nav ul {
@@ -815,30 +723,15 @@
             }
             
             .hero h1 {
-                font-size: 36px;
+                font-size: 2.2rem;
             }
             
             .hero p {
-                font-size: 18px;
+                font-size: 1rem;
             }
             
             .section-title h2 {
-                font-size: 32px;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero {
-                height: auto;
-                padding: 120px 0 80px;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
+                font-size: 2rem;
             }
             
             .services-grid,
@@ -846,10 +739,21 @@
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                min-height: auto;
+                padding: 120px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
             
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 30px;
             }
         }
     </style>
@@ -870,7 +774,7 @@
                     <li><a href="#services">Hizmetler</a></li>
                     <li><a href="#team">Ekibimiz</a></li>
                     <li><a href="#gallery">Galeri</a></li>
-                    <li><a href="#contact">İletişim</a></li>
+                    <li><a href="#instagram">Instagram</a></li>
                 </ul>
             </nav>
         </div>
@@ -878,13 +782,13 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <video autoplay muted loop class="hero-video">
-            <source src="https://cdn.pixabay.com/video/2023/04/20/160456-812206017_large.mp4" type="video/mp4">
-        </video>
-        <div class="hero-content">
-            <h1>Yusuf Güzellik Salonu</h1>
-            <p>Kendinizi özel hissedeceğiniz lüks bir güzellik deneyimi için doğru adres. Profesyonel ekibimiz ve kaliteli hizmetlerimizle güzelliğinize güzellik katıyoruz.</p>
-            <a href="#contact" class="btn">Hemen Randevu Al</a>
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Yusuf Güzellik Salonu</h1>
+                <p>Modern ve şık tasarım anlayışıyla, kendinizi özel hissedeceğiniz lüks bir güzellik deneyimi sunuyoruz. Profesyonel ekibimiz ve kaliteli hizmetlerimizle güzelliğinize güzellik katıyoruz.</p>
+                <a href="https://www.instagram.com/01_joseph_10/" class="btn" target="_blank">Hemen Randevu Al</a>
+            </div>
         </div>
     </section>
 
@@ -893,7 +797,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Hizmetlerimiz</h2>
-                <p>Size özel tasarlanmış lüks güzellik hizmetlerimizle tanışın</p>
+                <p>Size özel tasarlanmış modern güzellik hizmetlerimizle tanışın</p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -901,7 +805,7 @@
                         <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Saç Stili & Bakımı">
                     </div>
                     <div class="service-content">
-                        <h3>Saç Stili & Bakımı</h3>
+                        <h3>Saç Tasarımı</h3>
                         <p>Modern saç kesimleri, boyama, balyaj, ombre ve özel saç bakım tedavileri. En kaliteli ürünlerle saçlarınıza özenle bakıyoruz.</p>
                     </div>
                 </div>
@@ -910,7 +814,7 @@
                         <img src="https://images.unsplash.com/photo-1512496015859-c0fde078a46d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Makyaj">
                     </div>
                     <div class="service-content">
-                        <h3>Makyaj</h3>
+                        <h3>Profesyonel Makyaj</h3>
                         <p>Özel gün makyajı, düğün makyajı, doğal makyaj ve kalıcı makyaj hizmetleri. Cilt tipinize uygun hypoallergenic ürünler kullanıyoruz.</p>
                     </div>
                 </div>
@@ -1019,83 +923,15 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <!-- Instagram Section -->
+    <section class="instagram" id="instagram">
         <div class="container">
-            <div class="section-title">
-                <h2>İletişim</h2>
-                <p>Bize ulaşın ve randevunuzu hemen alın</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>Adres</h4>
-                            <p>Güzellik Sokak No:123, Şişli/İstanbul</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>Telefon</h4>
-                            <p>+90 (212) 345 67 89</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>E-posta</h4>
-                            <p>info@yusufguzellik.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>Çalışma Saatleri</h4>
-                            <p>Pazartesi - Cumartesi: 09:00 - 19:00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Adınız Soyadınız</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-posta Adresiniz</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Telefon Numaranız</label>
-                            <input type="tel" id="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="service">İlgilendiğiniz Hizmet</label>
-                            <select id="service" required>
-                                <option value="">Lütfen seçiniz</option>
-                                <option value="sac">Saç Stili & Bakımı</option>
-                                <option value="makyaj">Makyaj</option>
-                                <option value="el-ayak">El & Ayak Bakımı</option>
-                                <option value="cilt">Cilt Bakımı</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mesajınız</label>
-                            <textarea id="message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Randevu Al</button>
-                    </form>
-                </div>
+            <div class="instagram-container">
+                <h2>Bizi Instagram'dan Takip Edin</h2>
+                <p>En yeni çalışmalarımızdan haberdar olmak ve iletişime geçmek için bizi Instagram'dan takip edebilirsiniz.</p>
+                <a href="https://www.instagram.com/01_joseph_10/" class="instagram-btn" target="_blank">
+                    <i class="fab fa-instagram"></i> @01_joseph_10
+                </a>
             </div>
         </div>
     </section>
@@ -1111,9 +947,9 @@
                         </div>
                         <div class="logo-text">Yusuf Güzellik</div>
                     </div>
-                    <p class="footer-text">2010'dan beri İstanbul'da lüks güzellik ve bakım hizmetleri sunmaktayız. Müşterilerimize en kaliteli hizmeti sunmak için sürekli kendimizi geliştiriyoruz.</p>
+                    <p class="footer-text">2010'dan beri İstanbul'da modern güzellik ve bakım hizmetleri sunmaktayız. Müşterilerimize en kaliteli hizmeti sunmak için sürekli kendimizi geliştiriyoruz.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/01_joseph_10/" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
@@ -1126,17 +962,15 @@
                         <li><a href="#services">Hizmetler</a></li>
                         <li><a href="#team">Ekibimiz</a></li>
                         <li><a href="#gallery">Galeri</a></li>
-                        <li><a href="#contact">İletişim</a></li>
+                        <li><a href="#instagram">Instagram</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h3 class="footer-heading">Hizmetler</h3>
+                    <h3 class="footer-heading">İletişim</h3>
                     <ul>
-                        <li><a href="#services">Saç Stili & Bakımı</a></li>
-                        <li><a href="#services">Makyaj</a></li>
-                        <li><a href="#services">El & Ayak Bakımı</a></li>
-                        <li><a href="#services">Cilt Bakımı</a></li>
-                        <li><a href="#services">Erkek Kuaförü</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Güzellik Sokak No:123, Şişli/İstanbul</li>
+                        <li><i class="fas fa-phone"></i> +90 (212) 345 67 89</li>
+                        <li><i class="fas fa-envelope"></i> info@yusufguzellik.com</li>
                     </ul>
                 </div>
             </div>
@@ -1147,19 +981,8 @@
     </footer>
 
     <script>
-        // Form gönderimi için basit JavaScript
+        // Yumuşak kaydırma efekti
         document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.querySelector('.contact-form form');
-            
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Randevu talebiniz alınmıştır. En kısa sürede sizinle iletişime geçilecektir. Teşekkür ederiz!');
-                    contactForm.reset();
-                });
-            }
-            
-            // Yumuşak kaydırma efekti
             document.querySelectorAll('nav a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
