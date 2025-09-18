@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yusuf Güzellik Salonu | Zarif ve Şık</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -33,10 +33,24 @@
             line-height: 1.6;
             background-color: var(--white);
             overflow-x: hidden;
+            background: url('https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
         }
         
         h1, h2, h3, h4, h5 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-weight: 600;
         }
         
@@ -49,13 +63,14 @@
         
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--light-pink) 0%, var(--soft-pink) 100%);
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
         
         .header-container {
@@ -67,27 +82,31 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-decoration: none;
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold), var(--dark-rose));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
             font-weight: bold;
-            font-size: 20px;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
         
         .logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
             font-weight: 700;
-            color: var(--dark-rose);
+            background: linear-gradient(to right, var(--dark-rose), var(--dark-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         nav ul {
@@ -126,15 +145,25 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
             height: 100vh;
             display: flex;
             align-items: center;
             text-align: center;
-            color: var(--white);
+            color: var(--dark-brown);
             padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.2;
         }
         
         .hero-content {
@@ -144,21 +173,24 @@
         }
         
         .hero h1 {
-            font-size: 48px;
+            font-size: 52px;
             margin-bottom: 20px;
             font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--dark-brown), var(--dark-rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .hero p {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 30px;
             font-weight: 400;
+            color: var(--dark-brown);
         }
         
         .btn {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 14px 35px;
             background: linear-gradient(to right, var(--gold), var(--dark-rose));
             color: var(--white);
             border-radius: 30px;
@@ -166,6 +198,21 @@
             font-weight: 500;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, var(--dark-rose), var(--gold));
+            transition: all 0.5s ease;
+            z-index: -1;
         }
         
         .btn:hover {
@@ -173,20 +220,24 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
         
+        .btn:hover:before {
+            width: 100%;
+        }
+        
         /* Services Section */
         .services {
-            padding: 80px 0;
-            background: linear-gradient(to bottom, var(--light-beige), var(--white));
+            padding: 100px 0;
+            position: relative;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             position: relative;
         }
         
         .section-title h2 {
-            font-size: 36px;
+            font-size: 42px;
             color: var(--dark-rose);
             margin-bottom: 15px;
         }
@@ -195,38 +246,42 @@
             color: var(--dark-brown);
             max-width: 600px;
             margin: 0 auto;
+            font-size: 18px;
         }
         
         .section-title:after {
             content: '';
             display: block;
-            width: 60px;
+            width: 80px;
             height: 3px;
             background: linear-gradient(to right, var(--gold), var(--dark-rose));
-            margin: 15px auto 0;
+            margin: 20px auto 0;
+            border-radius: 3px;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
         }
         
         .service-card {
-            background: var(--white);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
         .service-img {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
         }
         
@@ -234,7 +289,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s ease;
         }
         
         .service-card:hover .service-img img {
@@ -242,55 +297,67 @@
         }
         
         .service-content {
-            padding: 20px;
+            padding: 25px;
+            text-align: center;
         }
         
         .service-content h3 {
-            font-size: 22px;
+            font-size: 24px;
             color: var(--dark-brown);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .service-content p {
             color: var(--black);
             margin-bottom: 15px;
-            font-size: 15px;
-        }
-        
-        .service-price {
-            color: var(--dark-rose);
-            font-weight: 600;
-            font-size: 18px;
+            font-size: 16px;
+            line-height: 1.7;
         }
         
         /* Team Section */
         .team {
-            padding: 80px 0;
-            background: linear-gradient(to bottom, var(--white), var(--light-beige));
+            padding: 100px 0;
+            background: rgba(249, 220, 230, 0.3);
+            position: relative;
+        }
+        
+        .team:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: -1;
         }
         
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
         }
         
         .team-member {
             text-align: center;
-            background: var(--white);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
         
         .team-member:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
         .member-img {
-            height: 250px;
+            height: 280px;
             overflow: hidden;
         }
         
@@ -298,7 +365,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s ease;
         }
         
         .team-member:hover .member-img img {
@@ -306,55 +373,76 @@
         }
         
         .member-info {
-            padding: 20px;
+            padding: 25px;
         }
         
         .member-info h3 {
-            font-size: 20px;
+            font-size: 24px;
             color: var(--dark-brown);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         
         .member-info p {
             color: var(--dark-rose);
             font-style: italic;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-weight: 500;
         }
         
         .member-desc {
             color: var(--black);
-            font-size: 14px;
+            font-size: 15px;
+            line-height: 1.7;
         }
         
         /* Gallery Section */
         .gallery {
-            padding: 80px 0;
-            background: linear-gradient(to bottom, var(--light-beige), var(--white));
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .gallery:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: -1;
         }
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .gallery-item {
             position: relative;
-            border-radius: 10px;
+            border-radius: 20px;
             overflow: hidden;
-            height: 250px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 280px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s ease;
         }
         
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
         
         .gallery-overlay {
@@ -363,21 +451,37 @@
             left: 0;
             right: 0;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-            padding: 20px;
+            padding: 25px;
             color: var(--white);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
+            transform: translateY(20px);
         }
         
         .gallery-item:hover .gallery-overlay {
             opacity: 1;
+            transform: translateY(0);
         }
         
         /* Testimonials */
         .testimonials {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--light-pink) 0%, var(--soft-pink) 100%);
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(248, 226, 231, 0.7) 0%, rgba(249, 220, 230, 0.7) 100%);
             text-align: center;
+            position: relative;
+        }
+        
+        .testimonials:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1512496015859-c0fde078a46d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: -1;
         }
         
         .testimonial-container {
@@ -387,97 +491,171 @@
         }
         
         .testimonial {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s ease;
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
         
         .testimonial-text {
             font-style: italic;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--dark-brown);
+            font-size: 18px;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .testimonial-text:before, .testimonial-text:after {
+            content: '"';
+            font-size: 50px;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial-text:before {
+            top: -20px;
+            left: -15px;
+        }
+        
+        .testimonial-text:after {
+            bottom: -40px;
+            right: -15px;
         }
         
         .testimonial-author {
             font-weight: 600;
             color: var(--dark-rose);
+            font-size: 18px;
         }
         
         /* Contact Section */
         .contact {
-            padding: 80px 0;
-            background: linear-gradient(to bottom, var(--white), var(--light-beige));
+            padding: 100px 0;
+            background: rgba(249, 242, 232, 0.5);
+            position: relative;
+        }
+        
+        .contact:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: -1;
         }
         
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
         }
         
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
         .contact-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, var(--gold), var(--dark-rose));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 20px;
+            font-size: 24px;
+            flex-shrink: 0;
         }
         
         .contact-text h4 {
-            font-size: 18px;
+            font-size: 20px;
             color: var(--dark-brown);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .contact-text p {
+            color: var(--black);
         }
         
         .contact-form {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: var(--dark-brown);
             font-weight: 500;
+            font-size: 16px;
         }
         
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 15px 20px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 10px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
         }
         
         .form-group textarea {
-            min-height: 120px;
+            min-height: 150px;
             resize: vertical;
         }
         
@@ -485,12 +663,29 @@
             background: linear-gradient(to right, var(--gold), var(--dark-rose));
             color: var(--white);
             border: none;
-            padding: 12px 30px;
+            padding: 16px 35px;
             border-radius: 30px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 17px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .submit-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, var(--dark-rose), var(--gold));
+            transition: all 0.5s ease;
+            z-index: -1;
         }
         
         .submit-btn:hover {
@@ -498,36 +693,46 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
         
+        .submit-btn:hover:before {
+            width: 100%;
+        }
+        
         /* Footer */
         footer {
             background: linear-gradient(135deg, var(--dark-brown) 0%, var(--black) 100%);
             color: var(--white);
-            padding: 60px 0 30px;
+            padding: 80px 0 30px;
+            position: relative;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-about {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
         
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 15px;
         }
         
         .footer-text {
-            font-size: 14px;
+            font-size: 15px;
             opacity: 0.8;
             line-height: 1.8;
         }
         
         .footer-heading {
-            font-size: 18px;
-            margin-bottom: 20px;
+            font-size: 22px;
+            margin-bottom: 25px;
             color: var(--light-gold);
         }
         
@@ -536,56 +741,71 @@
         }
         
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .footer-links a {
             color: var(--white);
             text-decoration: none;
             opacity: 0.8;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
         }
         
         .footer-links a:hover {
             opacity: 1;
+            transform: translateX(10px);
+            color: var(--light-gold);
         }
         
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: var(--white);
             transition: all 0.3s ease;
+            font-size: 18px;
         }
         
         .social-links a:hover {
             background: linear-gradient(135deg, var(--gold), var(--dark-rose));
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 14px;
+            font-size: 15px;
             opacity: 0.7;
         }
         
         /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .section-title h2 {
+                font-size: 36px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
             }
             
             nav ul {
@@ -598,25 +818,38 @@
                 font-size: 36px;
             }
             
+            .hero p {
+                font-size: 18px;
+            }
+            
             .section-title h2 {
-                font-size: 30px;
+                font-size: 32px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
         }
         
         @media (max-width: 576px) {
             .hero {
                 height: auto;
-                padding: 100px 0 60px;
+                padding: 120px 0 80px;
             }
             
             .hero h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
             
             .services-grid,
             .team-grid,
             .gallery-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
         }
     </style>
@@ -625,10 +858,12 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <div class="logo">
-                <div class="logo-icon">Y</div>
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
                 <div class="logo-text">Yusuf Güzellik</div>
-            </div>
+            </a>
             <nav>
                 <ul>
                     <li><a href="#home">Ana Sayfa</a></li>
@@ -643,6 +878,9 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://cdn.pixabay.com/video/2023/04/20/160456-812206017_large.mp4" type="video/mp4">
+        </video>
         <div class="hero-content">
             <h1>Yusuf Güzellik Salonu</h1>
             <p>Kendinizi özel hissedeceğiniz lüks bir güzellik deneyimi için doğru adres. Profesyonel ekibimiz ve kaliteli hizmetlerimizle güzelliğinize güzellik katıyoruz.</p>
@@ -664,8 +902,7 @@
                     </div>
                     <div class="service-content">
                         <h3>Saç Stili & Bakımı</h3>
-                        <p>Modern saç kesimleri, boyama, balyaj, ombre ve özel saç bakım tedavileri.</p>
-                        <div class="service-price">200TL起</div>
+                        <p>Modern saç kesimleri, boyama, balyaj, ombre ve özel saç bakım tedavileri. En kaliteli ürünlerle saçlarınıza özenle bakıyoruz.</p>
                     </div>
                 </div>
                 <div class="service-card">
@@ -674,8 +911,7 @@
                     </div>
                     <div class="service-content">
                         <h3>Makyaj</h3>
-                        <p>Özel gün makyajı, düğün makyajı, doğal makyaj ve kalıcı makyaj hizmetleri.</p>
-                        <div class="service-price">150TL起</div>
+                        <p>Özel gün makyajı, düğün makyajı, doğal makyaj ve kalıcı makyaj hizmetleri. Cilt tipinize uygun hypoallergenic ürünler kullanıyoruz.</p>
                     </div>
                 </div>
                 <div class="service-card">
@@ -684,8 +920,7 @@
                     </div>
                     <div class="service-content">
                         <h3>El & Ayak Bakımı</h3>
-                        <p>Manikür, pedikür, kalıcı oje ve cilt bakımı ile elleriniz ve ayaklarınız özenle şıklasın.</p>
-                        <div class="service-price">120TL起</div>
+                        <p>Manikür, pedikür, kalıcı oje ve cilt bakımı ile elleriniz ve ayaklarınız özenle şıklasın. Hijyenik ve steril ortamda hizmet veriyoruz.</p>
                     </div>
                 </div>
             </div>
@@ -707,7 +942,7 @@
                     <div class="member-info">
                         <h3>Yusuf Yılmaz</h3>
                         <p>Kuaför & Salon Sahibi</p>
-                        <p class="member-desc">15 yıllık deneyimiyle uzmanlaşmış saç tasarımcısı.</p>
+                        <p class="member-desc">15 yıllık deneyimiyle uzmanlaşmış saç tasarımcısı. Uluslararası yarışmalarda ödüllere sahiptir.</p>
                     </div>
                 </div>
                 <div class="team-member">
@@ -717,7 +952,7 @@
                     <div class="member-info">
                         <h3>Zeynep Kaya</h3>
                         <p>Makyöz</p>
-                        <p class="member-desc">Özel gün makyajında uzman, yaratıcı ve deneyimli.</p>
+                        <p class="member-desc">Özel gün makyajında uzman, yaratıcı ve deneyimli. Paris ve Milano'da eğitim almıştır.</p>
                     </div>
                 </div>
                 <div class="team-member">
@@ -727,7 +962,7 @@
                     <div class="member-info">
                         <h3>Melis Demir</h3>
                         <p>Cilt Bakım Uzmanı</p>
-                        <p class="member-desc">Cilt sağlığı ve güzelliği konusunda sertifikalı uzman.</p>
+                        <p class="member-desc">Cilt sağlığı ve güzelliği konusunda sertifikalı uzman. Doğal ve organik ürünler kullanmaktadır.</p>
                     </div>
                 </div>
             </div>
@@ -871,7 +1106,9 @@
             <div class="footer-content">
                 <div class="footer-about">
                     <div class="footer-logo">
-                        <div class="logo-icon">Y</div>
+                        <div class="logo-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
                         <div class="logo-text">Yusuf Güzellik</div>
                     </div>
                     <p class="footer-text">2010'dan beri İstanbul'da lüks güzellik ve bakım hizmetleri sunmaktayız. Müşterilerimize en kaliteli hizmeti sunmak için sürekli kendimizi geliştiriyoruz.</p>
