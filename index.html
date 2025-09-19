@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf Güzellik - Lüküs Güzellik ve Bakım Merkezi</title>
+    <title>Yusuf Güzellik - Lüks Güzellik ve Bakım Merkezi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #d4af37;
             --secondary-color: #8a6d3b;
-            --accent-color: #c9a86d;
-            --pink-color: #e6c9c9;
+            --accent-color: #f4c8d8;
             --dark-color: #1a1a1a;
             --light-color: #fdf8f8;
             --gray-color: #6c757d;
@@ -33,7 +32,7 @@
         }
         
         h1, h2, h3, h4, h5 {
-            font-family: 'Cinzel', serif;
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
         }
         
@@ -127,26 +126,6 @@
             width: 100%;
         }
         
-        .nav-btns {
-            display: flex;
-            align-items: center;
-        }
-        
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--dark-color);
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-right: 20px;
-            transition: var(--transition);
-        }
-        
-        .theme-toggle:hover {
-            color: var(--primary-color);
-            transform: rotate(30deg);
-        }
-        
         .nav-btn {
             display: none;
             background: none;
@@ -156,14 +135,14 @@
             color: var(--dark-color);
         }
         
-        /* Hero Section */
+        /* Hero Section - Değiştirilen bölüm: Siyah tema kaldırıldı, güzel bir arka plan eklendi */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+                        url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
             display: flex;
             align-items: center;
-            color: white;
+            color: var(--dark-color);
             text-align: center;
             padding-top: 80px;
             position: relative;
@@ -182,8 +161,8 @@
             font-size: 4rem;
             margin-bottom: 25px;
             animation: fadeInDown 1.2s ease;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .hero p {
@@ -429,7 +408,7 @@
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 10px;
-            font-family: 'Cinzel', serif;
+            font-family: 'Playfair Display', serif;
         }
         
         .stat-text {
@@ -529,7 +508,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: var(--pink-color);
+            background-color: var(--accent-color);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -851,6 +830,58 @@
             }
         }
         
+        /* Floating elements for animation */
+        .floating-element {
+            position: absolute;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            top: 60%;
+            left: 5%;
+            animation-delay: 1s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 70px;
+            height: 70px;
+            top: 40%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .floating-element:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 5%;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
         /* Responsive Design */
         @media (max-width: 1200px) {
             .hero h1 {
@@ -966,7 +997,7 @@
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-spa"></i>
+                    <i class="fas fa-spa"></i> <!-- Kadınsı logo için çiçek ikonu -->
                 </div>
                 <div class="logo-text">Yusuf <span>Güzellik</span></div>
             </div>
@@ -987,8 +1018,14 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Değiştirilen bölüm: Siyah tema kaldırıldı, güzel bir arka plan eklendi -->
     <section class="hero" id="home">
+        <!-- Hareketli elementler eklendi -->
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
         <div class="hero-content">
             <h1>Kadınlara Özel Lüks Güzellik</h1>
             <p>Yusuf Güzellik'te en kaliteli ürünler ve uzman ekibimizle doğal güzelliğinizi ön plana çıkarıyor, kendinizi özel hissetmenizi sağlıyoruz.</p>
@@ -1004,9 +1041,10 @@
                 <p>Kadınlara özel tasarlanmış premium hizmetlerimizle güzelliğinizi taçlandırıyoruz</p>
             </div>
             <div class="services-grid">
+                <!-- Epilasyon bölümü - Erkek resmi kadın resmi ile değiştirildi -->
                 <div class="service-card">
                     <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Lazer Epilasyon">
+                        <img src="https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Lazer Epilasyon">
                         <div class="service-overlay">
                             <a href="https://www.instagram.com/01_joseph_10/" class="btn btn-instagram" target="_blank">Instagram'dan İletişim</a>
                         </div>
