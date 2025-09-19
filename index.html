@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf Güzellik - Profesyonel Güzellik Merkezi</title>
+    <title>Yusuf Güzellik - Lüküs Güzellik ve Bakım Merkezi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
-            --primary-color: #d4af37;
+            --primary-color: #c9a86d;
             --secondary-color: #8a6d3b;
+            --accent-color: #d4af37;
             --dark-color: #1a1a1a;
             --light-color: #f8f9fa;
             --gray-color: #6c757d;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         * {
@@ -26,27 +29,28 @@
             color: var(--dark-color);
             line-height: 1.6;
             overflow-x: hidden;
+            background-color: #fdfbf7;
         }
         
         h1, h2, h3, h4, h5 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-weight: 700;
         }
         
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         
         /* Header Styles */
         header {
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(26, 26, 26, 0.95);
             position: fixed;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 15px 0;
+            transition: var(--transition);
         }
         
         .header-container {
@@ -61,20 +65,24 @@
         }
         
         .logo-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
+            font-size: 2.8rem;
+            color: var(--accent-color);
             margin-right: 10px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
         
         .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--dark-color);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .logo-text span {
-            color: var(--primary-color);
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
         
         nav ul {
@@ -83,19 +91,59 @@
         }
         
         nav ul li {
-            margin-left: 30px;
+            margin-left: 35px;
+            position: relative;
         }
         
         nav ul li a {
             text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 600;
+            color: white;
+            font-weight: 500;
             font-size: 1rem;
-            transition: color 0.3s;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
         }
         
         nav ul li a:hover {
-            color: var(--primary-color);
+            color: var(--accent-color);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-btns {
+            display: flex;
+            align-items: center;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 20px;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            color: var(--accent-color);
+            transform: rotate(30deg);
         }
         
         .nav-btn {
@@ -104,70 +152,136 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--dark-color);
+            color: white;
         }
         
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
             display: flex;
             align-items: center;
             color: white;
             text-align: center;
             padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/diagmonds.png');
+            opacity: 0.1;
+            pointer-events: none;
         }
         
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
+            font-size: 4rem;
+            margin-bottom: 25px;
+            animation: fadeInDown 1.2s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
         }
         
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1.2s ease;
+            font-weight: 300;
         }
         
         .btn {
             display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            padding: 15px 40px;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: var(--transition);
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         .btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+        }
+        
+        .btn:hover::before {
+            transform: translateY(0);
+        }
+        
+        /* Particle Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
         
         /* Services Section */
         .services {
-            padding: 100px 0;
+            padding: 120px 0;
             background-color: var(--light-color);
+            position: relative;
+        }
+        
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* ARKA PLAN RESMİ EKLENECEK YER - Aşağıdaki background-image özelliğini değiştirin */
+            background: url('https://www.transparenttextures.com/patterns/soft-wallpaper.png');
+            opacity: 0.05;
+            pointer-events: none;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
+            position: relative;
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--dark-color);
             margin-bottom: 20px;
             position: relative;
@@ -177,118 +291,252 @@
         .section-title h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--primary-color);
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
         }
         
         .service-card {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
         
         .service-img {
-            height: 200px;
+            height: 250px;
             overflow: hidden;
+            position: relative;
         }
         
         .service-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.7s ease;
         }
         
         .service-card:hover .service-img img {
             transform: scale(1.1);
         }
         
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-card:hover .service-overlay {
+            opacity: 1;
+        }
+        
         .service-content {
-            padding: 20px;
+            padding: 25px;
         }
         
         .service-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
             color: var(--dark-color);
         }
         
         .service-content p {
             color: var(--gray-color);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .service-price {
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            display: block;
         }
         
         /* About Section */
         .about {
-            padding: 100px 0;
+            padding: 120px 0;
+            background: linear-gradient(to right, #fdfbf7 0%, #f8f4ed 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            /* ARKA PLAN RESMİ EKLENECEK YER - Aşağıdaki background-image özelliğini değiştirin */
+            background: url('https://www.transparenttextures.com/patterns/gold-scale.png');
+            opacity: 0.1;
+            transform: rotate(45deg);
+            pointer-events: none;
         }
         
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 60px;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
         .about-img {
-            border-radius: 10px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100px;
+            height: 100px;
+            border-top: 4px solid var(--accent-color);
+            border-left: 4px solid var(--accent-color);
+            z-index: -1;
+        }
+        
+        .about-img::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            border-bottom: 4px solid var(--accent-color);
+            border-right: 4px solid var(--accent-color);
+            z-index: -1;
         }
         
         .about-img img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 1s ease;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
         }
         
         .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
             color: var(--dark-color);
+            line-height: 1.2;
         }
         
         .about-text p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--gray-color);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .stat-text {
+            font-size: 1rem;
+            color: var(--gray-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         /* Testimonials */
         .testimonials {
-            padding: 100px 0;
-            background-color: var(--light-color);
+            padding: 120px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                        /* ARKA PLAN RESMİ EKLENECEK YER - Aşağıdaki background-image özelliğini değiştirin */
+                        url('https://images.unsplash.com/photo-1596466596120-2a8e4b5d1a51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+            color: white;
             text-align: center;
+            position: relative;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/diagmonds.png');
+            opacity: 0.1;
+            pointer-events: none;
         }
         
         .testimonial-slider {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
         }
         
         .testimonial {
-            padding: 30px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
             margin: 0 20px;
             display: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         .testimonial.active {
@@ -298,104 +546,236 @@
         
         .testimonial-text {
             font-style: italic;
-            margin-bottom: 20px;
-            color: var(--gray-color);
+            margin-bottom: 30px;
+            color: #f1f1f1;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+            position: absolute;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .testimonial-text::before {
+            top: -20px;
+            left: -20px;
+        }
+        
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -20px;
         }
         
         .testimonial-author {
-            font-weight: 600;
-            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 3px solid var(--accent-color);
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .testimonial-info p {
+            color: var(--accent-color);
+            font-size: 0.9rem;
         }
         
         .testimonial-nav {
-            margin-top: 30px;
+            margin-top: 50px;
             display: flex;
             justify-content: center;
+            align-items: center;
+        }
+        
+        .testimonial-prev,
+        .testimonial-next {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .testimonial-prev:hover,
+        .testimonial-next:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+        }
+        
+        .testimonial-dots {
+            display: flex;
+            margin: 0 20px;
         }
         
         .testimonial-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: #ccc;
-            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            margin: 0 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: var(--transition);
         }
         
         .testimonial-dot.active {
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
+            transform: scale(1.3);
         }
         
         /* Contact Section */
         .contact {
-            padding: 100px 0;
+            padding: 120px 0;
+            background-color: var(--light-color);
+            position: relative;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            /* ARKA PLAN RESMİ EKLENECEK YER - Aşağıdaki background-image özelliğini değiştirin */
+            background: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            opacity: 0.1;
+            pointer-events: none;
         }
         
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 60px;
+            position: relative;
+            z-index: 1;
         }
         
         .contact-info h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
             color: var(--dark-color);
         }
         
         .contact-info p {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             color: var(--gray-color);
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         
         .contact-detail {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .contact-icon {
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary-color);
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
-            color: white;
-            font-size: 1.2rem;
+            margin-right: 20px;
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .contact-detail:hover .contact-icon {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
         }
         
         .contact-text h4 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .contact-text p {
+            margin-bottom: 0;
+            color: var(--gray-color);
         }
         
         .contact-form {
-            background-color: var(--light-color);
-            padding: 30px;
-            border-radius: 10px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+            text-align: center;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
+            color: var(--dark-color);
         }
         
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 15px 20px;
+            border: 2px solid #eee;
+            border-radius: 10px;
             font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
         }
         
         .form-group textarea {
@@ -407,52 +787,64 @@
         footer {
             background-color: var(--dark-color);
             color: white;
-            padding: 60px 0 30px;
+            padding: 80px 0 30px;
+            position: relative;
         }
         
         .footer-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            gap: 50px;
         }
         
         .footer-logo {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            font-family: 'Playfair Display', serif;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
         }
         
         .footer-logo span {
-            color: var(--primary-color);
+            color: var(--accent-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 25px;
+            color: #ccc;
+            line-height: 1.8;
         }
         
         .footer-social {
             display: flex;
-            margin-top: 20px;
         }
         
         .footer-social a {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 15px;
             color: white;
-            transition: background-color 0.3s;
+            transition: var(--transition);
+            font-size: 1.2rem;
         }
         
         .footer-social a:hover {
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-5px);
         }
         
         .footer-heading {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .footer-heading::after {
@@ -461,8 +853,8 @@
             bottom: 0;
             left: 0;
             width: 40px;
-            height: 2px;
-            background-color: var(--primary-color);
+            height: 3px;
+            background-color: var(--accent-color);
         }
         
         .footer-links {
@@ -470,25 +862,74 @@
         }
         
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .footer-links a {
             color: #ccc;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
+            display: inline-block;
         }
         
         .footer-links a:hover {
-            color: var(--primary-color);
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .footer-contact i {
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            width: 20px;
         }
         
         .copyright {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
+            margin-top: 70px;
+            padding-top: 25px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ccc;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
         }
         
         /* Animations */
@@ -500,7 +941,7 @@
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-50px);
             }
             to {
                 opacity: 1;
@@ -511,7 +952,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -519,7 +960,51 @@
             }
         }
         
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
         @media (max-width: 992px) {
             .about-content,
             .contact-container {
@@ -531,13 +1016,7 @@
             }
             
             .hero h1 {
-                font-size: 2.8rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-btn {
-                display: block;
+                font-size: 3rem;
             }
             
             nav ul {
@@ -546,11 +1025,12 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 80px);
-                background-color: white;
+                background-color: var(--dark-color);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                transition: left 0.3s ease;
+                transition: left 0.4s ease;
+                z-index: 999;
             }
             
             nav ul.active {
@@ -558,32 +1038,99 @@
             }
             
             nav ul li {
-                margin: 15px 0;
+                margin: 20px 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-btn {
+                display: block;
             }
             
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial {
+                padding: 30px;
+            }
+            
+            .testimonial-text {
                 font-size: 1rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-heading::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-social {
+                justify-content: center;
+            }
+            
+            .footer-contact p {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .about-text h2,
+            .contact-info h2 {
+                font-size: 2.2rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-author {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .testimonial-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-spa"></i>
+                    <i class="fas fa-crown"></i>
                 </div>
                 <div class="logo-text">Yusuf <span>Güzellik</span></div>
             </div>
-            <button class="nav-btn" id="navToggle">
-                <i class="fas fa-bars"></i>
-            </button>
             <nav>
                 <ul id="navMenu">
                     <li><a href="#home">Ana Sayfa</a></li>
@@ -593,14 +1140,23 @@
                     <li><a href="#contact">İletişim</a></li>
                 </ul>
             </nav>
+            <div class="nav-btns">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-btn" id="navToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div id="particles-js"></div>
         <div class="hero-content">
-            <h1>Güzelliğiniz Profesyonel Ellerde</h1>
-            <p>Yusuf Güzellik olarak, en kaliteli ürünler ve uzman ekibimizle doğal güzelliğinizi ön plana çıkarıyoruz.</p>
+            <h1>Lüks ve Zarafetin Buluşma Noktası</h1>
+            <p>Yusuf Güzellik'te en kaliteli ürünler ve uzman ekibimizle doğal güzelliğinizi ön plana çıkarıyor, kendinizi özel hissetmenizi sağlıyoruz.</p>
             <a href="#contact" class="btn">Randevu Al</a>
         </div>
     </section>
@@ -609,37 +1165,49 @@
     <section class="services" id="services">
         <div class="container">
             <div class="section-title">
-                <h2>Hizmetlerimiz</h2>
-                <p>Size özel tasarlanmış premium hizmetlerimiz</p>
+                <h2>Özel Hizmetlerimiz</h2>
+                <p>Size özel tasarlanmış premium hizmetlerimizle güzelliğinizi taçlandırıyoruz</p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-img">
                         <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Saç Bakımı">
+                        <div class="service-overlay">
+                            <a href="#contact" class="btn">Hemen Randevu Al</a>
+                        </div>
                     </div>
                     <div class="service-content">
-                        <h3>Saç Bakımı</h3>
-                        <p>Özel teknikler ve kaliteli ürünlerle saçlarınıza ihtiyacı olan bakımı sağlıyoruz.</p>
+                        <h3>Lüks Saç Bakımı</h3>
+                        <p>Özel teknikler ve kaliteli ürünlerle saçlarınıza ihtiyacı olan bakımı sağlıyor, ışıltılı ve sağlıklı saçlara kavuşmanızı sağlıyoruz.</p>
+                        <span class="service-price">450 TL'den başlayan fiyatlarla</span>
                         <a href="#contact" class="btn">Detaylar</a>
                     </div>
                 </div>
                 <div class="service-card">
                     <div class="service-img">
                         <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Cilt Bakımı">
+                        <div class="service-overlay">
+                            <a href="#contact" class="btn">Hemen Randevu Al</a>
+                        </div>
                     </div>
                     <div class="service-content">
-                        <h3>Cilt Bakımı</h3>
-                        <p>Cilt analizinize uygun olarak belirlediğimiz kişisel bakım programları.</p>
+                        <h3>Altın Cilt Bakımı</h3>
+                        <p>Cilt analizinize uygun olarak belirlediğimiz kişisel bakım programları ile cildinizi yenileyin ve ışıltısını geri kazanın.</p>
+                        <span class="service-price">600 TL'den başlayan fiyatlarla</span>
                         <a href="#contact" class="btn">Detaylar</a>
                     </div>
                 </div>
                 <div class="service-card">
                     <div class="service-img">
                         <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Makyaj">
+                        <div class="service-overlay">
+                            <a href="#contact" class="btn">Hemen Randevu Al</a>
+                        </div>
                     </div>
                     <div class="service-content">
-                        <h3>Özel Makyaj</h3>
-                        <p>Özel günleriniz için uzman makyaj ekibimizle unutulmaz bir görünüm.</p>
+                        <h3>Özel Gün Makyajı</h3>
+                        <p>Özel günleriniz için uzman makyaj ekibimizle unutulmaz bir görünüm yakalayın. Kalıcı ve etkileyici makyaj çözümleri.</p>
+                        <span class="service-price">750 TL'den başlayan fiyatlarla</span>
                         <a href="#contact" class="btn">Detaylar</a>
                     </div>
                 </div>
@@ -653,10 +1221,28 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>Yusuf Güzellik Farkı</h2>
-                    <p>15 yılı aşkın tecrübemizle, güzellik ve bakım sektöründe kaliteyi ve müşteri memnuniyetini ön planda tutuyoruz.</p>
+                    <p>20 yılı aşkın tecrübemizle, güzellik ve bakım sektöründe kaliteyi ve müşteri memnuniyetini ön planda tutuyoruz. Lüks ve konforu bir araya getirerek size özel bir deneyim sunuyoruz.</p>
                     <p>Uzman ekibimiz ve son teknoloji ekipmanlarımızla, size en iyi hizmeti sunmak için buradayız. Doğal malzemeler ve kişiye özel yaklaşımımızla fark yaratıyoruz.</p>
                     <p>Misyonumuz, her müşterimizin kendini özel ve güvende hissettiği, modern ve hijyenik bir ortamda en kaliteli hizmeti sunmaktır.</p>
-                    <a href="#contact" class="btn">Bize Ulaşın</a>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="20">0</div>
+                            <div class="stat-text">Yıllık Deneyim</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="5000">0</div>
+                            <div class="stat-text">Mutlu Müşteri</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="15">0</div>
+                            <div class="stat-text">Uzman Ekibi</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="32">0</div>
+                            <div class="stat-text">Ödül</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="about-img">
                     <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Yusuf Güzellik">
@@ -670,25 +1256,57 @@
         <div class="container">
             <div class="section-title">
                 <h2>Müşteri Yorumları</h2>
-                <p>Mutlu müşterilerimizin deneyimleri</p>
+                <p>Mutlu müşterilerimizin Yusuf Güzellik deneyimleri</p>
             </div>
             <div class="testimonial-slider">
                 <div class="testimonial active">
-                    <p class="testimonial-text">"Yusuf Güzellik'e ilk kez geldim ve kesinlikle bayıldım! Personel çok ilgili ve profesyonel. Cilt bakımımı Özlem Hanım yaptı, cildimde inanılmaz bir canlanma hissettim. Tekrar geleceğim!"</p>
-                    <p class="testimonial-author">- Ayşe Yılmaz</p>
+                    <p class="testimonial-text">Yusuf Güzellik'e ilk kez geldim ve kesinlikle bayıldım! Personel çok ilgili ve profesyonel. Cilt bakımımı Özlem Hanım yaptı, cildimde inanılmaz bir canlanma hissettim. Tekrar geleceğim!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Ayşe Yılmaz">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Ayşe Yılmaz</h4>
+                            <p>Düzenli Müşteri</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="testimonial">
-                    <p class="testimonial-text">"Saçlarım için doğru ürünleri bulmakta hep zorlanıyordum. Yusuf Bey doğru analizle saçıma en uygun bakım programını hazırladı. Saçlarım artık çok daha sağlıklı ve parlak!"</p>
-                    <p class="testimonial-author">- Mehmet Kaya</p>
+                    <p class="testimonial-text">Saçlarım için doğru ürünleri bulmakta hep zorlanıyordum. Yusuf Bey doğru analizle saçıma en uygun bakım programını hazırladı. Saçlarım artık çok daha sağlıklı ve parlak!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mehmet Kaya">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Mehmet Kaya</h4>
+                            <p>3 Aydır Müşteri</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="testimonial">
-                    <p class="testimonial-text">"Düğünüm için makyaj ve saç tasarımı hizmeti aldım. Hayal ettiğimden çok daha güzel oldu. Tüm gün bozulmayan makyajım ve mükemmel saçım için çok teşekkürler!"</p>
-                    <p class="testimonial-author">- Zeynep Demir</p>
+                    <p class="testimonial-text">Düğünüm için makyaj ve saç tasarımı hizmeti aldım. Hayal ettiğimden çok daha güzel oldu. Tüm gün bozulmayan makyajım ve mükemmel saçım için çok teşekkürler!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Zeynep Demir">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Zeynep Demir</h4>
+                            <p>Gelin Müşterisi</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="testimonial-nav">
-                    <div class="testimonial-dot active" data-index="0"></div>
-                    <div class="testimonial-dot" data-index="1"></div>
-                    <div class="testimonial-dot" data-index="2"></div>
+                    <button class="testimonial-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="testimonial-dots">
+                        <div class="testimonial-dot active" data-index="0"></div>
+                        <div class="testimonial-dot" data-index="1"></div>
+                        <div class="testimonial-dot" data-index="2"></div>
+                    </div>
+                    <button class="testimonial-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -707,7 +1325,7 @@
                         </div>
                         <div class="contact-text">
                             <h4>Adres</h4>
-                            <p>Örnek Mahallesi, Güzellik Sokak No: 123<br>İstanbul / Türkiye</p>
+                            <p>Nişantaşı, Abdi İpekçi Caddesi No: 123<br>İstanbul / Türkiye</p>
                         </div>
                     </div>
                     <div class="contact-detail">
@@ -726,6 +1344,15 @@
                         <div class="contact-text">
                             <h4>E-posta</h4>
                             <p>info@yusufguzellik.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Çalışma Saatleri</h4>
+                            <p>Pazartesi - Cumartesi: 09:00 - 20:00<br>Pazar: Kapalı</p>
                         </div>
                     </div>
                 </div>
@@ -748,18 +1375,22 @@
                             <label for="service">İlgilendiğiniz Hizmet</label>
                             <select id="service" required>
                                 <option value="">Hizmet Seçiniz</option>
-                                <option value="sac-bakimi">Saç Bakımı</option>
-                                <option value="cilt-bakimi">Cilt Bakımı</option>
-                                <option value="makyaj">Özel Makyaj</option>
-                                <option value="epilasyon">Epilasyon</option>
-                                <option value="masaj">Masaj Terapisi</option>
+                                <option value="sac-bakimi">Lüks Saç Bakımı</option>
+                                <option value="cilt-bakimi">Altın Cilt Bakımı</option>
+                                <option value="makyaj">Özel Gün Makyajı</option>
+                                <option value="epilasyon">Altın İğne Epilasyon</option>
+                                <option value="masaj">Lüks Masaj Terapisi</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="message">Mesajınız (İsteğe Bağlı)</label>
+                            <label for="date">Tercih Ettiğiniz Tarih</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Özel Notunuz (İsteğe Bağlı)</label>
                             <textarea id="message"></textarea>
                         </div>
-                        <button type="submit" class="btn">Gönder</button>
+                        <button type="submit" class="btn">Randevu Oluştur</button>
                     </form>
                 </div>
             </div>
@@ -793,28 +1424,79 @@
                 <div class="footer-links">
                     <h3 class="footer-heading">Hizmetler</h3>
                     <ul>
-                        <li><a href="#">Saç Bakımı</a></li>
-                        <li><a href="#">Cilt Bakımı</a></li>
-                        <li><a href="#">Makyaj</a></li>
-                        <li><a href="#">Epilasyon</a></li>
-                        <li><a href="#">Masaj Terapisi</a></li>
+                        <li><a href="#">Lüks Saç Bakımı</a></li>
+                        <li><a href="#">Altın Cilt Bakımı</a></li>
+                        <li><a href="#">Özel Gün Makyajı</a></li>
+                        <li><a href="#">Altın İğne Epilasyon</a></li>
+                        <li><a href="#">Lüks Masaj Terapisi</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
                     <h3 class="footer-heading">İletişim</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Örnek Mahallesi, Güzellik Sokak No: 123, İstanbul</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nişantaşı, Abdi İpekçi Cd. No:123, İstanbul</p>
                     <p><i class="fas fa-phone"></i> +90 (212) 345 67 89</p>
                     <p><i class="fas fa-envelope"></i> info@yusufguzellik.com</p>
-                    <p><i class="fas fa-clock"></i> Pazartesi - Cumartesi: 09:00 - 19:00</p>
+                    <p><i class="fas fa-clock"></i> Pzt - Cmt: 09:00 - 20:00</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Yusuf Güzellik. Tüm Hakları Saklıdır.</p>
+                <p>&copy; 2023 Yusuf Güzellik. Tüm Hakları Saklıdır. | Tasarlayan: Yusuf Güzellik</p>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 1500);
+        });
+
+        // Particles.js Configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#d4af37" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 4, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#c9a86d",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
         // Mobile Navigation Toggle
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
@@ -852,6 +1534,8 @@
         // Testimonial Slider
         const testimonials = document.querySelectorAll('.testimonial');
         const dots = document.querySelectorAll('.testimonial-dot');
+        const prevBtn = document.querySelector('.testimonial-prev');
+        const nextBtn = document.querySelector('.testimonial-next');
         let currentTestimonial = 0;
         
         function showTestimonial(index) {
@@ -870,17 +1554,52 @@
             });
         });
         
-        // Auto rotate testimonials
-        setInterval(() => {
+        prevBtn.addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+        
+        nextBtn.addEventListener('click', () => {
             currentTestimonial = (currentTestimonial + 1) % testimonials.length;
             showTestimonial(currentTestimonial);
-        }, 5000);
+        });
+        
+        // Auto rotate testimonials
+        let testimonialInterval = setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 6000);
+        
+        // Pause auto rotation on hover
+        const testimonialSlider = document.querySelector('.testimonial-slider');
+        testimonialSlider.addEventListener('mouseenter', () => {
+            clearInterval(testimonialInterval);
+        });
+        
+        testimonialSlider.addEventListener('mouseleave', () => {
+            testimonialInterval = setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 6000);
+        });
         
         // Form Submission
         const appointmentForm = document.getElementById('appointmentForm');
         
         appointmentForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Form validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            
+            if (!name || !email || !phone || !service || !date) {
+                alert('Lütfen tüm gerekli alanları doldurunuz.');
+                return;
+            }
             
             // Here you would normally send the form data to a server
             // For this example, we'll just show an alert
@@ -891,14 +1610,92 @@
         // Sticky Header
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
+            const backToTop = document.getElementById('backToTop');
+            
             if (window.scrollY > 100) {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
                 header.style.padding = '10px 0';
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.98)';
+                backToTop.classList.add('active');
             } else {
-                header.style.boxShadow = 'none';
                 header.style.padding = '15px 0';
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+                backToTop.classList.remove('active');
             }
         });
+        
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+        
+        // Animated Stats Counter
+        const statNumbers = document.querySelectorAll('.stat-number');
+        let counted = false;
+        
+        function animateStats() {
+            const statsSection = document.querySelector('.stats');
+            const statsSectionTop = statsSection.offsetTop;
+            const statsSectionHeight = statsSection.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrollY = window.scrollY;
+            
+            if (!counted && scrollY > statsSectionTop - windowHeight + statsSectionHeight / 2) {
+                statNumbers.forEach(statNumber => {
+                    const target = parseInt(statNumber.getAttribute('data-count'));
+                    const duration = 2000; // in milliseconds
+                    const step = Math.ceil(target / (duration / 16)); // 16ms per frame
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            statNumber.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            statNumber.textContent = current;
+                        }
+                    }, 16);
+                });
+                
+                counted = true;
+            }
+        }
+        
+        window.addEventListener('scroll', animateStats);
+        
+        // Initialize date input with current date as min value
+        const dateInput = document.getElementById('date');
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1;
+        let dd = today.getDate();
+        
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+        
+        const formattedToday = yyyy + '-' + mm + '-' + dd;
+        dateInput.setAttribute('min', formattedToday);
     </script>
 </body>
 </html>
