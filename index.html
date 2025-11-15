@@ -5,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Josephware - Yenilikçi Yazılım Çözümleri</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        /* --- 1. TEMEL STİLLER VE RESETLEME --- */
+        /* --- 1. Temel Ayarlar ve Renkler --- */
         :root {
-            --primary-color: #6a11cb; /* Ana mor renk */
-            --secondary-color: #2575fc; /* Ana mavi renk */
-            --dark-bg: #0f0f1a;      /* Koyu arkaplan */
-            --light-bg: #1c1c2b;     /* Biraz daha açık kart rengi */
-            --text-color: #f4f4f4;   /* Ana yazı rengi */
-            --text-muted: #a0a0b0; /* Soluk yazı rengi */
+            --primary-color: #007bff;
+            --secondary-color: #0056b3;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --text-color: #212529;
+            --white: #ffffff;
+            --container-width: 1100px;
         }
 
         * {
@@ -29,28 +26,28 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            background-color: var(--white);
             color: var(--text-color);
-            line-height: 1.6;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: var(--container-width);
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* --- 2. NAVİGASYON (BURGER MENÜLÜ) --- */
+        /* --- 2. Navigasyon --- */
         .navbar {
-            background: rgba(15, 15, 26, 0.8); /* Arkaplanı hafif şeffaf */
-            backdrop-filter: blur(10px);      /* Arkaplanı bulanıklaştır (modern görünüm) */
-            padding: 1.2rem 0;
-            border-bottom: 1px solid #2a2a3a;
+            background: var(--white);
+            border-bottom: 1px solid #e7e7e7;
+            padding: 1.5rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .nav-container {
@@ -64,271 +61,552 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--text-color);
+            color: var(--dark-gray);
             text-decoration: none;
+        }
+        .logo span {
+            color: var(--primary-color);
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-links li a {
-            color: var(--text-muted);
+            color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
+            font-size: 1.05rem;
             transition: color 0.3s ease;
+            cursor: pointer; /* Link yerine JS ile çalışacağı için */
         }
 
-        .nav-links li a:hover,
+        .nav-links li a:hover {
+            color: var(--primary-color);
+        }
+
         .nav-links li a.active {
-            color: var(--text-color);
+            color: var(--primary-color);
+            font-weight: 600;
         }
 
-        /* BURGER MENÜ İKONU */
         .burger-menu {
-            display: none; /* Masaüstünde gizli */
+            display: none;
             font-size: 1.8rem;
-            color: var(--text-color);
+            color: var(--dark-gray);
             cursor: pointer;
         }
 
-        /* --- 3. ANA BÖLÜM (HERO) - RENK GEÇİŞLİ YAZI --- */
-        .hero {
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 60px; /* Navbar yüksekliği kadar boşluk */
-            background: var(--dark-bg) url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
-            background-blend-mode: overlay; /* Resimle arka planı harmanla */
-            position: relative;
-        }
-        
-        /* Resmin üzerine koyu bir katman ekler (yazıların okunması için) */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 15, 26, 0.7);
-            z-index: 1;
+        main {
+            padding-top: 100px; /* Navbar yüksekliği kadar */
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        /* --- 3. Sayfa Bölümleri (JavaScript ile Kontrol Edilecek) --- */
+        .page-content {
+            display: none; /* JavaScript ile gösterilecek */
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        .page-content.active {
+            display: block; /* Aktif olan sayfa gösterilir */
         }
 
-        /* İSTEDİĞİNİZ RENK GEÇİŞLİ YAZI */
-        .gradient-text {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            color: #fff;
+        /* --- 4. Buton Stilleri --- */
+        .btn {
+            display: inline-block;
             padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px; /* Yuvarlak kenarlı buton */
+            border-radius: 5px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+            border: 1px solid var(--primary-color);
+        }
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--dark-gray);
+            border: 1px solid #ddd;
+        }
+        .btn-secondary:hover {
+            background: #e2e6ea;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* --- 4. HİZMETLER BÖLÜMÜ --- */
-        .services {
-            padding: 4rem 0;
+        /* --- 5. Genel Başlık ve Bölüm Stilleri --- */
+        .page-header {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 3rem 0;
             text-align: center;
-        }
-
-        .services h2 {
-            font-size: 2.5rem;
             margin-bottom: 3rem;
         }
+        .page-header h1 {
+            font-size: 2.8rem;
+        }
+        
+        .hero {
+            background: var(--light-gray);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+        .hero .gradient-text {
+            background: linear-gradient(90deg, var(--primary-color), #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+        
+        .content-section {
+            padding: 3rem 0;
+        }
+        .content-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--dark-gray);
+        }
 
+        /* --- 6. Hizmet Kartları --- */
         .service-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-
         .service-card {
-            background: var(--light-bg);
-            padding: 2.5rem 2rem;
-            border-radius: 10px;
-            border: 1px solid #2a2a3a;
+            border: 1px solid #e7e7e7;
+            border-radius: 8px;
+            padding: 2rem;
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
-
-        .service-card .icon {
-            font-size: 3rem;
+        .service-card i {
+            font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
         }
-
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .service-card p {
+            color: #555;
+        }
+
+        /* --- 7. Hakkımızda --- */
+        .about-content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-content img {
+            width: 50%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+        .about-text {
+            flex: 1;
+        }
+
+        /* --- 8. İletişim Formu --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .contact-info p {
+            font-size: 1.1rem;
             margin-bottom: 1rem;
         }
-
-        .service-card p {
-            color: var(--text-muted);
-        }
-        
-        /* --- 5. FOOTER (Alt Kısım) --- */
-        .footer {
-            background: var(--light-bg);
-            color: var(--text-muted);
+        .contact-info i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 20px;
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid #2a2a3a;
         }
 
+        /* --- 9. Footer --- */
+        .footer {
+            background: var(--dark-gray);
+            color: var(--light-gray);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+        }
+        .footer-container h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        .footer-container p,
+        .footer-container ul li a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        .footer-container ul { list-style: none; }
+        .footer-container ul li a:hover { color: var(--white); }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            margin-top: 2rem;
+            color: #aaa;
+        }
 
-        /* --- 6. MOBİL UYUMLULUK (BURGER MENÜ AYARLARI) --- */
+        /* --- 10. Mobil Uyum (Responsive) --- */
+        @media (max-width: 992px) {
+            .about-content, .contact-grid {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+            .about-content img {
+                width: 100%;
+                max-width: 400px;
+                margin-bottom: 2rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
-                display: none; /* Menüyü normalde gizle */
+                display: none;
                 flex-direction: column;
                 width: 100%;
-                background: var(--light-bg);
+                background: var(--white);
                 position: absolute;
-                top: 75px; /* Navbar yüksekliği kadar aşağıda */
+                top: 85px; /* Navbar yüksekliği */
                 left: 0;
                 padding: 1rem 0;
-                border-bottom: 1px solid #2a2a3a;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.05);
             }
-
-            /* JavaScript ile .active sınıfı eklendiğinde menüyü göster */
             .nav-links.active {
                 display: flex;
             }
-
             .nav-links li {
                 text-align: center;
                 padding: 1rem 0;
             }
-
             .burger-menu {
-                display: block; /* Burger ikonu mobilde görünsün */
+                display: block;
             }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .page-header h1 { font-size: 2.2rem; }
         }
-
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-container container">
-            <a href="#" class="logo">Josephware</a>
+            <a href="#" class="logo" data-page="home">Joseph<span>ware</span></a>
             
-            <div class="burger-menu" id="burger-menu">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="burger-menu" id="burger-menu"><i class="fas fa-bars"></i></div>
             
             <ul class="nav-links" id="nav-links">
-                <li><a href="#" class="active">Ana Sayfa</a></li>
-                <li><a href="#services">Hizmetler</a></li>
-                <li><a href="#">Hakkımızda</a></li>
-                <li><a href="#">Portfolyo</a></li>
-                <li><a href="#">İletişim</a></li>
+                <li><a class="nav-link active" data-page="home">Ana Sayfa</a></li>
+                <li><a class="nav-link" data-page="services">Hizmetler</a></li>
+                <li><a class="nav-link" data-page="about">Hakkımızda</a></li>
+                <li><a class="nav-link" data-page="contact">İletişim</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Geleceğin Kodları, <span class="gradient-text">Bugünün Çözümleri</span></h1>
-            <p>Josephware ile işletmenizi dijitalin zirvesine taşıyın.</p>
-            <a href="#services" class="cta-button">Hizmetlerimizi Keşfedin</a>
-        </div>
-    </header>
+    <main>
 
-    <section class="services" id="services">
-        <div class="container">
-            <h2>Neler Yapıyoruz?</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <div class="icon"><i class="fas fa-code"></i></div>
-                    <h3>Özel Yazılım Geliştirme</h3>
-                    <p>İhtiyaçlarınıza özel, ölçeklenebilir ve güvenli web ve mobil uygulamalar.</p>
+        <section class="page-content active" id="home">
+            <header class="hero">
+                <div class="container">
+                    <h1>Dijital Dönüşümünüz <span class="gradient-text">Burada Başlıyor</span></h1>
+                    <p>Josephware, işletmenizin potansiyelini ortaya çıkaran yenilikçi ve ölçeklenebilir yazılım çözümleri sunar.</p>
+                    <a class="btn btn-primary nav-link" data-page="services">Hizmetlerimizi İnceleyin</a>
+                    <a class="btn btn-secondary nav-link" data-page="contact">Bize Ulaşın</a>
                 </div>
-                <div class="service-card">
-                    <div class="icon"><i class="fas fa-cloud"></i></div>
-                    <h3>Bulut Çözümleri</h3>
-                    <p>Altyapınızı buluta taşıyın, maliyetleri düşürün ve verimliliği artırın.</p>
+            </header>
+            <section class="content-section">
+                <div class="container">
+                    <h2>Neler Sunuyoruz?</h2>
+                    <div class="service-grid">
+                        <div class="service-card">
+                            <i class="fas fa-code"></i>
+                            <h3>Özel Yazılım</h3>
+                            <p>İhtiyaçlarınıza tam olarak uyan, size özel tasarlanmış web ve mobil uygulamalar.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-cloud"></i>
+                            <h3>Bulut Çözümleri</h3>
+                            <p>Altyapınızı buluta taşıyarak maliyetleri düşürün, güvenliği ve esnekliği artırın.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Veri Analitiği</h3>
+                            <p>Verilerinizi anlamlı içgörülere dönüştürerek stratejik kararlar almanızı sağlıyoruz.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Veri Analitiği & Raporlama</h3>
-                    <p>Büyük veriyi anlamlı içgörülere dönüştürerek stratejik kararlar alın.</p>
+            </section>
+        </section>
+
+        <section class="page-content" id="services">
+            <header class="page-header">
+                <div class="container">
+                    <h1>Hizmetlerimiz</h1>
                 </div>
-            </div>
-        </div>
-    </section>
+            </header>
+            <section class="content-section">
+                <div class="container">
+                    <h2>Sunduğumuz Profesyonel Çözümler</h2>
+                    <div class="service-grid">
+                        <div class="service-card">
+                            <i class="fas fa-code"></i>
+                            <h3>Özel Yazılım</h3>
+                            <p>İhtiyaçlarınıza tam olarak uyan, size özel tasarlanmış web ve mobil uygulamalar.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-cloud"></i>
+                            <h3>Bulut Çözümleri</h3>
+                            <p>Altyapınızı buluta taşıyarak maliyetleri düşürün, güvenliği ve esnekliği artırın.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Veri Analitiği</h3>
+                            <p>Verilerinizi anlamlı içgörülere dönüştürerek stratejik kararlar almanızı sağlıyoruz.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Siber Güvenlik</h3>
+                            <p>Dijital varlıklarınızı korumak için kapsamlı siber güvenlik denetimleri ve çözümleri.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Mobil Uygulama</h3>
+                            <p>iOS ve Android platformlarında, kullanıcı odaklı ve performanslı mobil uygulamalar.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-cogs"></i>
+                            <h3>DevOps & Otomasyon</h3>
+                            <p>Geliştirme ve operasyon süreçlerinizi otomatize ederek verimliliğinizi artırıyoruz.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section class="page-content" id="about">
+            <header class="page-header">
+                <div class="container">
+                    <h1>Hakkımızda</h1>
+                </div>
+            </header>
+            <section class="content-section">
+                <div class="container">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2>Vizyonumuz: Teknolojide Sınırları Zorlamak</h2>
+                            <p><strong>Josephware olarak biz kimiz?</strong> Biz, teknolojiye tutkuyla bağlı, alanında uzman mühendisler, tasarımcılar ve stratejistlerden oluşan bir ekibiz.</p>
+                            <p>Misyonumuz, en karmaşık teknolojik zorlukları bile basit, sezgisel ve etkili çözümlere dönüştürmektir. Müşterilerimizin hedeflerini kendi hedeflerimiz olarak benimsiyor ve onların başarısı için çalışıyoruz.</p>
+                            <p>Modern teknoloji yığınlarını (stack) kullanarak, güvenli, ölçeklenebilir ve geleceğe hazır sistemler tasarlıyoruz.</p>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80" alt="Josephware Ekibi Toplantıda">
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section class="page-content" id="contact">
+            <header class="page-header">
+                <div class="container">
+                    <h1>Bize Ulaşın</h1>
+                </div>
+            </header>
+            <section class="content-section">
+                <div class="container">
+                    <h2>Bir Sonraki Projenizi Konuşalım</h2>
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h3>İletişim Bilgilerimiz</h3>
+                            <p>Projeniz hakkında konuşmak veya sadece bir kahve içmek için bize bu kanallardan ulaşabilirsiniz.</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Teknopark İstanbul, No:123, İstanbul</p>
+                            <p><i class="fas fa-phone"></i> +90 216 123 45 67</p>
+                            <p><i class="fas fa-envelope"></i> info@josephware.com</p>
+                            <p><strong>Çalışma Saatleri:</strong><br>Pazartesi - Cuma: 09:00 - 18:00</p>
+                        </div>
+                        <div class="contact-form">
+                            <h3>Mesaj Gönderin</h3>
+                            <form action="#">
+                                <div class="form-group">
+                                    <label for="name">Adınız Soyadınız</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">E-posta Adresiniz</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Mesajınız</label>
+                                    <textarea id="message" name="message" rows="6" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Formu Gönder</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+    </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Josephware. Tüm hakları saklıdır.</p>
+        <div class="container footer-container">
+            <div>
+                <h4>Joseph<span>ware</span></h4>
+                <p>Geleceğin teknolojisini bugünden inşa ediyoruz. İşletmenizi dijitalin gücüyle ileriye taşıyın.</p>
+            </div>
+            <div>
+                <h4>Hızlı Menü</h4>
+                <ul>
+                    <li><a class="nav-link" data-page="home">Ana Sayfa</a></li>
+                    <li><a class="nav-link" data-page="services">Hizmetler</a></li>
+                    <li><a class="nav-link" data-page="about">Hakkımızda</a></li>
+                    <li><a class="nav-link" data-page="contact">İletişim</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Sosyal Medya</h4>
+                <ul>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Josephware. Tüm hakları saklıdır.
         </div>
     </footer>
 
-
     <script>
-        // DOM elemanlarını seçiyoruz
-        const burgerMenu = document.getElementById('burger-menu');
-        const navLinks = document.getElementById('nav-links');
+        // Sayfa yüklendiğinde çalışacak kod
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // Burger menü ikonuna tıklanma olayı
-        burgerMenu.addEventListener('click', () => {
-            // nav-links elementine 'active' sınıfını ekle/çıkar
-            navLinks.classList.toggle('active');
-            
-            // İkonu değiştir (Hamburger -> X)
-            const icon = burgerMenu.querySelector('i');
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+            // --- BURGER MENÜ KODU ---
+            const burgerMenu = document.getElementById('burger-menu');
+            const navLinks = document.getElementById('nav-links');
+
+            burgerMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = burgerMenu.querySelector('i');
+                if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // --- TEK SAYFA NAVİGASYON KODU ---
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page-content');
+            const logo = document.querySelector('.logo');
+
+            // Logo'ya tıklama olayını da ekle
+            logo.addEventListener('click', () => {
+                showPage('home');
+            });
+
+            // Tüm menü linklerine (ve butonlara) tıklama olayı ekle
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Sayfanın zıplamasını engelle
+                    const pageId = link.getAttribute('data-page');
+                    showPage(pageId);
+
+                    // Eğer mobil menü açıksa, tıkladıktan sonra kapat
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        burgerMenu.querySelector('i').classList.remove('fa-times');
+                        burgerMenu.querySelector('i').classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // Sayfa gösterme fonksiyonu
+            function showPage(pageId) {
+                // 1. Tüm sayfaları gizle
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+
+                // 2. Hedef sayfayı göster
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+
+                // 3. Tüm linklerden 'active' sınıfını kaldır
+                allNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                // 4. Sadece tıklanan linke 'active' sınıfını ekle
+                document.querySelectorAll(`.nav-link[data-page="${pageId}"]`).forEach(activeLink => {
+                    activeLink.classList.add('active');
+                });
+
+                // 5. Sayfanın en üstüne git
+                window.scrollTo(0, 0);
             }
         });
     </script>
