@@ -318,17 +318,17 @@
             transform: translateY(-9px) rotate(-45deg);
         }
 
-        /* HERO BÖLÜMÜ */
+        /* HERO BÖLÜMÜ - DEĞİŞTİRİLDİ */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
             background-size: cover;
             position: relative;
             padding: 120px 0 80px;
-            color: white;
+            color: var(--text-color);
             text-align: center;
         }
 
@@ -348,7 +348,7 @@
 
         .hero p {
             font-size: 20px;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-light);
             margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
@@ -1203,8 +1203,8 @@
     <section class="section services" id="services">
         <div class="container">
             <div class="section-header">
-                <h2>Hizmetlerimiz</h2>
-                <p>İşinize değer katacak profesyonel yazılım çözümleri</p>
+                <h2 style="color: white;">Hizmetlerimiz</h2>
+                <p style="color: white;">İşinize değer katacak profesyonel yazılım çözümleri</p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -1231,11 +1231,22 @@
                 
                 <div class="service-card">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mobil Uygulamalar" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Web Oyun Tasarımı" loading="lazy">
                     </div>
                     <div class="service-content">
-                        <h3>Mobil Uygulamalar</h3>
-                        <p>iOS ve Android için native ve cross-platform mobil uygulamalar.</p>
+                        <h3>Web Oyun Tasarımı</h3>
+                        <p>HTML5 ve modern teknolojilerle etkileşimli web oyunları geliştiriyoruz.</p>
+                        <a href="#contact" class="btn">Teklif Al</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Web Animasyon Tasarımı" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Web Animasyon Tasarımı</h3>
+                        <p>CSS3, JavaScript ve SVG ile etkileyici web animasyonları tasarlıyoruz.</p>
                         <a href="#contact" class="btn">Teklif Al</a>
                     </div>
                 </div>
@@ -1276,10 +1287,10 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mobil Uygulama" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Web Oyunu" loading="lazy">
                     <div class="portfolio-overlay">
-                        <h3>Mobil Uygulama</h3>
-                        <p>Kullanıcı dostu arayüz</p>
+                        <h3>Web Oyunu</h3>
+                        <p>HTML5 ile geliştirilmiş interaktif oyun</p>
                     </div>
                 </div>
 
@@ -1292,10 +1303,10 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Eğitim Platformu" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Animasyonlu Web Sitesi" loading="lazy">
                     <div class="portfolio-overlay">
-                        <h3>Eğitim Platformu</h3>
-                        <p>Online öğrenme deneyimi</p>
+                        <h3>Animasyonlu Web Sitesi</h3>
+                        <p>CSS ve JS animasyonları</p>
                     </div>
                 </div>
             </div>
@@ -1374,7 +1385,8 @@
                             <select id="service" name="service">
                                 <option value="web">Web Geliştirme</option>
                                 <option value="ecommerce">E-Ticaret</option>
-                                <option value="mobile">Mobil Uygulamalar</option>
+                                <option value="webgame">Web Oyun Tasarımı</option>
+                                <option value="webanimation">Web Animasyon Tasarımı</option>
                                 <option value="enterprise">Kurumsal Yazılım</option>
                                 <option value="consulting">Danışmanlık</option>
                             </select>
@@ -1429,7 +1441,8 @@
                     <ul>
                         <li><a href="#services">Web Geliştirme</a></li>
                         <li><a href="#services">E-Ticaret</a></li>
-                        <li><a href="#services">Mobil Uygulamalar</a></li>
+                        <li><a href="#services">Web Oyun Tasarımı</a></li>
+                        <li><a href="#services">Web Animasyon Tasarımı</a></li>
                         <li><a href="#services">Kurumsal Yazılım</a></li>
                         <li><a href="#services">Danışmanlık</a></li>
                     </ul>
@@ -1583,7 +1596,8 @@
             const serviceTexts = {
                 'web': 'Web Geliştirme',
                 'ecommerce': 'E-Ticaret',
-                'mobile': 'Mobil Uygulamalar',
+                'webgame': 'Web Oyun Tasarımı',
+                'webanimation': 'Web Animasyon Tasarımı',
                 'enterprise': 'Kurumsal Yazılım',
                 'consulting': 'Danışmanlık'
             };
