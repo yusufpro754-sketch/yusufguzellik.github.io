@@ -7,10 +7,8 @@
     <meta name="description" content="Josephware - Profesyonel yazılım çözümleri, web geliştirme, e-ticaret ve kurumsal yazılım hizmetleri. İşletmenizi bir sonraki seviyeye taşıyın.">
     <meta name="keywords" content="yazılım, web geliştirme, e-ticaret, kurumsal yazılım, josephware">
     <meta name="author" content="Josephware">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
         /* GENEL STİLLER */
         :root {
@@ -29,24 +27,39 @@
             --border-color: #e2e8f0;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            /* Koyu Tema Renkleri */
+            --dark-primary-color: #3b82f6;
+            --dark-primary-light: #60a5fa;
+            --dark-primary-dark: #2563eb;
+            --dark-secondary-color: #94a3b8;
+            --dark-accent-color: #22d3ee;
+            --dark-bg-color: #0f172a;
+            --dark-bg-secondary: #1e293b;
+            --dark-bg-card: #1e293b;
+            --dark-text-primary: #f1f5f9;
+            --dark-text-secondary: #cbd5e1;
+            --dark-text-muted: #94a3b8;
+            --dark-border-color: #334155;
+            --dark-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --dark-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
         }
 
-        /* Koyu Tema Renkleri */
         .dark-mode {
-            --primary-color: #3b82f6;
-            --primary-light: #60a5fa;
-            --primary-dark: #2563eb;
-            --secondary-color: #94a3b8;
-            --accent-color: #22d3ee;
-            --bg-color: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            --primary-color: var(--dark-primary-color);
+            --primary-light: var(--dark-primary-light);
+            --primary-dark: var(--dark-primary-dark);
+            --secondary-color: var(--dark-secondary-color);
+            --accent-color: var(--dark-accent-color);
+            --bg-color: var(--dark-bg-color);
+            --bg-secondary: var(--dark-bg-secondary);
+            --bg-card: var(--dark-bg-card);
+            --text-primary: var(--dark-text-primary);
+            --text-secondary: var(--dark-text-secondary);
+            --text-muted: var(--dark-text-muted);
+            --border-color: var(--dark-border-color);
+            --shadow: var(--dark-shadow);
+            --shadow-lg: var(--dark-shadow-lg);
         }
 
         * {
@@ -79,8 +92,7 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
-            opacity: 0.05;
-            pointer-events: none;
+            opacity: 0.07;
         }
 
         .code-line {
@@ -128,9 +140,6 @@
             transform: scale(1.1);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        .theme-toggle .fa-sun { display: none; }
-        .dark-mode .theme-toggle .fa-sun { display: block; }
-        .dark-mode .theme-toggle .fa-moon { display: none; }
 
         /* CONTAINER */
         .container {
@@ -146,7 +155,7 @@
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 999;
+            z-index: 1000;
             box-shadow: var(--shadow);
             transition: all 0.3s;
         }
@@ -230,7 +239,7 @@
         }
 
         .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(10px, 10px);
         }
 
         .menu-toggle.active span:nth-child(2) {
@@ -247,12 +256,24 @@
             background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
             position: relative;
             overflow: hidden;
-            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
         }
 
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            text-align: center;
             position: relative;
             z-index: 1;
         }
@@ -337,6 +358,24 @@
         .features {
             padding: 100px 0;
             background-color: var(--bg-secondary);
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .features .container {
+            position: relative;
+            z-index: 1;
         }
 
         .features-grid {
@@ -384,16 +423,29 @@
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
         }
-        
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-        }
 
         /* HİZMETLER BÖLÜMÜ */
         .services {
             padding: 100px 0;
             background-color: var(--bg-color);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80') center/cover no-repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .services .container {
+            position: relative;
+            z-index: 1;
         }
 
         .services-grid {
@@ -439,6 +491,24 @@
         .portfolio {
             padding: 100px 0;
             background-color: var(--bg-secondary);
+            position: relative;
+        }
+
+        .portfolio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .portfolio .container {
+            position: relative;
+            z-index: 1;
         }
 
         .portfolio-grid {
@@ -462,21 +532,15 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .portfolio-image {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-        
-        .portfolio-image img {
+        .portfolio-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
         }
 
         .portfolio-overlay {
@@ -513,6 +577,24 @@
         .stats {
             padding: 80px 0;
             background-color: var(--bg-color);
+            position: relative;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .stats .container {
+            position: relative;
+            z-index: 1;
         }
 
         .stats-grid {
@@ -542,6 +624,24 @@
         .contact {
             padding: 100px 0;
             background-color: var(--bg-secondary);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') center/cover no-repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .contact .container {
+            position: relative;
+            z-index: 1;
         }
 
         .contact-container {
@@ -720,348 +820,501 @@
             font-size: 0.9rem;
         }
 
-        /* MODAL (CSS TAMAMLAMASI) */
+        /* MODAL */
         .modal {
-            display: none; /* JS ile açılacak */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 1rem;
         }
 
-        .modal.active {
-            display: flex;
-        }
-
         .modal-content {
             background: var(--bg-card);
             border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
             box-shadow: var(--shadow-lg);
-            width: 90%;
-            max-width: 600px;
-            padding: 2.5rem;
             position: relative;
-            animation: modalFadeIn 0.3s ease-out;
         }
 
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 2rem;
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
             color: var(--text-muted);
+            font-size: 1.5rem;
             cursor: pointer;
             transition: color 0.3s;
         }
 
-        .modal-close:hover {
+        .close-modal:hover {
             color: var(--text-primary);
         }
 
-        .modal-header h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
+        .modal-body {
+            margin-bottom: 1.5rem;
         }
 
         .modal-body p {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        .message-preview {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 150px;
+            overflow-y: auto;
         }
 
-        /* RESPONSIVE STİLLER (TAMAMLAMA) */
-        @media (max-width: 992px) {
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* RESPONSIVE TASARIM */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
             .contact-container {
                 grid-template-columns: 1fr;
+                gap: 3rem;
             }
         }
 
         @media (max-width: 768px) {
-            html {
-                font-size: 15px;
+            .menu-toggle {
+                display: flex;
             }
-
+            
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                box-shadow: var(--shadow);
+                display: none;
+                padding: 1.5rem 0;
+                border-top: 1px solid var(--border-color);
+            }
+            
+            nav.active {
+                display: block;
+                animation: slideDown 0.3s ease;
+            }
+            
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            
+            nav ul li {
+                margin: 0;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
-
+            
             .hero p {
                 font-size: 1.125rem;
             }
             
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .menu-toggle {
-                display: flex;
-                z-index: 1001;
-            }
-
-            nav ul {
-                display: none;
+            .hero-buttons {
                 flex-direction: column;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: var(--bg-color);
-                padding-top: 6rem;
                 align-items: center;
             }
-
-            nav ul.active {
-                display: flex;
+            
+            .section-title h2 {
+                font-size: 2rem;
             }
-
-            nav ul li {
-                margin: 1rem 0;
-                width: 100%;
+            
+            .features-grid,
+            .services-grid,
+            .portfolio-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
                 text-align: center;
             }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+            }
+        }
 
-            nav ul li a {
-                display: block;
-                padding: 1rem;
-                font-size: 1.2rem;
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 0.75rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- ARKA PLAN KOD EFEKTLERİ -->
+    <div class="code-background" id="codeBackground"></div>
 
-    <div class="code-background" id="code-background"></div>
+    <!-- TEMA DEĞİŞTİRME BUTONU -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
 
+    <!-- HEADER -->
     <header>
         <div class="container header-container">
-            <a href="#home" class="logo">
-                <i class="fa-solid fa-code logo-icon"></i>
+            <a href="#" class="logo">
+                <i class="fas fa-code logo-icon"></i>
                 Josephware
             </a>
-            <nav>
-                <ul id="nav-menu">
+            <div class="menu-toggle" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="mainNav">
+                <ul>
                     <li><a href="#home">Ana Sayfa</a></li>
                     <li><a href="#features">Özellikler</a></li>
                     <li><a href="#services">Hizmetler</a></li>
-                    <li><a href="#portfolio">Portfolyo</a></li>
+                    <li><a href="#portfolio">Projeler</a></li>
                     <li><a href="#contact">İletişim</a></li>
                 </ul>
             </nav>
-            <div class="menu-toggle" id="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </div>
     </header>
 
-    <main>
-        <section class="hero" id="home">
+    <!-- HERO BÖLÜMÜ -->
+    <section class="hero" id="home">
+        <div class="container">
             <div class="hero-content">
-                <h1>Geleceğin Kodları, Bugünden Elinizde</h1>
-                <p>Josephware ile işletmenizi dijitalin zirvesine taşıyın. Yenilikçi, ölçeklenebilir ve kullanıcı odaklı yazılım çözümleri sunuyoruz.</p>
+                <h1>Profesyonel Yazılım Çözümleri</h1>
+                <p>Josephware ile işletmenizi dijital dönüşüm yolculuğunda bir sonraki seviyeye taşıyın. Yenilikçi teknolojiler ve uzman ekibimizle özelleştirilmiş yazılım hizmetleri sunuyoruz.</p>
                 <div class="hero-buttons">
-                    <a href="#services" class="btn">Hizmetlerimizi Keşfedin</a>
-                    <a href="#contact" class="btn btn-outline">Bize Ulaşın</a>
+                    <a href="#features" class="btn">Hizmetlerimizi Keşfet</a>
+                    <a href="#contact" class="btn btn-outline">İletişime Geç</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="features" id="features">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Neden Josephware?</h2>
-                    <p>Bizi farklı kılan ve projelerinizi başarıya ulaştıran temel değerlerimiz.</p>
+    <!-- ÖZELLİKLER BÖLÜMÜ -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Yazılım Özellikleri Kataloğu</h2>
+                <p>İşletmenizin ihtiyaçlarına özel olarak geliştirdiğimiz yazılım çözümlerimizi keşfedin</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Geliştirme</h3>
+                    <p>Modern, responsive ve kullanıcı dostu web siteleri ve web uygulamaları geliştiriyoruz.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
                 </div>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fa-solid fa-rocket"></i></div>
-                        <h3>Yüksek Performans</h3>
-                        <p>Optimize edilmiş kod yapısı ve modern teknolojilerle ışık hızında uygulamalar.</p>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                        <h3>Tam Duyarlı Tasarım</h3>
-                        <p>Masaüstünden mobile, her cihazda kusursuz görünen ve çalışan arayüzler.</p>
+                    <h3>E-Ticaret Çözümleri</h3>
+                    <p>Güvenli ve ölçeklenebilir e-ticaret platformları ile online satışlarınızı artırın.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-building"></i>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h3>Güvenlik Odaklı</h3>
-                        <p>Verilerinizin güvenliği bizim önceliğimizdir. En güncel güvenlik protokollerini uygularız.</p>
+                    <h3>Kurumsal Yazılım</h3>
+                    <p>İş süreçlerinizi optimize eden özelleştirilmiş kurumsal yazılım çözümleri.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
+                    <h3>Mobil Uygulamalar</h3>
+                    <p>iOS ve Android platformları için yüksek performanslı mobil uygulamalar geliştiriyoruz.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Bulut Çözümleri</h3>
+                    <p>Ölçeklenebilir ve güvenli bulut altyapıları ile iş süreçlerinizi optimize ediyoruz.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Güvenlik Çözümleri</h3>
+                    <p>Veri güvenliği ve siber güvenlik konularında kapsamlı çözümler sunuyoruz.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="services" id="services">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Çözümlerimiz</h2>
-                    <p>İhtiyaçlarınıza özel olarak tasarlanmış geniş bir hizmet yelpazesi sunuyoruz.</p>
+    <!-- HİZMETLER BÖLÜMÜ -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hizmetlerimiz</h2>
+                <p>Profesyonel yazılım geliştirme hizmetlerimizle işletmenizin dijital dönüşümüne destek oluyoruz</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Özelleştirilmiş Yazılım</h3>
+                    <p>İşletmenizin ihtiyaçlarına özel olarak geliştirilmiş yazılım çözümleri.</p>
+                    <a href="#contact" class="btn">Teklif Al</a>
                 </div>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
-                        <h3>Web Geliştirme</h3>
-                        <p>Kurumsal web sitelerinden karmaşık web uygulamalarına kadar anahtar teslim çözümler.</p>
-                        <a href="#" class="btn btn-small btn-outline modal-trigger">Daha Fazla Bilgi</a>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-                        <h3>E-Ticaret Çözümleri</h3>
-                        <p>Güvenli ödeme altyapıları, özel tema ve modül geliştirmeleri ile e-ticaret siteniz.</p>
-                        <a href="#" class="btn btn-small btn-outline modal-trigger">Daha Fazla Bilgi</a>
+                    <h3>Danışmanlık</h3>
+                    <p>Teknoloji stratejinizi belirlemede uzman danışmanlık hizmeti.</p>
+                    <a href="#contact" class="btn">Teklif Al</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fa-solid fa-building"></i></div>
-                        <h3>Kurumsal Yazılım</h3>
-                        <p>İş süreçlerinizi otomatize eden (CRM, ERP) size özel yazılımlar geliştiriyoruz.</p>
-                        <a href="#" class="btn btn-small btn-outline modal-trigger">Daha Fazla Bilgi</a>
-                    </div>
+                    <h3>Destek & Bakım</h3>
+                    <p>Yazılımınızın sürekli güncel ve sorunsuz çalışması için destek hizmeti.</p>
+                    <a href="#contact" class="btn">Teklif Al</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="portfolio" id="portfolio">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Başarı Hikayelerimiz</h2>
-                    <p>Tamamladığımız ve gurur duyduğumuz projelerden bazıları.</p>
-                </div>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <div class="portfolio-image"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Proje 1"></div>
-                        <div class="portfolio-overlay">
-                            <h3>Proje: Analitik Pano</h3>
-                            <p>Veri Görselleştirme</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <div class="portfolio-image"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" alt="Proje 2"></div>
-                        <div class="portfolio-overlay">
-                            <h3>Proje: Teknoloji Blogu</h3>
-                            <p>Web Sitesi</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <div class="portfolio-image"><img src="https://images.unsplash.com/photo-1556742044-f5c760af44c5?auto=format&fit=crop&w=800&q=80" alt="Proje 3"></div>
-                        <div class="portfolio-overlay">
-                            <h3>Proje: Mobil POS</h3>
-                            <p>E-Ticaret</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- PROJE GALERİSİ -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Projelerimiz</h2>
+                <p>Daha önce tamamladığımız başarılı projelerden bazı örnekler</p>
             </div>
-        </section>
-
-        <section class="stats" id="stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number">120+</div>
-                        <div class="stat-text">Tamamlanan Proje</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">85</div>
-                        <div class="stat-text">Mutlu Müşteri</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">1.5M+</div>
-                        <div class="stat-text">Satır Kod</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">7/24</div>
-                        <div class="stat-text">Teknik Destek</div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Kurumsal Web Sitesi" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Kurumsal Web Sitesi</h3>
+                        <p>Modern tasarım ve responsive yapı</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="contact" id="contact">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Bize Ulaşın</h2>
-                    <p>Bir sonraki projenizi birlikte hayata geçirelim. Fikirlerinizi duymak için sabırsızlanıyoruz.</p>
-                </div>
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fa-solid fa-map-location-dot"></i></div>
-                            <div class="contact-details">
-                                <h3>Adres</h3>
-                                <p>Teknoloji Parkı, No: 123, İstanbul, Türkiye</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                            <div class="contact-details">
-                                <h3>E-Posta</h3>
-                                <p>info@josephware.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-                            <div class="contact-details">
-                                <h3>Telefon</h3>
-                                <p>+90 555 123 45 67</p>
-                            </div>
-                        </div>
+                
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="E-Ticaret Sitesi" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>E-Ticaret Platformu</h3>
+                        <p>Güvenli alışveriş deneyimi</p>
                     </div>
-                    <div class="contact-form">
-                        <form action="#">
-                            <div class="form-group">
-                                <label for="name">Adınız Soyadınız</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-Posta Adresiniz</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="service">İlgilendiğiniz Hizmet</label>
-                                <select id="service" name="service">
-                                    <option value="web">Web Geliştirme</option>
-                                    <option value="ecommerce">E-Ticaret</option>
-                                    <option value="kurumsal">Kurumsal Yazılım</option>
-                                    <option value="diger">Diğer</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Mesajınız</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn">Teklif Al</button>
-                        </form>
+                </div>
+                
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Kurumsal Portal" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Kurumsal Portal</h3>
+                        <p>İş süreçleri yönetim sistemi</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mobil Uygulama" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Mobil Uygulama</h3>
+                        <p>Kullanıcı dostu arayüz tasarımı</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Bulut Migrasyon" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Bulut Migrasyon</h3>
+                        <p>Şirket içi sistemden buluta geçiş</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Otomasyon Sistemi" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Otomasyon Sistemi</h3>
+                        <p>İş süreçlerinin otomatikleştirilmesi</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
+    <!-- İSTATİSTİKLER -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-text">Tamamlanan Proje</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">40+</div>
+                    <div class="stat-text">Mutlu Müşteri</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-text">Yıl Deneyim</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7/24</div>
+                    <div class="stat-text">Destek</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- İLETİŞİM -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>İletişim</h2>
+                <p>Projeniz hakkında konuşmak veya teklif almak için bizimle iletişime geçin</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Instagram</h3>
+                            <p>@01_joseph_10</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Çalışma Saatleri</h3>
+                            <p>Pazartesi - Cuma: 09:00 - 18:00</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>E-posta</h3>
+                            <p>josephsoftware00@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Adınız</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">İlginizi Çeken Hizmet</label>
+                            <select id="service" name="service">
+                                <option value="web">Web Geliştirme</option>
+                                <option value="ecommerce">E-Ticaret</option>
+                                <option value="enterprise">Kurumsal Yazılım</option>
+                                <option value="mobile">Mobil Uygulamalar</option>
+                                <option value="cloud">Bulut Çözümleri</option>
+                                <option value="consulting">Danışmanlık</option>
+                                <option value="support">Destek & Bakım</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mesajınız</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Instagram DM ile Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Josephware</h3>
-                    <p>Yenilikçi teknolojilerle işletmenizin dijital dünyadaki partneriyiz. Geleceği birlikte kodlayalım.</p>
+                    <p>Profesyonel yazılım çözümleri ile işletmenizin dijital dönüşümüne liderlik ediyoruz.</p>
                     <div class="social-icons">
-                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.instagram.com/01_joseph_10/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -1070,147 +1323,293 @@
                         <li><a href="#home">Ana Sayfa</a></li>
                         <li><a href="#features">Özellikler</a></li>
                         <li><a href="#services">Hizmetler</a></li>
-                        <li><a href="#portfolio">Portfolyo</a></li>
+                        <li><a href="#portfolio">Projeler</a></li>
                         <li><a href="#contact">İletişim</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Hizmetler</h3>
+                    <h3>Hizmetlerimiz</h3>
                     <ul>
-                        <li><a href="#">Web Geliştirme</a></li>
-                        <li><a href="#">E-Ticaret Çözümleri</a></li>
-                        <li><a href="#">Kurumsal Yazılım</a></li>
-                        <li><a href="#">Mobil Uygulama</a></li>
-                        <li><a href="#">SEO & Dijital Pazarlama</a></li>
+                        <li><a href="#services">Web Geliştirme</a></li>
+                        <li><a href="#services">E-Ticaret</a></li>
+                        <li><a href="#services">Kurumsal Yazılım</a></li>
+                        <li><a href="#services">Mobil Uygulamalar</a></li>
+                        <li><a href="#services">Bulut Çözümleri</a></li>
                     </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>İletişimde Kalın</h3>
-                    <p>Güncellemelerimizden haberdar olmak için bültenimize abone olun.</p>
-                    <form class="form-group" style="position: relative;">
-                        <input type="email" placeholder="E-posta adresiniz" style="padding-right: 50px;">
-                        <button type="submit" class="btn" style="position: absolute; right: 0; top: 0; border-radius: 0 8px 8px 0; padding: 0.875rem 1rem;">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                    </form>
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2025 Josephware. Tüm hakları saklıdır.
+                <p>&copy; 2025 Josephware. Tüm hakları saklıdır. | Instagram: @01_joseph_10</p>
             </div>
         </div>
     </footer>
 
-    <div class="modal" id="modal">
+    <!-- MODAL -->
+    <div class="modal" id="instagramModal">
         <div class="modal-content">
-            <span class="modal-close" id="modal-close">&times;</span>
             <div class="modal-header">
-                <h3>Örnek Hizmet Başlığı</h3>
+                <h2>Instagram DM Gönder</h2>
+                <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Bu, o hizmet hakkında detaylı bilgi içeren bir modal penceresidir. Buraya hizmetlerinizle ilgili kapsamlı açıklamalar ekleyebilirsiniz. Proje detayları, kullanılan teknolojiler ve süreç hakkında bilgi verebilirsiniz.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec eleifend finibus.</p>
-                <a href="#contact" class="btn" style="margin-top: 1rem;">Hemen Teklif Al</a>
+                <p>Mesajınız hazır! Aşağıdaki butona tıklayarak Instagram'a gidebilir ve mesajınızı doğrudan bize gönderebilirsiniz.</p>
+                <div class="message-preview" id="messagePreview"></div>
+                <p><strong>Adımlar:</strong></p>
+                <ol>
+                    <li>"Instagram Profiline Git" butonuna tıklayın</li>
+                    <li>Instagram'da "Mesaj Gönder" butonuna tıklayın</li>
+                    <li>Hazırlanan mesajı kopyalayıp yapıştırın</li>
+                    <li>Mesajınızı gönderin</li>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="copyMessage">Mesajı Kopyala</button>
+                <a href="https://www.instagram.com/01_joseph_10/" target="_blank" class="btn" id="goToInstagram">Instagram Profiline Git</a>
             </div>
         </div>
     </div>
 
-    <button class="theme-toggle" id="theme-toggle" aria-label="Tema Değiştir">
-        <i class="fa-solid fa-moon"></i>
-        <i class="fa-solid fa-sun"></i>
-    </button>
-    
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // --- TEMA DEĞİŞTİRME (DARK/LIGHT MODE) ---
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-
-            // Kayıtlı temayı kontrol et
-            if (localStorage.getItem('theme') === 'dark') {
-                body.classList.add('dark-mode');
+        // TEMA DEĞİŞTİRME
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Tema tercihini kontrol et
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
             }
+            
+            // Tema değişince kod akışını yeniden oluştur
+            generateCodeLines();
+        });
 
-            themeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark-mode');
-                // Seçimi kaydet
-                if (body.classList.contains('dark-mode')) {
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    localStorage.setItem('theme', 'light');
+        // ARKA PLAN KOD EFEKTLERİ
+        function generateCodeLines() {
+            const codeBackground = document.getElementById('codeBackground');
+            codeBackground.innerHTML = ''; // Önceki kodları temizle
+            
+            const codeSnippets = [
+                'function developSolution() {',
+                'const innovation = new Idea();',
+                'return innovation.implement();',
+                '}',
+                'class Software {',
+                'constructor(requirements) {',
+                'this.requirements = requirements;',
+                '}',
+                'develop() {',
+                'return new Solution(this.requirements);',
+                '}',
+                '}',
+                'const josephware = new Software(clientNeeds);',
+                'const perfectSolution = josephware.develop();',
+                '// Josephware - Kod kalitesi ve inovasyon',
+                'if (client.satisfied) {',
+                'project.success = true;',
+                '}',
+                'export default JosephwareSolutions;',
+                'const cuttingEdgeTech = [AI, Blockchain, IoT];',
+                'for (let tech of cuttingEdgeTech) {',
+                'integrate(tech);',
+                '}',
+                'const result = optimize(businessProcess);',
+                'return result;',
+                'const webDevelopment = new Project();',
+                'webDevelopment.technologies = [React, Node, MongoDB];',
+                'function createAmazingSoftware() {',
+                'let creativity = unlimited;',
+                'return innovativeSolutions;',
+                '}',
+                '// Josephware - Mükemmellik için kodluyoruz',
+                'const quality = standard;',
+                'while (quality < perfection) {',
+                'improveCode();',
+                '}',
+                'const team = {',
+                'developers: 10,',
+                'designers: 5,',
+                'projectManagers: 3',
+                '};',
+                'function deliverProject() {',
+                'return onTime && withinBudget;',
+                '}',
+                '// Modern web teknolojileri',
+                'const frontend = [React, Vue, Angular];',
+                'const backend = [Node, Python, Java];',
+                'const database = [MongoDB, PostgreSQL, MySQL];',
+                'function buildFullStack() {',
+                'return { frontend, backend, database };',
+                '}',
+                '// Mobil geliştirme',
+                'const mobilePlatforms = [iOS, Android];',
+                'const crossPlatform = [ReactNative, Flutter];',
+                'function createMobileApp() {',
+                'return nativePerformance;',
+                '}'
+            ];
+            
+            // Ekran boyutuna göre satır sayısını belirle
+            const screenWidth = window.innerWidth;
+            const linesCount = Math.min(Math.floor(screenWidth / 15), 80);
+            
+            for (let i = 0; i < linesCount; i++) {
+                const codeLine = document.createElement('div');
+                codeLine.className = 'code-line';
+                
+                // Rastgele kod parçacığı seç
+                const randomSnippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+                codeLine.textContent = randomSnippet;
+                
+                // Rastgele konum ve gecikme
+                const leftPosition = Math.random() * 100;
+                const animationDelay = Math.random() * 20;
+                const animationDuration = 15 + Math.random() * 20;
+                
+                codeLine.style.left = `${leftPosition}%`;
+                codeLine.style.animationDelay = `${animationDelay}s`;
+                codeLine.style.animationDuration = `${animationDuration}s`;
+                
+                codeBackground.appendChild(codeLine);
+            }
+        }
+
+        // MOBİL MENÜ
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenu.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Menü dışına tıklandığında menüyü kapat
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = mainNav.contains(event.target);
+            const isClickOnMenuToggle = mobileMenu.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnMenuToggle && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // MODAL İŞLEMLERİ
+        const modal = document.getElementById('instagramModal');
+        const closeModal = document.querySelector('.close-modal');
+        const copyMessageBtn = document.getElementById('copyMessage');
+        const messagePreview = document.getElementById('messagePreview');
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        copyMessageBtn.addEventListener('click', function() {
+            const textToCopy = messagePreview.textContent;
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                const originalText = copyMessageBtn.textContent;
+                copyMessageBtn.textContent = 'Kopyalandı!';
+                setTimeout(function() {
+                    copyMessageBtn.textContent = originalText;
+                }, 2000);
+            });
+        });
+
+        // ÖZELLİK SEÇME BUTONLARI
+        document.querySelectorAll('.feature-select').forEach(button => {
+            button.addEventListener('click', function() {
+                const featureTitle = this.parentElement.querySelector('h3').textContent;
+                
+                const instagramMessage = `Merhaba Josephware!\n\nWeb sitenizden bir özellik talebim var:\n\nİstediğim Özellik: ${featureTitle}\n\nBu özellik hakkında detaylı bilgi almak istiyorum. Teşekkürler!`;
+                
+                messagePreview.textContent = instagramMessage;
+                modal.style.display = 'flex';
+            });
+        });
+
+        // FORM GÖNDERİMİ
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            const serviceTexts = {
+                'web': 'Web Geliştirme',
+                'ecommerce': 'E-Ticaret',
+                'enterprise': 'Kurumsal Yazılım',
+                'mobile': 'Mobil Uygulamalar',
+                'cloud': 'Bulut Çözümleri',
+                'consulting': 'Danışmanlık',
+                'support': 'Destek & Bakım'
+            };
+            
+            const instagramMessage = `Merhaba Josephware!\n\nBen: ${name}\nİlgilendiğim hizmet: ${serviceTexts[service]}\n\nMesajım:\n${message}\n\nTeşekkürler!`;
+            
+            messagePreview.textContent = instagramMessage;
+            modal.style.display = 'flex';
+            
+            this.reset();
+        });
+
+        // SAYFA YÜKLENDİĞİNDE
+        window.addEventListener('load', function() {
+            generateCodeLines();
+        });
+
+        // PENCERE BOYUTU DEĞİŞTİĞİNDE
+        window.addEventListener('resize', function() {
+            generateCodeLines();
+        });
+
+        // DÜZGÜN KAYDIRMA
+        document.querySelectorAll('nav a, .btn[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                
+                if (window.innerWidth <= 768) {
+                    mainNav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
                 }
-            });
-
-            // --- MOBİL MENÜ (BURGER MENU) ---
-            const menuToggle = document.getElementById('menu-toggle');
-            const navMenu = document.getElementById('nav-menu');
-            const navLinks = navMenu.querySelectorAll('a');
-
-            menuToggle.addEventListener('click', () => {
-                menuToggle.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-
-            // Mobil menüde bir linke tıklayınca menüyü kapat
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    navMenu.classList.remove('active');
+                
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
+        });
 
-            // --- ARKA PLAN KOD ANİMASYONU ---
-            const codeBackground = document.getElementById('code-background');
-            const codeChars = "console.log('Josephware'); function init() { const data = fetch(); } class ApiService {} <ReactComponent />";
-            const lineCount = 30; // Arka plan kod satırı sayısı
-
-            for (let i = 0; i < lineCount; i++) {
-                const line = document.createElement('div');
-                line.className = 'code-line';
-                line.textContent = codeChars.substring(Math.random() * codeChars.length, Math.random() * codeChars.length);
-                line.style.left = `${Math.random() * 100}vw`;
-                line.style.animationDuration = `${Math.random() * 10 + 10}s`; // 10-20 saniye arası
-                line.style.animationDelay = `${Math.random() * 5}s`;
-                codeBackground.appendChild(line);
-            }
-
-            // --- MODAL (POP-UP) PENCERESİ ---
-            const modal = document.getElementById('modal');
-            const modalTriggers = document.querySelectorAll('.modal-trigger');
-            const modalClose = document.getElementById('modal-close');
-
-            modalTriggers.forEach(trigger => {
-                trigger.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    modal.classList.add('active');
-                });
-            });
-
-            modalClose.addEventListener('click', () => {
-                modal.classList.remove('active');
-            });
-
-            // Dışarıya tıklayınca modal'ı kapat
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                }
-            });
-
-            // --- HEADER GÖLGE EFEKTİ (SCROLL) ---
+        // SCROLL OLAYI - Header'a gölge ekleme
+        window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.style.boxShadow = "var(--shadow-lg)";
-                } else {
-                    header.style.boxShadow = "var(--shadow)";
-                }
-            });
-
+            if (window.scrollY > 50) {
+                header.style.boxShadow = 'var(--shadow-lg)';
+            } else {
+                header.style.boxShadow = 'var(--shadow)';
+            }
         });
     </script>
-
 </body>
 </html>
