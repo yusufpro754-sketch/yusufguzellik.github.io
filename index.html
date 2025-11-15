@@ -323,14 +323,18 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
             position: relative;
             padding: 120px 0 80px;
-            overflow: hidden;
+            color: white;
+            text-align: center;
         }
 
         .hero-content {
             max-width: 800px;
+            margin: 0 auto;
             z-index: 2;
             position: relative;
         }
@@ -344,31 +348,18 @@
 
         .hero p {
             font-size: 20px;
-            color: var(--text-light);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 40px;
             max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-buttons {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-        }
-
-        .hero-image {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            justify-content: center;
         }
 
         /* BÖLÜM BAŞLIKLARI */
@@ -1005,12 +996,8 @@
 
         /* RESPONSIVE */
         @media (max-width: 992px) {
-            .hero-image {
-                display: none;
-            }
-            
-            .hero-content {
-                max-width: 100%;
+            .hero h1 {
+                font-size: 42px;
             }
         }
 
@@ -1166,9 +1153,6 @@
                 </div>
             </div>
         </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Yazılım Geliştirme" loading="lazy">
-        </div>
     </section>
 
     <!-- FEATURES SECTION -->
@@ -1192,7 +1176,7 @@
                 
                 <div class="feature-card">
                     <div class="feature-image">
-                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Güvenlik Odaklı" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Güvenlik Odaklı" loading="lazy">
                     </div>
                     <div class="feature-content">
                         <h3>Güvenlik Odaklı</h3>
@@ -1236,7 +1220,7 @@
                 
                 <div class="service-card">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="E-Ticaret Çözümleri" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="E-Ticaret Çözümleri" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3>E-Ticaret Çözümleri</h3>
