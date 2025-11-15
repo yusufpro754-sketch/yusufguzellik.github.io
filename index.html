@@ -294,6 +294,7 @@
             border: none;
             cursor: pointer;
             padding: 0;
+            z-index: 1001;
         }
 
         .burger-menu span {
@@ -325,10 +326,13 @@
             background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
             position: relative;
             padding: 120px 0 80px;
+            overflow: hidden;
         }
 
         .hero-content {
             max-width: 800px;
+            z-index: 2;
+            position: relative;
         }
 
         .hero h1 {
@@ -354,19 +358,17 @@
         .hero-image {
             position: absolute;
             right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 45%;
-            max-width: 600px;
-            border-radius: 12px;
+            top: 0;
+            width: 50%;
+            height: 100%;
             overflow: hidden;
-            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
         }
 
         .hero-image img {
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
         /* BÖLÜM BAŞLIKLARI */
@@ -406,13 +408,15 @@
 
         .feature-card {
             background: var(--card-bg);
-            padding: 40px 30px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
             text-align: center;
             transition: all 0.3s ease;
             overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .feature-card:hover {
@@ -422,10 +426,8 @@
 
         .feature-image {
             width: 100%;
-            height: 220px;
-            border-radius: 8px;
+            height: 250px;
             overflow: hidden;
-            margin-bottom: 25px;
         }
 
         .feature-image img {
@@ -439,6 +441,13 @@
             transform: scale(1.05);
         }
 
+        .feature-content {
+            padding: 30px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         .feature-card h3 {
             font-size: 24px;
             margin-bottom: 15px;
@@ -448,6 +457,7 @@
         .feature-card p {
             color: var(--text-light);
             margin-bottom: 25px;
+            flex-grow: 1;
         }
 
         /* HİZMETLER */
@@ -459,7 +469,6 @@
 
         .service-card {
             background: var(--card-bg);
-            padding: 40px 30px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
@@ -467,6 +476,9 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .service-card::before {
@@ -486,10 +498,8 @@
 
         .service-image {
             width: 100%;
-            height: 220px;
-            border-radius: 8px;
+            height: 250px;
             overflow: hidden;
-            margin-bottom: 25px;
         }
 
         .service-image img {
@@ -503,6 +513,13 @@
             transform: scale(1.05);
         }
 
+        .service-content {
+            padding: 30px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         .service-card h3 {
             font-size: 24px;
             margin-bottom: 15px;
@@ -512,6 +529,7 @@
         .service-card p {
             color: var(--text-light);
             margin-bottom: 25px;
+            flex-grow: 1;
         }
 
         /* PORTFOLIO */
@@ -1049,11 +1067,13 @@
                 transition: all 0.3s ease;
                 z-index: 999;
                 border-bottom: 1px solid var(--border-color);
+                visibility: hidden;
             }
 
             nav.active {
                 transform: translateY(0);
                 opacity: 1;
+                visibility: visible;
             }
 
             nav ul {
@@ -1077,6 +1097,11 @@
             
             .btn {
                 padding: 10px 20px;
+            }
+            
+            .feature-image,
+            .service-image {
+                height: 200px;
             }
         }
     </style>
@@ -1158,27 +1183,33 @@
                     <div class="feature-image">
                         <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Hızlı Teslimat" loading="lazy">
                     </div>
-                    <h3>Hızlı Teslimat</h3>
-                    <p>Agile metodolojiler ile hızlı ve verimli proje teslimatı sağlıyoruz.</p>
-                    <button class="btn btn-outline feature-select">Detaylı Bilgi</button>
+                    <div class="feature-content">
+                        <h3>Hızlı Teslimat</h3>
+                        <p>Agile metodolojiler ile hızlı ve verimli proje teslimatı sağlıyoruz.</p>
+                        <button class="btn btn-outline feature-select">Detaylı Bilgi</button>
+                    </div>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-image">
                         <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Güvenlik Odaklı" loading="lazy">
                     </div>
-                    <h3>Güvenlik Odaklı</h3>
-                    <p>En son güvenlik standartları ile verilerinizi koruma altına alıyoruz.</p>
-                    <button class="btn btn-outline feature-select">Detaylı Bilgi</button>
+                    <div class="feature-content">
+                        <h3>Güvenlik Odaklı</h3>
+                        <p>En son güvenlik standartları ile verilerinizi koruma altına alıyoruz.</p>
+                        <button class="btn btn-outline feature-select">Detaylı Bilgi</button>
+                    </div>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-image">
                         <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80" alt="Responsive Tasarım" loading="lazy">
                     </div>
-                    <h3>Responsive Tasarım</h3>
-                    <p>Tüm cihazlarda mükemmel çalışan, responsive tasarımlar geliştiriyoruz.</p>
-                    <button class="btn btn-outline feature-select">Detaylı Bilgi</button>
+                    <div class="feature-content">
+                        <h3>Responsive Tasarım</h3>
+                        <p>Tüm cihazlarda mükemmel çalışan, responsive tasarımlar geliştiriyoruz.</p>
+                        <button class="btn btn-outline feature-select">Detaylı Bilgi</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1196,27 +1227,33 @@
                     <div class="service-image">
                         <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Web Geliştirme" loading="lazy">
                     </div>
-                    <h3>Web Geliştirme</h3>
-                    <p>Modern, hızlı ve SEO uyumlu web siteleri ve web uygulamaları.</p>
-                    <a href="#contact" class="btn">Teklif Al</a>
+                    <div class="service-content">
+                        <h3>Web Geliştirme</h3>
+                        <p>Modern, hızlı ve SEO uyumlu web siteleri ve web uygulamaları.</p>
+                        <a href="#contact" class="btn">Teklif Al</a>
+                    </div>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-image">
                         <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="E-Ticaret Çözümleri" loading="lazy">
                     </div>
-                    <h3>E-Ticaret Çözümleri</h3>
-                    <p>Güvenli ve ölçeklenebilir e-ticaret platformları geliştiriyoruz.</p>
-                    <a href="#contact" class="btn">Teklif Al</a>
+                    <div class="service-content">
+                        <h3>E-Ticaret Çözümleri</h3>
+                        <p>Güvenli ve ölçeklenebilir e-ticaret platformları geliştiriyoruz.</p>
+                        <a href="#contact" class="btn">Teklif Al</a>
+                    </div>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-image">
                         <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mobil Uygulamalar" loading="lazy">
                     </div>
-                    <h3>Mobil Uygulamalar</h3>
-                    <p>iOS ve Android için native ve cross-platform mobil uygulamalar.</p>
-                    <a href="#contact" class="btn">Teklif Al</a>
+                    <div class="service-content">
+                        <h3>Mobil Uygulamalar</h3>
+                        <p>iOS ve Android için native ve cross-platform mobil uygulamalar.</p>
+                        <a href="#contact" class="btn">Teklif Al</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1485,10 +1522,11 @@
             });
         }
 
-        // BURGER MENÜ - DÜZELTİLDİ
+        // BURGER MENÜ - TAMAMEN DÜZELTİLDİ
         const burgerMenu = document.getElementById('burgerMenu');
         const mainNav = document.getElementById('mainNav');
         
+        // Burger menü tıklama olayı
         burgerMenu.addEventListener('click', (e) => {
             e.stopPropagation();
             burgerMenu.classList.toggle('active');
