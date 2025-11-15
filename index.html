@@ -23,16 +23,16 @@
         }
 
         .theme-dark {
-            --primary-color: #3B82F6;
-            --primary-dark: #1D4ED8;
-            --secondary-color: #06B6D4;
+            --primary-color: #60A5FA;
+            --primary-dark: #3B82F6;
+            --secondary-color: #38BDF8;
             --text-color: #F1F5F9;
             --text-light: #94A3B8;
             --bg-color: #0F172A;
             --bg-secondary: #1E293B;
             --border-color: #334155;
             --card-bg: #1E293B;
-            --gradient: linear-gradient(135deg, #3B82F6, #06B6D4);
+            --gradient: linear-gradient(135deg, #60A5FA, #38BDF8);
         }
 
         .theme-blue {
@@ -40,7 +40,7 @@
             --primary-dark: #1D4ED8;
             --secondary-color: #0EA5E9;
             --text-color: #1E293B;
-            --text-light: #64748B;
+            --text-light: #475569;
             --bg-color: #ffffff;
             --bg-secondary: #F0F9FF;
             --border-color: #E0F2FE;
@@ -53,12 +53,103 @@
             --primary-dark: #7C3AED;
             --secondary-color: #A78BFA;
             --text-color: #1E293B;
-            --text-light: #64748B;
+            --text-light: #6B7280;
             --bg-color: #ffffff;
             --bg-secondary: #FAF5FF;
             --border-color: #EDE9FE;
             --card-bg: #ffffff;
             --gradient: linear-gradient(135deg, #8B5CF6, #A78BFA);
+        }
+
+        .theme-green {
+            --primary-color: #10B981;
+            --primary-dark: #059669;
+            --secondary-color: #34D399;
+            --text-color: #1E293B;
+            --text-light: #6B7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #ECFDF5;
+            --border-color: #D1FAE5;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, #10B981, #34D399);
+        }
+
+        .theme-orange {
+            --primary-color: #F59E0B;
+            --primary-dark: #D97706;
+            --secondary-color: #FBBF24;
+            --text-color: #1E293B;
+            --text-light: #6B7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #FFFBEB;
+            --border-color: #FEF3C7;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, #F59E0B, #FBBF24);
+        }
+
+        .theme-red {
+            --primary-color: #EF4444;
+            --primary-dark: #DC2626;
+            --secondary-color: #F87171;
+            --text-color: #1E293B;
+            --text-light: #6B7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #FEF2F2;
+            --border-color: #FECACA;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, #EF4444, #F87171);
+        }
+
+        .theme-indigo {
+            --primary-color: #4F46E5;
+            --primary-dark: #4338CA;
+            --secondary-color: #818CF8;
+            --text-color: #1E293B;
+            --text-light: #6B7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #EEF2FF;
+            --border-color: #E0E7FF;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, #4F46E5, #818CF8);
+        }
+
+        .theme-teal {
+            --primary-color: #14B8A6;
+            --primary-dark: #0D9488;
+            --secondary-color: #2DD4BF;
+            --text-color: #1E293B;
+            --text-light: #6B7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #F0FDFA;
+            --border-color: #CCFBF1;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, #14B8A6, #2DD4BF);
+        }
+
+        .theme-pink {
+            --primary-color: #EC4899;
+            --primary-dark: #DB2777;
+            --secondary-color: #F472B6;
+            --text-color: #1E293B;
+            --text-light: #6B7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #FDF2F8;
+            --border-color: #FBCFE8;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, #EC4899, #F472B6);
+        }
+
+        .theme-amber {
+            --primary-color: #F59E0B;
+            --primary-dark: #D97706;
+            --secondary-color: #FCD34D;
+            --text-color: #1E293B;
+            --text-light: #6B7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #FFFBEB;
+            --border-color: #FEF3C7;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, #F59E0B, #FCD34D);
         }
 
         * {
@@ -135,11 +226,15 @@
             background: rgba(15, 23, 42, 0.95);
         }
 
-        .theme-blue header {
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .theme-purple header {
+        .theme-blue header,
+        .theme-purple header,
+        .theme-green header,
+        .theme-orange header,
+        .theme-red header,
+        .theme-indigo header,
+        .theme-teal header,
+        .theme-pink header,
+        .theme-amber header {
             background: rgba(255, 255, 255, 0.95);
         }
 
@@ -378,13 +473,14 @@
 
         .service-card {
             background: var(--card-bg);
-            padding: 50px 40px;
+            padding: 40px 30px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
             text-align: center;
             transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
         }
 
         .service-card::before {
@@ -400,6 +496,25 @@
         .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
         }
 
         .service-icon {
@@ -724,6 +839,8 @@
             padding: 15px;
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .theme-options.active {
@@ -737,10 +854,26 @@
             border: none;
             cursor: pointer;
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .theme-option:hover {
             transform: scale(1.1);
+        }
+
+        .theme-option::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+        }
+
+        .theme-option.active::after {
+            border-color: var(--text-color);
         }
 
         .theme-light {
@@ -748,7 +881,7 @@
         }
 
         .theme-dark {
-            background: linear-gradient(135deg, #1E293B, #0F172A);
+            background: linear-gradient(135deg, #60A5FA, #38BDF8);
         }
 
         .theme-blue {
@@ -757,6 +890,34 @@
 
         .theme-purple {
             background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+        }
+
+        .theme-green {
+            background: linear-gradient(135deg, #10B981, #34D399);
+        }
+
+        .theme-orange {
+            background: linear-gradient(135deg, #F59E0B, #FBBF24);
+        }
+
+        .theme-red {
+            background: linear-gradient(135deg, #EF4444, #F87171);
+        }
+
+        .theme-indigo {
+            background: linear-gradient(135deg, #4F46E5, #818CF8);
+        }
+
+        .theme-teal {
+            background: linear-gradient(135deg, #14B8A6, #2DD4BF);
+        }
+
+        .theme-pink {
+            background: linear-gradient(135deg, #EC4899, #F472B6);
+        }
+
+        .theme-amber {
+            background: linear-gradient(135deg, #F59E0B, #FCD34D);
         }
 
         /* MODAL */
@@ -934,10 +1095,16 @@
     <!-- TEMA DEĞİŞTİRME -->
     <div class="theme-selector">
         <div class="theme-options" id="themeOptions">
-            <button class="theme-option theme-light" data-theme="light" title="Açık Tema"></button>
+            <button class="theme-option theme-light active" data-theme="light" title="Açık Tema"></button>
             <button class="theme-option theme-dark" data-theme="dark" title="Koyu Tema"></button>
             <button class="theme-option theme-blue" data-theme="blue" title="Mavi Tema"></button>
             <button class="theme-option theme-purple" data-theme="purple" title="Mor Tema"></button>
+            <button class="theme-option theme-green" data-theme="green" title="Yeşil Tema"></button>
+            <button class="theme-option theme-orange" data-theme="orange" title="Turuncu Tema"></button>
+            <button class="theme-option theme-red" data-theme="red" title="Kırmızı Tema"></button>
+            <button class="theme-option theme-indigo" data-theme="indigo" title="Çivit Tema"></button>
+            <button class="theme-option theme-teal" data-theme="teal" title="Turkuaz Tema"></button>
+            <button class="theme-option theme-pink" data-theme="pink" title="Pembe Tema"></button>
         </div>
         <button class="theme-toggle" id="themeToggle">
             <i class="fas fa-palette"></i>
@@ -1045,6 +1212,9 @@
             </div>
             <div class="services-grid">
                 <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Web Geliştirme" loading="lazy">
+                    </div>
                     <div class="service-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
@@ -1054,6 +1224,9 @@
                 </div>
                 
                 <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="E-Ticaret Çözümleri" loading="lazy">
+                    </div>
                     <div class="service-icon">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
@@ -1063,6 +1236,9 @@
                 </div>
                 
                 <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mobil Uygulamalar" loading="lazy">
+                    </div>
                     <div class="service-icon">
                         <i class="fas fa-mobile"></i>
                     </div>
@@ -1308,6 +1484,7 @@
         // Mevcut temayı yükle
         const currentTheme = localStorage.getItem('theme') || 'light';
         document.body.className = `theme-${currentTheme}`;
+        updateActiveThemeButton(currentTheme);
         
         // Tema seçeneklerini göster/gizle
         themeToggle.addEventListener('click', () => {
@@ -1321,8 +1498,20 @@
                 document.body.className = `theme-${theme}`;
                 localStorage.setItem('theme', theme);
                 themeOptions.classList.remove('active');
+                updateActiveThemeButton(theme);
             });
         });
+
+        // Aktif tema butonunu güncelle
+        function updateActiveThemeButton(theme) {
+            themeButtons.forEach(button => {
+                if (button.getAttribute('data-theme') === theme) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
 
         // BURGER MENÜ
         const burgerMenu = document.getElementById('burgerMenu');
