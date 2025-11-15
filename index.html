@@ -92,7 +92,7 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
-            opacity: 0.03;
+            opacity: 0.05;
         }
 
         .code-line {
@@ -104,6 +104,7 @@
             animation: codeFlow 20s linear infinite;
             text-shadow: 0 0 5px var(--primary-color);
             user-select: none;
+            opacity: 0.7;
         }
 
         @keyframes codeFlow {
@@ -237,6 +238,18 @@
             transition: all 0.3s;
         }
 
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         /* HERO BÖLÜMÜ */
         .hero {
             padding: 160px 0 100px;
@@ -268,6 +281,13 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -438,6 +458,7 @@
             box-shadow: var(--shadow);
             height: 300px;
             transition: all 0.3s;
+            background: var(--bg-card);
         }
 
         .portfolio-item:hover {
@@ -445,15 +466,15 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .portfolio-item img {
+        .portfolio-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .portfolio-item:hover img {
-            transform: scale(1.05);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
         }
 
         .portfolio-overlay {
@@ -805,6 +826,12 @@
             
             nav.active {
                 display: block;
+                animation: slideDown 0.3s ease;
+            }
+            
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
             }
             
             nav ul {
@@ -823,6 +850,11 @@
             
             .hero p {
                 font-size: 1.125rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
             
             .section-title h2 {
@@ -951,6 +983,33 @@
                     <p>İş süreçlerinizi optimize eden özelleştirilmiş kurumsal yazılım çözümleri.</p>
                     <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
                 </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobil Uygulamalar</h3>
+                    <p>iOS ve Android platformları için yüksek performanslı mobil uygulamalar geliştiriyoruz.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Bulut Çözümleri</h3>
+                    <p>Ölçeklenebilir ve güvenli bulut altyapıları ile iş süreçlerinizi optimize ediyoruz.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Güvenlik Çözümleri</h3>
+                    <p>Veri güvenliği ve siber güvenlik konularında kapsamlı çözümler sunuyoruz.</p>
+                    <button class="btn btn-outline feature-select">Bu Özelliği İstiyorum</button>
+                </div>
             </div>
         </div>
     </section>
@@ -1002,7 +1061,9 @@
             </div>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kurumsal Web Sitesi">
+                    <div class="portfolio-image">
+                        <i class="fas fa-globe"></i>
+                    </div>
                     <div class="portfolio-overlay">
                         <h3>Kurumsal Web Sitesi</h3>
                         <p>Modern tasarım ve responsive yapı</p>
@@ -1010,7 +1071,9 @@
                 </div>
                 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="E-Ticaret Sitesi">
+                    <div class="portfolio-image">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
                     <div class="portfolio-overlay">
                         <h3>E-Ticaret Platformu</h3>
                         <p>Güvenli alışveriş deneyimi</p>
@@ -1018,10 +1081,42 @@
                 </div>
                 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kurumsal Portal">
+                    <div class="portfolio-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
                     <div class="portfolio-overlay">
-                        <h3>Kurumsal Portal</h3>
-                        <p>İş süreçleri yönetim sistemi</p>
+                        <h3>İş Zekası Dashboard</h3>
+                        <p>Veri analizi ve görselleştirme</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Mobil Uygulama</h3>
+                        <p>Kullanıcı dostu arayüz tasarımı</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Bulut Migrasyon</h3>
+                        <p>Şirket içi sistemden buluta geçiş</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Otomasyon Sistemi</h3>
+                        <p>İş süreçlerinin otomatikleştirilmesi</p>
                     </div>
                 </div>
             </div>
@@ -1101,6 +1196,8 @@
                                 <option value="web">Web Geliştirme</option>
                                 <option value="ecommerce">E-Ticaret</option>
                                 <option value="enterprise">Kurumsal Yazılım</option>
+                                <option value="mobile">Mobil Uygulamalar</option>
+                                <option value="cloud">Bulut Çözümleri</option>
                                 <option value="consulting">Danışmanlık</option>
                                 <option value="support">Destek & Bakım</option>
                             </select>
@@ -1146,8 +1243,8 @@
                         <li><a href="#services">Web Geliştirme</a></li>
                         <li><a href="#services">E-Ticaret</a></li>
                         <li><a href="#services">Kurumsal Yazılım</a></li>
-                        <li><a href="#services">Danışmanlık</a></li>
-                        <li><a href="#services">Destek & Bakım</a></li>
+                        <li><a href="#services">Mobil Uygulamalar</a></li>
+                        <li><a href="#services">Bulut Çözümleri</a></li>
                     </ul>
                 </div>
             </div>
@@ -1242,12 +1339,31 @@
                 'integrate(tech);',
                 '}',
                 'const result = optimize(businessProcess);',
-                'return result;'
+                'return result;',
+                'const webDevelopment = new Project();',
+                'webDevelopment.technologies = [React, Node, MongoDB];',
+                'function createAmazingSoftware() {',
+                'let creativity = unlimited;',
+                'return innovativeSolutions;',
+                '}',
+                '// Josephware - Mükemmellik için kodluyoruz',
+                'const quality = standard;',
+                'while (quality < perfection) {',
+                'improveCode();',
+                '}',
+                'const team = {',
+                'developers: 10,',
+                'designers: 5,',
+                'projectManagers: 3',
+                '};',
+                'function deliverProject() {',
+                'return onTime && withinBudget;',
+                '}'
             ];
             
             // Ekran boyutuna göre satır sayısını belirle
             const screenWidth = window.innerWidth;
-            const linesCount = Math.min(Math.floor(screenWidth / 20), 50); // Maksimum 50 satır
+            const linesCount = Math.min(Math.floor(screenWidth / 15), 80);
             
             for (let i = 0; i < linesCount; i++) {
                 const codeLine = document.createElement('div');
@@ -1260,7 +1376,7 @@
                 // Rastgele konum ve gecikme
                 const leftPosition = Math.random() * 100;
                 const animationDelay = Math.random() * 20;
-                const animationDuration = 15 + Math.random() * 15;
+                const animationDuration = 15 + Math.random() * 20;
                 
                 codeLine.style.left = `${leftPosition}%`;
                 codeLine.style.animationDelay = `${animationDelay}s`;
@@ -1276,7 +1392,18 @@
 
         mobileMenu.addEventListener('click', function() {
             mainNav.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Menü dışına tıklandığında menüyü kapat
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = mainNav.contains(event.target);
+            const isClickOnMenuToggle = mobileMenu.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnMenuToggle && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
         });
 
         // MODAL İŞLEMLERİ
@@ -1330,6 +1457,8 @@
                 'web': 'Web Geliştirme',
                 'ecommerce': 'E-Ticaret',
                 'enterprise': 'Kurumsal Yazılım',
+                'mobile': 'Mobil Uygulamalar',
+                'cloud': 'Bulut Çözümleri',
                 'consulting': 'Danışmanlık',
                 'support': 'Destek & Bakım'
             };
