@@ -7,6 +7,9 @@
     <meta name="description" content="Josephware - Web geliştirme, e-ticaret, mobil uygulamalar ve kurumsal yazılım çözümleri. İşinizi dijital dönüşümle güçlendirin.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* TEMEL STİLLER */
         :root {
@@ -150,6 +153,32 @@
             --border-color: #FEF3C7;
             --card-bg: #ffffff;
             --gradient: linear-gradient(135deg, #F59E0B, #FCD34D);
+        }
+
+        .theme-custom {
+            /* Özel tema için değişkenler dinamik olarak ayarlanacak */
+        }
+
+        /* Font Seçenekleri */
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-roboto { font-family: 'Roboto', sans-serif; }
+
+        /* Buton Stilleri */
+        .btn-sharp { border-radius: 0 !important; }
+        .btn-pill { border-radius: 50px !important; }
+
+        /* Kart Gölge Seçenekleri */
+        .card-shadow-soft { box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; }
+        .card-shadow-medium { box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; }
+        .card-shadow-strong { box-shadow: 0 10px 15px rgba(0,0,0,0.1) !important; }
+        .card-shadow-none { box-shadow: none !important; }
+
+        /* Animasyon Kontrolü */
+        .no-animations * {
+            transition: none !important;
+            animation: none !important;
         }
 
         * {
@@ -318,7 +347,7 @@
             transform: translateY(-9px) rotate(-45deg);
         }
 
-        /* HERO BÖLÜMÜ - GÖRSEL DEĞİŞTİRİLDİ */
+        /* HERO BÖLÜMÜ */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -994,6 +1023,112 @@
             gap: 15px;
         }
 
+        /* KİŞİSELLEŞTİRME PANELİ */
+        .personalization-panel {
+            position: fixed;
+            top: 50%;
+            left: -350px;
+            transform: translateY(-50%);
+            width: 350px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0 12px 12px 0;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 1001;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .personalization-panel.active {
+            left: 0;
+        }
+
+        .personalization-panel h3 {
+            margin-bottom: 20px;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .customization-option {
+            margin-bottom: 20px;
+        }
+
+        .customization-option label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .customization-option select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* ÖZEL TEMA OLUŞTURUCU */
+        .custom-theme-creator {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .custom-theme-creator h4 {
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .color-pickers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .color-picker label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .color-picker input[type="color"] {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* KİŞİSELLEŞTİRME TETİKLEYİCİ */
+        .personalize-toggle {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            padding: 12px 15px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .personalize-toggle:hover {
+            padding-left: 18px;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 992px) {
             .hero h1 {
@@ -1038,6 +1173,15 @@
             
             .modal-footer .btn {
                 width: 100%;
+            }
+
+            .personalization-panel {
+                width: 300px;
+                left: -300px;
+            }
+
+            .color-pickers {
+                grid-template-columns: 1fr;
             }
 
             /* Burger Menu Styles */
@@ -1090,10 +1234,92 @@
             .service-image {
                 height: 200px;
             }
+
+            .personalization-panel {
+                width: 280px;
+                left: -280px;
+                padding: 15px;
+            }
+
+            .theme-selector {
+                bottom: 80px;
+            }
         }
     </style>
 </head>
-<body class="theme-light">
+<body class="theme-light font-inter">
+    <!-- KİŞİSELLEŞTİRME TETİKLEYİCİ -->
+    <button class="personalize-toggle" id="personalizeToggle">
+        <i class="fas fa-sliders-h"></i>
+    </button>
+
+    <!-- KİŞİSELLEŞTİRME PANELİ -->
+    <div class="personalization-panel" id="personalizationPanel">
+        <h3>Sayfa Özelleştirme</h3>
+        
+        <div class="customization-option">
+            <label for="fontFamily">Yazı Tipi</label>
+            <select id="fontFamily">
+                <option value="Inter">Inter (Modern)</option>
+                <option value="Poppins">Poppins (Elegant)</option>
+                <option value="Montserrat">Montserrat (Clean)</option>
+                <option value="Roboto">Roboto (Professional)</option>
+            </select>
+        </div>
+        
+        <div class="customization-option">
+            <label for="buttonStyle">Buton Stili</label>
+            <select id="buttonStyle">
+                <option value="rounded">Yuvarlak Köşe</option>
+                <option value="sharp">Keskin Köşe</option>
+                <option value="pill">Kapsül</option>
+            </select>
+        </div>
+        
+        <div class="customization-option">
+            <label for="cardShadows">Kart Gölgeleri</label>
+            <select id="cardShadows">
+                <option value="soft">Yumuşak</option>
+                <option value="medium">Orta</option>
+                <option value="strong">Güçlü</option>
+                <option value="none">Gölge Yok</option>
+            </select>
+        </div>
+        
+        <div class="customization-option">
+            <label for="animations">Animasyonlar</label>
+            <select id="animations">
+                <option value="enabled">Açık</option>
+                <option value="disabled">Kapalı</option>
+            </select>
+        </div>
+
+        <!-- ÖZEL TEMA OLUŞTURUCU -->
+        <div class="custom-theme-creator">
+            <h4>Özel Tema Oluştur</h4>
+            <div class="color-pickers">
+                <div class="color-picker">
+                    <label>Ana Renk</label>
+                    <input type="color" id="primaryColor" value="#3B82F6">
+                </div>
+                <div class="color-picker">
+                    <label>İkincil Renk</label>
+                    <input type="color" id="secondaryColor" value="#06B6D4">
+                </div>
+                <div class="color-picker">
+                    <label>Arka Plan</label>
+                    <input type="color" id="backgroundColor" value="#FFFFFF">
+                </div>
+                <div class="color-picker">
+                    <label>Metin Rengi</label>
+                    <input type="color" id="textColor" value="#1E293B">
+                </div>
+            </div>
+            <button class="btn" id="applyCustomTheme" style="width: 100%; margin-bottom: 10px;">Özel Temayı Uygula</button>
+            <button class="btn btn-outline" id="resetCustomTheme" style="width: 100%;">Varsayılan Temaya Dön</button>
+        </div>
+    </div>
+
     <!-- TEMA DEĞİŞTİRME -->
     <div class="theme-selector">
         <div class="theme-options" id="themeOptions">
@@ -1489,7 +1715,7 @@
         
         // Mevcut temayı yükle
         const currentTheme = localStorage.getItem('theme') || 'light';
-        document.body.className = `theme-${currentTheme}`;
+        document.body.className = `theme-${currentTheme} font-inter`;
         updateActiveThemeButton(currentTheme);
         
         // Tema seçeneklerini göster/gizle
@@ -1501,10 +1727,15 @@
         themeButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const theme = button.getAttribute('data-theme');
-                document.body.className = `theme-${theme}`;
+                document.body.className = document.body.className.replace(/\btheme-\w+/g, '');
+                document.body.classList.add(`theme-${theme}`);
                 localStorage.setItem('theme', theme);
                 themeOptions.classList.remove('active');
                 updateActiveThemeButton(theme);
+                
+                // Özel tema ayarlarını temizle
+                localStorage.removeItem('customTheme');
+                resetCustomThemeInputs();
             });
         });
 
@@ -1519,7 +1750,7 @@
             });
         }
 
-        // BURGER MENÜ - TAMAMEN DÜZELTİLDİ
+        // BURGER MENÜ
         const burgerMenu = document.getElementById('burgerMenu');
         const mainNav = document.getElementById('mainNav');
         
@@ -1633,6 +1864,160 @@
                 header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
             } else {
                 header.style.boxShadow = 'none';
+            }
+        });
+
+        // KİŞİSELLEŞTİRME FONKSİYONLARI
+        const personalizationPanel = document.getElementById('personalizationPanel');
+        const personalizeToggle = document.getElementById('personalizeToggle');
+
+        // Kişiselleştirme panelini aç/kapa
+        personalizeToggle.addEventListener('click', () => {
+            personalizationPanel.classList.toggle('active');
+        });
+
+        // Font Değiştirme
+        document.getElementById('fontFamily').addEventListener('change', function() {
+            document.body.className = document.body.className.replace(/\bfont-\w+/g, '');
+            document.body.classList.add(`font-${this.value.toLowerCase()}`);
+            localStorage.setItem('selectedFont', this.value);
+        });
+
+        // Buton Stili Değiştirme
+        document.getElementById('buttonStyle').addEventListener('change', function() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.className = btn.className.replace(/\bbtn-\w+/g, '');
+                btn.classList.add('btn', `btn-${this.value}`);
+            });
+            localStorage.setItem('buttonStyle', this.value);
+        });
+
+        // Kart Gölgeleri
+        document.getElementById('cardShadows').addEventListener('change', function() {
+            const cards = document.querySelectorAll('.feature-card, .service-card, .portfolio-item, .contact-form');
+            cards.forEach(card => {
+                card.className = card.className.replace(/\bcard-shadow-\w+/g, '');
+                card.classList.add(`card-shadow-${this.value}`);
+            });
+            localStorage.setItem('cardShadows', this.value);
+        });
+
+        // Animasyon Kontrolü
+        document.getElementById('animations').addEventListener('change', function() {
+            if (this.value === 'disabled') {
+                document.body.classList.add('no-animations');
+            } else {
+                document.body.classList.remove('no-animations');
+            }
+            localStorage.setItem('animations', this.value);
+        });
+
+        // Özel Tema Oluşturma
+        document.getElementById('applyCustomTheme').addEventListener('click', function() {
+            const primaryColor = document.getElementById('primaryColor').value;
+            const secondaryColor = document.getElementById('secondaryColor').value;
+            const backgroundColor = document.getElementById('backgroundColor').value;
+            const textColor = document.getElementById('textColor').value;
+            
+            applyCustomTheme(primaryColor, secondaryColor, backgroundColor, textColor);
+        });
+
+        // Varsayılan Temaya Dön
+        document.getElementById('resetCustomTheme').addEventListener('click', function() {
+            document.body.className = document.body.className.replace(/\btheme-\w+/g, '');
+            document.body.classList.add('theme-light');
+            localStorage.setItem('theme', 'light');
+            updateActiveThemeButton('light');
+            localStorage.removeItem('customTheme');
+            resetCustomThemeInputs();
+        });
+
+        function applyCustomTheme(primary, secondary, background, text) {
+            const root = document.documentElement;
+            root.style.setProperty('--primary-color', primary);
+            root.style.setProperty('--primary-dark', darkenColor(primary, 20));
+            root.style.setProperty('--secondary-color', secondary);
+            root.style.setProperty('--bg-color', background);
+            root.style.setProperty('--text-color', text);
+            root.style.setProperty('--gradient', `linear-gradient(135deg, ${primary}, ${secondary})`);
+            
+            // Mevcut tema sınıflarını kaldır
+            document.body.className = document.body.className.replace(/\btheme-\w+/g, '');
+            document.body.classList.add('theme-custom');
+            
+            localStorage.setItem('customTheme', JSON.stringify({
+                primary, secondary, background, text
+            }));
+        }
+
+        // Renk koyulaştırma fonksiyonu
+        function darkenColor(color, percent) {
+            const num = parseInt(color.replace("#", ""), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = (num >> 16) - amt;
+            const G = (num >> 8 & 0x00FF) - amt;
+            const B = (num & 0x0000FF) - amt;
+            return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+                    (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+                    (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+        }
+
+        // Özel tema inputlarını sıfırla
+        function resetCustomThemeInputs() {
+            document.getElementById('primaryColor').value = '#3B82F6';
+            document.getElementById('secondaryColor').value = '#06B6D4';
+            document.getElementById('backgroundColor').value = '#FFFFFF';
+            document.getElementById('textColor').value = '#1E293B';
+        }
+
+        // Sayfa yüklendiğinde kişiselleştirmeleri uygula
+        document.addEventListener('DOMContentLoaded', function() {
+            // Kayıtlı ayarları yükle
+            const savedFont = localStorage.getItem('selectedFont');
+            const savedButtonStyle = localStorage.getItem('buttonStyle');
+            const savedCardShadows = localStorage.getItem('cardShadows');
+            const savedAnimations = localStorage.getItem('animations');
+            const savedCustomTheme = localStorage.getItem('customTheme');
+            
+            if (savedFont) {
+                document.getElementById('fontFamily').value = savedFont;
+                document.body.className = document.body.className.replace(/\bfont-\w+/g, '');
+                document.body.classList.add(`font-${savedFont.toLowerCase()}`);
+            }
+            
+            if (savedButtonStyle) {
+                document.getElementById('buttonStyle').value = savedButtonStyle;
+                const buttons = document.querySelectorAll('.btn');
+                buttons.forEach(btn => {
+                    btn.className = btn.className.replace(/\bbtn-\w+/g, '');
+                    btn.classList.add('btn', `btn-${savedButtonStyle}`);
+                });
+            }
+            
+            if (savedCardShadows) {
+                document.getElementById('cardShadows').value = savedCardShadows;
+                const cards = document.querySelectorAll('.feature-card, .service-card, .portfolio-item, .contact-form');
+                cards.forEach(card => {
+                    card.className = card.className.replace(/\bcard-shadow-\w+/g, '');
+                    card.classList.add(`card-shadow-${savedCardShadows}`);
+                });
+            }
+            
+            if (savedAnimations) {
+                document.getElementById('animations').value = savedAnimations;
+                if (savedAnimations === 'disabled') {
+                    document.body.classList.add('no-animations');
+                }
+            }
+            
+            if (savedCustomTheme) {
+                const theme = JSON.parse(savedCustomTheme);
+                applyCustomTheme(theme.primary, theme.secondary, theme.background, theme.text);
+                document.getElementById('primaryColor').value = theme.primary;
+                document.getElementById('secondaryColor').value = theme.secondary;
+                document.getElementById('backgroundColor').value = theme.background;
+                document.getElementById('textColor').value = theme.text;
             }
         });
     </script>
