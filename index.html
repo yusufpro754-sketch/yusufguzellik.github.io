@@ -168,13 +168,13 @@
             <textarea id="customMessage" placeholder="Özel bir mesaj ekleyebilirsiniz..."></textarea>
         </div>
         
-        <button onclick="generateGame()">Kişiye Özel Oyunu Oluştur</button>
+        <button id="generateBtn">Kişiye Özel Oyunu Oluştur</button>
         
         <div class="result" id="result">
             <h3>Oyununuz Hazır! 🎉</h3>
             <p>Kişiselleştirilmiş oyunu aşağıdaki butona tıklayarak indirebilirsiniz.</p>
             <p>İndirdiğiniz dosyayı sevdiğiniz kişiye gönderin.</p>
-            <button class="download-btn" onclick="downloadGame()">Oyunu İndir</button>
+            <button class="download-btn" id="downloadBtn">Oyunu İndir</button>
         </div>
         
         <div class="instructions">
@@ -189,47 +189,38 @@
     </div>
 
     <script>
-        // Formu kontrol et ve oyunu oluştur
-        function generateGame() {
-            const userName = document.getElementById('userName').value.trim();
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generateBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const resultDiv = document.getElementById('result');
             
-            if (!userName) {
-                alert('Lütfen sevdiğiniz kişinin ismini girin!');
-                return;
-            }
+            generateBtn.addEventListener('click', function() {
+                const userName = document.getElementById('userName').value.trim();
+                
+                if (!userName) {
+                    alert('Lütfen sevdiğiniz kişinin ismini girin!');
+                    return;
+                }
+                
+                resultDiv.style.display = 'block';
+            });
             
-            // Sonuç bölümünü göster
-            document.getElementById('result').style.display = 'block';
-        }
-        
-        // Oyunu indir
-        function downloadGame() {
-            const userName = document.getElementById('userName').value.trim();
-            const yourName = document.getElementById('yourName').value.trim();
-            const customMessage = document.getElementById('customMessage').value.trim();
+            downloadBtn.addEventListener('click', function() {
+                const userName = document.getElementById('userName').value.trim();
+                const yourName = document.getElementById('yourName').value.trim();
+                const customMessage = document.getElementById('customMessage').value.trim();
+                
+                const gameCode = createGameCode(userName, yourName, customMessage);
+                downloadGame(gameCode, userName);
+            });
             
-            // Kişiselleştirilmiş oyun kodunu oluştur
-            const personalizedGame = createPersonalizedGame(userName, yourName, customMessage);
-            
-            // Kodu indirilebilir bir dosya olarak sun
-            const blob = new Blob([personalizedGame], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${userName}-beni-seviyor-musun.html`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-        
-        // Kişiselleştirilmiş oyun kodunu oluştur
-        function createPersonalizedGame(userName, yourName, customMessage) {
-            // Final mesajını özelleştir
-            let finalMessage = customMessage || "Bunu biliyordum! 😊";
-            let responseMessage = yourName ? `${yourName} de seni seviyorum ${userName}! 💕` : `Ben de seni seviyorum ${userName}! 💕`;
-            
-            return `<!DOCTYPE html>
+            function createGameCode(userName, yourName, customMessage) {
+                const finalMessage = customMessage || "Bunu biliyordum! 😊";
+                const responseMessage = yourName ? 
+                    `${yourName} de seni seviyorum ${userName}! 💕` : 
+                    `Ben de seni seviyorum ${userName}! 💕`;
+                
+                return `<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -242,7 +233,6 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             min-height: 100vh;
@@ -251,7 +241,6 @@
             align-items: center;
             padding: 20px;
         }
-        
         .container {
             max-width: 500px;
             width: 90%;
@@ -261,13 +250,11 @@
             padding: 40px 30px;
             text-align: center;
         }
-        
         h1 {
             color: #ff4d6d;
             font-size: 2.2rem;
             margin-bottom: 30px;
         }
-        
         .buttons {
             display: flex;
             justify-content: center;
@@ -275,7 +262,6 @@
             margin-top: 40px;
             position: relative;
         }
-        
         button {
             padding: 15px 30px;
             border: none;
@@ -287,26 +273,21 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
             min-width: 120px;
         }
-        
         #yesBtn {
             background: #4CAF50;
             color: white;
         }
-        
         #yesBtn:hover {
             transform: translateY(-5px);
         }
-        
         #noBtn {
             background: #ff4d6d;
             color: white;
             position: relative;
         }
-        
         #noBtn:hover {
             transform: translateY(-5px);
         }
-        
         .final-message {
             position: fixed;
             top: 0;
@@ -323,17 +304,14 @@
             text-align: center;
             padding: 20px;
         }
-        
         .final-message h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
-        
         .final-message p {
             font-size: 1.5rem;
             margin-bottom: 40px;
         }
-        
         .restart-btn {
             padding: 15px 30px;
             background: white;
@@ -344,7 +322,6 @@
             font-weight: bold;
             cursor: pointer;
         }
-        
         @media (max-width: 600px) {
             .buttons {
                 flex-direction: column;
@@ -387,18 +364,14 @@
         document.getElementById('noBtn').addEventListener('click', function() {
             noClickCount++;
             
-            // Butonun yazısını değiştir
             const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
             document.getElementById('noBtn').textContent = noButtonMessages[randomIndex];
             
-            // Evet butonunu büyüt
             yesBtnSize += 0.8;
             document.getElementById('yesBtn').style.transform = 'scale(' + yesBtnSize + ')';
             
-            // Butonu hareket ettir
             moveNoButton();
             
-            // Maksimum tıklamaya ulaşıldıysa oyunu bitir
             if (noClickCount >= maxClicks) {
                 setTimeout(function() {
                     document.getElementById('finalMessage').style.display = 'flex';
@@ -441,7 +414,20 @@
     </script>
 </body>
 </html>`;
-        }
+            }
+            
+            function downloadGame(gameCode, userName) {
+                const blob = new Blob([gameCode], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${userName}-beni-seviyor-musun.html`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        });
     </script>
 </body>
 </html>
