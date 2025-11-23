@@ -168,13 +168,13 @@
             <textarea id="customMessage" placeholder="Özel bir mesaj ekleyebilirsiniz..."></textarea>
         </div>
         
-        <button id="generateBtn">Kişiye Özel Oyunu Oluştur</button>
+        <button onclick="generateGame()">Kişiye Özel Oyunu Oluştur</button>
         
         <div class="result" id="result">
             <h3>Oyununuz Hazır! 🎉</h3>
             <p>Kişiselleştirilmiş oyunu aşağıdaki butona tıklayarak indirebilirsiniz.</p>
             <p>İndirdiğiniz dosyayı sevdiğiniz kişiye gönderin.</p>
-            <button class="download-btn" id="downloadBtn">Oyunu İndir</button>
+            <button class="download-btn" onclick="downloadGame()">Oyunu İndir</button>
         </div>
         
         <div class="instructions">
@@ -189,38 +189,42 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const generateBtn = document.getElementById('generateBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const resultDiv = document.getElementById('result');
+        function generateGame() {
+            const userName = document.getElementById('userName').value.trim();
             
-            generateBtn.addEventListener('click', function() {
-                const userName = document.getElementById('userName').value.trim();
-                
-                if (!userName) {
-                    alert('Lütfen sevdiğiniz kişinin ismini girin!');
-                    return;
-                }
-                
-                resultDiv.style.display = 'block';
-            });
+            if (!userName) {
+                alert('Lütfen sevdiğiniz kişinin ismini girin!');
+                return;
+            }
             
-            downloadBtn.addEventListener('click', function() {
-                const userName = document.getElementById('userName').value.trim();
-                const yourName = document.getElementById('yourName').value.trim();
-                const customMessage = document.getElementById('customMessage').value.trim();
-                
-                const gameCode = createGameCode(userName, yourName, customMessage);
-                downloadGame(gameCode, userName);
-            });
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        function downloadGame() {
+            const userName = document.getElementById('userName').value.trim();
+            const yourName = document.getElementById('yourName').value.trim();
+            const customMessage = document.getElementById('customMessage').value.trim();
             
-            function createGameCode(userName, yourName, customMessage) {
-                const finalMessage = customMessage || "Bunu biliyordum! 😊";
-                const responseMessage = yourName ? 
-                    `${yourName} de seni seviyorum ${userName}! 💕` : 
-                    `Ben de seni seviyorum ${userName}! 💕`;
-                
-                return `<!DOCTYPE html>
+            const gameCode = createGameCode(userName, yourName, customMessage);
+            
+            const blob = new Blob([gameCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = userName + '-beni-seviyor-musun.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        function createGameCode(userName, yourName, customMessage) {
+            const finalMessage = customMessage || "Bunu biliyordum! 😊";
+            const responseMessage = yourName ? 
+                yourName + ' de seni seviyorum ' + userName + '! 💕' : 
+                'Ben de seni seviyorum ' + userName + '! 💕';
+            
+            return `<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -414,20 +418,7 @@
     </script>
 </body>
 </html>`;
-            }
-            
-            function downloadGame(gameCode, userName) {
-                const blob = new Blob([gameCode], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `${userName}-beni-seviyor-musun.html`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            }
-        });
+        }
     </script>
 </body>
 </html>
