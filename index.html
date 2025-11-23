@@ -261,8 +261,8 @@
             // OYUN DEĞİŞKENLERİ
             let yesBtnSize = 1;
             let noClickCount = 0;
-            let lastPositions = []; // Son 3 pozisyonu takip et
-            const maxClicks = Math.floor(Math.random() * 6) + 5;
+            let lastPositions = [];
+            const maxClicks = Math.floor(Math.random() * 6) + 5; // 5-10 arası rastgele
             
             // HAYIR BUTONU MESAJLARI
             const noButtonMessages = [
@@ -307,17 +307,21 @@
                 }
             }
             
-            // EVET BUTONUNU BÜYÜT
+            // EVET BUTONUNU BÜYÜT - BELİRSİZ BÜYÜME
             function growYesButton() {
-                yesBtnSize += 0.8;
+                // Belirsiz büyüme: Her seferinde farklı oranda büyüsün
+                const randomGrowth = 0.5 + Math.random() * 0.8; // 0.5 - 1.3 arası
+                yesBtnSize += randomGrowth;
                 yesBtn.style.transform = `scale(${yesBtnSize})`;
                 
-                if (noClickCount >= maxClicks - 1) {
-                    const scaleX = window.innerWidth / yesBtn.offsetWidth * 1.2;
-                    const scaleY = window.innerHeight / yesBtn.offsetHeight * 1.2;
+                // Son adımda ekranı tamamen kaplasın
+                if (noClickCount >= maxClicks) {
+                    const scaleX = window.innerWidth / yesBtn.offsetWidth * 1.5;
+                    const scaleY = window.innerHeight / yesBtn.offsetHeight * 1.5;
                     yesBtnSize = Math.max(scaleX, scaleY);
                     yesBtn.style.transform = `scale(${yesBtnSize})`;
-                    yesBtn.style.zIndex = "50";
+                    yesBtn.style.zIndex = "100";
+                    yesBtn.textContent = "EVET! 💖"; // Son adımda buton metnini değiştir
                 }
                 
                 createHearts(5);
@@ -377,80 +381,47 @@
                 growYesButton();
                 moveNoButton();
                 
+                // MAKSİMUM TIKLAMAYA ULAŞILDIYSA OYUNU BİTİR
                 if (noClickCount >= maxClicks) {
                     setTimeout(function() {
                         endGame();
-                    }, 500);
+                    }, 800); // Büyüme animasyonu için biraz daha bekle
                 }
             }
             
             // HAYIR BUTONUNA FARE ÜZERİNE GELİNCE
             noBtn.addEventListener('mouseover', function() {
-                if (Math.random() < 0.8) {
+                if (Math.random() < 0.7) {
                     moveNoButton();
                     createSound(150, 0.1, 'sawtooth');
                 }
             });
             
-            // YENİ VE İYİLEŞTİRİLMİŞ HAREKET ALGORİTMASI
+            // HAYIR BUTONUNU HAREKET ETTİRME - KONTEYNER İÇİNDE KALACAK ŞEKİLDE
             function moveNoButton() {
                 const noBtnRect = noBtn.getBoundingClientRect();
                 const yesBtnRect = yesBtn.getBoundingClientRect();
                 const containerRect = document.querySelector('.container').getBoundingClientRect();
                 
-                const safeMargin = 15;
-                const maxX = window.innerWidth - noBtnRect.width - safeMargin;
-                const maxY = window.innerHeight - noBtnRect.height - safeMargin;
-                const minX = safeMargin;
-                const minY = safeMargin;
+                // KONTEYNER SINIRLARI İÇİNDE KALACAK ŞEKİLDE AYARLA
+                const safeMargin = 10;
+                const maxX = containerRect.right - noBtnRect.width - safeMargin;
+                const maxY = containerRect.bottom - noBtnRect.height - safeMargin;
+                const minX = containerRect.left + safeMargin;
+                const minY = containerRect.top + safeMargin;
                 
                 let bestPosition = null;
                 let maxDistance = 0;
                 let attempts = 0;
-                const maxAttempts = 50; // Maksimum deneme sayısı
+                const maxAttempts = 30;
                 
-                // AKILLI POZİSYON BULMA ALGORİTMASI
+                // AKILLI POZİSYON BULMA - SADECE KONTEYNER İÇİNDE
                 while (attempts < maxAttempts && !bestPosition) {
                     attempts++;
                     
-                    // %70 ihtimalle ekran kenarlarına, %30 rastgele
-                    let candidateX, candidateY;
-                    
-                    if (Math.random() < 0.7) {
-                        // Ekran kenarlarına yakın pozisyonlar
-                        const edge = Math.floor(Math.random() * 4);
-                        switch(edge) {
-                            case 0: // Üst kenar
-                                candidateX = Math.random() * (maxX - minX) + minX;
-                                candidateY = minY;
-                                break;
-                            case 1: // Sağ kenar
-                                candidateX = maxX;
-                                candidateY = Math.random() * (maxY - minY) + minY;
-                                break;
-                            case 2: // Alt kenar
-                                candidateX = Math.random() * (maxX - minX) + minX;
-                                candidateY = maxY;
-                                break;
-                            case 3: // Sol kenar
-                                candidateX = minX;
-                                candidateY = Math.random() * (maxY - minY) + minY;
-                                break;
-                        }
-                    } else {
-                        // Tamamen rastgele pozisyon
-                        candidateX = Math.random() * (maxX - minX) + minX;
-                        candidateY = Math.random() * (maxY - minY) + minY;
-                    }
-                    
-                    // KONTEYNER ÇAKIŞMA KONTROLÜ
-                    const containerOverlap = 
-                        candidateX < containerRect.right && 
-                        candidateX + noBtnRect.width > containerRect.left && 
-                        candidateY < containerRect.bottom && 
-                        candidateY + noBtnRect.height > containerRect.top;
-                    
-                    if (containerOverlap) continue;
+                    // Konteyner içinde rastgele pozisyon
+                    let candidateX = Math.random() * (maxX - minX) + minX;
+                    let candidateY = Math.random() * (maxY - minY) + minY;
                     
                     // EVET BUTONUNA UZAKLIK HESAPLA
                     const distance = Math.sqrt(
@@ -464,7 +435,7 @@
                         const prevDistance = Math.sqrt(
                             Math.pow(candidateX - pos.x, 2) + Math.pow(candidateY - pos.y, 2)
                         );
-                        if (prevDistance < 100) { // 100px'den yakınsa geçersiz
+                        if (prevDistance < 50) { // 50px'den yakınsa geçersiz
                             isTooCloseToPrevious = true;
                             break;
                         }
@@ -476,24 +447,12 @@
                     }
                 }
                 
-                // EĞER UYGUN POZİSYON BULUNAMADIYSA, SON ÇARE
+                // EĞER UYGUN POZİSYON BULUNAMADIYSA, KONTEYNER İÇİNDE RASTGELE
                 if (!bestPosition) {
                     bestPosition = {
                         x: Math.random() * (maxX - minX) + minX,
                         y: Math.random() * (maxY - minY) + minY
                     };
-                    
-                    // Konteyner ile çakışıyorsa zorla taşı
-                    const containerOverlap = 
-                        bestPosition.x < containerRect.right && 
-                        bestPosition.x + noBtnRect.width > containerRect.left && 
-                        bestPosition.y < containerRect.bottom && 
-                        bestPosition.y + noBtnRect.height > containerRect.top;
-                    
-                    if (containerOverlap) {
-                        bestPosition.x = containerRect.right + safeMargin;
-                        if (bestPosition.x > maxX) bestPosition.x = minX;
-                    }
                 }
                 
                 // POZİSYON GEÇMİŞİNİ GÜNCELLE (max 3 pozisyon)
@@ -503,9 +462,9 @@
                 }
                 
                 // BUTONU HAREKET ETTİR
-                noBtn.style.position = 'fixed';
-                noBtn.style.left = `${bestPosition.x}px`;
-                noBtn.style.top = `${bestPosition.y}px`;
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = `${bestPosition.x - containerRect.left}px`;
+                noBtn.style.top = `${bestPosition.y - containerRect.top}px`;
             }
             
             // KALP EFEKTİ OLUŞTURMA
@@ -556,6 +515,7 @@
                 
                 yesBtn.style.transform = 'scale(1)';
                 yesBtn.style.zIndex = "10";
+                yesBtn.textContent = "Evet";
                 noBtn.textContent = 'Hayır';
                 noBtn.style.position = 'relative';
                 noBtn.style.left = 'auto';
