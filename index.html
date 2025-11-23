@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kişiye Özel Sevgi Oyunu Oluştur</title>
+    <title>Kişiye Özel Sevgi Oyunu Oluşturucu</title>
     <style>
         * {
             margin: 0;
@@ -105,21 +105,12 @@
             margin-bottom: 15px;
         }
         
-        .link-container {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            margin: 15px 0;
-            word-break: break-all;
-        }
-        
-        .copy-btn {
+        .download-btn {
             background: #4CAF50;
             margin-top: 10px;
         }
         
-        .copy-btn:hover {
+        .download-btn:hover {
             background: #45a049;
         }
         
@@ -160,7 +151,7 @@
 <body>
     <div class="container">
         <h1>Kişiye Özel Sevgi Oyunu</h1>
-        <p class="subtitle">Sevdiğiniz kişi için özel bir link oluşturun</p>
+        <p class="subtitle">Sevdiğiniz kişi için özel bir oyun oluşturun</p>
         
         <div class="form-group">
             <label for="userName">Sevdiğiniz Kişinin İsmi *</label>
@@ -183,40 +174,27 @@
             <small style="color: #666; font-size: 0.8rem;">İnternette bulduğunuz bir görselin URL'sini yapıştırın</small>
         </div>
         
-        <button onclick="generateLink()">Kişiye Özel Link Oluştur</button>
+        <button onclick="generateGame()">Oyunu Oluştur ve İndir</button>
         
         <div class="result" id="result">
-            <h3>Linkiniz Hazır! 🎉</h3>
-            <p>Aşağıdaki linki sevdiğiniz kişiye gönderin:</p>
-            <div class="link-container" id="generatedLink">
-                <!-- Link burada görünecek -->
-            </div>
-            <button class="copy-btn" onclick="copyLink()">Linki Kopyala</button>
-            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
-                <strong>Not:</strong> Bu linki WhatsApp, Instagram, e-posta veya istediğiniz herhangi bir yolla paylaşabilirsiniz.
-            </p>
+            <h3>Oyununuz Hazır! 🎉</h3>
+            <p>Oyunu indirdiniz. Şimdi bu dosyayı sevdiğiniz kişiye gönderin.</p>
+            <p><strong>Önemli:</strong> Karşı taraf sadece oyunu oynayabilir, kişiselleştirme yapamaz!</p>
         </div>
         
         <div class="instructions">
             <h4>Nasıl Kullanacaksınız?</h4>
             <ol>
-                <li>Yukarıdaki formu doldurup "Kişiye Özel Link Oluştur" butonuna tıklayın</li>
-                <li>Oluşturulan linki "Linki Kopyala" butonuyla kopyalayın</li>
-                <li>Linki sevdiğiniz kişiye gönderin</li>
-                <li>Alıcı linke tıkladığında, kişiselleştirilmiş oyun otomatik açılacak</li>
+                <li>Yukarıdaki formu doldurup "Oyunu Oluştur ve İndir" butonuna tıklayın</li>
+                <li>İndirdiğiniz HTML dosyasını sevdiğiniz kişiye gönderin</li>
+                <li>Alıcı dosyayı bir web tarayıcısında (Chrome, Firefox, Safari vb.) açsın</li>
+                <li><strong>Güvenlik:</strong> Karşı taraf sadece oyunu oynayabilir, kişiselleştirme yapamaz</li>
             </ol>
-            
-            <h4 style="margin-top: 20px;">Arkaplan Görseli İçin Öneriler:</h4>
-            <ul style="padding-left: 20px;">
-                <li>Unsplash, Pexels gibi ücretsiz görsel sitelerinden URL alabilirsiniz</li>
-                <li>Örnek: https://images.unsplash.com/photo-1518568814500-bf0f8d125f46</li>
-                <li>Kendi görselinizi bir bulut depolama servisine yükleyip linkini kullanabilirsiniz</li>
-            </ul>
         </div>
     </div>
 
     <script>
-        function generateLink() {
+        function generateGame() {
             const userName = document.getElementById('userName').value.trim();
             
             if (!userName) {
@@ -228,318 +206,283 @@
             const customMessage = document.getElementById('customMessage').value.trim();
             const bgImage = document.getElementById('bgImage').value.trim();
             
-            // Mevcut sayfanın URL'sini al
-            const baseUrl = window.location.href.split('?')[0]; // Parametreleri temizle
-            
-            // URL parametrelerini oluştur
-            let params = new URLSearchParams();
-            params.append('to', encodeURIComponent(userName));
-            if (yourName) {
-                params.append('from', encodeURIComponent(yourName));
-            }
-            if (customMessage) {
-                params.append('note', encodeURIComponent(customMessage));
-            }
-            if (bgImage) {
-                params.append('bg', encodeURIComponent(bgImage));
-            }
-            
-            // Tam linki oluştur
-            const fullUrl = baseUrl + '?' + params.toString();
-            
-            // Linki göster
-            document.getElementById('generatedLink').innerHTML = 
-                `<a href="${fullUrl}" target="_blank" style="color: #ff4d6d; text-decoration: none;">${fullUrl}</a>`;
+            const gameCode = createPersonalizedGame(userName, yourName, customMessage, bgImage);
+            downloadGame(gameCode, userName);
             
             document.getElementById('result').style.display = 'block';
         }
         
-        function copyLink() {
-            const linkElement = document.getElementById('generatedLink');
-            const linkText = linkElement.querySelector('a').href;
+        function createPersonalizedGame(userName, yourName, customMessage, bgImage) {
+            const responseMessage = yourName ? 
+                yourName + ' de seni seviyorum ' + userName + '! 💕' : 
+                'Ben de seni seviyorum ' + userName + '! 💕';
             
-            navigator.clipboard.writeText(linkText).then(function() {
-                alert('Link kopyalandı! 🎉');
-            }).catch(function(err) {
-                // Eski tarayıcılar için fallback
-                const textArea = document.createElement('textarea');
-                textArea.value = linkText;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('Link kopyalandı! 🎉');
-            });
+            return `<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>${userName}, Beni Seviyor Musun?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
-        // Sayfa yüklendiğinde URL parametrelerini kontrol et
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const toName = urlParams.get('to');
-            const fromName = urlParams.get('from');
-            const note = urlParams.get('note');
-            const bgImage = urlParams.get('bg');
-            
-            if (toName) {
-                // Eğer URL'de parametre varsa, oyunu göster
-                showPersonalizedGame(toName, fromName, note, bgImage);
-            }
-        });
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
         
-        function showPersonalizedGame(userName, yourName, note, bgImage) {
-            // Sayfanın tüm içeriğini değiştir
-            document.body.innerHTML = '';
-            
-            // Arkaplanı ayarla
-            if (bgImage) {
-                document.body.style.backgroundImage = `url('${decodeURIComponent(bgImage)}')`;
-                document.body.style.backgroundSize = 'cover';
-                document.body.style.backgroundPosition = 'center';
-            } else {
-                document.body.style.background = 'linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb)';
-                document.body.style.backgroundSize = '400% 400%';
-                document.body.style.animation = 'gradientBackground 15s ease infinite';
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            ${bgImage ? 
+                `background: url('${bgImage}') center/cover no-repeat;` : 
+                `background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+                background-size: 400% 400%;
+                animation: gradientBackground 15s ease infinite;`
+            }
+            touch-action: manipulation;
+            position: fixed;
+        }
+        
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 10;
+        }
+        
+        h1 {
+            color: #ff4d6d;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            position: relative;
+        }
+        
+        button {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+            min-width: 130px;
+        }
+        
+        #yesBtn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+        
+        #yesBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+        }
+        
+        #noBtn {
+            background: linear-gradient(45deg, #ff4d6d, #ff3355);
+            color: white;
+            position: relative;
+            z-index: 20;
+            transition: left 0.4s ease, top 0.4s ease;
+        }
+        
+        #noBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: #ff4d6d;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            animation: floatUp 3s ease-in-out forwards;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .final-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 77, 109, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .final-message h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .final-message p {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .custom-note {
+            font-size: 1.5rem !important;
+            font-style: italic;
+            margin-top: 10px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .restart-btn {
+            padding: 18px 35px;
+            background: white;
+            color: #ff4d6d;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            margin-top: 20px;
+        }
+        
+        .restart-btn:hover {
+            transform: scale(1.05);
+            background: #f8f8f8;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2rem;
             }
             
-            document.body.style.padding = '20px';
-            document.body.style.display = 'flex';
-            document.body.style.justifyContent = 'center';
-            document.body.style.alignItems = 'center';
-            document.body.style.minHeight = '100vh';
-            document.body.style.position = 'fixed';
-            document.body.style.width = '100%';
-            document.body.style.height = '100%';
-            document.body.style.overflow = 'hidden';
+            button {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+                min-width: 110px;
+            }
             
-            const decodedUserName = decodeURIComponent(userName);
-            const decodedYourName = yourName ? decodeURIComponent(yourName) : '';
-            const decodedNote = note ? decodeURIComponent(note) : '';
+            .final-message h2 {
+                font-size: 2.5rem;
+            }
             
-            const responseMessage = decodedYourName ? 
-                decodedYourName + ' de seni seviyorum ' + decodedUserName + '! 💕' : 
-                'Ben de seni seviyorum ' + decodedUserName + '! 💕';
+            .final-message p {
+                font-size: 1.4rem;
+            }
             
-            document.body.innerHTML = `
-                <div class="container">
-                    <h1>${decodedUserName}, beni seviyor musun? 💖</h1>
-                    <div class="buttons">
-                        <button id="yesBtn">Evet</button>
-                        <button id="noBtn">Hayır</button>
-                    </div>
-                    <div class="floating-hearts" id="floatingHearts"></div>
-                </div>
-                
-                <div class="final-message" id="finalMessage">
-                    <h2>${responseMessage}</h2>
-                    ${decodedNote ? `<p class="custom-note">${decodedNote}</p>` : '<p>Bunu biliyordum! 😊</p>'}
-                    <button class="restart-btn" onclick="window.location.href = window.location.href.split('?')[0]">Yeni Oyun Oluştur</button>
-                </div>
-                
-                <style>
-                    @keyframes gradientBackground {
-                        0% { background-position: 0% 50%; }
-                        50% { background-position: 100% 50%; }
-                        100% { background-position: 0% 50%; }
-                    }
-                    
-                    .container {
-                        text-align: center;
-                        max-width: 500px;
-                        width: 90%;
-                        position: relative;
-                        padding: 40px 30px;
-                        background: rgba(255, 255, 255, 0.25);
-                        border-radius: 25px;
-                        backdrop-filter: blur(15px);
-                        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-                        border: 1px solid rgba(255, 255, 255, 0.4);
-                        z-index: 10;
-                    }
-                    
-                    h1 {
-                        color: #ff4d6d;
-                        font-size: 2.8rem;
-                        margin-bottom: 30px;
-                        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-                        font-weight: 700;
-                    }
-                    
-                    .buttons {
-                        display: flex;
-                        justify-content: center;
-                        gap: 25px;
-                        margin-top: 40px;
-                        position: relative;
-                    }
-                    
-                    button {
-                        padding: 18px 35px;
-                        border: none;
-                        border-radius: 50px;
-                        font-size: 1.3rem;
-                        font-weight: bold;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-                        position: relative;
-                        z-index: 10;
-                        min-width: 130px;
-                    }
-                    
-                    #yesBtn {
-                        background: linear-gradient(45deg, #4CAF50, #45a049);
-                        color: white;
-                    }
-                    
-                    #yesBtn:hover {
-                        transform: translateY(-5px);
-                        box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
-                    }
-                    
-                    #noBtn {
-                        background: linear-gradient(45deg, #ff4d6d, #ff3355);
-                        color: white;
-                        position: relative;
-                        z-index: 20;
-                        transition: left 0.4s ease, top 0.4s ease;
-                    }
-                    
-                    #noBtn:hover {
-                        transform: translateY(-5px);
-                        box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
-                    }
-                    
-                    .floating-hearts {
-                        position: fixed;
-                        width: 100%;
-                        height: 100%;
-                        top: 0;
-                        left: 0;
-                        pointer-events: none;
-                        z-index: 1;
-                    }
-                    
-                    .heart {
-                        position: absolute;
-                        font-size: 24px;
-                        color: #ff4d6d;
-                        opacity: 0;
-                        z-index: 1;
-                        pointer-events: none;
-                        animation: floatUp 3s ease-in-out forwards;
-                    }
-                    
-                    @keyframes floatUp {
-                        0% {
-                            transform: translateY(0) rotate(0deg);
-                            opacity: 1;
-                        }
-                        100% {
-                            transform: translateY(-120px) rotate(360deg);
-                            opacity: 0;
-                        }
-                    }
-                    
-                    .final-message {
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: rgba(255, 77, 109, 0.95);
-                        display: none;
-                        justify-content: center;
-                        align-items: center;
-                        flex-direction: column;
-                        z-index: 100;
-                        color: white;
-                        text-align: center;
-                        padding: 20px;
-                    }
-                    
-                    .final-message h2 {
-                        font-size: 3.5rem;
-                        margin-bottom: 20px;
-                        animation: pulse 1.5s infinite;
-                    }
-                    
-                    @keyframes pulse {
-                        0% { transform: scale(1); }
-                        50% { transform: scale(1.1); }
-                        100% { transform: scale(1); }
-                    }
-                    
-                    .final-message p {
-                        font-size: 1.8rem;
-                        margin-bottom: 20px;
-                    }
-                    
-                    .custom-note {
-                        font-size: 1.5rem !important;
-                        font-style: italic;
-                        margin-top: 10px;
-                        padding: 15px;
-                        background: rgba(255, 255, 255, 0.2);
-                        border-radius: 10px;
-                        max-width: 80%;
-                    }
-                    
-                    .restart-btn {
-                        padding: 18px 35px;
-                        background: white;
-                        color: #ff4d6d;
-                        border: none;
-                        border-radius: 50px;
-                        font-size: 1.3rem;
-                        font-weight: bold;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-                        margin-top: 20px;
-                    }
-                    
-                    .restart-btn:hover {
-                        transform: scale(1.05);
-                        background: #f8f8f8;
-                    }
-                    
-                    @media (max-width: 600px) {
-                        h1 {
-                            font-size: 2.2rem;
-                        }
-                        
-                        button {
-                            padding: 15px 25px;
-                            font-size: 1.1rem;
-                            min-width: 110px;
-                        }
-                        
-                        .final-message h2 {
-                            font-size: 2.5rem;
-                        }
-                        
-                        .final-message p {
-                            font-size: 1.4rem;
-                        }
-                        
-                        .custom-note {
-                            font-size: 1.2rem !important;
-                        }
-                        
-                        .buttons {
-                            flex-direction: column;
-                            align-items: center;
-                            gap: 20px;
-                        }
-                        
-                        .container {
-                            padding: 30px 20px;
-                        }
-                    }
-                </style>
-            `;
+            .custom-note {
+                font-size: 1.2rem !important;
+            }
             
-            // Oyun mantığını ekle
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>${userName}, beni seviyor musun? 💖</h1>
+        <div class="buttons">
+            <button id="yesBtn">Evet</button>
+            <button id="noBtn">Hayır</button>
+        </div>
+        <div class="floating-hearts" id="floatingHearts"></div>
+    </div>
+    
+    <div class="final-message" id="finalMessage">
+        <h2>${responseMessage}</h2>
+        ${customMessage ? `<p class="custom-note">${customMessage}</p>` : '<p>Bunu biliyordum! 😊</p>'}
+        <button class="restart-btn" id="restartBtn">Tekrar Oyna</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const finalMessage = document.getElementById('finalMessage');
+            const restartBtn = document.getElementById('restartBtn');
+            const floatingHearts = document.getElementById('floatingHearts');
+            
             let yesBtnSize = 1;
             let noClickCount = 0;
             let lastPositions = [];
@@ -557,7 +500,12 @@
                 "Gerçeği kabul et!", "Sevgin gözlerinden okunuyor!"
             ];
             
-            // SES EFEKTLERİ
+            document.addEventListener('touchmove', function(e) {
+                if (e.target !== noBtn) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
             function createSound(frequency, duration, type) {
                 try {
                     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -576,35 +524,150 @@
                     oscillator.start(audioContext.currentTime);
                     oscillator.stop(audioContext.currentTime + duration);
                 } catch(e) {
-                    // SES DESTEKLENMİYORSA SESSİZ DEVAM ET
                 }
             }
             
-            // EVET BUTONUNU BÜYÜT - BELİRSİZ BÜYÜME
             function growYesButton() {
-                // Belirsiz büyüme: Her seferinde farklı oranda büyüsün
-                const randomGrowth = 0.5 + Math.random() * 0.8; // 0.5 - 1.3 arası
+                const randomGrowth = 0.5 + Math.random() * 0.8;
                 yesBtnSize += randomGrowth;
-                document.getElementById('yesBtn').style.transform = 'scale(' + yesBtnSize + ')';
+                yesBtn.style.transform = 'scale(' + yesBtnSize + ')';
                 
-                // Son adımda ekranı tamamen kaplasın
                 if (noClickCount >= maxClicks) {
-                    const yesBtn = document.getElementById('yesBtn');
                     const scaleX = window.innerWidth / yesBtn.offsetWidth * 1.5;
                     const scaleY = window.innerHeight / yesBtn.offsetHeight * 1.5;
                     yesBtnSize = Math.max(scaleX, scaleY);
                     yesBtn.style.transform = 'scale(' + yesBtnSize + ')';
                     yesBtn.style.zIndex = "100";
-                    yesBtn.textContent = "EVET! 💖"; // Son adımda buton metnini değiştir
+                    yesBtn.textContent = "EVET! 💖";
                 }
                 
                 createHearts(5);
                 createSound(523.25, 0.3, 'sine');
             }
             
-            // KALP EFEKTİ OLUŞTURMA
+            function endGame() {
+                createHearts(15);
+                createSound(523.25, 0.5, 'sine');
+                
+                setTimeout(function() {
+                    finalMessage.style.display = 'flex';
+                    for(let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            createSound(523.25 + (i * 100), 0.2, 'sine');
+                        }, i * 150);
+                    }
+                    createHearts(20);
+                }, 300);
+            }
+            
+            yesBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                endGame();
+            });
+            
+            yesBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                endGame();
+            }, { passive: false });
+            
+            noBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                handleNoButtonClick();
+            });
+            
+            noBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                handleNoButtonClick();
+            }, { passive: false });
+            
+            function handleNoButtonClick() {
+                noClickCount++;
+                createSound(200, 0.2, 'triangle');
+                
+                const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
+                noBtn.textContent = noButtonMessages[randomIndex];
+                
+                growYesButton();
+                moveNoButton();
+                
+                if (noClickCount >= maxClicks) {
+                    setTimeout(function() {
+                        endGame();
+                    }, 800);
+                }
+            }
+            
+            noBtn.addEventListener('mouseover', function() {
+                if (Math.random() < 0.7) {
+                    moveNoButton();
+                    createSound(150, 0.1, 'sawtooth');
+                }
+            });
+            
+            function moveNoButton() {
+                const noBtnRect = noBtn.getBoundingClientRect();
+                const yesBtnRect = yesBtn.getBoundingClientRect();
+                const containerRect = document.querySelector('.container').getBoundingClientRect();
+                
+                const safeMargin = 10;
+                const maxX = containerRect.right - noBtnRect.width - safeMargin;
+                const maxY = containerRect.bottom - noBtnRect.height - safeMargin;
+                const minX = containerRect.left + safeMargin;
+                const minY = containerRect.top + safeMargin;
+                
+                let bestPosition = null;
+                let maxDistance = 0;
+                let attempts = 0;
+                const maxAttempts = 30;
+                
+                while (attempts < maxAttempts && !bestPosition) {
+                    attempts++;
+                    
+                    let candidateX = Math.random() * (maxX - minX) + minX;
+                    let candidateY = Math.random() * (maxY - minY) + minY;
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(candidateX - (yesBtnRect.left + yesBtnRect.width/2), 2) +
+                        Math.pow(candidateY - (yesBtnRect.top + yesBtnRect.height/2), 2)
+                    );
+                    
+                    let isTooCloseToPrevious = false;
+                    for (const pos of lastPositions) {
+                        const prevDistance = Math.sqrt(
+                            Math.pow(candidateX - pos.x, 2) + Math.pow(candidateY - pos.y, 2)
+                        );
+                        if (prevDistance < 50) {
+                            isTooCloseToPrevious = true;
+                            break;
+                        }
+                    }
+                    
+                    if (distance > maxDistance && !isTooCloseToPrevious) {
+                        maxDistance = distance;
+                        bestPosition = { x: candidateX, y: candidateY };
+                    }
+                }
+                
+                if (!bestPosition) {
+                    bestPosition = {
+                        x: Math.random() * (maxX - minX) + minX,
+                        y: Math.random() * (maxY - minY) + minY
+                    };
+                }
+                
+                lastPositions.push({ x: bestPosition.x, y: bestPosition.y });
+                if (lastPositions.length > 3) {
+                    lastPositions.shift();
+                }
+                
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = (bestPosition.x - containerRect.left) + 'px';
+                noBtn.style.top = (bestPosition.y - containerRect.top) + 'px';
+            }
+            
             function createHearts(count) {
-                const floatingHearts = document.getElementById('floatingHearts');
                 for (let i = 0; i < count; i++) {
                     setTimeout(() => {
                         const heart = document.createElement('div');
@@ -632,132 +695,52 @@
                 }
             }
             
-            document.getElementById('yesBtn').addEventListener('click', function() {
-                createHearts(15);
+            restartBtn.addEventListener('click', function() {
+                resetGame();
+            });
+            
+            restartBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                resetGame();
+            }, { passive: false });
+            
+            function resetGame() {
+                finalMessage.style.display = 'none';
+                yesBtnSize = 1;
+                noClickCount = 0;
+                lastPositions = [];
+                
+                yesBtn.style.transform = 'scale(1)';
+                yesBtn.style.zIndex = "10";
+                yesBtn.textContent = "Evet";
+                noBtn.textContent = 'Hayır';
+                noBtn.style.position = 'relative';
+                noBtn.style.left = 'auto';
+                noBtn.style.top = 'auto';
+                
+                createHearts(8);
                 createSound(523.25, 0.5, 'sine');
-                
-                setTimeout(function() {
-                    document.getElementById('finalMessage').style.display = 'flex';
-                    for(let i = 0; i < 5; i++) {
-                        setTimeout(() => {
-                            createSound(523.25 + (i * 100), 0.2, 'sine');
-                        }, i * 150);
-                    }
-                    createHearts(20);
-                }, 300);
-            });
-            
-            document.getElementById('noBtn').addEventListener('click', function() {
-                noClickCount++;
-                createSound(200, 0.2, 'triangle');
-                
-                const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
-                document.getElementById('noBtn').textContent = noButtonMessages[randomIndex];
-                
-                growYesButton();
-                moveNoButton();
-                
-                if (noClickCount >= maxClicks) {
-                    setTimeout(function() {
-                        createHearts(15);
-                        createSound(523.25, 0.5, 'sine');
-                        
-                        setTimeout(function() {
-                            document.getElementById('finalMessage').style.display = 'flex';
-                            for(let i = 0; i < 5; i++) {
-                                setTimeout(() => {
-                                    createSound(523.25 + (i * 100), 0.2, 'sine');
-                                }, i * 150);
-                            }
-                            createHearts(20);
-                        }, 300);
-                    }, 800);
-                }
-            });
-            
-            document.getElementById('noBtn').addEventListener('mouseover', function() {
-                if (Math.random() < 0.7) {
-                    moveNoButton();
-                    createSound(150, 0.1, 'sawtooth');
-                }
-            });
-            
-            function moveNoButton() {
-                const container = document.querySelector('.container');
-                const noBtn = document.getElementById('noBtn');
-                const yesBtn = document.getElementById('yesBtn');
-                
-                const containerRect = container.getBoundingClientRect();
-                const noBtnRect = noBtn.getBoundingClientRect();
-                const yesBtnRect = yesBtn.getBoundingClientRect();
-                
-                const safeMargin = 10;
-                const maxX = containerRect.right - noBtnRect.width - safeMargin;
-                const maxY = containerRect.bottom - noBtnRect.height - safeMargin;
-                const minX = containerRect.left + safeMargin;
-                const minY = containerRect.top + safeMargin;
-                
-                let bestPosition = null;
-                let maxDistance = 0;
-                let attempts = 0;
-                const maxAttempts = 30;
-                
-                // AKILLI POZİSYON BULMA - SADECE KONTEYNER İÇİNDE
-                while (attempts < maxAttempts && !bestPosition) {
-                    attempts++;
-                    
-                    // Konteyner içinde rastgele pozisyon
-                    let candidateX = Math.random() * (maxX - minX) + minX;
-                    let candidateY = Math.random() * (maxY - minY) + minY;
-                    
-                    // EVET BUTONUNA UZAKLIK HESAPLA
-                    const distance = Math.sqrt(
-                        Math.pow(candidateX - (yesBtnRect.left + yesBtnRect.width/2), 2) +
-                        Math.pow(candidateY - (yesBtnRect.top + yesBtnRect.height/2), 2)
-                    );
-                    
-                    // ÖNCEKİ POZİSYONLARDAN FARKLI MI KONTROL ET
-                    let isTooCloseToPrevious = false;
-                    for (const pos of lastPositions) {
-                        const prevDistance = Math.sqrt(
-                            Math.pow(candidateX - pos.x, 2) + Math.pow(candidateY - pos.y, 2)
-                        );
-                        if (prevDistance < 50) { // 50px'den yakınsa geçersiz
-                            isTooCloseToPrevious = true;
-                            break;
-                        }
-                    }
-                    
-                    if (distance > maxDistance && !isTooCloseToPrevious) {
-                        maxDistance = distance;
-                        bestPosition = { x: candidateX, y: candidateY };
-                    }
-                }
-                
-                // EĞER UYGUN POZİSYON BULUNAMADIYSA, KONTEYNER İÇİNDE RASTGELE
-                if (!bestPosition) {
-                    bestPosition = {
-                        x: Math.random() * (maxX - minX) + minX,
-                        y: Math.random() * (maxY - minY) + minY
-                    };
-                }
-                
-                // POZİSYON GEÇMİŞİNİ GÜNCELLE (max 3 pozisyon)
-                lastPositions.push({ x: bestPosition.x, y: bestPosition.y });
-                if (lastPositions.length > 3) {
-                    lastPositions.shift();
-                }
-                
-                // BUTONU HAREKET ETTİR
-                noBtn.style.position = 'absolute';
-                noBtn.style.left = (bestPosition.x - containerRect.left) + 'px';
-                noBtn.style.top = (bestPosition.y - containerRect.top) + 'px';
             }
             
-            // Sayfa yüklendiğinde kalp efekti
             setTimeout(() => {
                 createHearts(5);
             }, 1000);
+        });
+    </script>
+</body>
+</html>`;
+        }
+        
+        function downloadGame(gameCode, userName) {
+            const blob = new Blob([gameCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = userName + '-beni-seviyor-musun.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
