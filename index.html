@@ -191,8 +191,16 @@
     <script>
         // Sayfa yüklendiğinde çalışacak kod
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("Sayfa yüklendi, event listener'lar ekleniyor...");
+            
+            const generateBtn = document.getElementById('generateBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const resultDiv = document.getElementById('result');
+            
             // "Kişiye Özel Oyunu Oluştur" butonuna tıklama olayını ekle
-            document.getElementById('generateBtn').addEventListener('click', function() {
+            generateBtn.addEventListener('click', function() {
+                console.log("Kişiye Özel Oyunu Oluştur butonuna tıklandı");
+                
                 const userName = document.getElementById('userName').value.trim();
                 
                 if (!userName) {
@@ -201,11 +209,14 @@
                 }
                 
                 // Sonuç bölümünü göster
-                document.getElementById('result').style.display = 'block';
+                resultDiv.style.display = 'block';
+                console.log("Sonuç bölümü gösterildi");
             });
             
             // "Oyunu İndir" butonuna tıklama olayını ekle
-            document.getElementById('downloadBtn').addEventListener('click', function() {
+            downloadBtn.addEventListener('click', function() {
+                console.log("Oyunu İndir butonuna tıklandı");
+                
                 const userName = document.getElementById('userName').value.trim();
                 const yourName = document.getElementById('yourName').value.trim();
                 const customMessage = document.getElementById('customMessage').value.trim();
@@ -220,10 +231,13 @@
         
         // Kişiselleştirilmiş oyun kodunu oluşturan fonksiyon
         function createPersonalizedGame(userName, yourName, customMessage) {
+            console.log("Oyun oluşturuluyor:", userName, yourName, customMessage);
+            
             // Final mesajını özelleştir
             let finalMessage = customMessage || "Bunu biliyordum! 😊";
             let responseMessage = yourName ? `${yourName} de seni seviyorum ${userName}! 💕` : `Ben de seni seviyorum ${userName}! 💕`;
             
+            // Oyun kodunu döndür
             return `<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -722,15 +736,19 @@
         
         // Kişiselleştirilmiş oyunu indirme fonksiyonu
         function downloadPersonalizedGame(gameCode, userName) {
+            console.log("Oyun indiriliyor:", userName);
+            
             const blob = new Blob([gameCode], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${userName}-beni-seviyor-musun.html`;
+            a.download = \`\${userName}-beni-seviyor-musun.html\`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+            
+            console.log("Oyun başarıyla indirildi");
         }
     </script>
 </body>
