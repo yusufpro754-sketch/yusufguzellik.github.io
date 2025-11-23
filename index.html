@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kişiye Özel Sevgi Oyunu Link Oluşturucu</title>
+    <title>Kişiye Özel Sevgi Oyunu Oluştur</title>
     <style>
         * {
             margin: 0;
@@ -172,6 +172,17 @@
             <input type="text" id="yourName" placeholder="Örnek: Ahmet">
         </div>
         
+        <div class="form-group">
+            <label for="customMessage">Özel Not (İsteğe Bağlı)</label>
+            <textarea id="customMessage" placeholder="Özel bir not ekleyebilirsiniz..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="bgImage">Arkaplan Görsel URL (İsteğe Bağlı)</label>
+            <input type="text" id="bgImage" placeholder="https://example.com/resim.jpg">
+            <small style="color: #666; font-size: 0.8rem;">İnternette bulduğunuz bir görselin URL'sini yapıştırın</small>
+        </div>
+        
         <button onclick="generateLink()">Kişiye Özel Link Oluştur</button>
         
         <div class="result" id="result">
@@ -194,6 +205,13 @@
                 <li>Linki sevdiğiniz kişiye gönderin</li>
                 <li>Alıcı linke tıkladığında, kişiselleştirilmiş oyun otomatik açılacak</li>
             </ol>
+            
+            <h4 style="margin-top: 20px;">Arkaplan Görseli İçin Öneriler:</h4>
+            <ul style="padding-left: 20px;">
+                <li>Unsplash, Pexels gibi ücretsiz görsel sitelerinden URL alabilirsiniz</li>
+                <li>Örnek: https://images.unsplash.com/photo-1518568814500-bf0f8d125f46</li>
+                <li>Kendi görselinizi bir bulut depolama servisine yükleyip linkini kullanabilirsiniz</li>
+            </ul>
         </div>
     </div>
 
@@ -207,6 +225,8 @@
             }
             
             const yourName = document.getElementById('yourName').value.trim();
+            const customMessage = document.getElementById('customMessage').value.trim();
+            const bgImage = document.getElementById('bgImage').value.trim();
             
             // Mevcut sayfanın URL'sini al
             const baseUrl = window.location.href.split('?')[0]; // Parametreleri temizle
@@ -216,6 +236,12 @@
             params.append('to', encodeURIComponent(userName));
             if (yourName) {
                 params.append('from', encodeURIComponent(yourName));
+            }
+            if (customMessage) {
+                params.append('note', encodeURIComponent(customMessage));
+            }
+            if (bgImage) {
+                params.append('bg', encodeURIComponent(bgImage));
             }
             
             // Tam linki oluştur
@@ -251,20 +277,43 @@
             const urlParams = new URLSearchParams(window.location.search);
             const toName = urlParams.get('to');
             const fromName = urlParams.get('from');
+            const note = urlParams.get('note');
+            const bgImage = urlParams.get('bg');
             
             if (toName) {
                 // Eğer URL'de parametre varsa, oyunu göster
-                showPersonalizedGame(toName, fromName);
+                showPersonalizedGame(toName, fromName, note, bgImage);
             }
         });
         
-        function showPersonalizedGame(userName, yourName) {
+        function showPersonalizedGame(userName, yourName, note, bgImage) {
             // Sayfanın tüm içeriğini değiştir
             document.body.innerHTML = '';
+            
+            // Arkaplanı ayarla
+            if (bgImage) {
+                document.body.style.backgroundImage = `url('${decodeURIComponent(bgImage)}')`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+            } else {
+                document.body.style.background = 'linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb)';
+                document.body.style.backgroundSize = '400% 400%';
+                document.body.style.animation = 'gradientBackground 15s ease infinite';
+            }
+            
             document.body.style.padding = '20px';
+            document.body.style.display = 'flex';
+            document.body.style.justifyContent = 'center';
+            document.body.style.alignItems = 'center';
+            document.body.style.minHeight = '100vh';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
+            document.body.style.overflow = 'hidden';
             
             const decodedUserName = decodeURIComponent(userName);
             const decodedYourName = yourName ? decodeURIComponent(yourName) : '';
+            const decodedNote = note ? decodeURIComponent(note) : '';
             
             const responseMessage = decodedYourName ? 
                 decodedYourName + ' de seni seviyorum ' + decodedUserName + '! 💕' : 
@@ -277,24 +326,42 @@
                         <button id="yesBtn">Evet</button>
                         <button id="noBtn">Hayır</button>
                     </div>
+                    <div class="floating-hearts" id="floatingHearts"></div>
                 </div>
                 
                 <div class="final-message" id="finalMessage">
                     <h2>${responseMessage}</h2>
-                    <p>Bunu biliyordum! 😊</p>
+                    ${decodedNote ? `<p class="custom-note">${decodedNote}</p>` : '<p>Bunu biliyordum! 😊</p>'}
                     <button class="restart-btn" onclick="window.location.href = window.location.href.split('?')[0]">Yeni Oyun Oluştur</button>
                 </div>
                 
                 <style>
+                    @keyframes gradientBackground {
+                        0% { background-position: 0% 50%; }
+                        50% { background-position: 100% 50%; }
+                        100% { background-position: 0% 50%; }
+                    }
+                    
                     .container {
+                        text-align: center;
                         max-width: 500px;
                         width: 90%;
-                        background: white;
-                        border-radius: 20px;
-                        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-                        padding: 40px 30px;
-                        text-align: center;
                         position: relative;
+                        padding: 40px 30px;
+                        background: rgba(255, 255, 255, 0.25);
+                        border-radius: 25px;
+                        backdrop-filter: blur(15px);
+                        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+                        border: 1px solid rgba(255, 255, 255, 0.4);
+                        z-index: 10;
+                    }
+                    
+                    h1 {
+                        color: #ff4d6d;
+                        font-size: 2.8rem;
+                        margin-bottom: 30px;
+                        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+                        font-weight: 700;
                     }
                     
                     .buttons {
@@ -305,29 +372,72 @@
                         position: relative;
                     }
                     
-                    #yesBtn {
-                        background: #4CAF50;
-                        color: white;
+                    button {
+                        padding: 18px 35px;
                         border: none;
-                        padding: 15px 30px;
                         border-radius: 50px;
-                        font-size: 1.2rem;
+                        font-size: 1.3rem;
                         font-weight: bold;
                         cursor: pointer;
-                        min-width: 120px;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+                        position: relative;
+                        z-index: 10;
+                        min-width: 130px;
+                    }
+                    
+                    #yesBtn {
+                        background: linear-gradient(45deg, #4CAF50, #45a049);
+                        color: white;
+                    }
+                    
+                    #yesBtn:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
                     }
                     
                     #noBtn {
-                        background: #ff4d6d;
+                        background: linear-gradient(45deg, #ff4d6d, #ff3355);
                         color: white;
-                        border: none;
-                        padding: 15px 30px;
-                        border-radius: 50px;
-                        font-size: 1.2rem;
-                        font-weight: bold;
-                        cursor: pointer;
                         position: relative;
-                        min-width: 120px;
+                        z-index: 20;
+                        transition: left 0.4s ease, top 0.4s ease;
+                    }
+                    
+                    #noBtn:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+                    }
+                    
+                    .floating-hearts {
+                        position: fixed;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        pointer-events: none;
+                        z-index: 1;
+                    }
+                    
+                    .heart {
+                        position: absolute;
+                        font-size: 24px;
+                        color: #ff4d6d;
+                        opacity: 0;
+                        z-index: 1;
+                        pointer-events: none;
+                        animation: floatUp 3s ease-in-out forwards;
+                    }
+                    
+                    @keyframes floatUp {
+                        0% {
+                            transform: translateY(0) rotate(0deg);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(-120px) rotate(360deg);
+                            opacity: 0;
+                        }
                     }
                     
                     .final-message {
@@ -348,30 +458,82 @@
                     }
                     
                     .final-message h2 {
-                        font-size: 2.5rem;
+                        font-size: 3.5rem;
                         margin-bottom: 20px;
+                        animation: pulse 1.5s infinite;
+                    }
+                    
+                    @keyframes pulse {
+                        0% { transform: scale(1); }
+                        50% { transform: scale(1.1); }
+                        100% { transform: scale(1); }
                     }
                     
                     .final-message p {
-                        font-size: 1.5rem;
-                        margin-bottom: 40px;
+                        font-size: 1.8rem;
+                        margin-bottom: 20px;
+                    }
+                    
+                    .custom-note {
+                        font-size: 1.5rem !important;
+                        font-style: italic;
+                        margin-top: 10px;
+                        padding: 15px;
+                        background: rgba(255, 255, 255, 0.2);
+                        border-radius: 10px;
+                        max-width: 80%;
                     }
                     
                     .restart-btn {
-                        padding: 15px 30px;
+                        padding: 18px 35px;
                         background: white;
                         color: #ff4d6d;
                         border: none;
                         border-radius: 50px;
-                        font-size: 1.2rem;
+                        font-size: 1.3rem;
                         font-weight: bold;
                         cursor: pointer;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                        margin-top: 20px;
+                    }
+                    
+                    .restart-btn:hover {
+                        transform: scale(1.05);
+                        background: #f8f8f8;
                     }
                     
                     @media (max-width: 600px) {
+                        h1 {
+                            font-size: 2.2rem;
+                        }
+                        
+                        button {
+                            padding: 15px 25px;
+                            font-size: 1.1rem;
+                            min-width: 110px;
+                        }
+                        
+                        .final-message h2 {
+                            font-size: 2.5rem;
+                        }
+                        
+                        .final-message p {
+                            font-size: 1.4rem;
+                        }
+                        
+                        .custom-note {
+                            font-size: 1.2rem !important;
+                        }
+                        
                         .buttons {
                             flex-direction: column;
+                            align-items: center;
                             gap: 20px;
+                        }
+                        
+                        .container {
+                            padding: 30px 20px;
                         }
                     }
                 </style>
@@ -380,60 +542,222 @@
             // Oyun mantığını ekle
             let yesBtnSize = 1;
             let noClickCount = 0;
+            let lastPositions = [];
             const maxClicks = Math.floor(Math.random() * 6) + 5;
             
             const noButtonMessages = [
                 "Hayır", "Emin misin?", "Gerçekten mi?", "Bir daha düşün!", "Son şansın!",
                 "Üzülürüm!", "Ağlayacağım! 😢", "Beni sevdiğini biliyorum!", "Neden kaçıyorsun?",
                 "İtiraf et!", "Beni seviyorsun!", "Kabul et artık!", "Biliyorum seviyorsun!",
-                "Bu kadar inatçı olma!", "Pes et artık!", "Sen beni seviyorsun!"
+                "Bu kadar inatçı olma!", "Pes et artık!", "Sen beni seviyorsun!", 
+                "İtiraf zamanı!", "Beni sevdiğini biliyorum! 💖", "Yalan söylüyorsun!",
+                "Gözlerin evet diyor!", "Kalbinin sesini dinle!", "Sevgin belli oluyor!",
+                "İnat etmeyi bırak!", "Biraz dürüst ol!", "Kendine yalan söyleme!",
+                "Bunu biliyordum!", "Sevdiğini itiraf et!", "Artık pes et!", 
+                "Gerçeği kabul et!", "Sevgin gözlerinden okunuyor!"
             ];
             
+            // SES EFEKTLERİ
+            function createSound(frequency, duration, type) {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = frequency;
+                    oscillator.type = type;
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + duration);
+                } catch(e) {
+                    // SES DESTEKLENMİYORSA SESSİZ DEVAM ET
+                }
+            }
+            
+            // EVET BUTONUNU BÜYÜT - BELİRSİZ BÜYÜME
+            function growYesButton() {
+                // Belirsiz büyüme: Her seferinde farklı oranda büyüsün
+                const randomGrowth = 0.5 + Math.random() * 0.8; // 0.5 - 1.3 arası
+                yesBtnSize += randomGrowth;
+                document.getElementById('yesBtn').style.transform = 'scale(' + yesBtnSize + ')';
+                
+                // Son adımda ekranı tamamen kaplasın
+                if (noClickCount >= maxClicks) {
+                    const yesBtn = document.getElementById('yesBtn');
+                    const scaleX = window.innerWidth / yesBtn.offsetWidth * 1.5;
+                    const scaleY = window.innerHeight / yesBtn.offsetHeight * 1.5;
+                    yesBtnSize = Math.max(scaleX, scaleY);
+                    yesBtn.style.transform = 'scale(' + yesBtnSize + ')';
+                    yesBtn.style.zIndex = "100";
+                    yesBtn.textContent = "EVET! 💖"; // Son adımda buton metnini değiştir
+                }
+                
+                createHearts(5);
+                createSound(523.25, 0.3, 'sine');
+            }
+            
+            // KALP EFEKTİ OLUŞTURMA
+            function createHearts(count) {
+                const floatingHearts = document.getElementById('floatingHearts');
+                for (let i = 0; i < count; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '💖';
+                        heart.classList.add('heart');
+                        
+                        const startX = Math.random() * window.innerWidth;
+                        heart.style.left = startX + 'px';
+                        heart.style.bottom = '0px';
+                        
+                        const duration = 2 + Math.random() * 2;
+                        heart.style.animation = 'floatUp ' + duration + 's ease-in-out forwards';
+                        
+                        const size = 20 + Math.random() * 30;
+                        heart.style.fontSize = size + 'px';
+                        
+                        floatingHearts.appendChild(heart);
+                        
+                        setTimeout(() => {
+                            if (heart.parentNode) {
+                                heart.parentNode.removeChild(heart);
+                            }
+                        }, duration * 1000);
+                    }, i * 150);
+                }
+            }
+            
             document.getElementById('yesBtn').addEventListener('click', function() {
-                document.getElementById('finalMessage').style.display = 'flex';
+                createHearts(15);
+                createSound(523.25, 0.5, 'sine');
+                
+                setTimeout(function() {
+                    document.getElementById('finalMessage').style.display = 'flex';
+                    for(let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            createSound(523.25 + (i * 100), 0.2, 'sine');
+                        }, i * 150);
+                    }
+                    createHearts(20);
+                }, 300);
             });
             
             document.getElementById('noBtn').addEventListener('click', function() {
                 noClickCount++;
+                createSound(200, 0.2, 'triangle');
                 
                 const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
                 document.getElementById('noBtn').textContent = noButtonMessages[randomIndex];
                 
-                yesBtnSize += 0.8;
-                document.getElementById('yesBtn').style.transform = 'scale(' + yesBtnSize + ')';
-                
+                growYesButton();
                 moveNoButton();
                 
                 if (noClickCount >= maxClicks) {
                     setTimeout(function() {
-                        document.getElementById('finalMessage').style.display = 'flex';
-                    }, 500);
+                        createHearts(15);
+                        createSound(523.25, 0.5, 'sine');
+                        
+                        setTimeout(function() {
+                            document.getElementById('finalMessage').style.display = 'flex';
+                            for(let i = 0; i < 5; i++) {
+                                setTimeout(() => {
+                                    createSound(523.25 + (i * 100), 0.2, 'sine');
+                                }, i * 150);
+                            }
+                            createHearts(20);
+                        }, 300);
+                    }, 800);
                 }
             });
             
             document.getElementById('noBtn').addEventListener('mouseover', function() {
                 if (Math.random() < 0.7) {
                     moveNoButton();
+                    createSound(150, 0.1, 'sawtooth');
                 }
             });
             
             function moveNoButton() {
                 const container = document.querySelector('.container');
                 const noBtn = document.getElementById('noBtn');
+                const yesBtn = document.getElementById('yesBtn');
                 
                 const containerRect = container.getBoundingClientRect();
                 const noBtnRect = noBtn.getBoundingClientRect();
+                const yesBtnRect = yesBtn.getBoundingClientRect();
                 
-                const maxX = containerRect.width - noBtnRect.width - 20;
-                const maxY = containerRect.height - noBtnRect.height - 20;
+                const safeMargin = 10;
+                const maxX = containerRect.right - noBtnRect.width - safeMargin;
+                const maxY = containerRect.bottom - noBtnRect.height - safeMargin;
+                const minX = containerRect.left + safeMargin;
+                const minY = containerRect.top + safeMargin;
                 
-                const randomX = Math.floor(Math.random() * maxX);
-                const randomY = Math.floor(Math.random() * maxY);
+                let bestPosition = null;
+                let maxDistance = 0;
+                let attempts = 0;
+                const maxAttempts = 30;
                 
+                // AKILLI POZİSYON BULMA - SADECE KONTEYNER İÇİNDE
+                while (attempts < maxAttempts && !bestPosition) {
+                    attempts++;
+                    
+                    // Konteyner içinde rastgele pozisyon
+                    let candidateX = Math.random() * (maxX - minX) + minX;
+                    let candidateY = Math.random() * (maxY - minY) + minY;
+                    
+                    // EVET BUTONUNA UZAKLIK HESAPLA
+                    const distance = Math.sqrt(
+                        Math.pow(candidateX - (yesBtnRect.left + yesBtnRect.width/2), 2) +
+                        Math.pow(candidateY - (yesBtnRect.top + yesBtnRect.height/2), 2)
+                    );
+                    
+                    // ÖNCEKİ POZİSYONLARDAN FARKLI MI KONTROL ET
+                    let isTooCloseToPrevious = false;
+                    for (const pos of lastPositions) {
+                        const prevDistance = Math.sqrt(
+                            Math.pow(candidateX - pos.x, 2) + Math.pow(candidateY - pos.y, 2)
+                        );
+                        if (prevDistance < 50) { // 50px'den yakınsa geçersiz
+                            isTooCloseToPrevious = true;
+                            break;
+                        }
+                    }
+                    
+                    if (distance > maxDistance && !isTooCloseToPrevious) {
+                        maxDistance = distance;
+                        bestPosition = { x: candidateX, y: candidateY };
+                    }
+                }
+                
+                // EĞER UYGUN POZİSYON BULUNAMADIYSA, KONTEYNER İÇİNDE RASTGELE
+                if (!bestPosition) {
+                    bestPosition = {
+                        x: Math.random() * (maxX - minX) + minX,
+                        y: Math.random() * (maxY - minY) + minY
+                    };
+                }
+                
+                // POZİSYON GEÇMİŞİNİ GÜNCELLE (max 3 pozisyon)
+                lastPositions.push({ x: bestPosition.x, y: bestPosition.y });
+                if (lastPositions.length > 3) {
+                    lastPositions.shift();
+                }
+                
+                // BUTONU HAREKET ETTİR
                 noBtn.style.position = 'absolute';
-                noBtn.style.left = randomX + 'px';
-                noBtn.style.top = randomY + 'px';
+                noBtn.style.left = (bestPosition.x - containerRect.left) + 'px';
+                noBtn.style.top = (bestPosition.y - containerRect.top) + 'px';
             }
+            
+            // Sayfa yüklendiğinde kalp efekti
+            setTimeout(() => {
+                createHearts(5);
+            }, 1000);
         }
     </script>
 </body>
