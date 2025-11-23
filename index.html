@@ -1,494 +1,261 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beni Seviyor Musun?</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, sans-serif;
-        }
-        
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #ff6b6b, #ff8e8e, #ffafaf, #ffd6d6);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            overflow: hidden;
-            padding: 20px;
-            position: relative;
-        }
-        
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-            position: relative;
-            padding: 40px 30px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: transform 0.3s ease;
-            z-index: 10;
-        }
-        
-        h1 {
-            color: #ff4d6d;
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-            font-weight: 700;
-        }
-        
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-            position: relative;
-            min-height: 140px;
-        }
-        
-        button {
-            padding: 18px 35px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 10;
-            min-width: 130px;
-        }
-        
-        #yesBtn {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: white;
-            transition: all 0.5s ease;
-        }
-        
-        #yesBtn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
-        }
-        
-        #noBtn {
-            background: linear-gradient(45deg, #ff4d6d, #ff3355);
-            color: white;
-            position: fixed;
-            transition: all 0.3s ease;
-        }
-        
-        #noBtn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
-        }
-        
-        .floating-hearts {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .heart {
-            position: absolute;
-            font-size: 24px;
-            color: #ff4d6d;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-            animation: float 3s ease-in-out forwards;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-120px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        .final-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 77, 109, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 100;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .final-message h2 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .final-message p {
-            font-size: 1.8rem;
-            margin-bottom: 40px;
-        }
-        
-        .restart-btn {
-            padding: 18px 35px;
-            background: white;
-            color: #ff4d6d;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .restart-btn:hover {
-            transform: scale(1.05);
-            background: #f8f8f8;
-        }
-        
-        .background-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .bg-heart {
-            position: absolute;
-            font-size: 40px;
-            color: rgba(255, 77, 109, 0.1);
-            animation: float-bg 20s linear infinite;
-        }
-        
-        @keyframes float-bg {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Mobil uyumluluk */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            button {
-                padding: 15px 25px;
-                font-size: 1.1rem;
-                min-width: 110px;
-            }
-            
-            .final-message h2 {
-                font-size: 2.5rem;
-            }
-            
-            .final-message p {
-                font-size: 1.4rem;
-            }
-            
-            .buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Beni Seviyor musun?</title>
+  <style>
+    :root{
+      --bg: #fff7f2;
+      --card: #fff;
+      --accent: #ff6b81;
+      --muted: #666;
+      --max-width: 720px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, #fff7f2 0%, #fff 100%);
+      display:flex;align-items:center;justify-content:center;padding:24px;
+      color:var(--muted);
+    }.game{
+  width:100%;max-width:var(--max-width);background:var(--card);border-radius:20px;padding:28px;
+  box-shadow:0 8px 30px rgba(15,15,15,0.08);text-align:center;position:relative;overflow:hidden;
+}
+
+h1{margin:6px 0 18px;font-size:clamp(20px,4vw,28px);color:#333}
+p.lead{margin:0 0 20px;color:#555}
+
+.stage{
+  position:relative;height:44vh;min-height:220px;border-radius:12px;background:linear-gradient(180deg,#fff,#fffafb);
+  display:flex;align-items:center;justify-content:center;padding:12px;margin-bottom:18px;overflow:hidden;
+}
+
+.btn-row{display:flex;gap:18px;align-items:center;justify-content:center}
+
+button.btn{
+  user-select:none;border:0;padding:14px 24px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);transition:transform .22s ease,opacity .22s,border-color .22s,box-shadow .22s;
+  background:linear-gradient(180deg,#fff,#fff);min-width:110px;max-width:45vw;white-space:nowrap;
+}
+
+.btn:active{transform:translateY(2px)}
+
+.btn--yes{
+  background:linear-gradient(180deg,#ffeef2,#ffdde6);color:var(--accent);border:2px solid rgba(255,107,129,0.12);
+}
+
+.btn--no{
+  background:linear-gradient(180deg,#f7f8ff,#eef2ff);color:#27408b;border:2px solid rgba(39,64,139,0.08);
+  position:relative;touch-action:none;
+}
+
+/* message bubble */
+.messages{position:absolute;left:18px;right:18px;top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.msg{background:#fff;padding:8px 12px;border-radius:999px;font-size:13px;box-shadow:0 6px 20px rgba(10,10,10,0.04)}
+
+.toast{
+  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:999px;font-weight:600;opacity:0;pointer-events:none;
+  transition:opacity .28s ease,transform .28s ease; font-size:14px;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
+
+/* make sure buttons are reachable on small screens */
+@media (max-width:420px){
+  .stage{height:36vh}
+  button.btn{padding:12px 16px;border-radius:10px;font-size:15px}
+}
+
+  </style>
 </head>
 <body>
-    <div class="background-hearts" id="backgroundHearts"></div>
-    
-    <div class="container">
-        <h1>Beni seviyor musun? 💖</h1>
-        <div class="buttons">
-            <button id="yesBtn">Evet</button>
-            <button id="noBtn">Hayır</button>
-        </div>
-        <div class="floating-hearts" id="floatingHearts"></div>
-    </div>
-    
-    <div class="final-message" id="finalMessage">
-        <h2>Ben de seni seviyorum! 💕</h2>
-        <p>Bunu biliyordum! 😊</p>
-        <button class="restart-btn" id="restartBtn">Tekrar Oyna</button>
-    </div>
+  <main class="game" role="main">
+    <div class="messages" aria-hidden="true"></div>
+    <h1>Beni seviyor musun?</h1>
+    <p class="lead">Seçimini yap: <strong>Evet</strong> ya da <strong>Hayır</strong></p><div class="stage" id="stage">
+  <div class="btn-row" id="btnRow" aria-hidden="false">
+    <button id="yesBtn" class="btn btn--yes" aria-label="Evet">Evet</button>
+    <button id="noBtn" class="btn btn--no" aria-label="Hayır">Hayır</button>
+  </div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const yesBtn = document.getElementById('yesBtn');
-            const noBtn = document.getElementById('noBtn');
-            const finalMessage = document.getElementById('finalMessage');
-            const restartBtn = document.getElementById('restartBtn');
-            const floatingHearts = document.getElementById('floatingHearts');
-            const backgroundHearts = document.getElementById('backgroundHearts');
-            
-            let yesBtnSize = 1;
-            let noClickCount = 0;
-            const maxClicks = Math.floor(Math.random() * 6) + 5; // 5-10 arası rastgele
-            
-            // Hayır butonu için ironik mesajlar
-            const noButtonMessages = [
-                "Hayır",
-                "Emin misin?",
-                "Gerçekten mi?",
-                "Bir daha düşün!",
-                "Son şansın!",
-                "Üzülürüm!",
-                "Ağlayacağım! 😢",
-                "Beni sevdiğini biliyorum!",
-                "Neden kaçıyorsun?",
-                "İtiraf et!",
-                "Beni seviyorsun!",
-                "Kabul et artık!",
-                "Biliyorum seviyorsun!",
-                "Bu kadar inatçı olma!",
-                "Pes et artık!",
-                "Sen beni seviyorsun!",
-                "İtiraf zamanı!",
-                "Beni sevdiğini biliyorum! 💖"
-            ];
-            
-            // Arka plan kalpleri oluştur
-            createBackgroundHearts();
-            
-            // Ses efektleri oluşturma
-            function createSound(frequency, duration, type) {
-                try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.value = frequency;
-                    oscillator.type = type;
-                    
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + duration);
-                } catch(e) {
-                    console.log("Ses desteklenmiyor");
-                }
-            }
-            
-            // Evet butonunu büyüt
-            function growYesButton() {
-                yesBtnSize += 0.4;
-                yesBtn.style.transform = `scale(${yesBtnSize})`;
-                createHearts(5);
-                createSound(523.25, 0.3, 'sine');
-            }
-            
-            // Oyunu bitir
-            function endGame() {
-                createHearts(15);
-                createSound(523.25, 0.5, 'sine');
-                
-                setTimeout(function() {
-                    finalMessage.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                    // Başarı sesi
-                    for(let i = 0; i < 5; i++) {
-                        setTimeout(() => {
-                            createSound(523.25 + (i * 100), 0.2, 'sine');
-                        }, i * 150);
-                    }
-                    createHearts(20);
-                }, 300);
-            }
-            
-            // Evet butonuna tıklama - oyunu bitir
-            yesBtn.addEventListener('click', function() {
-                endGame();
-            });
-            
-            // Hayır butonuna tıklama
-            noBtn.addEventListener('click', function() {
-                noClickCount++;
-                createSound(200, 0.2, 'triangle');
-                
-                // Butonun yazısını değiştir
-                const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
-                noBtn.textContent = noButtonMessages[randomIndex];
-                
-                // Evet butonunu büyüt
-                growYesButton();
-                
-                // Butonu hareket ettir
-                moveNoButton();
-                
-                // Maksimum tıklamaya ulaşıldıysa oyunu bitir
-                if (noClickCount >= maxClicks) {
-                    setTimeout(function() {
-                        endGame();
-                    }, 500);
-                }
-            });
-            
-            // Hayır butonuna fare üzerine gelince
-            noBtn.addEventListener('mouseover', function() {
-                // %80 ihtimalle buton kaçsın
-                if (Math.random() < 0.8) {
-                    moveNoButton();
-                    createSound(150, 0.1, 'sawtooth');
-                }
-            });
-            
-            // Hayır butonunu hareket ettirme fonksiyonu - tüm ekranda
-            function moveNoButton() {
-                const noBtnRect = noBtn.getBoundingClientRect();
-                
-                // Ekranın tamamında hareket edebilsin
-                const maxX = window.innerWidth - noBtnRect.width - 20;
-                const maxY = window.innerHeight - noBtnRect.height - 20;
-                
-                // Rastgele pozisyon (tüm ekranda)
-                const randomX = Math.floor(Math.random() * maxX);
-                const randomY = Math.floor(Math.random() * maxY);
-                
-                // Butonu hareket ettir
-                noBtn.style.position = 'fixed';
-                noBtn.style.left = `${randomX}px`;
-                noBtn.style.top = `${randomY}px`;
-            }
-            
-            // Kalp efekti oluşturma fonksiyonu
-            function createHearts(count) {
-                for (let i = 0; i < count; i++) {
-                    setTimeout(() => {
-                        const heart = document.createElement('div');
-                        heart.innerHTML = '💖';
-                        heart.classList.add('heart');
-                        
-                        // Rastgele pozisyon
-                        const startX = Math.random() * window.innerWidth;
-                        heart.style.left = `${startX}px`;
-                        heart.style.bottom = '0px';
-                        
-                        // Rastgele animasyon süresi
-                        const duration = 2 + Math.random() * 2;
-                        heart.style.animation = `float ${duration}s ease-in-out forwards`;
-                        
-                        // Rastgele boyut
-                        const size = 20 + Math.random() * 30;
-                        heart.style.fontSize = `${size}px`;
-                        
-                        floatingHearts.appendChild(heart);
-                        
-                        // Animasyon bitince kalbi kaldır
-                        setTimeout(() => {
-                            if (heart.parentNode) {
-                                heart.parentNode.removeChild(heart);
-                            }
-                        }, duration * 1000);
-                    }, i * 150);
-                }
-            }
-            
-            // Arka plan kalpleri oluşturma
-            function createBackgroundHearts() {
-                for (let i = 0; i < 15; i++) {
-                    const heart = document.createElement('div');
-                    heart.innerHTML = '💖';
-                    heart.classList.add('bg-heart');
-                    
-                    // Rastgele pozisyon
-                    const startX = Math.random() * window.innerWidth;
-                    heart.style.left = `${startX}px`;
-                    heart.style.bottom = '-50px';
-                    
-                    // Rastgele animasyon gecikmesi
-                    heart.style.animationDelay = `${Math.random() * 20}s`;
-                    
-                    // Rastgele boyut
-                    const size = 20 + Math.random() * 40;
-                    heart.style.fontSize = `${size}px`;
-                    
-                    backgroundHearts.appendChild(heart);
-                }
-            }
-            
-            // Yeniden başlat butonu
-            restartBtn.addEventListener('click', function() {
-                finalMessage.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                
-                // Değişkenleri sıfırla
-                yesBtnSize = 1;
-                noClickCount = 0;
-                
-                // Butonları sıfırla
-                yesBtn.style.transform = 'scale(1)';
-                noBtn.textContent = 'Hayır';
-                noBtn.style.position = 'static';
-                
-                createHearts(8);
-                createSound(523.25, 0.5, 'sine');
-            });
-            
-            // Sayfa yüklendiğinde kalp efekti
-            setTimeout(() => {
-                createHearts(5);
-            }, 1000);
-        });
-    </script>
-</body>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  </main>  <script>
+    // Türkçe, açıklamalı, sade bir implementasyon
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const stage = document.getElementById('stage');
+    const messages = document.querySelector('.messages');
+    const toast = document.getElementById('toast');
+
+    // Evet butonu --- her tıklamada büyüyecek
+    let yesScale = 1;
+    const YES_SCALE_STEP = 0.12; // her tıklamada kaç artacağı
+    const YES_MAX_SCALE = 3.0; // görsel limit
+
+    yesBtn.addEventListener('click', ()=>{
+      yesScale = Math.min(YES_MAX_SCALE, yesScale + YES_SCALE_STEP);
+      yesBtn.style.transform = `scale(${yesScale})`;
+      showToastRandom(['Biliyordum!','Seni de seviyorum!','Harika seçim!','Kalbim hızlı çarpıyor.']);
+    });
+
+    // Hayır butonu --- kaçar. Hem mouse hover hem touchscreen desteği.
+    const safeMargin = 12; // px kenara yapışmasın
+
+    // Random ironik / ısrarcı mesajlar (kullanıcının istediği gibi 'beni sevdiğini biliyorum' tarzında)
+    const noReplies = [
+      'Beni sevdiğini biliyorum.',
+      'Hayır dediğini duyamadım :)',
+      'Bir daha düşün bence :)',
+      'İyi ki dürüstsün, ama ben ısrarcıyım.',
+      'Sana zaman veriyorum, ben buradayım.'
+    ];
+
+    // Stage bounding box hesaplama
+    function getStageBounds(){
+      const rect = stage.getBoundingClientRect();
+      return rect;
+    }
+
+    // Butonu güvenli alana taşı
+    function moveNoButtonRandomly(quick=false){
+      const rect = getStageBounds();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      // kullanılabilir alanın genişliği: stage içi ve safe margin
+      const areaW = rect.width - btnRect.width - safeMargin*2;
+      const areaH = rect.height - btnRect.height - safeMargin*2;
+      if(areaW <= 0 || areaH <= 0){
+        // çok küçük ekran — butonu ortala
+        noBtn.style.left = '';
+        noBtn.style.top = '';
+        noBtn.style.transform = '';
+        return;
+      }
+
+      // random pozisyonlar içeriğine göre
+      const x = Math.round(Math.random() * areaW) + safeMargin;
+      const y = Math.round(Math.random() * areaH) + safeMargin;
+
+      // Konumlandırmayı relative parent olan .stage içinde absolute değil; bu yüzden transform kullanıyoruz
+      const parentRect = stage.getBoundingClientRect();
+      const fromX = btnRect.left - parentRect.left;
+      const fromY = btnRect.top - parentRect.top;
+      const toX = x - fromX;
+      const toY = y - fromY;
+
+      // Animasyon: smooth transition
+      noBtn.style.transition = quick ? 'transform .18s ease' : 'transform .36s cubic-bezier(.2,.9,.2,1)';
+      // mevcut transform değerlerini sıfırlayıp translate uygula
+      noBtn.style.transform = `translate(${toX}px, ${toY}px)`;
+    }
+
+    // Buton hareketini tetikle — hover veya touch
+    function handleNoHover(ev){
+      // Fare hareketleri veya dokunma
+      moveNoButtonRandomly(false);
+    }
+
+    // Mobilde dokunma başladığında kaçsın
+    noBtn.addEventListener('touchstart', (e)=>{
+      // dokunma sırasında tıklamaya izin vermemek için preventDefault yapmıyoruz çünkü bazı kullanıcılar gerçekten basmak isteyebilir
+      moveNoButtonRandomly(true);
+    }, {passive:true});
+
+    // Fare için hover
+    noBtn.addEventListener('mouseenter', (e)=>{
+      handleNoHover(e);
+    });
+
+    // Ayrıca butonun etrafında mousemove olursa da koş
+    stage.addEventListener('mousemove', (e)=>{
+      // Eğer imleç butona çok yakınsa kaçır
+      const b = noBtn.getBoundingClientRect();
+      const dX = e.clientX - (b.left + b.width/2);
+      const dY = e.clientY - (b.top + b.height/2);
+      const dist = Math.hypot(dX,dY);
+      if(dist < Math.max(b.width,b.height) * 1.2){
+        moveNoButtonRandomly();
+      }
+    });
+
+    // Hayır butonuna gerçekten basılabilirse mesaj göster
+    noBtn.addEventListener('click', (e)=>{
+      // click'e basıldıysa küçük bir sevinç mesajı göster
+      showNoReply();
+      // buton tekrar kaçsın biraz hızlı
+      moveNoButtonRandomly(true);
+    });
+
+    // Rastsal bir noReply göster
+    function showNoReply(){
+      const msg = noReplies[Math.floor(Math.random()*noReplies.length)];
+      // baloncuk ekle
+      const el = document.createElement('div');
+      el.className = 'msg';
+      el.textContent = msg;
+      messages.appendChild(el);
+
+      // en fazla 4 mesaj göster
+      while(messages.children.length > 4){ messages.removeChild(messages.firstChild); }
+
+      // ufak bir toast da göster
+      showToast(msg);
+    }
+
+    // Toast gösterme yardımcı
+    let toastTimer = null;
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>{ toast.classList.remove('show'); }, 2000);
+    }
+
+    function showToastRandom(list){
+      const t = list[Math.floor(Math.random()*list.length)];
+      showToast(t);
+    }
+
+    // Responsive: stage yeniden boyutlandığında butonun konumunu sınırla
+    let resizeTimer = null;
+    window.addEventListener('resize', ()=>{
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(()=>{
+        // transform'ı sıfırla; buton stage içine yeniden konumlandırılsın
+        noBtn.style.transition = 'none';
+        noBtn.style.transform = '';
+        // küçük gecikmeyle geçerli alan içinde yeniden konumlandır
+        setTimeout(()=>{
+          moveNoButtonRandomly(true);
+        }, 80);
+      }, 120);
+    });
+
+    // Başlangıçta butonlar center içinde düzgün konumlanmış olacak
+    // Küçük bir gecikme ile hayır butonunu rastgele pozisyona taşı
+    window.addEventListener('load', ()=>{
+      setTimeout(()=> moveNoButtonRandomly(true), 350);
+    });
+
+    // Klavye uyumluluğu: Tab ile odakta iken Space/Enter çalışsın
+    yesBtn.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); yesBtn.click(); } });
+    noBtn.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); noBtn.click(); } });
+
+    // Dokunmalı cihazlarda hayır butonuna basmak zor olabilir; eğer kullanıcı butona uzun süre dokunursa (long-press)
+    // kabul edelim: uzun basma ile 'click' sonuçları gösterilsin.
+    let pressTimer = null;
+    noBtn.addEventListener('touchend', ()=>{ clearTimeout(pressTimer); });
+    noBtn.addEventListener('touchstart', ()=>{
+      clearTimeout(pressTimer);
+      pressTimer = setTimeout(()=>{
+        // uzun basma algılandı -> kabul et
+        showNoReply();
+      }, 650);
+    }, {passive:true});
+
+  </script></body>
 </html>
