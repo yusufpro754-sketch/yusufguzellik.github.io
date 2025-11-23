@@ -406,46 +406,76 @@
                 }
             });
             
-            // HAYIR BUTONUNU HAREKET ETTİRME - KESİN ÇÖZÜM
+            // HAYIR BUTONUNU HAREKET ETTİRME - TAMAMEN YENİ ALGORİTMA
             function moveNoButton() {
                 const noBtnRect = noBtn.getBoundingClientRect();
                 const yesBtnRect = yesBtn.getBoundingClientRect();
+                const containerRect = document.querySelector('.container').getBoundingClientRect();
                 
                 // EKRAN SINIRLARI - KESİN ÇÖZÜM
-                const safeMargin = 10;
+                const safeMargin = 20;
                 const maxX = window.innerWidth - noBtnRect.width - safeMargin;
                 const maxY = window.innerHeight - noBtnRect.height - safeMargin;
                 const minX = safeMargin;
                 const minY = safeMargin;
                 
-                // BASİT VE ETKİLİ ÇÖZÜM: Ekranın 4 köşesinden rastgele birini seç
-                const corners = [
-                    { x: minX, y: minY }, // Sol üst
-                    { x: maxX, y: minY }, // Sağ üst  
-                    { x: minX, y: maxY }, // Sol alt
-                    { x: maxX, y: maxY }  // Sağ alt
-                ];
+                let randomX, randomY;
+                let attempts = 0;
+                const maxAttempts = 50;
+                let validPosition = false;
                 
-                // Köşelerden evet butonuna en uzak olanı bul
-                let bestCorner = corners[0];
-                let maxDistance = 0;
-                
-                for (const corner of corners) {
-                    const distance = Math.sqrt(
-                        Math.pow(corner.x - (yesBtnRect.left + yesBtnRect.width/2), 2) +
-                        Math.pow(corner.y - (yesBtnRect.top + yesBtnRect.height/2), 2)
+                // UYGUN POZİSYON BUL
+                while (!validPosition && attempts < maxAttempts) {
+                    attempts++;
+                    
+                    // TAMAMEN RASTGELE POZİSYON
+                    randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
+                    randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
+                    
+                    // EVET BUTONU VE KONTEYNER İLE ÇAKIŞMA KONTROLÜ
+                    const noBtnRight = randomX + noBtnRect.width;
+                    const noBtnBottom = randomY + noBtnRect.height;
+                    
+                    // Evet butonu ile çakışma kontrolü
+                    const yesBtnOverlap = 
+                        randomX < yesBtnRect.right && 
+                        noBtnRight > yesBtnRect.left && 
+                        randomY < yesBtnRect.bottom && 
+                        noBtnBottom > yesBtnRect.top;
+                    
+                    // Konteyner ile çakışma kontrolü
+                    const containerOverlap = 
+                        randomX < containerRect.right && 
+                        noBtnRight > containerRect.left && 
+                        randomY < containerRect.bottom && 
+                        noBtnBottom > containerRect.top;
+                    
+                    // Evet butonuna çok yakın olmama kontrolü
+                    const distanceToYes = Math.sqrt(
+                        Math.pow(randomX + noBtnRect.width/2 - (yesBtnRect.left + yesBtnRect.width/2), 2) +
+                        Math.pow(randomY + noBtnRect.height/2 - (yesBtnRect.top + yesBtnRect.height/2), 2)
                     );
                     
-                    if (distance > maxDistance) {
-                        maxDistance = distance;
-                        bestCorner = corner;
+                    // Eğer çakışma yoksa ve yeterince uzaksa geçerli pozisyon
+                    if (!yesBtnOverlap && !containerOverlap && distanceToYes > 150) {
+                        validPosition = true;
                     }
                 }
                 
-                // Butonu hareket ettir - KESİNLİKLE EKRAN İÇİNDE
+                // EĞER UYGUN POZİSYON BULUNAMADIYSA, EKRANIN RASTGELE BİR YERİNE YERLEŞTİR
+                if (!validPosition) {
+                    randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
+                    randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
+                }
+                
+                // SON KONTROL: KESİNLİKLE EKRAN DIŞINA ÇIKMADIĞINDAN EMİN OL
+                randomX = Math.max(minX, Math.min(maxX, randomX));
+                randomY = Math.max(minY, Math.min(maxY, randomY));
+                
+                // BUTONU HAREKET ETTİR
                 noBtn.style.position = 'fixed';
-                noBtn.style.left = `${Math.max(minX, Math.min(maxX, bestCorner.x))}px`;
-                noBtn.style.top = `${Math.max(minY, Math.min(maxY, bestCorner.y))}px`;
+                noBtn.style.left = `${randomX}px`;
+                noBtn.style.top = `${randomY}px`;
             }
             
             // KALP EFEKTİ OLUŞTURMA
