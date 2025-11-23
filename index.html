@@ -189,18 +189,12 @@
     </div>
 
     <script>
-        // Sayfa yüklendiğinde çalışacak kod
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("Sayfa yüklendi");
-            
             const generateBtn = document.getElementById('generateBtn');
             const downloadBtn = document.getElementById('downloadBtn');
             const resultDiv = document.getElementById('result');
             
-            // "Kişiye Özel Oyunu Oluştur" butonuna tıklama olayını ekle
             generateBtn.addEventListener('click', function() {
-                console.log("Kişiye Özel Oyunu Oluştur butonuna tıklandı");
-                
                 const userName = document.getElementById('userName').value.trim();
                 
                 if (!userName) {
@@ -208,38 +202,25 @@
                     return;
                 }
                 
-                // Sonuç bölümünü göster
                 resultDiv.style.display = 'block';
-                console.log("Sonuç bölümü gösterildi");
             });
             
-            // "Oyunu İndir" butonuna tıklama olayını ekle
             downloadBtn.addEventListener('click', function() {
-                console.log("Oyunu İndir butonuna tıklandı");
-                
                 const userName = document.getElementById('userName').value.trim();
                 const yourName = document.getElementById('yourName').value.trim();
                 const customMessage = document.getElementById('customMessage').value.trim();
                 
-                // Kişiselleştirilmiş oyun kodunu oluştur
-                const personalizedGame = createPersonalizedGame(userName, yourName, customMessage);
-                
-                // Kodu indirilebilir bir dosya olarak sun
-                downloadPersonalizedGame(personalizedGame, userName);
+                const gameCode = createGameCode(userName, yourName, customMessage);
+                downloadGame(gameCode, userName);
             });
             
-            // Kişiselleştirilmiş oyun kodunu oluşturan fonksiyon
-            function createPersonalizedGame(userName, yourName, customMessage) {
-                console.log("Oyun oluşturuluyor:", userName, yourName, customMessage);
+            function createGameCode(userName, yourName, customMessage) {
+                const finalMessage = customMessage || "Bunu biliyordum! 😊";
+                const responseMessage = yourName ? 
+                    yourName + ' de seni seviyorum ' + userName + '! 💕' : 
+                    'Ben de seni seviyorum ' + userName + '! 💕';
                 
-                // Final mesajını özelleştir
-                let finalMessage = customMessage || "Bunu biliyordum! 😊";
-                let responseMessage = yourName ? 
-                    yourName + " de seni seviyorum " + userName + "! 💕" : 
-                    "Ben de seni seviyorum " + userName + "! 💕";
-                
-                // Oyun kodunu oluştur
-                let gameCode = `<!DOCTYPE html>
+                return `<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -434,14 +415,9 @@
     </script>
 </body>
 </html>`;
-                
-                return gameCode;
             }
             
-            // Kişiselleştirilmiş oyunu indirme fonksiyonu
-            function downloadPersonalizedGame(gameCode, userName) {
-                console.log("Oyun indiriliyor:", userName);
-                
+            function downloadGame(gameCode, userName) {
                 const blob = new Blob([gameCode], { type: 'text/html' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -451,8 +427,6 @@
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-                
-                console.log("Oyun başarıyla indirildi");
             }
         });
     </script>
