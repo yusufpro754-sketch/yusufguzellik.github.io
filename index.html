@@ -218,6 +218,8 @@
             }
             
             .buttons {
+                flex-direction: column;
+                align-items: center;
                 gap: 20px;
             }
             
@@ -294,13 +296,11 @@
                 "Sevgin gözlerinden okunuyor!"
             ];
             
-            // KAYDIRMAYI ENGELLE
+            // MOBİL İÇİN KAYDIRMAYI ENGELLE
             document.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-            
-            document.addEventListener('wheel', function(e) {
-                e.preventDefault();
+                if (e.target !== noBtn) {
+                    e.preventDefault();
+                }
             }, { passive: false });
             
             // SES EFEKTLERİ
@@ -368,11 +368,25 @@
                 endGame();
             });
             
+            // EVET BUTONUNA DOKUNMA (MOBİL)
+            yesBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                endGame();
+            }, { passive: false });
+            
             // HAYIR BUTONUNA TIKLAMA
             noBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 handleNoButtonClick();
             });
+            
+            // HAYIR BUTONUNA DOKUNMA (MOBİL)
+            noBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                handleNoButtonClick();
+            }, { passive: false });
             
             // HAYIR BUTONU İŞLEVİ
             function handleNoButtonClick() {
@@ -406,7 +420,7 @@
                 }
             });
             
-            // HAYIR BUTONUNU HAREKET ETTİRME - TAMAMEN YENİ ALGORİTMA
+            // HAYIR BUTONUNU HAREKET ETTİRME - EN İYİ ALGORİTMA
             function moveNoButton() {
                 const noBtnRect = noBtn.getBoundingClientRect();
                 const yesBtnRect = yesBtn.getBoundingClientRect();
@@ -419,63 +433,66 @@
                 const minX = safeMargin;
                 const minY = safeMargin;
                 
-                let randomX, randomY;
-                let attempts = 0;
-                const maxAttempts = 50;
-                let validPosition = false;
+                // ÖNCEDEN TANIMLANMIŞ GÜVENLİ KONUMLAR
+                const safePositions = [
+                    // Köşeler
+                    { x: minX, y: minY },
+                    { x: maxX, y: minY },
+                    { x: minX, y: maxY },
+                    { x: maxX, y: maxY },
+                    
+                    // Kenar orta noktaları
+                    { x: minX, y: window.innerHeight / 2 - noBtnRect.height / 2 },
+                    { x: maxX, y: window.innerHeight / 2 - noBtnRect.height / 2 },
+                    { x: window.innerWidth / 2 - noBtnRect.width / 2, y: minY },
+                    { x: window.innerWidth / 2 - noBtnRect.width / 2, y: maxY },
+                    
+                    // Rastgele konumlar
+                    { x: minX + 100, y: minY + 100 },
+                    { x: maxX - 100, y: minY + 100 },
+                    { x: minX + 100, y: maxY - 100 },
+                    { x: maxX - 100, y: maxY - 100 }
+                ];
                 
-                // UYGUN POZİSYON BUL
-                while (!validPosition && attempts < maxAttempts) {
-                    attempts++;
-                    
-                    // TAMAMEN RASTGELE POZİSYON
-                    randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
-                    randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
-                    
-                    // EVET BUTONU VE KONTEYNER İLE ÇAKIŞMA KONTROLÜ
-                    const noBtnRight = randomX + noBtnRect.width;
-                    const noBtnBottom = randomY + noBtnRect.height;
-                    
-                    // Evet butonu ile çakışma kontrolü
-                    const yesBtnOverlap = 
-                        randomX < yesBtnRect.right && 
-                        noBtnRight > yesBtnRect.left && 
-                        randomY < yesBtnRect.bottom && 
-                        noBtnBottom > yesBtnRect.top;
+                let bestPosition = null;
+                let maxDistance = 0;
+                
+                // EVET BUTONUNDAN EN UZAK KONUMU BUL
+                for (const pos of safePositions) {
+                    const distance = Math.sqrt(
+                        Math.pow(pos.x - (yesBtnRect.left + yesBtnRect.width/2), 2) +
+                        Math.pow(pos.y - (yesBtnRect.top + yesBtnRect.height/2), 2)
+                    );
                     
                     // Konteyner ile çakışma kontrolü
                     const containerOverlap = 
-                        randomX < containerRect.right && 
-                        noBtnRight > containerRect.left && 
-                        randomY < containerRect.bottom && 
-                        noBtnBottom > containerRect.top;
+                        pos.x < containerRect.right && 
+                        pos.x + noBtnRect.width > containerRect.left && 
+                        pos.y < containerRect.bottom && 
+                        pos.y + noBtnRect.height > containerRect.top;
                     
-                    // Evet butonuna çok yakın olmama kontrolü
-                    const distanceToYes = Math.sqrt(
-                        Math.pow(randomX + noBtnRect.width/2 - (yesBtnRect.left + yesBtnRect.width/2), 2) +
-                        Math.pow(randomY + noBtnRect.height/2 - (yesBtnRect.top + yesBtnRect.height/2), 2)
-                    );
-                    
-                    // Eğer çakışma yoksa ve yeterince uzaksa geçerli pozisyon
-                    if (!yesBtnOverlap && !containerOverlap && distanceToYes > 150) {
-                        validPosition = true;
+                    if (distance > maxDistance && !containerOverlap) {
+                        maxDistance = distance;
+                        bestPosition = pos;
                     }
                 }
                 
-                // EĞER UYGUN POZİSYON BULUNAMADIYSA, EKRANIN RASTGELE BİR YERİNE YERLEŞTİR
-                if (!validPosition) {
-                    randomX = Math.floor(Math.random() * (maxX - minX)) + minX;
-                    randomY = Math.floor(Math.random() * (maxY - minY)) + minY;
+                // EĞER UYGUN POZİSYON BULUNAMADIYSA, RASTGELE BİR KONUM SEÇ
+                if (!bestPosition) {
+                    bestPosition = {
+                        x: Math.floor(Math.random() * (maxX - minX)) + minX,
+                        y: Math.floor(Math.random() * (maxY - minY)) + minY
+                    };
                 }
                 
                 // SON KONTROL: KESİNLİKLE EKRAN DIŞINA ÇIKMADIĞINDAN EMİN OL
-                randomX = Math.max(minX, Math.min(maxX, randomX));
-                randomY = Math.max(minY, Math.min(maxY, randomY));
+                const finalX = Math.max(minX, Math.min(maxX, bestPosition.x));
+                const finalY = Math.max(minY, Math.min(maxY, bestPosition.y));
                 
                 // BUTONU HAREKET ETTİR
                 noBtn.style.position = 'fixed';
-                noBtn.style.left = `${randomX}px`;
-                noBtn.style.top = `${randomY}px`;
+                noBtn.style.left = `${finalX}px`;
+                noBtn.style.top = `${finalY}px`;
             }
             
             // KALP EFEKTİ OLUŞTURMA
@@ -511,6 +528,12 @@
             restartBtn.addEventListener('click', function() {
                 resetGame();
             });
+            
+            // YENİDEN BAŞLAT BUTONUNA DOKUNMA (MOBİL)
+            restartBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                resetGame();
+            }, { passive: false });
             
             // OYUNU SIFIRLA
             function resetGame() {
