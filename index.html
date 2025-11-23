@@ -189,29 +189,36 @@
     </div>
 
     <script>
-        document.getElementById('generateBtn').addEventListener('click', function() {
-            const userName = document.getElementById('userName').value.trim();
+        // Sayfa yüklendiğinde çalışacak kod
+        document.addEventListener('DOMContentLoaded', function() {
+            // "Kişiye Özel Oyunu Oluştur" butonuna tıklama olayını ekle
+            document.getElementById('generateBtn').addEventListener('click', function() {
+                const userName = document.getElementById('userName').value.trim();
+                
+                if (!userName) {
+                    alert('Lütfen sevdiğiniz kişinin ismini girin!');
+                    return;
+                }
+                
+                // Sonuç bölümünü göster
+                document.getElementById('result').style.display = 'block';
+            });
             
-            if (!userName) {
-                alert('Lütfen sevdiğiniz kişinin ismini girin!');
-                return;
-            }
-            
-            document.getElementById('result').style.display = 'block';
+            // "Oyunu İndir" butonuna tıklama olayını ekle
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                const userName = document.getElementById('userName').value.trim();
+                const yourName = document.getElementById('yourName').value.trim();
+                const customMessage = document.getElementById('customMessage').value.trim();
+                
+                // Kişiselleştirilmiş oyun kodunu oluştur
+                const personalizedGame = createPersonalizedGame(userName, yourName, customMessage);
+                
+                // Kodu indirilebilir bir dosya olarak sun
+                downloadPersonalizedGame(personalizedGame, userName);
+            });
         });
         
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            const userName = document.getElementById('userName').value.trim();
-            const yourName = document.getElementById('yourName').value.trim();
-            const customMessage = document.getElementById('customMessage').value.trim();
-            
-            // Kişiselleştirilmiş oyun kodunu oluştur
-            const personalizedGame = createPersonalizedGame(userName, yourName, customMessage);
-            
-            // Kodu indirilebilir bir dosya olarak sun
-            downloadPersonalizedGame(personalizedGame, userName);
-        });
-        
+        // Kişiselleştirilmiş oyun kodunu oluşturan fonksiyon
         function createPersonalizedGame(userName, yourName, customMessage) {
             // Final mesajını özelleştir
             let finalMessage = customMessage || "Bunu biliyordum! 😊";
@@ -713,6 +720,7 @@
 </html>`;
         }
         
+        // Kişiselleştirilmiş oyunu indirme fonksiyonu
         function downloadPersonalizedGame(gameCode, userName) {
             const blob = new Blob([gameCode], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
