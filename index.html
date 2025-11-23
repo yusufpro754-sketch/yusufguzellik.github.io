@@ -168,13 +168,13 @@
             <textarea id="customMessage" placeholder="Özel bir mesaj ekleyebilirsiniz..."></textarea>
         </div>
         
-        <button id="generateBtn">Kişiye Özel Oyunu Oluştur</button>
+        <button onclick="generateGame()">Kişiye Özel Oyunu Oluştur</button>
         
         <div class="result" id="result">
             <h3>Oyununuz Hazır! 🎉</h3>
             <p>Kişiselleştirilmiş oyunu aşağıdaki butona tıklayarak indirebilirsiniz.</p>
             <p>İndirdiğiniz dosyayı sevdiğiniz kişiye gönderin.</p>
-            <button class="download-btn" id="downloadBtn">Oyunu İndir</button>
+            <button class="download-btn" onclick="downloadGame()">Oyunu İndir</button>
         </div>
         
         <div class="instructions">
@@ -189,60 +189,51 @@
     </div>
 
     <script>
-        // Sayfa yüklendiğinde çalışacak kod
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("Sayfa yüklendi, event listener'lar ekleniyor...");
+        // Formu kontrol et ve oyunu oluştur
+        function generateGame() {
+            const userName = document.getElementById('userName').value.trim();
             
-            const generateBtn = document.getElementById('generateBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const resultDiv = document.getElementById('result');
+            if (!userName) {
+                alert('Lütfen sevdiğiniz kişinin ismini girin!');
+                return;
+            }
             
-            // "Kişiye Özel Oyunu Oluştur" butonuna tıklama olayını ekle
-            generateBtn.addEventListener('click', function() {
-                console.log("Kişiye Özel Oyunu Oluştur butonuna tıklandı");
-                
-                const userName = document.getElementById('userName').value.trim();
-                
-                if (!userName) {
-                    alert('Lütfen sevdiğiniz kişinin ismini girin!');
-                    return;
-                }
-                
-                // Sonuç bölümünü göster
-                resultDiv.style.display = 'block';
-                console.log("Sonuç bölümü gösterildi");
-            });
-            
-            // "Oyunu İndir" butonuna tıklama olayını ekle
-            downloadBtn.addEventListener('click', function() {
-                console.log("Oyunu İndir butonuna tıklandı");
-                
-                const userName = document.getElementById('userName').value.trim();
-                const yourName = document.getElementById('yourName').value.trim();
-                const customMessage = document.getElementById('customMessage').value.trim();
-                
-                // Kişiselleştirilmiş oyun kodunu oluştur
-                const personalizedGame = createPersonalizedGame(userName, yourName, customMessage);
-                
-                // Kodu indirilebilir bir dosya olarak sun
-                downloadPersonalizedGame(personalizedGame, userName);
-            });
-        });
+            // Sonuç bölümünü göster
+            document.getElementById('result').style.display = 'block';
+        }
         
-        // Kişiselleştirilmiş oyun kodunu oluşturan fonksiyon
-        function createPersonalizedGame(userName, yourName, customMessage) {
-            console.log("Oyun oluşturuluyor:", userName, yourName, customMessage);
+        // Oyunu indir
+        function downloadGame() {
+            const userName = document.getElementById('userName').value.trim();
+            const yourName = document.getElementById('yourName').value.trim();
+            const customMessage = document.getElementById('customMessage').value.trim();
             
+            // Kişiselleştirilmiş oyun kodunu oluştur
+            const personalizedGame = createPersonalizedGame(userName, yourName, customMessage);
+            
+            // Kodu indirilebilir bir dosya olarak sun
+            const blob = new Blob([personalizedGame], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${userName}-beni-seviyor-musun.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Kişiselleştirilmiş oyun kodunu oluştur
+        function createPersonalizedGame(userName, yourName, customMessage) {
             // Final mesajını özelleştir
             let finalMessage = customMessage || "Bunu biliyordum! 😊";
             let responseMessage = yourName ? `${yourName} de seni seviyorum ${userName}! 💕` : `Ben de seni seviyorum ${userName}! 💕`;
             
-            // Oyun kodunu döndür
             return `<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${userName}, Beni Seviyor Musun?</title>
     <style>
         * {
@@ -250,57 +241,31 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
         }
         
         body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
-            background-size: 400% 400%;
-            animation: gradientBackground 15s ease infinite;
-            touch-action: manipulation;
-            position: fixed;
-        }
-        
-        @keyframes gradientBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            padding: 20px;
         }
         
         .container {
-            text-align: center;
             max-width: 500px;
             width: 90%;
-            position: relative;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             padding: 40px 30px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 25px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            z-index: 10;
+            text-align: center;
         }
         
         h1 {
             color: #ff4d6d;
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-            font-weight: 700;
         }
         
         .buttons {
@@ -312,71 +277,34 @@
         }
         
         button {
-            padding: 18px 35px;
+            padding: 15px 30px;
             border: none;
             border-radius: 50px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 10;
-            min-width: 130px;
+            min-width: 120px;
         }
         
         #yesBtn {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
+            background: #4CAF50;
             color: white;
         }
         
         #yesBtn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
         }
         
         #noBtn {
-            background: linear-gradient(45deg, #ff4d6d, #ff3355);
+            background: #ff4d6d;
             color: white;
             position: relative;
-            z-index: 20;
-            transition: left 0.4s ease, top 0.4s ease;
         }
         
         #noBtn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
-        }
-        
-        .floating-hearts {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .heart {
-            position: absolute;
-            font-size: 24px;
-            color: #ff4d6d;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-            animation: floatUp 3s ease-in-out forwards;
-        }
-        
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-120px) rotate(360deg);
-                opacity: 0;
-            }
         }
         
         .final-message {
@@ -397,67 +325,30 @@
         }
         
         .final-message h2 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
         
         .final-message p {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 40px;
         }
         
         .restart-btn {
-            padding: 18px 35px;
+            padding: 15px 30px;
             background: white;
             color: #ff4d6d;
             border: none;
             border-radius: 50px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .restart-btn:hover {
-            transform: scale(1.05);
-            background: #f8f8f8;
         }
         
         @media (max-width: 600px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            button {
-                padding: 15px 25px;
-                font-size: 1.1rem;
-                min-width: 110px;
-            }
-            
-            .final-message h2 {
-                font-size: 2.5rem;
-            }
-            
-            .final-message p {
-                font-size: 1.4rem;
-            }
-            
             .buttons {
                 flex-direction: column;
-                align-items: center;
                 gap: 20px;
-            }
-            
-            .container {
-                padding: 30px 20px;
             }
         }
     </style>
@@ -469,7 +360,6 @@
             <button id="yesBtn">Evet</button>
             <button id="noBtn">Hayır</button>
         </div>
-        <div class="floating-hearts" id="floatingHearts"></div>
     </div>
     
     <div class="final-message" id="finalMessage">
@@ -479,276 +369,78 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const yesBtn = document.getElementById('yesBtn');
-            const noBtn = document.getElementById('noBtn');
-            const finalMessage = document.getElementById('finalMessage');
-            const restartBtn = document.getElementById('restartBtn');
-            const floatingHearts = document.getElementById('floatingHearts');
-            
-            let yesBtnSize = 1;
-            let noClickCount = 0;
-            let lastPositions = [];
-            const maxClicks = Math.floor(Math.random() * 6) + 5;
-            
-            const noButtonMessages = [
-                "Hayır", "Emin misin?", "Gerçekten mi?", "Bir daha düşün!", "Son şansın!",
-                "Üzülürüm!", "Ağlayacağım! 😢", "Beni sevdiğini biliyorum!", "Neden kaçıyorsun?",
-                "İtiraf et!", "Beni seviyorsun!", "Kabul et artık!", "Biliyorum seviyorsun!",
-                "Bu kadar inatçı olma!", "Pes et artık!", "Sen beni seviyorsun!", 
-                "İtiraf zamanı!", "Beni sevdiğini biliyorum! 💖", "Yalan söylüyorsun!",
-                "Gözlerin evet diyor!", "Kalbinin sesini dinle!", "Sevgin belli oluyor!",
-                "İnat etmeyi bırak!", "Biraz dürüst ol!", "Kendine yalan söyleme!",
-                "Bunu biliyordum!", "Sevdiğini itiraf et!", "Artık pes et!", 
-                "Gerçeği kabul et!", "Sevgin gözlerinden okunuyor!"
-            ];
-            
-            document.addEventListener('touchmove', function(e) {
-                if (e.target !== noBtn) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            function createSound(frequency, duration, type) {
-                try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.value = frequency;
-                    oscillator.type = type;
-                    
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + duration);
-                } catch(e) {
-                }
-            }
-            
-            function growYesButton() {
-                const randomGrowth = 0.5 + Math.random() * 0.8;
-                yesBtnSize += randomGrowth;
-                yesBtn.style.transform = \`scale(\${yesBtnSize})\`;
-                
-                if (noClickCount >= maxClicks) {
-                    const scaleX = window.innerWidth / yesBtn.offsetWidth * 1.5;
-                    const scaleY = window.innerHeight / yesBtn.offsetHeight * 1.5;
-                    yesBtnSize = Math.max(scaleX, scaleY);
-                    yesBtn.style.transform = \`scale(\${yesBtnSize})\`;
-                    yesBtn.style.zIndex = "100";
-                    yesBtn.textContent = "EVET! 💖";
-                }
-                
-                createHearts(5);
-                createSound(523.25, 0.3, 'sine');
-            }
-            
-            function endGame() {
-                createHearts(15);
-                createSound(523.25, 0.5, 'sine');
-                
-                setTimeout(function() {
-                    finalMessage.style.display = 'flex';
-                    for(let i = 0; i < 5; i++) {
-                        setTimeout(() => {
-                            createSound(523.25 + (i * 100), 0.2, 'sine');
-                        }, i * 150);
-                    }
-                    createHearts(20);
-                }, 300);
-            }
-            
-            yesBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                endGame();
-            });
-            
-            yesBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                endGame();
-            }, { passive: false });
-            
-            noBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                handleNoButtonClick();
-            });
-            
-            noBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                handleNoButtonClick();
-            }, { passive: false });
-            
-            function handleNoButtonClick() {
-                noClickCount++;
-                createSound(200, 0.2, 'triangle');
-                
-                const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
-                noBtn.textContent = noButtonMessages[randomIndex];
-                
-                growYesButton();
-                moveNoButton();
-                
-                if (noClickCount >= maxClicks) {
-                    setTimeout(function() {
-                        endGame();
-                    }, 800);
-                }
-            }
-            
-            noBtn.addEventListener('mouseover', function() {
-                if (Math.random() < 0.7) {
-                    moveNoButton();
-                    createSound(150, 0.1, 'sawtooth');
-                }
-            });
-            
-            function moveNoButton() {
-                const noBtnRect = noBtn.getBoundingClientRect();
-                const yesBtnRect = yesBtn.getBoundingClientRect();
-                const containerRect = document.querySelector('.container').getBoundingClientRect();
-                
-                const safeMargin = 10;
-                const maxX = containerRect.right - noBtnRect.width - safeMargin;
-                const maxY = containerRect.bottom - noBtnRect.height - safeMargin;
-                const minX = containerRect.left + safeMargin;
-                const minY = containerRect.top + safeMargin;
-                
-                let bestPosition = null;
-                let maxDistance = 0;
-                let attempts = 0;
-                const maxAttempts = 30;
-                
-                while (attempts < maxAttempts && !bestPosition) {
-                    attempts++;
-                    
-                    let candidateX = Math.random() * (maxX - minX) + minX;
-                    let candidateY = Math.random() * (maxY - minY) + minY;
-                    
-                    const distance = Math.sqrt(
-                        Math.pow(candidateX - (yesBtnRect.left + yesBtnRect.width/2), 2) +
-                        Math.pow(candidateY - (yesBtnRect.top + yesBtnRect.height/2), 2)
-                    );
-                    
-                    let isTooCloseToPrevious = false;
-                    for (const pos of lastPositions) {
-                        const prevDistance = Math.sqrt(
-                            Math.pow(candidateX - pos.x, 2) + Math.pow(candidateY - pos.y, 2)
-                        );
-                        if (prevDistance < 50) {
-                            isTooCloseToPrevious = true;
-                            break;
-                        }
-                    }
-                    
-                    if (distance > maxDistance && !isTooCloseToPrevious) {
-                        maxDistance = distance;
-                        bestPosition = { x: candidateX, y: candidateY };
-                    }
-                }
-                
-                if (!bestPosition) {
-                    bestPosition = {
-                        x: Math.random() * (maxX - minX) + minX,
-                        y: Math.random() * (maxY - minY) + minY
-                    };
-                }
-                
-                lastPositions.push({ x: bestPosition.x, y: bestPosition.y });
-                if (lastPositions.length > 3) {
-                    lastPositions.shift();
-                }
-                
-                noBtn.style.position = 'absolute';
-                noBtn.style.left = \`\${bestPosition.x - containerRect.left}px\`;
-                noBtn.style.top = \`\${bestPosition.y - containerRect.top}px\`;
-            }
-            
-            function createHearts(count) {
-                for (let i = 0; i < count; i++) {
-                    setTimeout(() => {
-                        const heart = document.createElement('div');
-                        heart.innerHTML = '💖';
-                        heart.classList.add('heart');
-                        
-                        const startX = Math.random() * window.innerWidth;
-                        heart.style.left = \`\${startX}px\`;
-                        heart.style.bottom = '0px';
-                        
-                        const duration = 2 + Math.random() * 2;
-                        heart.style.animation = \`floatUp \${duration}s ease-in-out forwards\`;
-                        
-                        const size = 20 + Math.random() * 30;
-                        heart.style.fontSize = \`\${size}px\`;
-                        
-                        floatingHearts.appendChild(heart);
-                        
-                        setTimeout(() => {
-                            if (heart.parentNode) {
-                                heart.parentNode.removeChild(heart);
-                            }
-                        }, duration * 1000);
-                    }, i * 150);
-                }
-            }
-            
-            restartBtn.addEventListener('click', function() {
-                resetGame();
-            });
-            
-            restartBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                resetGame();
-            }, { passive: false });
-            
-            function resetGame() {
-                finalMessage.style.display = 'none';
-                yesBtnSize = 1;
-                noClickCount = 0;
-                lastPositions = [];
-                
-                yesBtn.style.transform = 'scale(1)';
-                yesBtn.style.zIndex = "10";
-                yesBtn.textContent = "Evet";
-                noBtn.textContent = 'Hayır';
-                noBtn.style.position = 'relative';
-                noBtn.style.left = 'auto';
-                noBtn.style.top = 'auto';
-                
-                createHearts(8);
-                createSound(523.25, 0.5, 'sine');
-            }
-            
-            setTimeout(() => {
-                createHearts(5);
-            }, 1000);
+        let yesBtnSize = 1;
+        let noClickCount = 0;
+        const maxClicks = Math.floor(Math.random() * 6) + 5;
+        
+        const noButtonMessages = [
+            "Hayır", "Emin misin?", "Gerçekten mi?", "Bir daha düşün!", "Son şansın!",
+            "Üzülürüm!", "Ağlayacağım! 😢", "Beni sevdiğini biliyorum!", "Neden kaçıyorsun?",
+            "İtiraf et!", "Beni seviyorsun!", "Kabul et artık!", "Biliyorum seviyorsun!",
+            "Bu kadar inatçı olma!", "Pes et artık!", "Sen beni seviyorsun!"
+        ];
+        
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            document.getElementById('finalMessage').style.display = 'flex';
         });
+        
+        document.getElementById('noBtn').addEventListener('click', function() {
+            noClickCount++;
+            
+            // Butonun yazısını değiştir
+            const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
+            document.getElementById('noBtn').textContent = noButtonMessages[randomIndex];
+            
+            // Evet butonunu büyüt
+            yesBtnSize += 0.8;
+            document.getElementById('yesBtn').style.transform = 'scale(' + yesBtnSize + ')';
+            
+            // Butonu hareket ettir
+            moveNoButton();
+            
+            // Maksimum tıklamaya ulaşıldıysa oyunu bitir
+            if (noClickCount >= maxClicks) {
+                setTimeout(function() {
+                    document.getElementById('finalMessage').style.display = 'flex';
+                }, 500);
+            }
+        });
+        
+        document.getElementById('noBtn').addEventListener('mouseover', function() {
+            if (Math.random() < 0.7) {
+                moveNoButton();
+            }
+        });
+        
+        document.getElementById('restartBtn').addEventListener('click', function() {
+            document.getElementById('finalMessage').style.display = 'none';
+            yesBtnSize = 1;
+            noClickCount = 0;
+            document.getElementById('yesBtn').style.transform = 'scale(1)';
+            document.getElementById('noBtn').textContent = 'Hayır';
+            document.getElementById('noBtn').style.position = 'static';
+        });
+        
+        function moveNoButton() {
+            const container = document.querySelector('.container');
+            const noBtn = document.getElementById('noBtn');
+            
+            const containerRect = container.getBoundingClientRect();
+            const noBtnRect = noBtn.getBoundingClientRect();
+            
+            const maxX = containerRect.width - noBtnRect.width - 20;
+            const maxY = containerRect.height - noBtnRect.height - 20;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
     </script>
 </body>
 </html>`;
-        }
-        
-        // Kişiselleştirilmiş oyunu indirme fonksiyonu
-        function downloadPersonalizedGame(gameCode, userName) {
-            console.log("Oyun indiriliyor:", userName);
-            
-            const blob = new Blob([gameCode], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = \`\${userName}-beni-seviyor-musun.html\`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            console.log("Oyun başarıyla indirildi");
         }
     </script>
 </body>
