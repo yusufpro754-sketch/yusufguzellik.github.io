@@ -2,533 +2,485 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Beni Seviyor Musun?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyun Kişiselleştirme Generator</title>
     <style>
-        /* TEMEL STİL AYARLARI */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
         }
         
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
-            background-size: 400% 400%;
-            animation: gradientBackground 15s ease infinite;
-            touch-action: manipulation;
-            position: fixed;
-        }
-        
-        @keyframes gradientBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* ANA KONTEYNER */
-        .container {
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            padding: 40px 30px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 25px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            z-index: 10;
-        }
-        
-        /* BAŞLIK */
-        h1 {
-            color: #ff4d6d;
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-            font-weight: 700;
-        }
-        
-        /* BUTON ALANI */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 40px;
-            position: relative;
-        }
-        
-        /* BUTON STİLLERİ */
-        button {
-            padding: 18px 35px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 10;
-            min-width: 130px;
-        }
-        
-        #yesBtn {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: white;
-        }
-        
-        #yesBtn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
-        }
-        
-        #noBtn {
-            background: linear-gradient(45deg, #ff4d6d, #ff3355);
-            color: white;
-            position: relative;
-            z-index: 20;
-            transition: left 0.4s ease, top 0.4s ease;
-        }
-        
-        #noBtn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
-        }
-        
-        /* UÇAN KALPLER */
-        .floating-hearts {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .heart {
-            position: absolute;
-            font-size: 24px;
-            color: #ff4d6d;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-            animation: floatUp 3s ease-in-out forwards;
-        }
-        
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-120px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* OYUN SONU MESAJI */
-        .final-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 77, 109, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 100;
-            color: white;
-            text-align: center;
             padding: 20px;
         }
         
-        .final-message h2 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .final-message p {
-            font-size: 1.8rem;
-            margin-bottom: 40px;
-        }
-        
-        .restart-btn {
-            padding: 18px 35px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             background: white;
-            color: #ff4d6d;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .code-section, .customize-section {
+            padding: 30px;
+        }
+        
+        .code-section {
+            background: #f8f9fa;
+            border-right: 2px dashed #dee2e6;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #2d3436;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: #e17055;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .preview-box {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 100px;
+        }
+        
+        .generate-section {
+            padding: 30px;
+            background: #2d3436;
+            color: white;
+            text-align: center;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
             border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             border-radius: 50px;
-            font-size: 1.3rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .result-section {
+            padding: 30px;
+            background: #f8f9fa;
+            display: none;
+        }
+        
+        .result-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid #00b894;
+        }
+        
+        .link-display {
+            background: #f1f2f6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            border: 2px dashed #a4b0be;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .restart-btn:hover {
-            transform: scale(1.05);
-            background: #f8f8f8;
+        .copy-btn {
+            background: #0984e3;
+            color: white;
         }
         
-        /* MOBİL UYUMLULUK */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            button {
-                padding: 15px 25px;
-                font-size: 1.1rem;
-                min-width: 110px;
-            }
-            
-            .final-message h2 {
-                font-size: 2.5rem;
-            }
-            
-            .final-message p {
-                font-size: 1.4rem;
-            }
-            
-            .buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-            }
+        .test-btn {
+            background: #00b894;
+            color: white;
+        }
+        
+        .new-btn {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .info-text {
+            background: #ffeaa7;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #fdcb6e;
+        }
+        
+        .placeholder-example {
+            background: #dfe6e9;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <!-- ANA OYUN ALANI -->
     <div class="container">
-        <h1>Beni seviyor musun? 💖</h1>
-        <div class="buttons">
-            <button id="yesBtn">Evet</button>
-            <button id="noBtn">Hayır</button>
+        <div class="header">
+            <h1>🎮 Oyun Kişiselleştirme Generator</h1>
+            <p>Oyun kodunuzu yapıştırın, kişiselleştirin ve özel link oluşturun!</p>
         </div>
-        <div class="floating-hearts" id="floatingHearts"></div>
-    </div>
-    
-    <!-- OYUN SONU EKRANI -->
-    <div class="final-message" id="finalMessage">
-        <h2>Ben de seni seviyorum! 💕</h2>
-        <p>Bunu biliyordum! 😊</p>
-        <button class="restart-btn" id="restartBtn">Tekrar Oyna</button>
+        
+        <div class="main-content">
+            <div class="code-section">
+                <div class="section-title">
+                    <span>📝 1. Oyun Kodunuzu Yapıştırın</span>
+                </div>
+                <textarea id="gameCode" placeholder="Buraya HTML oyun kodunuzu yapıştırın...">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Kişiselleştirilmiş Oyun&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            color: #ff6b6b;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Merhaba {{isim}}!&lt;/h1&gt;
+        &lt;p&gt;Seviye: {{seviye}}&lt;/p&gt;
+        &lt;p&gt;Skorunuz: {{skor}}&lt;/p&gt;
+        &lt;p&gt;{{mesaj}}&lt;/p&gt;
+        &lt;button onclick="alert('Tebrikler {{isim}}!')"&gt;Oyna&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+                
+                <div class="info-text">
+                    <strong>💡 İpucu:</strong> Oyun kodunuzda kişiselleştirme için <strong>{{isim}}</strong>, <strong>{{seviye}}</strong> gibi placeholder'lar kullanın.
+                </div>
+                
+                <div class="placeholder-example">
+                    Örnek: &lt;h1&gt;Merhaba {{isim}}!&lt;/h1&gt;
+                </div>
+            </div>
+            
+            <div class="customize-section">
+                <div class="section-title">
+                    <span>🎨 2. Kişiselleştirme Ayarları</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerName">Oyuncu İsmi *</label>
+                    <input type="text" id="playerName" placeholder="Örnek: Ahmet, Ayşe" value="Ahmet">
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerLevel">Seviye</label>
+                    <select id="playerLevel">
+                        <option value="Acemi">Acemi</option>
+                        <option value="Orta" selected>Orta</option>
+                        <option value="Usta">Usta</option>
+                        <option value="Profesyonel">Profesyonel</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerScore">Başlangıç Skoru</label>
+                    <input type="number" id="playerScore" placeholder="0" value="100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customMessage">Özel Mesaj</label>
+                    <input type="text" id="customMessage" placeholder="Özel bir mesaj yazın" value="Oyunu kazanmak için hazır mısın?">
+                </div>
+                
+                <div class="form-group">
+                    <label for="backgroundColor">Arkaplan Rengi</label>
+                    <input type="color" id="backgroundColor" value="#667eea">
+                </div>
+                
+                <div class="section-title">
+                    <span>👁️ Önizleme</span>
+                </div>
+                <div class="preview-box" id="preview">
+                    Kişiselleştirilmiş içerik burada görünecek...
+                </div>
+            </div>
+        </div>
+        
+        <div class="generate-section">
+            <button class="generate-btn" onclick="generateGame()">
+                🚀 Kişiselleştirilmiş Oyun Linki Oluştur
+            </button>
+        </div>
+        
+        <div class="result-section" id="resultSection">
+            <div class="result-box">
+                <h2>🎉 Oyununuz Hazır!</h2>
+                <p>Kişiselleştirilmiş oyun linkiniz aşağıdadır. Bu linki paylaşabilirsiniz.</p>
+                
+                <div class="link-display" id="generatedLink">
+                    Link burada görünecek...
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn copy-btn" onclick="copyToClipboard()">
+                        📋 Linki Kopyala
+                    </button>
+                    <button class="action-btn test-btn" onclick="testGame()">
+                        🎮 Oyunu Test Et
+                    </button>
+                    <button class="action-btn new-btn" onclick="newGame()">
+                        ✨ Yeni Oyun Oluştur
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // SAYFA YÜKLENDİĞİNDE ÇALIŞACAK KOD
-        document.addEventListener('DOMContentLoaded', function() {
-            // ELEMENTLERİ SEÇ
-            const yesBtn = document.getElementById('yesBtn');
-            const noBtn = document.getElementById('noBtn');
-            const finalMessage = document.getElementById('finalMessage');
-            const restartBtn = document.getElementById('restartBtn');
-            const floatingHearts = document.getElementById('floatingHearts');
+        // Değişkenleri izle ve önizlemeyi güncelle
+        document.getElementById('playerName').addEventListener('input', updatePreview);
+        document.getElementById('playerLevel').addEventListener('change', updatePreview);
+        document.getElementById('playerScore').addEventListener('input', updatePreview);
+        document.getElementById('customMessage').addEventListener('input', updatePreview);
+        
+        function updatePreview() {
+            const name = document.getElementById('playerName').value || 'İsimsiz';
+            const level = document.getElementById('playerLevel').value;
+            const score = document.getElementById('playerScore').value;
+            const message = document.getElementById('customMessage').value;
             
-            // OYUN DEĞİŞKENLERİ
-            let yesBtnSize = 1;
-            let noClickCount = 0;
-            let lastPositions = [];
-            const maxClicks = Math.floor(Math.random() * 6) + 5; // 5-10 arası rastgele
+            document.getElementById('preview').innerHTML = `
+                <h3>${name} için Önizleme</h3>
+                <p><strong>Seviye:</strong> ${level}</p>
+                <p><strong>Skor:</strong> ${score}</p>
+                <p><strong>Mesaj:</strong> ${message}</p>
+                <p><em>Oyun içeriği bu bilgilere göre kişiselleştirilecek.</em></p>
+            `;
+        }
+        
+        // Sayfa yüklendiğinde önizlemeyi güncelle
+        updatePreview();
+        
+        function generateGame() {
+            const gameCode = document.getElementById('gameCode').value;
+            const name = document.getElementById('playerName').value || 'Oyuncu';
+            const level = document.getElementById('playerLevel').value;
+            const score = document.getElementById('playerScore').value;
+            const message = document.getElementById('customMessage').value;
+            const bgColor = document.getElementById('backgroundColor').value;
             
-            // HAYIR BUTONU MESAJLARI
-            const noButtonMessages = [
-                "Hayır", "Emin misin?", "Gerçekten mi?", "Bir daha düşün!", "Son şansın!",
-                "Üzülürüm!", "Ağlayacağım! 😢", "Beni sevdiğini biliyorum!", "Neden kaçıyorsun?",
-                "İtiraf et!", "Beni seviyorsun!", "Kabul et artık!", "Biliyorum seviyorsun!",
-                "Bu kadar inatçı olma!", "Pes et artık!", "Sen beni seviyorsun!", 
-                "İtiraf zamanı!", "Beni sevdiğini biliyorum! 💖", "Yalan söylüyorsun!",
-                "Gözlerin evet diyor!", "Kalbinin sesini dinle!", "Sevgin belli oluyor!",
-                "İnat etmeyi bırak!", "Biraz dürüst ol!", "Kendine yalan söyleme!",
-                "Bunu biliyordum!", "Sevdiğini itiraf et!", "Artık pes et!", 
-                "Gerçeği kabul et!", "Sevgin gözlerinden okunuyor!"
-            ];
+            if (!gameCode.trim()) {
+                alert('Lütfen oyun kodunu yapıştırın!');
+                return;
+            }
             
-            // MOBİL İÇİN KAYDIRMAYI ENGELLE
-            document.addEventListener('touchmove', function(e) {
-                if (e.target !== noBtn) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
+            if (!name.trim()) {
+                alert('Lütfen oyuncu ismini girin!');
+                return;
+            }
             
-            // SES EFEKTLERİ
-            function createSound(frequency, duration, type) {
+            // Oyun kodundaki placeholder'ları değiştir
+            let personalizedCode = gameCode
+                .replace(/{{isim}}/gi, name)
+                .replace(/{{seviye}}/gi, level)
+                .replace(/{{skor}}/gi, score)
+                .replace(/{{mesaj}}/gi, message)
+                .replace(/{{arkaplan}}/gi, bgColor);
+            
+            // Base64 encode
+            const encodedGame = btoa(unescape(encodeURIComponent(personalizedCode)));
+            
+            // Geçerli URL'yi al
+            const currentUrl = window.location.href.split('?')[0];
+            const gameUrl = `${currentUrl}?game=${encodedGame}`;
+            
+            // Sonucu göster
+            document.getElementById('generatedLink').textContent = gameUrl;
+            document.getElementById('resultSection').style.display = 'block';
+            
+            // Sonuca kaydır
+            document.getElementById('resultSection').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        function copyToClipboard() {
+            const linkText = document.getElementById('generatedLink').textContent;
+            navigator.clipboard.writeText(linkText).then(() => {
+                alert('Link panoya kopyalandı!');
+            }).catch(err => {
+                // Fallback
+                const tempInput = document.createElement('input');
+                tempInput.value = linkText;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                alert('Link kopyalandı!');
+            });
+        }
+        
+        function testGame() {
+            const linkText = document.getElementById('generatedLink').textContent;
+            window.open(linkText, '_blank');
+        }
+        
+        function newGame() {
+            if (confirm('Yeni bir oyun oluşturmak istediğinizden emin misiniz? Mevcut ayarlar sıfırlanacak.')) {
+                document.getElementById('playerName').value = '';
+                document.getElementById('playerScore').value = '0';
+                document.getElementById('customMessage').value = '';
+                document.getElementById('resultSection').style.display = 'none';
+                updatePreview();
+            }
+        }
+        
+        // URL'den game parametresini oku ve oyunu göster
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const gameData = urlParams.get('game');
+            
+            if (gameData) {
                 try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
+                    // Base64 decode
+                    const decodedGame = decodeURIComponent(escape(atob(gameData)));
                     
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.value = frequency;
-                    oscillator.type = type;
-                    
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + duration);
-                } catch(e) {
-                    // SES DESTEKLENMİYORSA SESSİZ DEVAM ET
+                    // Sayfayı oyun içeriği ile değiştir
+                    document.open();
+                    document.write(decodedGame);
+                    document.close();
+                } catch (e) {
+                    console.error('Oyun yüklenirken hata:', e);
+                    alert('Oyun yüklenirken bir hata oluştu.');
                 }
             }
-            
-            // EVET BUTONUNU BÜYÜT - BELİRSİZ BÜYÜME
-            function growYesButton() {
-                // Belirsiz büyüme: Her seferinde farklı oranda büyüsün
-                const randomGrowth = 0.5 + Math.random() * 0.8; // 0.5 - 1.3 arası
-                yesBtnSize += randomGrowth;
-                yesBtn.style.transform = `scale(${yesBtnSize})`;
-                
-                // Son adımda ekranı tamamen kaplasın
-                if (noClickCount >= maxClicks) {
-                    const scaleX = window.innerWidth / yesBtn.offsetWidth * 1.5;
-                    const scaleY = window.innerHeight / yesBtn.offsetHeight * 1.5;
-                    yesBtnSize = Math.max(scaleX, scaleY);
-                    yesBtn.style.transform = `scale(${yesBtnSize})`;
-                    yesBtn.style.zIndex = "100";
-                    yesBtn.textContent = "EVET! 💖"; // Son adımda buton metnini değiştir
-                }
-                
-                createHearts(5);
-                createSound(523.25, 0.3, 'sine');
-            }
-            
-            // OYUNU BİTİR
-            function endGame() {
-                createHearts(15);
-                createSound(523.25, 0.5, 'sine');
-                
-                setTimeout(function() {
-                    finalMessage.style.display = 'flex';
-                    for(let i = 0; i < 5; i++) {
-                        setTimeout(() => {
-                            createSound(523.25 + (i * 100), 0.2, 'sine');
-                        }, i * 150);
-                    }
-                    createHearts(20);
-                }, 300);
-            }
-            
-            // EVET BUTONUNA TIKLAMA
-            yesBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                endGame();
-            });
-            
-            // EVET BUTONUNA DOKUNMA (MOBİL)
-            yesBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                endGame();
-            }, { passive: false });
-            
-            // HAYIR BUTONUNA TIKLAMA
-            noBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                handleNoButtonClick();
-            });
-            
-            // HAYIR BUTONUNA DOKUNMA (MOBİL)
-            noBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                handleNoButtonClick();
-            }, { passive: false });
-            
-            // HAYIR BUTONU İŞLEVİ
-            function handleNoButtonClick() {
-                noClickCount++;
-                createSound(200, 0.2, 'triangle');
-                
-                const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
-                noBtn.textContent = noButtonMessages[randomIndex];
-                
-                growYesButton();
-                moveNoButton();
-                
-                // MAKSİMUM TIKLAMAYA ULAŞILDIYSA OYUNU BİTİR
-                if (noClickCount >= maxClicks) {
-                    setTimeout(function() {
-                        endGame();
-                    }, 800); // Büyüme animasyonu için biraz daha bekle
-                }
-            }
-            
-            // HAYIR BUTONUNA FARE ÜZERİNE GELİNCE
-            noBtn.addEventListener('mouseover', function() {
-                if (Math.random() < 0.7) {
-                    moveNoButton();
-                    createSound(150, 0.1, 'sawtooth');
-                }
-            });
-            
-            // HAYIR BUTONUNU HAREKET ETTİRME - KONTEYNER İÇİNDE KALACAK ŞEKİLDE
-            function moveNoButton() {
-                const noBtnRect = noBtn.getBoundingClientRect();
-                const yesBtnRect = yesBtn.getBoundingClientRect();
-                const containerRect = document.querySelector('.container').getBoundingClientRect();
-                
-                // KONTEYNER SINIRLARI İÇİNDE KALACAK ŞEKİLDE AYARLA
-                const safeMargin = 10;
-                const maxX = containerRect.right - noBtnRect.width - safeMargin;
-                const maxY = containerRect.bottom - noBtnRect.height - safeMargin;
-                const minX = containerRect.left + safeMargin;
-                const minY = containerRect.top + safeMargin;
-                
-                let bestPosition = null;
-                let maxDistance = 0;
-                let attempts = 0;
-                const maxAttempts = 30;
-                
-                // AKILLI POZİSYON BULMA - SADECE KONTEYNER İÇİNDE
-                while (attempts < maxAttempts && !bestPosition) {
-                    attempts++;
-                    
-                    // Konteyner içinde rastgele pozisyon
-                    let candidateX = Math.random() * (maxX - minX) + minX;
-                    let candidateY = Math.random() * (maxY - minY) + minY;
-                    
-                    // EVET BUTONUNA UZAKLIK HESAPLA
-                    const distance = Math.sqrt(
-                        Math.pow(candidateX - (yesBtnRect.left + yesBtnRect.width/2), 2) +
-                        Math.pow(candidateY - (yesBtnRect.top + yesBtnRect.height/2), 2)
-                    );
-                    
-                    // ÖNCEKİ POZİSYONLARDAN FARKLI MI KONTROL ET
-                    let isTooCloseToPrevious = false;
-                    for (const pos of lastPositions) {
-                        const prevDistance = Math.sqrt(
-                            Math.pow(candidateX - pos.x, 2) + Math.pow(candidateY - pos.y, 2)
-                        );
-                        if (prevDistance < 50) { // 50px'den yakınsa geçersiz
-                            isTooCloseToPrevious = true;
-                            break;
-                        }
-                    }
-                    
-                    if (distance > maxDistance && !isTooCloseToPrevious) {
-                        maxDistance = distance;
-                        bestPosition = { x: candidateX, y: candidateY };
-                    }
-                }
-                
-                // EĞER UYGUN POZİSYON BULUNAMADIYSA, KONTEYNER İÇİNDE RASTGELE
-                if (!bestPosition) {
-                    bestPosition = {
-                        x: Math.random() * (maxX - minX) + minX,
-                        y: Math.random() * (maxY - minY) + minY
-                    };
-                }
-                
-                // POZİSYON GEÇMİŞİNİ GÜNCELLE (max 3 pozisyon)
-                lastPositions.push({ x: bestPosition.x, y: bestPosition.y });
-                if (lastPositions.length > 3) {
-                    lastPositions.shift();
-                }
-                
-                // BUTONU HAREKET ETTİR
-                noBtn.style.position = 'absolute';
-                noBtn.style.left = `${bestPosition.x - containerRect.left}px`;
-                noBtn.style.top = `${bestPosition.y - containerRect.top}px`;
-            }
-            
-            // KALP EFEKTİ OLUŞTURMA
-            function createHearts(count) {
-                for (let i = 0; i < count; i++) {
-                    setTimeout(() => {
-                        const heart = document.createElement('div');
-                        heart.innerHTML = '💖';
-                        heart.classList.add('heart');
-                        
-                        const startX = Math.random() * window.innerWidth;
-                        heart.style.left = `${startX}px`;
-                        heart.style.bottom = '0px';
-                        
-                        const duration = 2 + Math.random() * 2;
-                        heart.style.animation = `floatUp ${duration}s ease-in-out forwards`;
-                        
-                        const size = 20 + Math.random() * 30;
-                        heart.style.fontSize = `${size}px`;
-                        
-                        floatingHearts.appendChild(heart);
-                        
-                        setTimeout(() => {
-                            if (heart.parentNode) {
-                                heart.parentNode.removeChild(heart);
-                            }
-                        }, duration * 1000);
-                    }, i * 150);
-                }
-            }
-            
-            // YENİDEN BAŞLAT BUTONU
-            restartBtn.addEventListener('click', function() {
-                resetGame();
-            });
-            
-            restartBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                resetGame();
-            }, { passive: false });
-            
-            // OYUNU SIFIRLA
-            function resetGame() {
-                finalMessage.style.display = 'none';
-                yesBtnSize = 1;
-                noClickCount = 0;
-                lastPositions = [];
-                
-                yesBtn.style.transform = 'scale(1)';
-                yesBtn.style.zIndex = "10";
-                yesBtn.textContent = "Evet";
-                noBtn.textContent = 'Hayır';
-                noBtn.style.position = 'relative';
-                noBtn.style.left = 'auto';
-                noBtn.style.top = 'auto';
-                
-                createHearts(8);
-                createSound(523.25, 0.5, 'sine');
-            }
-            
-            // SAYFA YÜKLENDİĞİNDE KALP EFEKTİ
-            setTimeout(() => {
-                createHearts(5);
-            }, 1000);
         });
     </script>
 </body>
