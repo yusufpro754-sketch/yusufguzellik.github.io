@@ -3,484 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oyun Kişiselleştirme Generator</title>
+    <title>HTML ile Güzel Çiçek</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
         }
         
-        .header {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 30px;
+        .container {
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
         
-        .header h1 {
+        h1 {
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             font-size: 2.5rem;
-            margin-bottom: 10px;
         }
         
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .flower {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            animation: float 6s ease-in-out infinite;
         }
         
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
+        /* Çiçek merkezi */
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffcc00, #ff9900, #ff6600);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            z-index: 5;
         }
         
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
+        /* Yapraklar */
+        .petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 150px;
+            background: linear-gradient(to bottom, #ff5e9c, #ff2e7e, #d40062);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform-origin: center 200px;
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.5),
+                0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* İkinci katman yapraklar */
+        .petal.inner {
+            width: 80px;
+            height: 120px;
+            background: linear-gradient(to bottom, #ff9ecd, #ff5e9c, #ff2e7e);
+            z-index: 2;
+        }
+        
+        /* Yaprakları konumlandırma */
+        .petal:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg); }
+        .petal:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg); }
+        .petal:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg); }
+        .petal:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg); }
+        .petal:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg); }
+        .petal:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg); }
+        .petal:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg); }
+        .petal:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg); }
+        
+        .petal.inner:nth-child(9) { transform: translate(-50%, -50%) rotate(22.5deg); }
+        .petal.inner:nth-child(10) { transform: translate(-50%, -50%) rotate(67.5deg); }
+        .petal.inner:nth-child(11) { transform: translate(-50%, -50%) rotate(112.5deg); }
+        .petal.inner:nth-child(12) { transform: translate(-50%, -50%) rotate(157.5deg); }
+        .petal.inner:nth-child(13) { transform: translate(-50%, -50%) rotate(202.5deg); }
+        .petal.inner:nth-child(14) { transform: translate(-50%, -50%) rotate(247.5deg); }
+        .petal.inner:nth-child(15) { transform: translate(-50%, -50%) rotate(292.5deg); }
+        .petal.inner:nth-child(16) { transform: translate(-50%, -50%) rotate(337.5deg); }
+        
+        /* Yaprak animasyonu */
+        .petal {
+            animation: petal-move 8s ease-in-out infinite;
+        }
+        
+        .petal:nth-child(even) {
+            animation-delay: -2s;
+        }
+        
+        .petal.inner {
+            animation: inner-petal-move 6s ease-in-out infinite;
+        }
+        
+        .petal.inner:nth-child(even) {
+            animation-delay: -1.5s;
+        }
+        
+        /* Yapraklar */
+        .leaf {
+            position: absolute;
+            width: 80px;
+            height: 120px;
+            background: linear-gradient(to bottom, #4CAF50, #2E7D32);
+            border-radius: 0 80% 0 80%;
+            z-index: 1;
+        }
+        
+        .leaf.left {
+            top: 65%;
+            left: 10%;
+            transform: rotate(-30deg);
+        }
+        
+        .leaf.right {
+            top: 65%;
+            right: 10%;
+            transform: rotate(210deg) scaleX(-1);
+        }
+        
+        /* Arka plan dekorasyonu */
+        .bg-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        .bubble:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+        
+        .bubble:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+        
+        .bubble:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 80%;
+            animation-delay: -10s;
+        }
+        
+        .bubble:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 60%;
+            left: 10%;
+            animation-delay: -7s;
+        }
+        
+        /* Animasyonlar */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
             }
         }
         
-        .code-section, .customize-section {
-            padding: 30px;
+        @keyframes petal-move {
+            0%, 100% {
+                transform: translate(-50%, -50%) rotate(var(--rot, 0)) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(calc(var(--rot, 0) + 5deg)) scale(1.05);
+            }
         }
         
-        .code-section {
-            background: #f8f9fa;
-            border-right: 2px dashed #dee2e6;
+        @keyframes inner-petal-move {
+            0%, 100% {
+                transform: translate(-50%, -50%) rotate(var(--rot, 0)) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(calc(var(--rot, 0) - 3deg)) scale(1.03);
+            }
         }
         
-        .section-title {
-            font-size: 1.5rem;
-            color: #2d3436;
-            margin-bottom: 20px;
+        /* Kontroller */
+        .controls {
+            margin-top: 40px;
             display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-title i {
-            color: #e17055;
-        }
-        
-        textarea {
-            width: 100%;
-            height: 400px;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-        
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2d3436;
-        }
-        
-        input, select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .preview-box {
-            background: #f8f9fa;
-            border: 2px dashed #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-            min-height: 100px;
-        }
-        
-        .generate-section {
-            padding: 30px;
-            background: #2d3436;
-            color: white;
-            text-align: center;
-        }
-        
-        .generate-btn {
-            background: linear-gradient(135deg, #00b894, #00a085);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-weight: bold;
-        }
-        
-        .generate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        .result-section {
-            padding: 30px;
-            background: #f8f9fa;
-            display: none;
-        }
-        
-        .result-box {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 5px solid #00b894;
-        }
-        
-        .link-display {
-            background: #f1f2f6;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            word-break: break-all;
-            font-family: 'Courier New', monospace;
-            border: 2px dashed #a4b0be;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 15px;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 15px;
         }
         
-        .action-btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
+        button {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
         
-        .copy-btn {
-            background: #0984e3;
-            color: white;
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        .test-btn {
-            background: #00b894;
-            color: white;
-        }
-        
-        .new-btn {
-            background: #fdcb6e;
-            color: #2d3436;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .info-text {
-            background: #ffeaa7;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #fdcb6e;
-        }
-        
-        .placeholder-example {
-            background: #dfe6e9;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
+        /* Responsive tasarım */
+        @media (max-width: 600px) {
+            .flower {
+                width: 250px;
+                height: 250px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-decoration">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+    
     <div class="container">
-        <div class="header">
-            <h1>🎮 Oyun Kişiselleştirme Generator</h1>
-            <p>Oyun kodunuzu yapıştırın, kişiselleştirin ve özel link oluşturun!</p>
-        </div>
+        <h1>HTML ile Güzel Çiçek</h1>
         
-        <div class="main-content">
-            <div class="code-section">
-                <div class="section-title">
-                    <span>📝 1. Oyun Kodunuzu Yapıştırın</span>
-                </div>
-                <textarea id="gameCode" placeholder="Buraya HTML oyun kodunuzu yapıştırın...">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Kişiselleştirilmiş Oyun&lt;/title&gt;
-    &lt;style&gt;
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-        .container {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-        h1 {
-            color: #ff6b6b;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="container"&gt;
-        &lt;h1&gt;Merhaba {{isim}}!&lt;/h1&gt;
-        &lt;p&gt;Seviye: {{seviye}}&lt;/p&gt;
-        &lt;p&gt;Skorunuz: {{skor}}&lt;/p&gt;
-        &lt;p&gt;{{mesaj}}&lt;/p&gt;
-        &lt;button onclick="alert('Tebrikler {{isim}}!')"&gt;Oyna&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea>
-                
-                <div class="info-text">
-                    <strong>💡 İpucu:</strong> Oyun kodunuzda kişiselleştirme için <strong>{{isim}}</strong>, <strong>{{seviye}}</strong> gibi placeholder'lar kullanın.
-                </div>
-                
-                <div class="placeholder-example">
-                    Örnek: &lt;h1&gt;Merhaba {{isim}}!&lt;/h1&gt;
-                </div>
-            </div>
+        <div class="flower">
+            <!-- Dış yapraklar -->
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
             
-            <div class="customize-section">
-                <div class="section-title">
-                    <span>🎨 2. Kişiselleştirme Ayarları</span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerName">Oyuncu İsmi *</label>
-                    <input type="text" id="playerName" placeholder="Örnek: Ahmet, Ayşe" value="Ahmet">
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerLevel">Seviye</label>
-                    <select id="playerLevel">
-                        <option value="Acemi">Acemi</option>
-                        <option value="Orta" selected>Orta</option>
-                        <option value="Usta">Usta</option>
-                        <option value="Profesyonel">Profesyonel</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerScore">Başlangıç Skoru</label>
-                    <input type="number" id="playerScore" placeholder="0" value="100">
-                </div>
-                
-                <div class="form-group">
-                    <label for="customMessage">Özel Mesaj</label>
-                    <input type="text" id="customMessage" placeholder="Özel bir mesaj yazın" value="Oyunu kazanmak için hazır mısın?">
-                </div>
-                
-                <div class="form-group">
-                    <label for="backgroundColor">Arkaplan Rengi</label>
-                    <input type="color" id="backgroundColor" value="#667eea">
-                </div>
-                
-                <div class="section-title">
-                    <span>👁️ Önizleme</span>
-                </div>
-                <div class="preview-box" id="preview">
-                    Kişiselleştirilmiş içerik burada görünecek...
-                </div>
-            </div>
+            <!-- İç yapraklar -->
+            <div class="petal inner"></div>
+            <div class="petal inner"></div>
+            <div class="petal inner"></div>
+            <div class="petal inner"></div>
+            <div class="petal inner"></div>
+            <div class="petal inner"></div>
+            <div class="petal inner"></div>
+            <div class="petal inner"></div>
+            
+            <!-- Çiçek merkezi -->
+            <div class="center"></div>
+            
+            <!-- Yapraklar -->
+            <div class="leaf left"></div>
+            <div class="leaf right"></div>
         </div>
         
-        <div class="generate-section">
-            <button class="generate-btn" onclick="generateGame()">
-                🚀 Kişiselleştirilmiş Oyun Linki Oluştur
-            </button>
-        </div>
-        
-        <div class="result-section" id="resultSection">
-            <div class="result-box">
-                <h2>🎉 Oyununuz Hazır!</h2>
-                <p>Kişiselleştirilmiş oyun linkiniz aşağıdadır. Bu linki paylaşabilirsiniz.</p>
-                
-                <div class="link-display" id="generatedLink">
-                    Link burada görünecek...
-                </div>
-                
-                <div class="action-buttons">
-                    <button class="action-btn copy-btn" onclick="copyToClipboard()">
-                        📋 Linki Kopyala
-                    </button>
-                    <button class="action-btn test-btn" onclick="testGame()">
-                        🎮 Oyunu Test Et
-                    </button>
-                    <button class="action-btn new-btn" onclick="newGame()">
-                        ✨ Yeni Oyun Oluştur
-                    </button>
-                </div>
-            </div>
+        <div class="controls">
+            <button id="colorBtn">Renk Değiştir</button>
+            <button id="sizeBtn">Boyut Değiştir</button>
+            <button id="animBtn">Animasyonu Durdur/Başlat</button>
         </div>
     </div>
 
     <script>
-        // Değişkenleri izle ve önizlemeyi güncelle
-        document.getElementById('playerName').addEventListener('input', updatePreview);
-        document.getElementById('playerLevel').addEventListener('change', updatePreview);
-        document.getElementById('playerScore').addEventListener('input', updatePreview);
-        document.getElementById('customMessage').addEventListener('input', updatePreview);
-        
-        function updatePreview() {
-            const name = document.getElementById('playerName').value || 'İsimsiz';
-            const level = document.getElementById('playerLevel').value;
-            const score = document.getElementById('playerScore').value;
-            const message = document.getElementById('customMessage').value;
+        document.addEventListener('DOMContentLoaded', function() {
+            const flower = document.querySelector('.flower');
+            const petals = document.querySelectorAll('.petal');
+            const innerPetals = document.querySelectorAll('.petal.inner');
+            const center = document.querySelector('.center');
+            const colorBtn = document.getElementById('colorBtn');
+            const sizeBtn = document.getElementById('sizeBtn');
+            const animBtn = document.getElementById('animBtn');
             
-            document.getElementById('preview').innerHTML = `
-                <h3>${name} için Önizleme</h3>
-                <p><strong>Seviye:</strong> ${level}</p>
-                <p><strong>Skor:</strong> ${score}</p>
-                <p><strong>Mesaj:</strong> ${message}</p>
-                <p><em>Oyun içeriği bu bilgilere göre kişiselleştirilecek.</em></p>
-            `;
-        }
-        
-        // Sayfa yüklendiğinde önizlemeyi güncelle
-        updatePreview();
-        
-        function generateGame() {
-            const gameCode = document.getElementById('gameCode').value;
-            const name = document.getElementById('playerName').value || 'Oyuncu';
-            const level = document.getElementById('playerLevel').value;
-            const score = document.getElementById('playerScore').value;
-            const message = document.getElementById('customMessage').value;
-            const bgColor = document.getElementById('backgroundColor').value;
+            let isAnimating = true;
+            let currentSize = 1;
             
-            if (!gameCode.trim()) {
-                alert('Lütfen oyun kodunu yapıştırın!');
-                return;
-            }
-            
-            if (!name.trim()) {
-                alert('Lütfen oyuncu ismini girin!');
-                return;
-            }
-            
-            // Oyun kodundaki placeholder'ları değiştir
-            let personalizedCode = gameCode
-                .replace(/{{isim}}/gi, name)
-                .replace(/{{seviye}}/gi, level)
-                .replace(/{{skor}}/gi, score)
-                .replace(/{{mesaj}}/gi, message)
-                .replace(/{{arkaplan}}/gi, bgColor);
-            
-            // Base64 encode
-            const encodedGame = btoa(unescape(encodeURIComponent(personalizedCode)));
-            
-            // Geçerli URL'yi al
-            const currentUrl = window.location.href.split('?')[0];
-            const gameUrl = `${currentUrl}?game=${encodedGame}`;
-            
-            // Sonucu göster
-            document.getElementById('generatedLink').textContent = gameUrl;
-            document.getElementById('resultSection').style.display = 'block';
-            
-            // Sonuca kaydır
-            document.getElementById('resultSection').scrollIntoView({ 
-                behavior: 'smooth' 
+            // Renk değiştirme işlevi
+            colorBtn.addEventListener('click', function() {
+                const hue1 = Math.floor(Math.random() * 360);
+                const hue2 = (hue1 + 60) % 360;
+                const hue3 = (hue1 + 120) % 360;
+                
+                petals.forEach(petal => {
+                    petal.style.background = `linear-gradient(to bottom, hsl(${hue1}, 70%, 70%), hsl(${hue2}, 70%, 60%), hsl(${hue3}, 70%, 50%))`;
+                });
+                
+                innerPetals.forEach(petal => {
+                    petal.style.background = `linear-gradient(to bottom, hsl(${hue1}, 80%, 80%), hsl(${hue2}, 80%, 70%), hsl(${hue3}, 80%, 60%))`;
+                });
+                
+                center.style.background = `radial-gradient(circle, hsl(${hue2}, 100%, 60%), hsl(${hue3}, 100%, 50%), hsl(${hue1}, 100%, 40%))`;
             });
-        }
-        
-        function copyToClipboard() {
-            const linkText = document.getElementById('generatedLink').textContent;
-            navigator.clipboard.writeText(linkText).then(() => {
-                alert('Link panoya kopyalandı!');
-            }).catch(err => {
-                // Fallback
-                const tempInput = document.createElement('input');
-                tempInput.value = linkText;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.execCommand('copy');
-                document.body.removeChild(tempInput);
-                alert('Link kopyalandı!');
-            });
-        }
-        
-        function testGame() {
-            const linkText = document.getElementById('generatedLink').textContent;
-            window.open(linkText, '_blank');
-        }
-        
-        function newGame() {
-            if (confirm('Yeni bir oyun oluşturmak istediğinizden emin misiniz? Mevcut ayarlar sıfırlanacak.')) {
-                document.getElementById('playerName').value = '';
-                document.getElementById('playerScore').value = '0';
-                document.getElementById('customMessage').value = '';
-                document.getElementById('resultSection').style.display = 'none';
-                updatePreview();
-            }
-        }
-        
-        // URL'den game parametresini oku ve oyunu göster
-        window.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const gameData = urlParams.get('game');
             
-            if (gameData) {
-                try {
-                    // Base64 decode
-                    const decodedGame = decodeURIComponent(escape(atob(gameData)));
-                    
-                    // Sayfayı oyun içeriği ile değiştir
-                    document.open();
-                    document.write(decodedGame);
-                    document.close();
-                } catch (e) {
-                    console.error('Oyun yüklenirken hata:', e);
-                    alert('Oyun yüklenirken bir hata oluştu.');
+            // Boyut değiştirme işlevi
+            sizeBtn.addEventListener('click', function() {
+                currentSize = currentSize === 1 ? 0.8 : currentSize === 0.8 ? 1.2 : 1;
+                flower.style.transform = `scale(${currentSize})`;
+            });
+            
+            // Animasyon durdurma/başlatma işlevi
+            animBtn.addEventListener('click', function() {
+                if (isAnimating) {
+                    flower.style.animationPlayState = 'paused';
+                    petals.forEach(petal => {
+                        petal.style.animationPlayState = 'paused';
+                    });
+                    innerPetals.forEach(petal => {
+                        petal.style.animationPlayState = 'paused';
+                    });
+                    animBtn.textContent = 'Animasyonu Başlat';
+                } else {
+                    flower.style.animationPlayState = 'running';
+                    petals.forEach(petal => {
+                        petal.style.animationPlayState = 'running';
+                    });
+                    innerPetals.forEach(petal => {
+                        petal.style.animationPlayState = 'running';
+                    });
+                    animBtn.textContent = 'Animasyonu Durdur';
                 }
-            }
+                isAnimating = !isAnimating;
+            });
         });
     </script>
 </body>
