@@ -5,188 +5,336 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Beni Seviyor Musun?</title>
     <style>
-        /* ÖNCEKİ TÜM STİL KODLARI BURADA KALACAK */
-        /* Sadece paylaşım bölümü için ek stil */
-        .share-section {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 20px;
-            margin-top: 20px;
-            backdrop-filter: blur(10px);
+        /* TEMEL STİL AYARLARI */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
-        .share-section h3 {
-            color: #ff4d6d;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .share-input {
-            padding: 12px 15px;
-            border: 2px solid #ff4d6d;
-            border-radius: 25px;
-            margin: 10px 0;
+        html, body {
             width: 100%;
-            max-width: 300px;
-            font-size: 1rem;
+            height: 100%;
+            overflow: hidden;
         }
         
-        .share-buttons {
+        body {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
             justify-content: center;
-            margin-top: 15px;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            touch-action: manipulation;
+            position: fixed;
         }
         
-        .share-btn {
-            padding: 10px 20px;
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* ANA KONTEYNER */
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 10;
+        }
+        
+        /* BAŞLIK */
+        h1 {
+            color: #ff4d6d;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+        }
+        
+        /* BUTON ALANI */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            position: relative;
+        }
+        
+        /* BUTON STİLLERİ */
+        button {
+            padding: 18px 35px;
             border: none;
-            border-radius: 20px;
+            border-radius: 50px;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+            min-width: 130px;
         }
         
-        .copy-btn {
-            background: #2196F3;
+        #yesBtn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
             color: white;
         }
         
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
+        #yesBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
         }
         
-        .generate-btn {
-            background: #ff4d6d;
+        #noBtn {
+            background: linear-gradient(45deg, #ff4d6d, #ff3355);
             color: white;
+            position: relative;
+            z-index: 20;
+            transition: left 0.4s ease, top 0.4s ease;
+        }
+        
+        #noBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+        }
+        
+        /* UÇAN KALPLER */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: #ff4d6d;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            animation: floatUp 3s ease-in-out forwards;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* OYUN SONU MESAJI */
+        .final-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 77, 109, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .final-message h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .final-message p {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+        }
+        
+        .restart-btn {
+            padding: 18px 35px;
+            background: white;
+            color: #ff4d6d;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .restart-btn:hover {
+            transform: scale(1.05);
+            background: #f8f8f8;
+        }
+        
+        /* MOBİL UYUMLULUK */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            button {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+                min-width: 110px;
+            }
+            
+            .final-message h2 {
+                font-size: 2.5rem;
+            }
+            
+            .final-message p {
+                font-size: 1.4rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .container {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- ANA OYUN ALANI -->
     <div class="container">
-        <h1 id="mainTitle">Beni seviyor musun? 💖</h1>
+        <h1>Beni seviyor musun? 💖</h1>
         <div class="buttons">
             <button id="yesBtn">Evet</button>
             <button id="noBtn">Hayır</button>
         </div>
-        
-        <!-- PAYLAŞIM BÖLÜMÜ -->
-        <div class="share-section" id="shareSection">
-            <h3>✨ Bu oyunu arkadaşların için kişiselleştir!</h3>
-            <input type="text" id="friendName" class="share-input" placeholder="Arkadaşının ismini yaz..." maxlength="20">
-            <button id="generateLink" class="share-btn generate-btn">Kişiselleştirilmiş Link Oluştur</button>
-            <div id="generatedLink" style="margin-top: 15px;"></div>
-        </div>
-        
         <div class="floating-hearts" id="floatingHearts"></div>
     </div>
     
+    <!-- OYUN SONU EKRANI -->
     <div class="final-message" id="finalMessage">
-        <h2 id="finalTitle">Ben de seni seviyorum! 💕</h2>
-        <p id="finalText">Bunu biliyordum! 😊</p>
+        <h2>Ben de seni seviyorum! 💕</h2>
+        <p>Bunu biliyordum! 😊</p>
         <button class="restart-btn" id="restartBtn">Tekrar Oyna</button>
     </div>
 
     <script>
-        // SAYFA YÜKLENDİĞİNDE
+        // SAYFA YÜKLENDİĞİNDE ÇALIŞACAK KOD
         document.addEventListener('DOMContentLoaded', function() {
-            // URL'den isim parametresini oku ve decode et
-            const urlParams = new URLSearchParams(window.location.search);
-            let playerName = 'Sevgili';
-            
-            if (urlParams.has('isim')) {
-                try {
-                    playerName = decodeURIComponent(escape(atob(urlParams.get('isim'))));
-                } catch (e) {
-                    playerName = urlParams.get('isim');
-                }
-            }
-            
-            // Sayfayı kişiselleştir
-            document.getElementById('mainTitle').innerHTML = `${playerName}, beni seviyor musun? 💖`;
-            document.getElementById('finalTitle').innerHTML = `${playerName}, ben de seni seviyorum! 💕`;
-            document.getElementById('finalText').innerHTML = `Beni sevdiğini biliyordum ${playerName}! 😊`;
-
-            // ÖNCEKİ TÜM JAVASCRIPT KODU BURADA KALACAK
-            // Sadece paylaşım fonksiyonlarını ekleyeceğiz
-            
+            // ELEMENTLERİ SEÇ
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
             const finalMessage = document.getElementById('finalMessage');
             const restartBtn = document.getElementById('restartBtn');
             const floatingHearts = document.getElementById('floatingHearts');
-            const shareSection = document.getElementById('shareSection');
-            const generateLinkBtn = document.getElementById('generateLink');
             
+            // OYUN DEĞİŞKENLERİ
             let yesBtnSize = 1;
             let noClickCount = 0;
             let lastPositions = [];
-            const maxClicks = Math.floor(Math.random() * 6) + 5;
-
-            // Paylaşım bölümünü başlangıçta göster
-            shareSection.style.display = 'block';
-
-            // Link oluşturma
-            generateLinkBtn.addEventListener('click', function() {
-                const friendName = document.getElementById('friendName').value.trim() || 'Sevgili';
-                generatePersonalizedLink(friendName);
-            });
-
-            function generatePersonalizedLink(name) {
-                const encodedName = btoa(unescape(encodeURIComponent(name)));
-                const currentUrl = window.location.origin + window.location.pathname;
-                const personalizedUrl = `${currentUrl}?isim=${encodedName}`;
+            const maxClicks = Math.floor(Math.random() * 6) + 5; // 5-10 arası rastgele
+            
+            // HAYIR BUTONU MESAJLARI
+            const noButtonMessages = [
+                "Hayır", "Emin misin?", "Gerçekten mi?", "Bir daha düşün!", "Son şansın!",
+                "Üzülürüm!", "Ağlayacağım! 😢", "Beni sevdiğini biliyorum!", "Neden kaçıyorsun?",
+                "İtiraf et!", "Beni seviyorsun!", "Kabul et artık!", "Biliyorum seviyorsun!",
+                "Bu kadar inatçı olma!", "Pes et artık!", "Sen beni seviyorsun!", 
+                "İtiraf zamanı!", "Beni sevdiğini biliyorum! 💖", "Yalan söylüyorsun!",
+                "Gözlerin evet diyor!", "Kalbinin sesini dinle!", "Sevgin belli oluyor!",
+                "İnat etmeyi bırak!", "Biraz dürüst ol!", "Kendine yalan söyleme!",
+                "Bunu biliyordum!", "Sevdiğini itiraf et!", "Artık pes et!", 
+                "Gerçeği kabul et!", "Sevgin gözlerinden okunuyor!"
+            ];
+            
+            // MOBİL İÇİN KAYDIRMAYI ENGELLE
+            document.addEventListener('touchmove', function(e) {
+                if (e.target !== noBtn) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // SES EFEKTLERİ
+            function createSound(frequency, duration, type) {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = frequency;
+                    oscillator.type = type;
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + duration);
+                } catch(e) {
+                    // SES DESTEKLENMİYORSA SESSİZ DEVAM ET
+                }
+            }
+            
+            // EVET BUTONUNU BÜYÜT - BELİRSİZ BÜYÜME
+            function growYesButton() {
+                // Belirsiz büyüme: Her seferinde farklı oranda büyüsün
+                const randomGrowth = 0.5 + Math.random() * 0.8; // 0.5 - 1.3 arası
+                yesBtnSize += randomGrowth;
+                yesBtn.style.transform = `scale(${yesBtnSize})`;
                 
-                document.getElementById('generatedLink').innerHTML = `
-                    <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 15px; margin-top: 10px;">
-                        <p style="margin-bottom: 10px; font-weight: bold;">${name} için özel link:</p>
-                        <input type="text" value="${personalizedUrl}" readonly 
-                               style="width: 100%; padding: 10px; border: 2px dashed #ff4d6d; border-radius: 10px; margin-bottom: 10px;">
-                        <div class="share-buttons">
-                            <button onclick="copyToClipboard('${personalizedUrl}')" class="share-btn copy-btn">📋 Linki Kopyala</button>
-                            <button onclick="shareOnWhatsApp('${personalizedUrl}', '${name}')" class="share-btn whatsapp-btn">💚 WhatsApp'ta Paylaş</button>
-                        </div>
-                    </div>
-                `;
+                // Son adımda ekranı tamamen kaplasın
+                if (noClickCount >= maxClicks) {
+                    const scaleX = window.innerWidth / yesBtn.offsetWidth * 1.5;
+                    const scaleY = window.innerHeight / yesBtn.offsetHeight * 1.5;
+                    yesBtnSize = Math.max(scaleX, scaleY);
+                    yesBtn.style.transform = `scale(${yesBtnSize})`;
+                    yesBtn.style.zIndex = "100";
+                    yesBtn.textContent = "EVET! 💖"; // Son adımda buton metnini değiştir
+                }
                 
-                createHearts(3);
+                createHearts(5);
                 createSound(523.25, 0.3, 'sine');
             }
-
-            // Global fonksiyonlar
-            window.copyToClipboard = function(text) {
-                navigator.clipboard.writeText(text).then(function() {
-                    alert('✅ Link panoya kopyalandı!');
-                }).catch(function() {
-                    // Fallback
-                    const tempInput = document.createElement('input');
-                    tempInput.value = text;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(tempInput);
-                    alert('✅ Link kopyalandı!');
-                });
-            };
-
-            window.shareOnWhatsApp = function(url, name) {
-                const text = `💖 Hey! ${name} için özel bir "Beni Seviyor Musun?" oyunu hazırladım. Buraya tıkla ve beni sevip sevmediğini söyle! 😊 ${url}`;
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
-                window.open(whatsappUrl, '_blank');
-            };
-
-            // Oyun sonunda paylaşım bölümünü tekrar göster
+            
+            // OYUNU BİTİR
             function endGame() {
                 createHearts(15);
                 createSound(523.25, 0.5, 'sine');
                 
                 setTimeout(function() {
                     finalMessage.style.display = 'flex';
-                    // Paylaşım bölümünü container içinde göster
-                    shareSection.style.display = 'block';
-                    
                     for(let i = 0; i < 5; i++) {
                         setTimeout(() => {
                             createSound(523.25 + (i * 100), 0.2, 'sine');
@@ -195,10 +343,192 @@
                     createHearts(20);
                 }, 300);
             }
-
-            // ÖNCEKİ DİĞER FONKSİYONLAR (createHearts, createSound, moveNoButton, vs.) AYNI KALACAK
-            // ... (önceki tüm oyun kodunuz burada kalacak)
-
+            
+            // EVET BUTONUNA TIKLAMA
+            yesBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                endGame();
+            });
+            
+            // EVET BUTONUNA DOKUNMA (MOBİL)
+            yesBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                endGame();
+            }, { passive: false });
+            
+            // HAYIR BUTONUNA TIKLAMA
+            noBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                handleNoButtonClick();
+            });
+            
+            // HAYIR BUTONUNA DOKUNMA (MOBİL)
+            noBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                handleNoButtonClick();
+            }, { passive: false });
+            
+            // HAYIR BUTONU İŞLEVİ
+            function handleNoButtonClick() {
+                noClickCount++;
+                createSound(200, 0.2, 'triangle');
+                
+                const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
+                noBtn.textContent = noButtonMessages[randomIndex];
+                
+                growYesButton();
+                moveNoButton();
+                
+                // MAKSİMUM TIKLAMAYA ULAŞILDIYSA OYUNU BİTİR
+                if (noClickCount >= maxClicks) {
+                    setTimeout(function() {
+                        endGame();
+                    }, 800); // Büyüme animasyonu için biraz daha bekle
+                }
+            }
+            
+            // HAYIR BUTONUNA FARE ÜZERİNE GELİNCE
+            noBtn.addEventListener('mouseover', function() {
+                if (Math.random() < 0.7) {
+                    moveNoButton();
+                    createSound(150, 0.1, 'sawtooth');
+                }
+            });
+            
+            // HAYIR BUTONUNU HAREKET ETTİRME - KONTEYNER İÇİNDE KALACAK ŞEKİLDE
+            function moveNoButton() {
+                const noBtnRect = noBtn.getBoundingClientRect();
+                const yesBtnRect = yesBtn.getBoundingClientRect();
+                const containerRect = document.querySelector('.container').getBoundingClientRect();
+                
+                // KONTEYNER SINIRLARI İÇİNDE KALACAK ŞEKİLDE AYARLA
+                const safeMargin = 10;
+                const maxX = containerRect.right - noBtnRect.width - safeMargin;
+                const maxY = containerRect.bottom - noBtnRect.height - safeMargin;
+                const minX = containerRect.left + safeMargin;
+                const minY = containerRect.top + safeMargin;
+                
+                let bestPosition = null;
+                let maxDistance = 0;
+                let attempts = 0;
+                const maxAttempts = 30;
+                
+                // AKILLI POZİSYON BULMA - SADECE KONTEYNER İÇİNDE
+                while (attempts < maxAttempts && !bestPosition) {
+                    attempts++;
+                    
+                    // Konteyner içinde rastgele pozisyon
+                    let candidateX = Math.random() * (maxX - minX) + minX;
+                    let candidateY = Math.random() * (maxY - minY) + minY;
+                    
+                    // EVET BUTONUNA UZAKLIK HESAPLA
+                    const distance = Math.sqrt(
+                        Math.pow(candidateX - (yesBtnRect.left + yesBtnRect.width/2), 2) +
+                        Math.pow(candidateY - (yesBtnRect.top + yesBtnRect.height/2), 2)
+                    );
+                    
+                    // ÖNCEKİ POZİSYONLARDAN FARKLI MI KONTROL ET
+                    let isTooCloseToPrevious = false;
+                    for (const pos of lastPositions) {
+                        const prevDistance = Math.sqrt(
+                            Math.pow(candidateX - pos.x, 2) + Math.pow(candidateY - pos.y, 2)
+                        );
+                        if (prevDistance < 50) { // 50px'den yakınsa geçersiz
+                            isTooCloseToPrevious = true;
+                            break;
+                        }
+                    }
+                    
+                    if (distance > maxDistance && !isTooCloseToPrevious) {
+                        maxDistance = distance;
+                        bestPosition = { x: candidateX, y: candidateY };
+                    }
+                }
+                
+                // EĞER UYGUN POZİSYON BULUNAMADIYSA, KONTEYNER İÇİNDE RASTGELE
+                if (!bestPosition) {
+                    bestPosition = {
+                        x: Math.random() * (maxX - minX) + minX,
+                        y: Math.random() * (maxY - minY) + minY
+                    };
+                }
+                
+                // POZİSYON GEÇMİŞİNİ GÜNCELLE (max 3 pozisyon)
+                lastPositions.push({ x: bestPosition.x, y: bestPosition.y });
+                if (lastPositions.length > 3) {
+                    lastPositions.shift();
+                }
+                
+                // BUTONU HAREKET ETTİR
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = `${bestPosition.x - containerRect.left}px`;
+                noBtn.style.top = `${bestPosition.y - containerRect.top}px`;
+            }
+            
+            // KALP EFEKTİ OLUŞTURMA
+            function createHearts(count) {
+                for (let i = 0; i < count; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '💖';
+                        heart.classList.add('heart');
+                        
+                        const startX = Math.random() * window.innerWidth;
+                        heart.style.left = `${startX}px`;
+                        heart.style.bottom = '0px';
+                        
+                        const duration = 2 + Math.random() * 2;
+                        heart.style.animation = `floatUp ${duration}s ease-in-out forwards`;
+                        
+                        const size = 20 + Math.random() * 30;
+                        heart.style.fontSize = `${size}px`;
+                        
+                        floatingHearts.appendChild(heart);
+                        
+                        setTimeout(() => {
+                            if (heart.parentNode) {
+                                heart.parentNode.removeChild(heart);
+                            }
+                        }, duration * 1000);
+                    }, i * 150);
+                }
+            }
+            
+            // YENİDEN BAŞLAT BUTONU
+            restartBtn.addEventListener('click', function() {
+                resetGame();
+            });
+            
+            restartBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                resetGame();
+            }, { passive: false });
+            
+            // OYUNU SIFIRLA
+            function resetGame() {
+                finalMessage.style.display = 'none';
+                yesBtnSize = 1;
+                noClickCount = 0;
+                lastPositions = [];
+                
+                yesBtn.style.transform = 'scale(1)';
+                yesBtn.style.zIndex = "10";
+                yesBtn.textContent = "Evet";
+                noBtn.textContent = 'Hayır';
+                noBtn.style.position = 'relative';
+                noBtn.style.left = 'auto';
+                noBtn.style.top = 'auto';
+                
+                createHearts(8);
+                createSound(523.25, 0.5, 'sine');
+            }
+            
+            // SAYFA YÜKLENDİĞİNDE KALP EFEKTİ
+            setTimeout(() => {
+                createHearts(5);
+            }, 1000);
         });
     </script>
 </body>
