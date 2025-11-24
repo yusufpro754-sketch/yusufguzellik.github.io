@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kişiye Özel Sevgi Oyunu Oluşturucu</title>
+    <title>Kişiye Özel Sevgi Oyunu</title>
     <style>
+        /* KİŞİSELLEŞTİRME AYARLARI - BU BÖLÜMÜ DEĞİŞTİRİN */
+        :root {
+            --karsi-isim: "Ayşe"; /* SEVDİĞİNİZ KİŞİNİN İSMİ */
+            --sizin-isim: "Ahmet"; /* SİZİN İSMİNİZ (İsteğe bağlı) */
+            --ozel-not: "Seni çok seviyorum! 💖"; /* ÖZEL NOT (İsteğe bağlı) */
+            --arkaplan-resmi: ""; /* ARKAPLAN RESMİ URL'si (İsteğe bağlı) */
+        }
+        
+        /* OYUN STİLLERİ - BU BÖLÜMÜ DEĞİŞTİRMEYİN */
         * {
             margin: 0;
             padding: 0;
@@ -13,229 +22,14 @@
         }
         
         body {
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-        }
-        
-        .container {
-            max-width: 600px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 40px;
-            text-align: center;
-        }
-        
-        h1 {
-            color: #ff4d6d;
-            margin-bottom: 10px;
-            font-size: 2.2rem;
-        }
-        
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #495057;
-        }
-        
-        input, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-        
-        input:focus, textarea:focus {
-            border-color: #ff4d6d;
-            outline: none;
-        }
-        
-        textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        
-        button {
-            background: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 10px;
-            width: 100%;
-        }
-        
-        button:hover {
-            background: #e04460;
-        }
-        
-        .result {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            display: none;
-        }
-        
-        .result h3 {
-            color: #ff4d6d;
-            margin-bottom: 15px;
-        }
-        
-        .download-btn {
-            background: #4CAF50;
-            margin-top: 10px;
-        }
-        
-        .download-btn:hover {
-            background: #45a049;
-        }
-        
-        .instructions {
-            margin-top: 30px;
-            padding: 15px;
-            background: #fff5f7;
-            border-radius: 10px;
-            text-align: left;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .instructions h4 {
-            color: #ff4d6d;
-            margin-bottom: 10px;
-        }
-        
-        .instructions ol {
-            padding-left: 20px;
-        }
-        
-        .instructions li {
-            margin-bottom: 8px;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
             
-            h1 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Kişiye Özel Sevgi Oyunu</h1>
-        <p class="subtitle">Sevdiğiniz kişi için özel bir oyun oluşturun</p>
-        
-        <div class="form-group">
-            <label for="userName">Sevdiğiniz Kişinin İsmi *</label>
-            <input type="text" id="userName" placeholder="Örnek: Ayşe, Mehmet..." required>
-        </div>
-        
-        <div class="form-group">
-            <label for="yourName">Sizin İsminiz (İsteğe Bağlı)</label>
-            <input type="text" id="yourName" placeholder="Örnek: Ahmet">
-        </div>
-        
-        <div class="form-group">
-            <label for="customMessage">Özel Not (İsteğe Bağlı)</label>
-            <textarea id="customMessage" placeholder="Özel bir not ekleyebilirsiniz..."></textarea>
-        </div>
-        
-        <button id="createBtn">Oyunu Oluştur ve İndir</button>
-        
-        <div class="result" id="result">
-            <h3>Oyununuz Hazır! 🎉</h3>
-            <p>Oyunu indirdiniz. Şimdi bu dosyayı sevdiğiniz kişiye gönderin.</p>
-            <p><strong>Önemli:</strong> Karşı taraf sadece oyunu oynayabilir, kişiselleştirme yapamaz!</p>
-        </div>
-        
-        <div class="instructions">
-            <h4>Nasıl Kullanacaksınız?</h4>
-            <ol>
-                <li>Yukarıdaki formu doldurup "Oyunu Oluştur ve İndir" butonuna tıklayın</li>
-                <li>İndirdiğiniz HTML dosyasını sevdiğiniz kişiye gönderin</li>
-                <li>Alıcı dosyayı bir web tarayıcısında (Chrome, Firefox, Safari vb.) açsın</li>
-                <li><strong>Güvenlik:</strong> Karşı taraf sadece oyunu oynayabilir, kişiselleştirme yapamaz</li>
-            </ol>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('createBtn').addEventListener('click', function() {
-            const userName = document.getElementById('userName').value.trim();
-            
-            if (!userName) {
-                alert('Lütfen sevdiğiniz kişinin ismini girin!');
-                return;
-            }
-            
-            const yourName = document.getElementById('yourName').value.trim();
-            const customMessage = document.getElementById('customMessage').value.trim();
-            
-            // Oyun kodunu oluştur
-            const gameCode = createGameCode(userName, yourName, customMessage);
-            
-            // Oyunu indir
-            downloadGame(gameCode, userName);
-            
-            // Sonuç mesajını göster
-            document.getElementById('result').style.display = 'block';
-        });
-
-        function createGameCode(userName, yourName, customMessage) {
-            const finalMessage = customMessage || "Bunu biliyordum! 😊";
-            const responseMessage = yourName ? 
-                `${yourName} de seni seviyorum ${userName}! 💕` : 
-                `Ben de seni seviyorum ${userName}! 💕`;
-
-            return `<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${userName}, Beni Seviyor Musun?</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            /* Arkaplan - var(--arkaplan-resmi) değişkenini kullanır */
+            background: var(--arkaplan-resmi) ? url(var(--arkaplan-resmi)) center/cover no-repeat : linear-gradient(135deg, #ff9a9e, #fad0c4);
         }
         
         .container {
@@ -353,7 +147,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>${userName}, beni seviyor musun? 💖</h1>
+        <!-- İsim burada otomatik olarak :root'taki --karsi-isim değişkeninden gelecek -->
+        <h1 id="dynamicTitle">Beni seviyor musun? 💖</h1>
         <div class="buttons">
             <button id="yesBtn">Evet</button>
             <button id="noBtn">Hayır</button>
@@ -361,12 +156,14 @@
     </div>
     
     <div class="final-message" id="finalMessage">
-        <h2>${responseMessage}</h2>
-        ${customMessage ? `<p class="custom-note">${customMessage}</p>` : '<p>Bunu biliyordum! 😊</p>'}
+        <!-- Mesajlar burada otomatik olarak :root'taki değişkenlerden gelecek -->
+        <h2 id="finalMessageTitle">Ben de seni seviyorum! 💕</h2>
+        <p id="finalMessageText">Bunu biliyordum! 😊</p>
         <button class="restart-btn" id="restartBtn">Tekrar Oyna</button>
     </div>
 
     <script>
+        // Oyun değişkenleri
         let yesBtnSize = 1;
         let noClickCount = 0;
         const maxClicks = Math.floor(Math.random() * 6) + 5;
@@ -378,84 +175,87 @@
             "Bu kadar inatçı olma!", "Pes et artık!", "Sen beni seviyorsun!"
         ];
         
-        document.getElementById('yesBtn').addEventListener('click', function() {
-            document.getElementById('finalMessage').style.display = 'flex';
-        });
-        
-        document.getElementById('noBtn').addEventListener('click', function() {
-            noClickCount++;
+        // Sayfa yüklendiğinde kişiselleştirilmiş içeriği ayarla
+        document.addEventListener('DOMContentLoaded', function() {
+            // CSS değişkenlerini oku
+            const rootStyles = getComputedStyle(document.documentElement);
+            const karsiIsim = rootStyles.getPropertyValue('--karsi-isim').trim().replace(/["']/g, "");
+            const sizinIsim = rootStyles.getPropertyValue('--sizin-isim').trim().replace(/["']/g, "");
+            const ozelNot = rootStyles.getPropertyValue('--ozel-not').trim().replace(/["']/g, "");
             
-            const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
-            document.getElementById('noBtn').textContent = noButtonMessages[randomIndex];
+            // Başlığı güncelle
+            document.getElementById('dynamicTitle').textContent = karsiIsim + ", beni seviyor musun? 💖";
             
-            yesBtnSize += 0.8;
-            document.getElementById('yesBtn').style.transform = 'scale(' + yesBtnSize + ')';
+            // Final mesajını güncelle
+            const finalMessageTitle = sizinIsim ? 
+                sizinIsim + " de seni seviyorum " + karsiIsim + "! 💕" : 
+                "Ben de seni seviyorum " + karsiIsim + "! 💕";
             
-            moveNoButton();
+            document.getElementById('finalMessageTitle').textContent = finalMessageTitle;
             
-            if (noClickCount >= maxClicks) {
-                setTimeout(function() {
-                    document.getElementById('finalMessage').style.display = 'flex';
-                }, 500);
+            if (ozelNot && ozelNot !== "") {
+                document.getElementById('finalMessageText').innerHTML = '<span class="custom-note">' + ozelNot + '</span>';
             }
+            
+            // Oyun işlevselliğini başlat
+            setupGame();
         });
         
-        document.getElementById('noBtn').addEventListener('mouseover', function() {
-            if (Math.random() < 0.7) {
+        function setupGame() {
+            document.getElementById('yesBtn').addEventListener('click', function() {
+                document.getElementById('finalMessage').style.display = 'flex';
+            });
+            
+            document.getElementById('noBtn').addEventListener('click', function() {
+                noClickCount++;
+                
+                const randomIndex = Math.floor(Math.random() * noButtonMessages.length);
+                document.getElementById('noBtn').textContent = noButtonMessages[randomIndex];
+                
+                yesBtnSize += 0.8;
+                document.getElementById('yesBtn').style.transform = 'scale(' + yesBtnSize + ')';
+                
                 moveNoButton();
+                
+                if (noClickCount >= maxClicks) {
+                    setTimeout(function() {
+                        document.getElementById('finalMessage').style.display = 'flex';
+                    }, 500);
+                }
+            });
+            
+            document.getElementById('noBtn').addEventListener('mouseover', function() {
+                if (Math.random() < 0.7) {
+                    moveNoButton();
+                }
+            });
+            
+            document.getElementById('restartBtn').addEventListener('click', function() {
+                document.getElementById('finalMessage').style.display = 'none';
+                yesBtnSize = 1;
+                noClickCount = 0;
+                document.getElementById('yesBtn').style.transform = 'scale(1)';
+                document.getElementById('noBtn').textContent = 'Hayır';
+                document.getElementById('noBtn').style.position = 'static';
+            });
+            
+            function moveNoButton() {
+                const container = document.querySelector('.container');
+                const noBtn = document.getElementById('noBtn');
+                
+                const containerRect = container.getBoundingClientRect();
+                const noBtnRect = noBtn.getBoundingClientRect();
+                
+                const maxX = containerRect.width - noBtnRect.width - 20;
+                const maxY = containerRect.height - noBtnRect.height - 20;
+                
+                const randomX = Math.floor(Math.random() * maxX);
+                const randomY = Math.floor(Math.random() * maxY);
+                
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
             }
-        });
-        
-        document.getElementById('restartBtn').addEventListener('click', function() {
-            document.getElementById('finalMessage').style.display = 'none';
-            yesBtnSize = 1;
-            noClickCount = 0;
-            document.getElementById('yesBtn').style.transform = 'scale(1)';
-            document.getElementById('noBtn').textContent = 'Hayır';
-            document.getElementById('noBtn').style.position = 'static';
-        });
-        
-        function moveNoButton() {
-            const container = document.querySelector('.container');
-            const noBtn = document.getElementById('noBtn');
-            
-            const containerRect = container.getBoundingClientRect();
-            const noBtnRect = noBtn.getBoundingClientRect();
-            
-            const maxX = containerRect.width - noBtnRect.width - 20;
-            const maxY = containerRect.height - noBtnRect.height - 20;
-            
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
-            
-            noBtn.style.position = 'absolute';
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-        }
-    </script>
-</body>
-</html>`;
-        }
-
-        function downloadGame(gameCode, userName) {
-            // Blob oluştur
-            const blob = new Blob([gameCode], { type: 'text/html' });
-            
-            // URL oluştur
-            const url = URL.createObjectURL(blob);
-            
-            // İndirme linki oluştur
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${userName}-beni-seviyor-musun.html`;
-            
-            // Linki tıklat
-            document.body.appendChild(a);
-            a.click();
-            
-            // Temizlik
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
         }
     </script>
 </body>
