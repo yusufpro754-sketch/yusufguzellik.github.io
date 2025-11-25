@@ -3,546 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerçekçi Çiçekler</title>
+    <title>CopyCenter Pro | Toner & Baskı Merkezi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* --- CSS BAŞLANGICI (TASARIM KODLARI) --- */
+        :root {
+            --primary: #004085; /* Kurumsal Lacivert */
+            --accent: #ff6600;  /* Dikkat Çekici Turuncu */
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
         }
-        
+
         body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigasyon */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #87CEEB, #E0F7FA);
-            overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 15px 0;
         }
-        
-        .garden {
-            position: relative;
-            width: 100%;
-            height: 100vh;
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .logo span { color: var(--accent); }
+
+        .nav-links {
             display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            overflow: hidden;
+            gap: 25px;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .cart-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
         }
         
-        /* Çim zemini */
-        .grass {
+        .cart-count {
             position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(to top, #2E7D32, #4CAF50);
-            z-index: 1;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+            border: 1px solid white;
         }
-        
-        .grass::before {
+
+        /* Hero (Vitrin) Bölümü */
+        .hero {
+            background: linear-gradient(rgba(0, 64, 133, 0.9), rgba(0, 64, 133, 0.7)), url('https://images.unsplash.com/photo-1563205764-89b533a0b938?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        .hero p { font-size: 1.2rem; margin-bottom: 25px; opacity: 0.9; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background-color: #e65c00; transform: translateY(-2px); }
+
+        /* Bölüm Başlıkları */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 30px;
+            font-size: 2rem;
+            color: var(--primary);
+            position: relative;
+        }
+        .section-title::after {
             content: '';
-            position: absolute;
-            top: -10px;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to top, transparent, #4CAF50);
-            border-radius: 50% 50% 0 0;
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 10px auto 0;
         }
-        
-        /* Gül çiçeği */
-        .rose {
-            position: absolute;
-            bottom: 150px;
-            left: 20%;
-            z-index: 10;
-            animation: sway 8s ease-in-out infinite;
+
+        /* Ürün Kartları Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
         }
-        
-        .rose-stem {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 8px;
-            height: 200px;
-            background: linear-gradient(to right, #2E7D32, #4CAF50);
-            z-index: 2;
-        }
-        
-        .rose-leaf {
-            position: absolute;
-            width: 40px;
-            height: 30px;
-            background: #4CAF50;
-            border-radius: 0 50% 0 50%;
-            z-index: 3;
-        }
-        
-        .rose-leaf.left {
-            bottom: 70px;
-            left: -30px;
-            transform: rotate(-30deg);
-        }
-        
-        .rose-leaf.right {
-            bottom: 120px;
-            right: -35px;
-            transform: rotate(120deg) scaleX(-1);
-        }
-        
-        .rose-flower {
-            position: absolute;
-            bottom: 180px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 80px;
-            z-index: 4;
-        }
-        
-        .rose-petal {
-            position: absolute;
-            width: 40px;
-            height: 50px;
-            background: linear-gradient(to bottom, #ff4081, #d81b60);
-            border-radius: 50% 50% 40% 40%;
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        
-        .rose-petal:nth-child(1) { transform: rotate(0deg); }
-        .rose-petal:nth-child(2) { transform: rotate(45deg); }
-        .rose-petal:nth-child(3) { transform: rotate(90deg); }
-        .rose-petal:nth-child(4) { transform: rotate(135deg); }
-        .rose-petal:nth-child(5) { transform: rotate(180deg); }
-        .rose-petal:nth-child(6) { transform: rotate(225deg); }
-        .rose-petal:nth-child(7) { transform: rotate(270deg); }
-        .rose-petal:nth-child(8) { transform: rotate(315deg); }
-        
-        .rose-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 25px;
-            height: 25px;
-            background: #FFD54F;
-            border-radius: 50%;
-            z-index: 5;
-        }
-        
-        /* Papatya çiçeği */
-        .daisy {
-            position: absolute;
-            bottom: 150px;
-            right: 25%;
-            z-index: 10;
-            animation: sway 10s ease-in-out infinite;
-            animation-delay: 1s;
-        }
-        
-        .daisy-stem {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 180px;
-            background: linear-gradient(to right, #388E3C, #4CAF50);
-            z-index: 2;
-        }
-        
-        .daisy-flower {
-            position: absolute;
-            bottom: 160px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 70px;
-            z-index: 4;
-        }
-        
-        .daisy-petal {
-            position: absolute;
-            width: 30px;
-            height: 50px;
+
+        .product-card {
             background: white;
-            border-radius: 50% 50% 40% 40%;
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            position: relative;
+            border: 1px solid #eee;
         }
-        
-        .daisy-petal:nth-child(1) { transform: rotate(0deg); }
-        .daisy-petal:nth-child(2) { transform: rotate(36deg); }
-        .daisy-petal:nth-child(3) { transform: rotate(72deg); }
-        .daisy-petal:nth-child(4) { transform: rotate(108deg); }
-        .daisy-petal:nth-child(5) { transform: rotate(144deg); }
-        .daisy-petal:nth-child(6) { transform: rotate(180deg); }
-        .daisy-petal:nth-child(7) { transform: rotate(216deg); }
-        .daisy-petal:nth-child(8) { transform: rotate(252deg); }
-        .daisy-petal:nth-child(9) { transform: rotate(288deg); }
-        .daisy-petal:nth-child(10) { transform: rotate(324deg); }
-        
-        .daisy-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            background: #FFD54F;
-            border-radius: 50%;
-            z-index: 5;
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        
-        /* Lale çiçeği */
-        .tulip {
-            position: absolute;
-            bottom: 150px;
-            left: 60%;
-            z-index: 10;
-            animation: sway 7s ease-in-out infinite;
-            animation-delay: 2s;
-        }
-        
-        .tulip-stem {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 7px;
-            height: 170px;
-            background: linear-gradient(to right, #388E3C, #4CAF50);
-            z-index: 2;
-        }
-        
-        .tulip-leaf {
-            position: absolute;
-            width: 50px;
-            height: 80px;
-            background: #4CAF50;
-            border-radius: 50% 0 50% 0;
-            z-index: 3;
-        }
-        
-        .tulip-leaf.left {
-            bottom: 50px;
-            left: -40px;
-            transform: rotate(-10deg);
-        }
-        
-        .tulip-leaf.right {
-            bottom: 80px;
-            right: -45px;
-            transform: rotate(100deg) scaleX(-1);
-        }
-        
-        .tulip-flower {
-            position: absolute;
-            bottom: 150px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 70px;
-            z-index: 4;
-        }
-        
-        .tulip-petal {
-            position: absolute;
-            width: 60px;
-            height: 70px;
-            background: linear-gradient(to bottom, #E91E63, #AD1457);
-            border-radius: 50% 50% 40% 40%;
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-        }
-        
-        .tulip-center {
+
+        .badge {
             position: absolute;
             top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: #FFD54F;
-            border-radius: 50%;
-            z-index: 5;
-        }
-        
-        /* Menekşe çiçeği */
-        .violet {
-            position: absolute;
-            bottom: 150px;
-            right: 10%;
-            z-index: 10;
-            animation: sway 9s ease-in-out infinite;
-            animation-delay: 0.5s;
-        }
-        
-        .violet-stem {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 5px;
-            height: 120px;
-            background: linear-gradient(to right, #388E3C, #4CAF50);
-            z-index: 2;
-        }
-        
-        .violet-leaf {
-            position: absolute;
-            width: 60px;
-            height: 40px;
-            background: #4CAF50;
-            border-radius: 50% 50% 50% 0;
-            z-index: 3;
-        }
-        
-        .violet-leaf.left {
-            bottom: 40px;
-            left: -45px;
-            transform: rotate(-20deg);
-        }
-        
-        .violet-leaf.right {
-            bottom: 60px;
-            right: -50px;
-            transform: rotate(110deg) scaleX(-1);
-        }
-        
-        .violet-flower {
-            position: absolute;
-            bottom: 110px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            z-index: 4;
-        }
-        
-        .violet-petal {
-            position: absolute;
-            width: 20px;
-            height: 25px;
-            background: linear-gradient(to bottom, #7B1FA2, #4A148C);
-            border-radius: 50% 50% 40% 40%;
-        }
-        
-        .violet-petal:nth-child(1) { transform: rotate(0deg); top: 0; left: 10px; }
-        .violet-petal:nth-child(2) { transform: rotate(72deg); top: 5px; left: 0; }
-        .violet-petal:nth-child(3) { transform: rotate(144deg); top: 15px; left: -5px; }
-        .violet-petal:nth-child(4) { transform: rotate(216deg); top: 25px; left: 5px; }
-        .violet-petal:nth-child(5) { transform: rotate(288deg); top: 15px; left: 20px; }
-        
-        .violet-center {
-            position: absolute;
-            top: 15px;
             left: 10px;
-            width: 10px;
-            height: 10px;
-            background: #FFD54F;
-            border-radius: 50%;
-            z-index: 5;
+            background-color: #28a745;
+            color: white;
+            padding: 3px 8px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            z-index: 10;
         }
-        
-        /* Güneş */
-        .sun {
-            position: absolute;
-            top: 50px;
-            right: 50px;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, #FFEB3B, #FFC107);
-            border-radius: 50%;
-            box-shadow: 0 0 40px #FFEB3B;
-            animation: sun-pulse 4s ease-in-out infinite;
+
+        .product-img {
+            height: 180px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #ccc;
         }
-        
-        /* Bulutlar */
-        .cloud {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-            opacity: 0.9;
+
+        .product-info { padding: 20px; text-align: center; }
+        .product-title { font-size: 1.1rem; margin-bottom: 5px; color: var(--dark); }
+        .product-desc { font-size: 0.9rem; color: #666; margin-bottom: 10px; }
+        .product-price { font-size: 1.3rem; color: var(--primary); font-weight: bold; margin-bottom: 15px; }
+
+        .btn-sm { padding: 8px 20px; font-size: 0.9rem; width: 100%; border-radius: 5px; }
+
+        /* Hizmetler Bölümü */
+        .services-wrapper {
+            background-color: #fff;
+            padding: 50px 0;
+            text-align: center;
         }
-        
-        .cloud-1 {
-            width: 100px;
-            height: 60px;
-            top: 80px;
-            left: 10%;
-            animation: cloud-move 40s linear infinite;
+        .services-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
         }
-        
-        .cloud-2 {
-            width: 120px;
-            height: 70px;
-            top: 120px;
-            left: 40%;
-            animation: cloud-move 35s linear infinite;
-            animation-delay: -10s;
+        .service-box {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 10px;
+            background: var(--light);
+            border: 1px solid #eee;
         }
-        
-        .cloud-3 {
-            width: 80px;
-            height: 50px;
-            top: 60px;
-            left: 70%;
-            animation: cloud-move 45s linear infinite;
-            animation-delay: -5s;
+        .service-box i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+        .service-box h3 { margin-bottom: 10px; color: var(--primary); }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #ddd;
+            padding: 50px 0 20px;
+            margin-top: 50px;
         }
-        
-        /* Animasyonlar */
-        @keyframes sway {
-            0%, 100% {
-                transform: translateX(0) rotate(0deg);
-            }
-            25% {
-                transform: translateX(-5px) rotate(-1deg);
-            }
-            75% {
-                transform: translateX(5px) rotate(1deg);
-            }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
         }
+        .footer-col h4 { color: white; margin-bottom: 20px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li i { margin-right: 10px; color: var(--accent); }
         
-        @keyframes sun-pulse {
-            0%, 100% {
-                box-shadow: 0 0 40px #FFEB3B;
-            }
-            50% {
-                box-shadow: 0 0 60px 10px #FFEB3B;
-            }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            font-size: 0.9rem;
         }
-        
-        @keyframes cloud-move {
-            0% {
-                transform: translateX(-100px);
-            }
-            100% {
-                transform: translateX(calc(100vw + 100px));
-            }
-        }
-        
-        /* Çiçeklerin ortaya çıkış animasyonu */
-        .rose, .daisy, .tulip, .violet {
-            opacity: 0;
-            animation-fill-mode: both;
-        }
-        
-        .rose {
-            animation: flower-appear 1.5s ease-out 0.5s forwards;
-        }
-        
-        .daisy {
-            animation: flower-appear 1.5s ease-out 1s forwards;
-        }
-        
-        .tulip {
-            animation: flower-appear 1.5s ease-out 1.5s forwards;
-        }
-        
-        .violet {
-            animation: flower-appear 1.5s ease-out 2s forwards;
-        }
-        
-        @keyframes flower-appear {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Responsive tasarım */
+
+        /* Mobil Responsive */
         @media (max-width: 768px) {
-            .rose { left: 10%; }
-            .daisy { right: 15%; }
-            .tulip { left: 50%; }
-            .violet { right: 5%; }
-            
-            .rose-stem { height: 150px; }
-            .daisy-stem { height: 140px; }
-            .tulip-stem { height: 130px; }
-            .violet-stem { height: 100px; }
+            .navbar { flex-direction: column; gap: 15px; }
+            .hero h1 { font-size: 2rem; }
+            .nav-links { gap: 15px; font-size: 0.9rem; }
         }
+        /* --- CSS BİTİŞ --- */
     </style>
 </head>
 <body>
-    <div class="garden">
-        <div class="sun"></div>
-        
-        <div class="cloud cloud-1"></div>
-        <div class="cloud cloud-2"></div>
-        <div class="cloud cloud-3"></div>
-        
-        <div class="grass"></div>
-        
-        <!-- Gül -->
-        <div class="rose">
-            <div class="rose-stem"></div>
-            <div class="rose-leaf left"></div>
-            <div class="rose-leaf right"></div>
-            <div class="rose-flower">
-                <div class="rose-petal"></div>
-                <div class="rose-petal"></div>
-                <div class="rose-petal"></div>
-                <div class="rose-petal"></div>
-                <div class="rose-petal"></div>
-                <div class="rose-petal"></div>
-                <div class="rose-petal"></div>
-                <div class="rose-petal"></div>
-                <div class="rose-center"></div>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <i class="fas fa-print"></i> CopyCenter<span>Pro</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Ana Sayfa</a></li>
+                    <li><a href="#products">Tonerler</a></li>
+                    <li><a href="#services">Hizmetler</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="cart-btn" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i> Sepetim
+                <span id="cart-counter" class="cart-count">0</span>
             </div>
         </div>
-        
-        <!-- Papatya -->
-        <div class="daisy">
-            <div class="daisy-stem"></div>
-            <div class="daisy-flower">
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-petal"></div>
-                <div class="daisy-center"></div>
-            </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Kaliteli Baskı, Uygun Fiyat</h1>
+            <p>İşletmeniz için en iyi muadil tonerler ve profesyonel fotokopi hizmetleri.</p>
+            <a href="#products" class="btn">Alışverişe Başla</a>
         </div>
-        
-        <!-- Lale -->
-        <div class="tulip">
-            <div class="tulip-stem"></div>
-            <div class="tulip-leaf left"></div>
-            <div class="tulip-leaf right"></div>
-            <div class="tulip-flower">
-                <div class="tulip-petal"></div>
-                <div class="tulip-center"></div>
+    </section>
+
+    <section id="products" class="container">
+        <h2 class="section-title">Çok Satan Tonerler</h2>
+        <div class="products-grid">
+            
+            <div class="product-card">
+                <div class="badge">Fırsat</div>
+                <div class="product-img"><i class="fas fa-box"></i></div>
+                <div class="product-info">
+                    <h3 class="product-title">HP 85A (CE285A) Muadil</h3>
+                    <p class="product-desc">1600 Sayfa kapasiteli, çiyli.</p>
+                    <div class="product-price">350.00 ₺</div>
+                    <button class="btn btn-sm" onclick="addToCart('HP 85A Toner')">Sepete Ekle</button>
+                </div>
             </div>
+
+            <div class="product-card">
+                <div class="product-img"><i class="fas fa-box-open"></i></div>
+                <div class="product-info">
+                    <h3 class="product-title">Canon CRG-725 Toner</h3>
+                    <p class="product-desc">Canon LBP serisi uyumlu.</p>
+                    <div class="product-price">420.00 ₺</div>
+                    <button class="btn btn-sm" onclick="addToCart('Canon CRG-725')">Sepete Ekle</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img"><i class="fas fa-fill-drip"></i></div>
+                <div class="product-info">
+                    <h3 class="product-title">Epson 103 Mürekkep Seti</h3>
+                    <p class="product-desc">4 Renk Orijinal Ecotank Şişe.</p>
+                    <div class="product-price">950.00 ₺</div>
+                    <button class="btn btn-sm" onclick="addToCart('Epson 103 Set')">Sepete Ekle</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img"><i class="fas fa-tools"></i></div>
+                <div class="product-info">
+                    <h3 class="product-title">Toner Dolum Hizmeti</h3>
+                    <p class="product-desc">Adresten alım ve teslim.</p>
+                    <div class="product-price">150.00 ₺</div>
+                    <button class="btn btn-sm" onclick="addToCart('Dolum Hizmeti')">Sepete Ekle</button>
+                </div>
+            </div>
+
         </div>
-        
-        <!-- Menekşe -->
-        <div class="violet">
-            <div class="violet-stem"></div>
-            <div class="violet-leaf left"></div>
-            <div class="violet-leaf right"></div>
-            <div class="violet-flower">
-                <div class="violet-petal"></div>
-                <div class="violet-petal"></div>
-                <div class="violet-petal"></div>
-                <div class="violet-petal"></div>
-                <div class="violet-petal"></div>
-                <div class="violet-center"></div>
+    </section>
+
+    <div class="services-wrapper" id="services">
+        <div class="container">
+            <h2 class="section-title">Copy Center Hizmetleri</h2>
+            <div class="services-row">
+                <div class="service-box">
+                    <i class="fas fa-copy"></i>
+                    <h3>Fotokopi & Çıktı</h3>
+                    <p>Yüksek hacimli siyah beyaz ve renkli dijital baskı.</p>
+                </div>
+                <div class="service-box">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Ciltleme</h3>
+                    <p>Spiral, ısısal cilt ve tez ciltleme işlemleri.</p>
+                </div>
+                <div class="service-box">
+                    <i class="fas fa-id-card"></i>
+                    <h3>Promosyon</h3>
+                    <p>Kaşe, kartvizit ve kupa bardak baskısı.</p>
+                </div>
             </div>
         </div>
     </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>CopyCenter Pro</h4>
+                    <p>Kaliteli baskı çözümleri ve uygun fiyatlı toner tedariği ile işletmenizin yanındayız.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>İletişim</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> İstanbul, Şişli Merkez Mah.</li>
+                        <li><i class="fas fa-phone"></i> 0212 555 10 20</li>
+                        <li><i class="fas fa-envelope"></i> info@copycenterpro.com</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hızlı Menü</h4>
+                    <ul>
+                        <li><a href="#products">Tonerler</a></li>
+                        <li><a href="#services">Hizmetler</a></li>
+                        <li><a href="#">Gizlilik Politikası</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 CopyCenter Pro. Tüm hakları saklıdır. Tasarım: Josephware
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sepet değişkeni
+        let basketCount = 0;
+        const countLabel = document.getElementById('cart-counter');
+
+        // Sepete Ekleme Fonksiyonu
+        function addToCart(productName) {
+            basketCount++;
+            countLabel.innerText = basketCount;
+            
+            // Animasyonlu uyarı
+            countLabel.style.transform = "scale(1.5)";
+            setTimeout(() => {
+                countLabel.style.transform = "scale(1)";
+            }, 200);
+
+            console.log(productName + " sepete eklendi.");
+            alert(productName + " başarıyla sepete eklendi!");
+        }
+
+        // Sepeti Açma Fonksiyonu
+        function openCart() {
+            if (basketCount === 0) {
+                alert("Sepetiniz şu an boş. Lütfen ürün ekleyin.");
+            } else {
+                alert("Ödeme ekranına yönlendiriliyorsunuz... (Demo)");
+            }
+        }
+    </script>
 </body>
 </html>
