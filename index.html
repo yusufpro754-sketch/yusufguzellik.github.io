@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK-T | Ak Toner Baskı Teknolojileri</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* GENEL AYARLAR */
+        :root {
+            --primary-color: #c0392b; /* Toner kırmızısı */
+            --secondary-color: #2c3e50; /* Koyu Lacivert */
+            --light-bg: #f5f6fa;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* HEADER & NAVİGASYON */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 5px 20px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 50px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span { color: var(--primary-color); }
+
+        /* ARAMA ÇUBUĞU */
+        .search-container {
+            flex: 1;
+            margin: 0 40px;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #eee;
+            border-radius: 25px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-container input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            cursor: pointer;
+        }
+
+        /* GİRİŞ BUTONLARI */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-dealer {
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: 1px solid var(--secondary-color);
+        }
+
+        .btn-admin {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+
+        .btn:hover { opacity: 0.8; }
+
+        /* ANA İÇERİK - MARKALAR */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .brand-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+
+        .brand-logo-place {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 15px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .brand-name {
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .sub-categories {
+            font-size: 0.8rem;
+            color: #777;
+            display: none; /* Tıklayınca açılabilir */
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 40px 0 10px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .footer-col h3 {
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col p, .footer-col li {
+            color: #ccc;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .company-full-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; gap: 20px; padding: 20px; }
+            .search-container { margin: 10px 0; width: 100%; }
+            .auth-buttons { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <span><i class="fas fa-phone"></i> 0850 XXX XX XX</span>
+        <span>Çalışma Saatleri: 09:00 - 18:00 (Pzt - Cmt)</span>
+    </div>
+
+    <header>
+        <div class="main-header">
+            <a href="#" class="logo">
+                <i class="fas fa-print"></i> AK-<span>T</span>
+            </a>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Marka veya toner modeli arayın (Örn: HP 85A)..." onkeyup="filterBrands()">
+                <i class="fas fa-search search-btn"></i>
+            </div>
+
+            <div class="auth-buttons">
+                <button class="btn btn-dealer" onclick="alert('Bayi Giriş Paneli açılıyor...')"><i class="fas fa-user-tie"></i> Bayi Girişi</button>
+                <button class="btn btn-admin" onclick="alert('Yönetici Paneli açılıyor...')"><i class="fas fa-lock"></i> Yönetici</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Markalar & Ürün Kategorileri</h2>
+        <div class="brand-grid" id="brandGrid">
+            
+            <div class="brand-card">
+                <div class="brand-logo-place" style="color:#0096D6">HP</div>
+                <div class="brand-name">HP Toner & Kartuş</div>
+                <p style="font-size:12px; color:#666;">LaserJet, DeskJet Serileri</p>
+            </div>
+
+            <div class="brand-card">
+                <div class="brand-logo-place" style="color:#1428A0">SAMSUNG</div>
+                <div class="brand-name">Samsung Toner</div>
+                <p style="font-size:12px; color:#666;">Xpress, ProXpress Serileri</p>
+            </div>
+
+            <div class="brand-card">
+                <div class="brand-logo-place" style="color:#2b2b2b">BROTHER</div>
+                <div class="brand-name">Brother Toner</div>
+                <p style="font-size:12px; color:#666;">TN Serisi, Drum Üniteleri</p>
+            </div>
+
+            <div class="brand-card">
+                <div class="brand-logo-place" style="color:#00539F">KONICA MINOLTA</div>
+                <div class="brand-name">Konica Minolta</div>
+                <p style="font-size:12px; color:#666;">Bizhub Serisi</p>
+            </div>
+
+            <div class="brand-card">
+                <div class="brand-logo-place" style="color:#DA291C">XEROX</div>
+                <div class="brand-name">Xerox Toner</div>
+                <p style="font-size:12px; color:#666;">Phaser, WorkCentre</p>
+            </div>
+
+            <div class="brand-card">
+                <div class="brand-logo-place" style="color:#D51C29">KYOCERA</div>
+                <div class="brand-name">Kyocera Mita</div>
+                <p style="font-size:12px; color:#666;">Ecosys, Taskalfa</p>
+            </div>
+
+            <div class="brand-card">
+                <div class="brand-logo-place" style="color:#FF0000">TOSHIBA</div>
+                <div class="brand-name">Toshiba Toner</div>
+                <p style="font-size:12px; color:#666;">e-Studio Serisi</p>
+            </div>
+
+            <div class="brand-card" style="border-color: #f39c12;">
+                <div class="brand-logo-place" style="color:#f39c12"><i class="fas fa-cogs"></i></div>
+                <div class="brand-name">Yedek Parça</div>
+                <p style="font-size:12px; color:#666;">Chip, Drum, Blade, Merdane</p>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Kurumsal</h3>
+                <p class="company-full-name">AK TONER BASKI TEKNOLOJİLERİ İÇ VE DIŞ TİCARET LİMİTED ŞİRKETİ</p>
+                <p>Türkiye'nin önde gelen toner ve baskı çözümleri tedarikçisi. 3000+ ürün çeşidi ile hizmetinizdeyiz.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Hızlı Erişim</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#">Ana Sayfa</a></li>
+                    <li><a href="#">Bayi Ol</a></li>
+                    <li><a href="#">Kargo ve Teslimat</a></li>
+                    <li><a href="#">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>İletişim</h3>
+                <p><i class="fas fa-map-marker-alt"></i> İstanbul / Türkiye</p>
+                <p><i class="fas fa-envelope"></i> info@aktoner.com</p>
+                <p><i class="fas fa-clock"></i> 09:00 - 18:00</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 AK TONER - Tüm Hakları Saklıdır.
+        </div>
+    </footer>
+
+    <script>
+        // Basit Arama Fonksiyonu
+        function filterBrands() {
+            var input, filter, grid, cards, name, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            grid = document.getElementById("brandGrid");
+            cards = grid.getElementsByClassName('brand-card');
+
+            for (i = 0; i < cards.length; i++) {
+                name = cards[i].getElementsByClassName("brand-name")[0];
+                txtValue = name.textContent || name.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
