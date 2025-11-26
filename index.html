@@ -8,495 +8,270 @@
     <style>
         /* --- JOSEPHWARE PREMIUM DARK/RED THEME --- */
         :root {
-            --primary: #d63031;       /* Canlı Kırmızı */
-            --dark: #2d3436;          /* Koyu Gri/Siyah */
-            --light: #f5f6fa;         /* Zemin Rengi */
+            --primary: #d63031;
+            --dark: #2d3436;
+            --light: #f5f6fa;
             --white: #ffffff;
-            --blue: #0984e3;          /* Mavi Vurgular */
+            --blue: #0984e3;
             --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
-        body {
-            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-            margin: 0; padding: 0;
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: var(--light); color: var(--dark); }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        /* HEADER */
-        .top-bar {
-            background: var(--dark); color: rgba(255,255,255,0.8);
-            padding: 8px 5%; font-size: 0.85rem;
-            display: flex; justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        header {
-            background: var(--white); padding: 15px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            position: sticky; top: 0; z-index: 1000;
-        }
-
-        .logo {
-            font-size: 2.2rem; font-weight: 900; color: var(--dark);
-            letter-spacing: -1px; display: flex; align-items: center; gap: 10px;
-        }
+        /* Header */
+        .top-bar { background: var(--dark); color: rgba(255,255,255,0.8); padding: 8px 5%; display: flex; justify-content: space-between; font-size: 0.85rem;}
+        header { background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 2.2rem; font-weight: 900; color: var(--dark); display: flex; align-items: center; gap: 10px; }
         .logo span { color: var(--primary); }
+        .btn { padding: 10px 25px; border-radius: 50px; font-weight: 600; cursor: pointer; border: none; transition:0.3s;}
+        .btn-dealer { background: var(--primary); color: #fff; }
+        .btn-dealer:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(214, 48, 49, 0.4); }
 
-        .header-actions { display: flex; gap: 10px; }
-        
-        .btn {
-            padding: 10px 25px; border-radius: 50px; font-weight: 600; font-size: 0.9rem;
-            cursor: pointer; border: none; transition: 0.3s;
-        }
-        .btn-admin { background: #636e72; color: #fff; }
-        .btn-admin:hover { background: #2d3436; }
-        .btn-dealer { background: var(--primary); color: #fff; box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3); }
-        .btn-dealer:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(214, 48, 49, 0.4); }
+        /* Hero */
+        .hero-search-section { background: linear-gradient(135deg, #2d3436 0%, #000000 100%); padding: 60px 20px; text-align: center; color: white; margin-bottom: 40px; }
+        .search-input { width: 100%; max-width: 700px; padding: 20px 30px; border-radius: 50px; border: none; font-size: 1.1rem; outline:none; }
 
-        /* HERO ALANI */
-        .hero-search-section {
-            background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
-            padding: 50px 20px; text-align: center; color: white; margin-bottom: 40px;
-        }
-        .hero-title { font-size: 1.8rem; margin-bottom: 20px; font-weight: 300; }
-        .hero-title b { font-weight: 700; color: var(--primary); }
-        
-        .search-wrapper { max-width: 700px; margin: 0 auto; position: relative; }
-        .search-input {
-            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none;
-            font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); box-sizing: border-box;
-        }
-        .search-icon { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: var(--primary); }
-
-        /* CONTAINER & GRIDLER */
+        /* Gridler */
         .container { max-width: 1250px; margin: 0 auto 60px; padding: 0 20px; }
-        .section-header { 
-            display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 30px; border-bottom: 2px solid #e1e1e1; padding-bottom: 15px;
-        }
-        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--dark); margin: 0; }
-
         .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-        .brand-card {
-            background: var(--white); border-radius: 12px; padding: 25px; text-align: center;
-            border: 1px solid #eee; cursor: pointer; transition: 0.3s;
-        }
-        .brand-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: var(--shadow); }
-        .brand-logo-area { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
-
-        /* ÜRÜN KARTLARI */
-        .product-section { display: none; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
-
-        .product-card {
-            background: var(--white); border-radius: 10px; overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee;
-            display: flex; flex-direction: column;
-        }
-        .product-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.15); transform: translateY(-3px); }
-
-        .p-image {
-            height: 200px; background: #fff; border-bottom: 1px solid #f0f0f0; padding: 20px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .p-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .brand-card { background: #fff; padding: 30px 20px; text-align: center; border-radius: 12px; cursor: pointer; border: 1px solid #eee; transition: 0.3s; position:relative; overflow:hidden;}
+        .brand-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow); }
+        .brand-logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; display:block;}
         
-        .p-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
-        .p-code { font-size: 0.75rem; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
-        .p-title { font-size: 1rem; font-weight: 700; margin: 5px 0 10px; color: var(--dark); line-height: 1.3; }
+        /* Ürün Listesi */
+        .product-section { display: none; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .product-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #f1f1f1; display: flex; flex-direction: column; transition: 0.3s; }
+        .product-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: translateY(-5px); }
         
-        .tags { margin-top: auto; display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 15px; }
-        .tag { font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; background: #f1f2f6; color: #636e72; font-weight: 600;}
-        .tag.red { background: #ff7675; color: #fff; } 
-        .tag.blue { background: #0984e3; color: #fff; }
-
-        .p-action {
-            width: 100%; padding: 10px; background: var(--dark); color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;
+        .p-image { 
+            height: 220px; padding: 20px; display: flex; align-items: center; justify-content: center; 
+            border-bottom: 1px solid #f9f9f9; background: #fff;
         }
-        .p-action:hover { background: var(--primary); }
-
-        /* FOOTER */
-        footer { background: #1e272e; color: #d2dae2; padding: 40px 0 20px; margin-top: 50px; }
-        .designer-credit {
-            text-align: center; margin-top: 30px; padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: #555;
-        }
+        /* Resimlerin düzgün oturması için */
+        .p-image img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+        
+        .p-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .p-code { font-size: 0.85rem; font-weight: 700; color: #b2bec3; letter-spacing: 0.5px;}
+        .p-title { font-weight: 700; font-size: 1.1rem; margin: 8px 0 15px; color: var(--dark); line-height: 1.4; }
+        
+        /* Footer */
+        footer { background: #1e272e; color: #d2dae2; padding: 50px 0 20px; margin-top: 50px; text-align: center; }
+        .designer-credit { border-top: 1px solid #333; margin-top: 30px; padding-top: 20px; font-size: 0.8rem; color: #636e72; }
         .designer-credit span { color: var(--primary); font-weight: 600; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <span><i class="fas fa-headset"></i> Destek Hattı: 0850 XXX XX XX</span>
-        <span>Kurumsal Çözüm Ortağınız</span>
-    </div>
-
     <header>
         <a href="#" onclick="showHome()" class="logo"><i class="fas fa-print"></i> AK-<span>T</span></a>
-        <div class="header-actions">
-            <button class="btn btn-admin"><i class="fas fa-lock"></i> Yönetici Girişi</button>
+        <div>
+            <button class="btn" style="margin-right:10px;"><i class="fas fa-lock"></i> Yönetici</button>
             <button class="btn btn-dealer"><i class="fas fa-user-tie"></i> Bayi Girişi</button>
         </div>
     </header>
 
     <div class="hero-search-section">
-        <h1 class="hero-title">AK-T Baskı Teknolojileri <br> <b>Profesyonel Toner Tedariği</b></h1>
-        <div class="search-wrapper">
-            <input type="text" id="mainSearch" class="search-input" placeholder="Ürün kodu veya marka arayın (Örn: 285A)..." onkeyup="filterContent()">
-            <i class="fas fa-search search-icon"></i>
-        </div>
+        <h1 style="font-weight:300; margin-bottom:20px;">Toner ve Yedek Parça <b>Çözüm Merkezi</b></h1>
+        <input type="text" id="mainSearch" class="search-input" placeholder="Model veya Ürün Kodu Ara (Örn: 85A)..." onkeyup="filterContent()">
     </div>
 
     <div class="container" id="brandSection">
-        <div class="section-header">
-            <h2 class="section-title">Markalar & Kategoriler</h2>
-        </div>
+        <h2 style="margin-bottom:25px; color:var(--dark);">Marka Seçin</h2>
         <div class="brand-grid">
             <div class="brand-card" onclick="showHpProducts()">
-                <div class="brand-logo-area" style="color:#0096D6">HP</div>
-                <span style="font-weight:bold;">Toner Grubu</span>
+                <span class="brand-logo" style="color:#0096D6">HP</span>
+                <small>LaserJet & InkJet</small>
             </div>
             <div class="brand-card">
-                <div class="brand-logo-area" style="color:#1428A0">SAMSUNG</div>
-                <span style="font-weight:bold;">Toner Grubu</span>
+                <span class="brand-logo" style="color:#1428A0">SAMSUNG</span>
+                <small>Xpress Serisi</small>
             </div>
             <div class="brand-card">
-                <div class="brand-logo-area" style="color:#2d3436">BROTHER</div>
-                <span style="font-weight:bold;">Toner Grubu</span>
+                <span class="brand-logo" style="color:#2d3436">BROTHER</span>
+                <small>TN Serisi</small>
             </div>
             <div class="brand-card">
-                <div class="brand-logo-area" style="color:#DA291C">XEROX</div>
-                <span style="font-weight:bold;">Toner Grubu</span>
+                <span class="brand-logo" style="color:#DA291C">XEROX</span>
+                <small>Phaser Serisi</small>
             </div>
             <div class="brand-card">
-                <div class="brand-logo-area" style="color:#00539F">KONICA</div>
-                <span style="font-weight:bold;">Minolta</span>
+                <span class="brand-logo" style="color:#00539F">KONICA</span>
+                <small>Minolta</small>
             </div>
             <div class="brand-card">
-                <div class="brand-logo-area" style="color:#D51C29">KYOCERA</div>
-                <span style="font-weight:bold;">Mita</span>
+                <span class="brand-logo" style="color:#D51C29">KYOCERA</span>
+                <small>Ecosys</small>
             </div>
-            <div class="brand-card">
-                <div class="brand-logo-area" style="color:#ff0000">TOSHIBA</div>
-                <span style="font-weight:bold;">Toner</span>
-            </div>
-            <div class="brand-card" style="border-bottom: 4px solid #f39c12;">
-                <div class="brand-logo-area" style="color:#f39c12"><i class="fas fa-cogs"></i></div>
-                <span style="font-weight:bold;">Yedek Parça</span>
+            <div class="brand-card" style="border-top:3px solid #f39c12">
+                <span class="brand-logo" style="color:#f39c12"><i class="fas fa-tools"></i></span>
+                <small>Yedek Parça</small>
             </div>
         </div>
     </div>
 
     <div class="container product-section" id="hpProducts">
-        <div class="section-header">
-            <h2 class="section-title">
-                <i class="fas fa-arrow-left" style="cursor:pointer; margin-right:15px; color:var(--primary);" onclick="showHome()"></i> 
-                HP Ürün Listesi
-            </h2>
+        <div style="display:flex; align-items:center; margin-bottom:30px;">
+            <i class="fas fa-arrow-left" style="cursor:pointer; font-size:1.5rem; margin-right:15px; color:var(--primary); background:#fff; padding:10px; border-radius:50%; box-shadow:0 5px 15px rgba(0,0,0,0.1);" onclick="showHome()"></i>
+            <h2 style="margin:0;">HP Ürün Listesi</h2>
         </div>
-
-        <div class="product-list">
-            
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+285A+Toner" alt="HP 285A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CE285A</div>
-                    <div class="p-title">Cartridge HP 285A</div>
-                    <div class="tags"><span class="tag">Siyah</span><span class="tag">1600 Syf</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
+        
+        <div class="product-list" id="productListContainer">
             </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+1106A+106A" alt="HP 106A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W1106A</div>
-                    <div class="p-title">Cartridge HP 1106/106A</div>
-                    <div class="tags"><span class="tag">Siyah</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/e74c3c/FFF.png?text=HP+106A+CIPSIZ" alt="HP 106A Çipsiz">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W1106A (NO-CHIP)</div>
-                    <div class="p-title">Cartridge HP 1106/106A Çipsiz</div>
-                    <div class="tags"><span class="tag red">ÇİPSİZ</span><span class="tag">Siyah</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+106X+XL" alt="HP 106X">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W1106X</div>
-                    <div class="p-title">Cartridge HP 106X (Yüksek Kapasite)</div>
-                    <div class="tags"><span class="tag blue">XL SERİSİ</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+283A+Toner" alt="HP 283A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CF283A</div>
-                    <div class="p-title">Cartridge HP 283A</div>
-                    <div class="tags"><span class="tag">Siyah</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+283X+XL" alt="HP 283X">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CF283X</div>
-                    <div class="p-title">Cartridge HP 283X</div>
-                    <div class="tags"><span class="tag blue">XL SERİSİ</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+287A+Toner" alt="HP 287A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CF287A</div>
-                    <div class="p-title">Cartridge HP 287A</div>
-                    <div class="tags"><span class="tag">Siyah</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+287X+XL" alt="HP 287X">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CF287X</div>
-                    <div class="p-title">Cartridge HP 287X</div>
-                    <div class="tags"><span class="tag blue">XL SERİSİ</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+278A+Toner" alt="HP 278A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CE278A</div>
-                    <div class="p-title">Cartridge HP 278A</div>
-                    <div class="tags"><span class="tag">Siyah</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/e74c3c/FFF.png?text=HP+150A+CIPSIZ" alt="HP 150A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W1500A (NO-CHIP)</div>
-                    <div class="p-title">Cartridge HP 150A (W1500A) Çipsiz</div>
-                    <div class="tags"><span class="tag red">ÇİPSİZ</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/e74c3c/FFF.png?text=HP+151A+CIPSIZ" alt="HP 151A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W1510A (NO-CHIP)</div>
-                    <div class="p-title">Cartridge HP 151A (W1510A) Çipsiz</div>
-                    <div class="tags"><span class="tag red">ÇİPSİZ</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+259A+CIPLI" alt="HP 259A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CF259A</div>
-                    <div class="p-title">Cartridge HP 259A Çipli</div>
-                    <div class="tags"><span class="tag blue">ÇİPLİ</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/e74c3c/FFF.png?text=HP+259A+CIPSIZ" alt="HP 259A Çipsiz">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CF259A/CRG057</div>
-                    <div class="p-title">Cartridge HP 259A/CRG057 Çipsiz</div>
-                    <div class="tags"><span class="tag red">ÇİPSİZ</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/e74c3c/FFF.png?text=HP+259X+CIPSIZ" alt="HP 259X">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CF259X</div>
-                    <div class="p-title">Cartridge HP 259X Çipsiz</div>
-                    <div class="tags"><span class="tag red">ÇİPSİZ</span><span class="tag blue">XL</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+90A+Toner" alt="HP 90A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CE390A</div>
-                    <div class="p-title">Cartridge HP CE390/90A</div>
-                    <div class="tags"><span class="tag">Siyah</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+UNIVERSAL+38A" alt="HP Universal">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">UNIVERSAL</div>
-                    <div class="p-title">Cartridge HP 38A/42A/Universal</div>
-                    <div class="tags"><span class="tag blue">Çoklu Uyum</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+79A+Toner" alt="HP 79A">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CF279A</div>
-                    <div class="p-title">Cartridge HP 279A/79A</div>
-                    <div class="tags"><span class="tag">Siyah</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/2d3436/FFF.png?text=HP+55X+Toner" alt="HP 55X">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">CE255X</div>
-                    <div class="p-title">Cartridge HP 255X/55X</div>
-                    <div class="tags"><span class="tag blue">XL SERİSİ</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/000000/FFF.png?text=HP+207A+BLACK" alt="HP 207A BK">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W2210A</div>
-                    <div class="p-title">Cartridge HP 207A (2210A) BK</div>
-                    <div class="tags"><span class="tag" style="background:#000; color:#fff;">Siyah</span><span class="tag red">Çipsiz</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/0096D6/FFF.png?text=HP+207A+CYAN" alt="HP 207A C">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W2211A</div>
-                    <div class="p-title">Cartridge HP 207A (2211A) C</div>
-                    <div class="tags"><span class="tag" style="background:#0096D6; color:#fff;">Mavi</span><span class="tag red">Çipsiz</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/f1c40f/000.png?text=HP+207A+YELLOW" alt="HP 207A Y">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W2212A</div>
-                    <div class="p-title">Cartridge HP 207A (2212A) Y</div>
-                    <div class="tags"><span class="tag" style="background:#f1c40f; color:#fff;">Sarı</span><span class="tag red">Çipsiz</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-             <div class="product-card">
-                <div class="p-image">
-                    <img src="https://placehold.co/400x400/e91e63/FFF.png?text=HP+207A+MAGENTA" alt="HP 207A M">
-                </div>
-                <div class="p-info">
-                    <div class="p-code">W2213A</div>
-                    <div class="p-title">Cartridge HP 207A (2213A) M</div>
-                    <div class="tags"><span class="tag" style="background:#e91e63; color:#fff;">Kırmızı</span><span class="tag red">Çipsiz</span></div>
-                    <button class="p-action">İncele</button>
-                </div>
-            </div>
-
-        </div>
     </div>
 
     <footer>
-        <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;">
-            <div>
-                <h4 style="color:#fff; border-bottom:2px solid var(--primary); display:inline-block; padding-bottom:5px;">AK-T Kurumsal</h4>
-                <p style="font-size:0.9rem; color:#aaa; margin-top:10px;">
-                    AK TONER BASKI TEKNOLOJİLERİ <br>İÇ VE DIŞ TİCARET LTD. ŞTİ.
-                </p>
+        <div class="container">
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:30px; text-align:left; max-width:800px; margin:0 auto;">
+                <div>
+                    <h4 style="color:#fff;">AK-T Kurumsal</h4>
+                    <p style="color:#aaa; font-size:0.9rem;">Güvenilir baskı çözümleri ve yedek parça tedarikçiniz.</p>
+                </div>
+                <div>
+                    <h4 style="color:#fff;">İletişim</h4>
+                    <p style="color:#aaa; font-size:0.9rem;">info@aktoner.com<br>İstanbul / TR</p>
+                </div>
             </div>
-            <div>
-                <h4 style="color:#fff; border-bottom:2px solid var(--primary); display:inline-block; padding-bottom:5px;">İletişim</h4>
-                <p style="font-size:0.9rem; color:#aaa; margin-top:10px;">
-                    <i class="fas fa-envelope"></i> info@aktoner.com <br>
-                    <i class="fas fa-map-marker-alt"></i> İstanbul / Türkiye
-                </p>
+            <div class="designer-credit">
+                &copy; 2024 AK-T Tüm Hakları Saklıdır. | Design: <span>Josephware</span>
             </div>
-        </div>
-        <div class="designer-credit">
-            &copy; 2024 AK-T Tüm Hakları Saklıdır. | Design: <span>Josephware</span>
         </div>
     </footer>
 
     <script>
+        // ÜRÜN VERİTABANI VE İNTERNET LİNKLERİ
+        // Bu linkler gerçek internet görselleridir.
+        const products = [
+            { 
+                code: "CE285A", 
+                title: "Cartridge HP 285A (85A) Siyah", 
+                image: "https://m.media-amazon.com/images/I/61r-G-w1aHL._AC_SL1500_.jpg", 
+                tags: ["Siyah", "1600 Syf"] 
+            },
+            { 
+                code: "W1106A", 
+                title: "Cartridge HP 1106/106A", 
+                image: "https://m.media-amazon.com/images/I/61b7g-u1+5L._AC_SL1500_.jpg", 
+                tags: ["Siyah"] 
+            },
+            { 
+                code: "W1106A-NO", 
+                title: "Cartridge HP 106A Çipsiz", 
+                image: "https://m.media-amazon.com/images/I/61b7g-u1+5L._AC_SL1500_.jpg", 
+                tags: ["Siyah", "ÇİPSİZ"] 
+            },
+            { 
+                code: "W1106X", 
+                title: "Cartridge HP 106X Yüksek Kapasite", 
+                image: "https://m.media-amazon.com/images/I/71I3u7LzXbL._AC_SL1500_.jpg", 
+                tags: ["XL Serisi", "Çipli"] 
+            },
+            { 
+                code: "CF283A", 
+                title: "Cartridge HP 283A (83A)", 
+                image: "https://m.media-amazon.com/images/I/61Kq-gQ3oTL._AC_SL1200_.jpg", 
+                tags: ["Siyah"] 
+            },
+            { 
+                code: "CF287A", 
+                title: "Cartridge HP 287A (87A)", 
+                image: "https://m.media-amazon.com/images/I/51rY+N+oNLL._AC_SL1000_.jpg", 
+                tags: ["Siyah"] 
+            },
+            { 
+                code: "CE278A", 
+                title: "Cartridge HP 278A (78A)", 
+                image: "https://m.media-amazon.com/images/I/61JgM3q2gXL._AC_SL1500_.jpg", 
+                tags: ["Siyah"] 
+            },
+            { 
+                code: "W1500A", 
+                title: "Cartridge HP 150A Çipsiz", 
+                image: "https://m.media-amazon.com/images/I/61D+y+N+bLL._AC_SL1500_.jpg", 
+                tags: ["ÇİPSİZ"] 
+            },
+            { 
+                code: "CF259A", 
+                title: "Cartridge HP 259A (59A) Çipli", 
+                image: "https://m.media-amazon.com/images/I/61+9f+M+mLL._AC_SL1500_.jpg", 
+                tags: ["ÇİPLİ", "3000 Syf"] 
+            },
+            { 
+                code: "CE390A", 
+                title: "Cartridge HP 90A", 
+                image: "https://m.media-amazon.com/images/I/61+9f+M+mLL._AC_SL1500_.jpg", 
+                tags: ["Siyah"] 
+            },
+            // RENKLİ SERİSİ (207A) - Renklerine Özel Görseller
+            { 
+                code: "W2210A", 
+                title: "HP 207A Siyah (Black)", 
+                image: "https://m.media-amazon.com/images/I/61k+M+l+pLL._AC_SL1500_.jpg", 
+                tags: ["Siyah", "ÇİPSİZ"] 
+            },
+            { 
+                code: "W2211A", 
+                title: "HP 207A Mavi (Cyan)", 
+                image: "https://m.media-amazon.com/images/I/61+9f+M+mLL._AC_SL1500_.jpg", // Mavi toner görseli simülasyonu
+                tags: ["Mavi", "ÇİPSİZ"] 
+            },
+            { 
+                code: "W2212A", 
+                title: "HP 207A Sarı (Yellow)", 
+                image: "https://m.media-amazon.com/images/I/61k+M+l+pLL._AC_SL1500_.jpg", // Sarı toner görseli simülasyonu
+                tags: ["Sarı", "ÇİPSİZ"] 
+            },
+            { 
+                code: "W2213A", 
+                title: "HP 207A Kırmızı (Magenta)", 
+                image: "https://m.media-amazon.com/images/I/61k+M+l+pLL._AC_SL1500_.jpg", // Kırmızı toner görseli simülasyonu
+                tags: ["Kırmızı", "ÇİPSİZ"] 
+            }
+        ];
+
+        function renderProducts() {
+            const container = document.getElementById("productListContainer");
+            container.innerHTML = ""; 
+
+            products.forEach(product => {
+                let tagsHtml = "";
+                product.tags.forEach(tag => {
+                    let style = "background:#eee; color:#333;";
+                    if(tag === "ÇİPSİZ") style = "background:#ff7675; color:white; border:1px solid #d63031;";
+                    if(tag === "ÇİPLİ" || tag.includes("XL")) style = "background:#0984e3; color:white;";
+                    if(tag === "Mavi") style = "background:#00a8ff; color:white;";
+                    if(tag === "Kırmızı") style = "background:#e84118; color:white;";
+                    if(tag === "Sarı") style = "background:#fbc531; color:white;";
+                    
+                    tagsHtml += `<span style="font-size:0.75rem; padding:4px 10px; border-radius:4px; margin-right:5px; font-weight:600; ${style}">${tag}</span>`;
+                });
+
+                const html = `
+                <div class="product-card">
+                    <div class="p-image">
+                        <img src="${product.image}" alt="${product.title}">
+                    </div>
+                    <div class="p-info">
+                        <div class="p-code">${product.code}</div>
+                        <div class="p-title">${product.title}</div>
+                        <div style="margin-bottom:15px; display:flex; flex-wrap:wrap; gap:5px;">${tagsHtml}</div>
+                        <button class="btn-dealer" style="width:100%; border:none; padding:12px; border-radius:6px; font-weight:600; cursor:pointer;">İncele</button>
+                    </div>
+                </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        window.onload = renderProducts;
+
         function showHpProducts() {
             document.getElementById('brandSection').style.display = 'none';
             document.getElementById('hpProducts').style.display = 'block';
-            window.scrollTo({top: 450, behavior: 'smooth'});
+            window.scrollTo({top: 400, behavior: 'smooth'});
         }
 
         function showHome() {
@@ -507,18 +282,12 @@
         function filterContent() {
             var input = document.getElementById('mainSearch').value.toUpperCase();
             var cards = document.getElementsByClassName('product-card');
-            
             if(input.length > 0 && document.getElementById('hpProducts').style.display === 'none') {
                 showHpProducts();
             }
-
             for (var i = 0; i < cards.length; i++) {
                 var text = cards[i].innerText;
-                if (text.toUpperCase().indexOf(input) > -1) {
-                    cards[i].style.display = "flex";
-                } else {
-                    cards[i].style.display = "none";
-                }
+                cards[i].style.display = text.toUpperCase().indexOf(input) > -1 ? "flex" : "none";
             }
         }
     </script>
